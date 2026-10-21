@@ -1,6 +1,6 @@
 # 原子片段
 
-片段不是完整协议。先读operations.md确定位置、模式、体积、流速、push_out及等待；以下变量均须在生成阶段赋定值，禁止未定义占位交付。数值默认只维护在规则/速率JSON，不从旧片段继承。move_to速度按既有规则或明确指定填入；等待查询delays.md的官方阶段配置，用户明确指定优先。模板不封装为通用移液函数。以下delay占位仅在对应阶段启用且非零时生成；相邻片段连接时同一实际撤离的等待只执行一次。
+片段不是完整协议。先读operations.md确定位置、模式、体积、流速、push_out及等待；以下变量均须在生成阶段赋定值，禁止未定义占位交付。数值默认只维护在规则/速率JSON，不从旧片段继承。move_to速度按既有规则或明确指定填入；等待查询delays.md的官方阶段配置，用户明确指定优先。模板不封装为通用移液函数。所有prepare_to_aspirate行都由吸液前待准备检查实例化：新头首次或存在待准备事件时保留，已准备且无新事件时省略，不因复用片段重复准备。入液/退出速度按每个实际动作所在液体分别赋值，源端与目标端不默认共用。以下delay占位仅在对应阶段启用且非零时生成；相邻片段连接时同一实际撤离的等待只执行一次。
 
 ## dry_run流速赋值
 
@@ -70,14 +70,14 @@ force_direct只用于已核对可达的同孔局部段。相邻片段已有相�
 ```python
 pipette.move_to(source.top())
 pipette.prepare_to_aspirate()
-pipette.move_to(source.bottom(z=0.8), speed=entry_speed)
+pipette.move_to(source.bottom(z=0.8), speed=source_entry_speed)
 protocol.delay(seconds=before_aspirate_delay)
 pipette.aspirate(volume, location=source.bottom(z=0.8), flow_rate=aspirate_flow_rate)
 protocol.delay(seconds=after_aspirate_delay)
-pipette.move_to(source.top(), speed=exit_speed)
+pipette.move_to(source.top(), speed=source_exit_speed)
 protocol.delay(seconds=after_aspirate_retract_delay)
 pipette.move_to(destination.top())
-pipette.move_to(destination.meniscus(z=0, target="start"), speed=entry_speed)
+pipette.move_to(destination.meniscus(z=0, target="start"), speed=destination_entry_speed)
 protocol.delay(seconds=before_dispense_delay)
 pipette.dispense(volume, location=destination.meniscus(z=0, target="dynamic"),
                  flow_rate=dispense_flow_rate, push_out=dispense_push_out)
@@ -199,18 +199,29 @@ return_tips仍须结合当前喷嘴配置及复用规则判断，不因choice选
 
 ## 50µL移液器：探测后清膜
 
-前提：用户已启用探测、空枪头、清膜体积与当前模式兼容。clear_volume按当前模式赋定值：50µL枪头低体积模式30、正常模式50；20µL枪头均为20。不为清膜专门切模式，清膜吸排流速按operations在生成阶段算好；不是正式取液。液量跟踪影响按operations核对，不把本片段当作已通过官方模拟的证明。
+通用规则见operations“50µL移液器探测后清膜”，跟踪原理见api-probe“液面记录与转换”。下例只演示本次已确认实例：API2.28、Flex50µL配50µL枪头、SINGLE H1，已在液面外configure_for_volume(2)，新干燥空枪头已取好；从有机相母液取2µL、液面下1mm跟随吸液。清膜水相流速、正式取液流速及等待均已按本例配置查好；其他体积/模式/位置/液体须按规则重新确定，不把2µL和-1mm推广为默认。
 
 ```python
+# protocol、pipette、source由实际协议提供，dry_run为已解析的布尔值。
+aspirate_rate = 33.777778 if dry_run else 7.333333
+pipette.move_to(source.top())
+pipette.prepare_to_aspirate()
 pipette.measure_liquid_height(source)
-clear_position = source.top(z=2)
-pipette.move_to(clear_position, speed=exit_speed)
-# 若此前活塞待准备，在此显式执行pipette.prepare_to_aspirate()
-pipette.aspirate(clear_volume, location=clear_position,
-                 flow_rate=clear_aspirate_rate)
-pipette.dispense(clear_volume, location=clear_position,
-                 flow_rate=clear_dispense_rate, push_out=0)
-# 按后续正式取液需要处理模式切换/准备，再控速进入正式吸液位置。
+
+pipette.move_to(source.top(z=2), speed=10)
+# 低体积模式清膜30µL；正式/试运行均按水相，原位吸排不传location。
+pipette.aspirate(30, flow_rate=29.5)
+protocol.delay(seconds=0.2)
+pipette.dispense(30, flow_rate=50, push_out=0)
+protocol.delay(seconds=0.2)
+
+# 此时无需重复准备；以保留的探测体积换算液面。
+pipette.move_to(source.meniscus(z=-1, target="start"), speed=10)
+pipette.aspirate(2, location=source.meniscus(z=-1, target="dynamic"),
+                 flow_rate=aspirate_rate)
+protocol.delay(seconds=0.2)
+pipette.move_to(source.top(), speed=10)
+protocol.delay(seconds=0.5)
 ```
 
-生成真实脚本时按已知活塞状态展开必要准备命令，不把条件注释当作已经执行。
+本例探测前已准备，之后无模式切换/非零push_out，因此清膜前及正式取液前不重复准备；其他前置状态按operations检查。模板止于离开源孔，2µL仍在枪头中，交由后续加样流程处理。该片段在官方10.1.0/API2.28模拟验证，不能替代实机验证。

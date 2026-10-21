@@ -138,7 +138,7 @@ parent: str
 The name of the slot the module is on.
 
 On a Flex, this will be like `"D1"`. On an OT-2, this will be like `"1"`.
-See [Deck Slots](../deck-slots.md).
+See [Deck Slots](https://docs.opentrons.com/v2/deck_slots.html).
 
 源码：module_contexts.py L408–L414（固定提交）。
 

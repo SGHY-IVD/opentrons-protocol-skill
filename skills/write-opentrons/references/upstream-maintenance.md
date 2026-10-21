@@ -1,6 +1,6 @@
-# 官方资料来源与更新（仅维护时读取）
+# 官方仓库导航与资料更新（特殊排查/维护时读取）
 
-采用随技能发布的已核对快照，不在下载、安装或每次生成时自动刷新。不把官方仓库设为运行依赖，不引入全量克隆或submodule。此入口不扩大日常联网范围；耗材几何按需查询仍遵循operations.md。
+采用随技能发布的已核对快照，不在下载、安装或每次生成时自动刷新。不把官方仓库设为运行依赖，不引入全量克隆或submodule。常规生成不联网刷新；耗材几何按需查询仍遵循operations.md。具体异常或维护资料不能解释的特殊行为，可按下节定向查询官方依据；查证不等于升级资料或授权使用未收录接口。
 
 ## 来源与责任
 
@@ -13,6 +13,26 @@
 |单次任务所需孔几何|operations.md“耗材几何按需查询”|优先实际定义；缺失时按现有例外获取官方JSON，不自动写回技能|
 |官方流速、等待、硬件参数|相关JSON的sources/commit/blob_sha等现有字段及配套说明|保留原始来源与项目覆盖的区别；只更新受影响条目|
 |经验默认、模板与审查|operations.md、patterns/mixing-examples等、protocol-review.md|项目维护；不随官方刷新被覆盖，官方新限制冲突时报告并修正组合|
+
+## 特殊问题查找导航
+
+触发条件：出现具体报错、实际行为与维护资料不一致，或已有资料无法解释影响当前任务的关键行为。普通生成、单纯未收录某个接口不自动触发全库搜索。先定位现有资料与目标API/机器人软件版本，再按问题只查相关层；已给出的日志、方法名或异常类型优先作为搜索词。
+
+以下路径依据2026-10-21已取得的仓库树（commit `72fd2310e5b8f39e6024f3926c95bfc4468be260`）核对，仅是查找起点，不声明其内容与用户软件版本一致；实际使用时以目标版本目录为准。基础定义目录见operations.md，避免重复维护完整目录树。
+
+|问题/能力|官方查找起点|查证重点|
+|调用参数、默认行为、版本限制|`api/src/opentrons/protocol_api/`，按方法名定位|公开契约与版本标记；不要把内部方法当协议API|
+|取头顺序、剩余枪头、部分喷嘴、换盒状态|上述目录的`instrument_context.py`、`labware.py`；必要时转`protocol_engine/state/`与`hardware_control/nozzle_manager.py`|调用如何更新状态、布局及起始位置影响；结合当前配置|
+|吸排液余量、push-out、活塞准备、体积模式|`protocol_api/instrument_context.py` → `protocol_engine/commands/`、`execution/` → `hardware_control/`；数值查shared-data移液器定义|先跟踪实际调用链，再读相关硬件分支，不混用机型|
+|液面计算、耗材模型、沿壁或喷嘴偏移|`protocol_api/labware.py`、`protocol_engine/state/`，配合shared-data耗材/移液器定义|几何字段、液量状态与坐标转换分别核对|
+|甲板占位、模块堆叠、搬运冲突|shared-data甲板/模块/耗材定义，结合`protocol_engine/state/`与`execution/`|定义关系如何被实际执行校验，不能只读一个JSON推断全部兼容性|
+|模块盖/夹爪、温度/震荡、等待状态|`protocol_api/module_contexts.py`、`protocol_engine/commands/`与`hardware_control/modules/`|前置条件、状态转换、等待与停止的区别|
+|参数/CSV、暂停及界面提示|`protocol_api/`按参数或CSV方法搜索；确为执行服务/显示问题时查`robot-server/robot_server/`、`app/src/`|区分协议计算、运行服务与UI显示，不因显示问题修改实验逻辑|
+|行为边界、疑似回归、某种异常是否有覆盖|`api/tests/opentrons/protocol_api/`、`protocol_engine/`、`hardware_control/`，按方法/错误名搜索对应测试|用测试理解覆盖条件；测试存在不等于当前配置或实机已验证|
+
+表内简写`protocol_api/`、`protocol_engine/`、`hardware_control/`均相对`api/src/opentrons/`。先公开契约，再状态/命令，再硬件层；不要求每个问题都读到底层。必要时查目标发布记录或官方issue/PR定位变化，讨论和未合并补丁不能直接当已发布行为。
+
+只保留与问题相关的证据：来源、版本、适用条件、结论及不确定项。查到新接口/参数或安装关系时报告可补充项，按维护流程核对收录后再用于生成；不静默写回技能，不直接覆盖经验默认。版本不明或证据冲突时明确缺口。结论足够即停止，不扩展为全仓库解读。
 
 ## 版本与追溯
 

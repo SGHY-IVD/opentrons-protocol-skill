@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "baseline": "2026-10-21.6",
+  "baseline": "2026-10-21.20",
   "instructions": "只审查每题scope及直接状态依赖；片段不是完整protocol。未展示的加载、标签、流速查表、等待、其他路径和收尾已另核对，不报片段省略；显式state/overrides优先。行号从code首行计。输出每题id,status(pass/issues/unresolved),findings[{line,reason}]；保留分支条件。不得读取答案或历史结果。",
   "cases": [
     {
@@ -198,6 +198,34 @@
       "state": "H1起4喷嘴；用户选完整8通道对齐；标准Y居中无补偿，当前在该槽偏移top；水相200µL枪头。",
       "overrides": "按state中的用户选择",
       "code": "pipette.move_to(source.bottom(0.8).move(Point(0, -18, 0)), speed=20)\npipette.aspirate(50, source.bottom(0.8), flow_rate=100)"
+    },
+    {
+      "scope": "新枪头首次吸液的显式准备",
+      "state": "Flex1000配200µL枪头；source为水相，初始无枪头。仅审查新取枪头后的显式准备及位置；其余要求已核对。",
+      "overrides": "无",
+      "id": "R29",
+      "code": "pipette.pick_up_tip()\npipette.move_to(source.top())\npipette.move_to(source.bottom(0.8), speed=20)\npipette.aspirate(50, source.bottom(0.8), flow_rate=100)"
+    },
+    {
+      "scope": "新枪头首次吸液的显式准备",
+      "state": "Flex1000配200µL枪头；source为水相，初始无枪头。仅审查新取枪头后的显式准备及位置；其余要求已核对。",
+      "overrides": "无",
+      "id": "R30",
+      "code": "pipette.pick_up_tip()\npipette.move_to(source.top())\npipette.prepare_to_aspirate()\npipette.move_to(source.bottom(0.8), speed=20)\npipette.aspirate(50, source.bottom(0.8), flow_rate=100)"
+    },
+    {
+      "scope": "源端与目标端的入液退出移动速度",
+      "state": "Flex1000配200µL枪头，已显式准备且无待准备事件，现处于source.bottom(0.8)，刚完成甘油类源液吸取；目标孔接触液体已确认为水相。仅核对这三次移动路径/速度。",
+      "overrides": "无",
+      "id": "R31",
+      "code": "pipette.move_to(source.top(), speed=10)\npipette.move_to(destination.top())\npipette.move_to(destination.bottom(0.8), speed=10)"
+    },
+    {
+      "scope": "源端与目标端的入液退出移动速度",
+      "state": "Flex1000配200µL枪头，已显式准备且无待准备事件，现处于source.bottom(0.8)，刚完成甘油类源液吸取；目标孔接触液体已确认为水相。仅核对这三次移动路径/速度。",
+      "overrides": "无",
+      "id": "R32",
+      "code": "pipette.move_to(source.top(), speed=10)\npipette.move_to(destination.top())\npipette.move_to(destination.bottom(0.8), speed=20)"
     }
   ]
 }

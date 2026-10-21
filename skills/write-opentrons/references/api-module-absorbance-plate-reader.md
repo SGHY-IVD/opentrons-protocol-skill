@@ -33,7 +33,7 @@ initialize(mode: ABSMeasureMode, wavelengths: List[int], reference_wavelength: O
 
 Prepare the Absorbance Plate Reader to read a plate.
 
-See [Initialization](../modules/absorbance-plate-reader.md#initialization) for examples.
+See [Initialization](https://docs.opentrons.com/v2/modules/absorbance-plate-reader.html#initialization) for examples.
 
 Args:
     mode: Either `"single"` or `"multi"`.
@@ -114,7 +114,7 @@ Args:
         with `export_filename="my_data"`, there will be two output files:
         `my_data_450.csv` and `my_data_562.csv`.
 
-        See [CSV Data](../modules/absorbance-plate-reader.md#csv-data)
+        See [CSV Data](https://docs.opentrons.com/v2/modules/absorbance-plate-reader.html#csv-data)
         for information on working with these CSV files.
 
 Returns:

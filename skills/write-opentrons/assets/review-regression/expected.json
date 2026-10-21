@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "baseline": "2026-10-21.6",
+  "baseline": "2026-10-21.20",
   "answers": {
     "R01": {
       "status": "issues",
@@ -214,6 +214,36 @@
         }
       ],
       "rule": "references/reservoir-partial-nozzles.md"
+    },
+    "R29": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 4,
+          "reason": "新取枪头首次吸液前缺少source.top处显式prepare_to_aspirate"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R30": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R31": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "200µL枪头目标接触水相时入液默认20mm/s，不能沿用甘油源端10mm/s"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R32": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
     }
   }
 }
