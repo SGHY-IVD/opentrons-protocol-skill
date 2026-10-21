@@ -1,0 +1,177 @@
+{
+  "results": [
+    {
+      "id": "R01",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "排出80µL后仍有20µL记录余液，不允许非零push_out；应为0。"
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R03",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R04",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R05",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "此前非零push_out留下待准备状态；本次吸液前应在source.top、空枪头且液面外显式prepare_to_aspirate，再控速入液，不能依赖aspirate自动准备。"
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R07",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R08",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "普通混匀轮次仍保留14µL且无待准备事件，不应调用prepare_to_aspirate；当前还有液体且位于孔底，亦不满足空枪头、液面外准备条件。"
+        }
+      ]
+    },
+    {
+      "id": "R09",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R10",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "20µL保留液加本次吸入200µL合计220µL，超过200µL有效容量。"
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R12",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "后续需要模式切换，不符合原位立即混匀条件；首次加液应采用常规动态液面排液，再退出top。"
+        },
+        {
+          "line": 2,
+          "reason": "模式切换前未显式到well.top离开液面；排空只满足液量条件，不满足位置条件。"
+        },
+        {
+          "line": 3,
+          "reason": "模式切换产生待准备状态；吸液前缺少在well.top液面外、空枪头条件下的prepare_to_aspirate及随后控速入液。"
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R14",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "从source.top跨孔直接以20mm/s到dest孔内，会把跨孔段也设为入液低速；应先move_to(dest.top())，再控速进入dest.bottom(0.8)。"
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R16",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R17",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "第一次open_lid已使盖打开，delay不改变盖状态且无人工干预；第二次open_lid为可去除的重复动作。"
+        }
+      ]
+    },
+    {
+      "id": "R18",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R19",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本次无位置覆盖，常规吸液应遵循技能默认bottom(0.8)，而非bottom(1)。"
+        }
+      ]
+    },
+    {
+      "id": "R20",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R21",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R22",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 7,
+          "reason": "take_all=True时排净并产生待准备，当前准备有效；take_all=False时仍保留20µL且无新的待准备事件，不能在合流处无条件prepare_to_aspirate。应仅在take_all=True分支完成空枪头准备，False分支保留余液继续吸液。"
+        }
+      ]
+    },
+    {
+      "id": "R23",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "虽已标记待准备且source.top位于液面外，但枪头余量未知，无法核实current_volume=0的必要条件；须先确定余量，若仍有液体则是流程冲突，不能直接准备。"
+        }
+      ]
+    }
+  ]
+}

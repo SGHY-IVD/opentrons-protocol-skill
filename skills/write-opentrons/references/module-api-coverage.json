@@ -1,0 +1,326 @@
+{
+  "commit": "05b494ba81636978fb79f08bbc20468f94464d5c",
+  "source_sha256": "8d0d1a6eafb1a0aaaa77faa9f321079da0d1f9177d3baab7989cf681cdf8f865",
+  "baseline": "2.30",
+  "modules": {
+    "HeaterShakerContext": {
+      "public_members": [
+        "close_labware_latch",
+        "current_speed",
+        "current_temperature",
+        "deactivate_heater",
+        "deactivate_shaker",
+        "labware",
+        "labware_latch_status",
+        "load_adapter",
+        "load_adapter_from_definition",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "open_labware_latch",
+        "parent",
+        "serial_number",
+        "set_and_wait_for_shake_speed",
+        "set_and_wait_for_temperature",
+        "set_shake_speed",
+        "set_target_temperature",
+        "speed_status",
+        "target_speed",
+        "target_temperature",
+        "temperature_status",
+        "type",
+        "wait_for_temperature"
+      ],
+      "local": [
+        "close_labware_latch",
+        "current_speed",
+        "current_temperature",
+        "deactivate_heater",
+        "deactivate_shaker",
+        "labware_latch_status",
+        "open_labware_latch",
+        "serial_number",
+        "set_and_wait_for_shake_speed",
+        "set_and_wait_for_temperature",
+        "set_shake_speed",
+        "set_target_temperature",
+        "speed_status",
+        "target_speed",
+        "target_temperature",
+        "temperature_status",
+        "wait_for_temperature"
+      ],
+      "shared": [
+        "labware",
+        "load_adapter",
+        "load_adapter_from_definition",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "type"
+      ]
+    },
+    "TemperatureModuleContext": {
+      "public_members": [
+        "deactivate",
+        "labware",
+        "load_adapter",
+        "load_adapter_from_definition",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "serial_number",
+        "set_temperature",
+        "start_set_temperature",
+        "status",
+        "target",
+        "temperature",
+        "type"
+      ],
+      "local": [
+        "deactivate",
+        "serial_number",
+        "set_temperature",
+        "start_set_temperature",
+        "status",
+        "target",
+        "temperature"
+      ],
+      "shared": [
+        "labware",
+        "load_adapter",
+        "load_adapter_from_definition",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "type"
+      ],
+      "source_supplement": [
+        "await_temperature"
+      ]
+    },
+    "ThermocyclerContext": {
+      "public_members": [
+        "block_target_temperature",
+        "block_temperature",
+        "block_temperature_status",
+        "close_lid",
+        "deactivate",
+        "deactivate_block",
+        "deactivate_lid",
+        "execute_profile",
+        "labware",
+        "lid_position",
+        "lid_target_temperature",
+        "lid_temperature",
+        "lid_temperature_status",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "open_lid",
+        "parent",
+        "serial_number",
+        "set_block_temperature",
+        "set_lid_temperature",
+        "start_execute_profile",
+        "start_set_block_temperature",
+        "start_set_lid_temperature",
+        "type"
+      ],
+      "local": [
+        "block_target_temperature",
+        "block_temperature",
+        "block_temperature_status",
+        "close_lid",
+        "deactivate",
+        "deactivate_block",
+        "deactivate_lid",
+        "execute_profile",
+        "lid_position",
+        "lid_target_temperature",
+        "lid_temperature",
+        "lid_temperature_status",
+        "open_lid",
+        "serial_number",
+        "set_block_temperature",
+        "set_lid_temperature",
+        "start_execute_profile",
+        "start_set_block_temperature",
+        "start_set_lid_temperature"
+      ],
+      "shared": [
+        "labware",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "type"
+      ],
+      "source_supplement": [
+        "ramp_rate",
+        "hold_time",
+        "total_cycle_count",
+        "current_cycle_index",
+        "total_step_count",
+        "current_step_index"
+      ]
+    },
+    "MagneticModuleContext": {
+      "public_members": [
+        "disengage",
+        "engage",
+        "labware",
+        "load_adapter",
+        "load_adapter_from_definition",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "serial_number",
+        "status",
+        "type"
+      ],
+      "local": [
+        "disengage",
+        "engage",
+        "serial_number",
+        "status"
+      ],
+      "shared": [
+        "labware",
+        "load_adapter",
+        "load_adapter_from_definition",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "type"
+      ],
+      "source_supplement": [
+        "calibrate"
+      ]
+    },
+    "MagneticBlockContext": {
+      "public_members": [
+        "labware",
+        "load_adapter",
+        "load_adapter_from_definition",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "type"
+      ],
+      "local": [],
+      "shared": [
+        "labware",
+        "load_adapter",
+        "load_adapter_from_definition",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "type"
+      ]
+    },
+    "AbsorbanceReaderContext": {
+      "public_members": [
+        "close_lid",
+        "initialize",
+        "is_lid_on",
+        "labware",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "open_lid",
+        "parent",
+        "read",
+        "serial_number",
+        "type"
+      ],
+      "local": [
+        "close_lid",
+        "initialize",
+        "is_lid_on",
+        "open_lid",
+        "read",
+        "serial_number"
+      ],
+      "shared": [
+        "labware",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "type"
+      ]
+    },
+    "FlexStackerContext": {
+      "public_members": [
+        "empty",
+        "fill",
+        "fill_items",
+        "get_current_storable_labware",
+        "get_current_storable_labware_from_list",
+        "get_max_storable_labware",
+        "get_max_storable_labware_from_list",
+        "get_stored_labware",
+        "labware",
+        "load_adapter",
+        "load_adapter_from_definition",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "retrieve",
+        "serial_number",
+        "set_stored_labware",
+        "set_stored_labware_items",
+        "store",
+        "type"
+      ],
+      "local": [
+        "empty",
+        "fill",
+        "fill_items",
+        "get_current_storable_labware",
+        "get_current_storable_labware_from_list",
+        "get_max_storable_labware",
+        "get_max_storable_labware_from_list",
+        "get_stored_labware",
+        "retrieve",
+        "serial_number",
+        "set_stored_labware",
+        "set_stored_labware_items",
+        "store"
+      ],
+      "shared": [
+        "labware",
+        "load_adapter",
+        "load_adapter_from_definition",
+        "load_labware",
+        "load_labware_by_name",
+        "load_labware_from_definition",
+        "model",
+        "parent",
+        "type"
+      ]
+    }
+  }
+}

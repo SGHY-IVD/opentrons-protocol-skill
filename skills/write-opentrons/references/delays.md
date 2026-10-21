@@ -1,0 +1,21 @@
+# 官方等待参数
+
+数值唯一源delay-rates.json：2026-10-16拉取官方edge分支water/ethanol_80/glycerol_50的v3定义，96组液体×型号×枪头×滤芯配置，每组含aspirate、singleDispense、multiDispense的三个等待阶段。保留原始enabled/duration；禁用或有效时长0时不生成delay(0)。替代此前水相0.1/有机相0.3/甘油相1的经验默认，不混用。
+
+查询：`python3 scripts/delay.py --model flex_8channel_1000 --tip 200 --liquid organic --action aspirate`。滤芯头加`--filtered`。排液默认`--action dispense`；明确连续分液策略才选择`multi_dispense`，不因为代码循环多次dispense就切换表。单次每步等待不按体积插值，当前定义为固定阶段参数。生成阶段查询，最终脚本只保留实际定值/赋定值变量，不运行本工具。
+
+|字段|放置位置|
+|---|---|
+|submerge|进入吸液/排液位置之后、开始吸排之前|
+|after|吸液/排液完成后、退出之前|
+|retract|实际撤离吸液/排液位置之后，通常在该孔top；不是跨孔到下一孔之后|
+
+执行顺序核对来源：api/src/opentrons/protocol_api/core/engine/transfer_components_executor.py（edge）。所有启用的阶段保持分离，不能把撤离后等待加到液面内等待。当前三类submerge有效值都为0。乙醇撤离后0.5秒，水/甘油无有效撤离后等待。滤芯差异保留，不自行合并单/八通道或普通/滤芯。
+
+混匀逐轮吸后等待取aspirate.after，排后取singleDispense.after；普通轮次没有实际退出，不执行retract等待，也不凭空增加submerge等待。首次进入、最后退出如有对应动作，按相应阶段执行一次。加液后立即混匀仍执行该次加液的排后等待；不把“立即”解释成跳过已启用等待。先按加样液体选择加样等待，再按混合后实际/推断液体类别选择混匀等待。
+
+若已发生撤离并完成对应等待，下一步活塞准备/跨孔模板不得重复执行。垃圾桶排液没有孔内撤离，不能伪造撤离动作来套延时；需要复用官方液体类执行器特殊垃圾桶行为时先核对维护接口，否则按实际动作安排。仅同步等待数据，不自动继承官方位置、流速、吹出、空气段、预润洗或高级命令。
+
+air_gap如实际存在，可参照官方执行器复用aspirate.after作为空气段吸入后等待，仍需说明该来源，不自动新增air_gap；blow_out/push_out没有独立通用等待表，不自行补固定值。movement_delay是边吸排边移动的启动延迟，不是这里的停留时间，也不从本表推导。
+
+用户明确指定等待优先，并标注覆盖；示例曾指定0.2秒只是演示输入，不是旧默认保留。缺少组合报缺失，不回退到已撤销的三类固定值。长孵育、模块等待独立。dry_run不自动删除这些短等待。

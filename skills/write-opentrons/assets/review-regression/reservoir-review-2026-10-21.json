@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "id": "R24",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R25",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "已确认标准Y居中且无额外补偿时，SINGLE A1保持完整8通道对齐所需Y偏移为+31.5 mm；代码使用-31.5 mm，偏移符号错误。"
+        }
+      ]
+    },
+    {
+      "id": "R26",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R27",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "H1起4喷嘴在储液槽吸液，定位策略尚未确认；须确认采用官方默认定位还是完整8通道对齐，不能把当前无偏移写法视为已确认或判通过。"
+        }
+      ]
+    },
+    {
+      "id": "R28",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "第1行按已选完整8通道对齐进入Y=-18 mm位置，但本行aspirate指定未偏移的source.bottom(0.8)，会回到官方默认位置，丢失对齐补偿；吸液位置应保持同一-18 mm Y偏移。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1195 @@
+{
+  "revision": "2026-10-19-v1",
+  "units": {
+    "volume": "uL",
+    "flow_rate": "uL/s"
+  },
+  "notes": [
+    "普通和滤芯枪头共用当前经验速度。",
+    "本表查询不能替代移液器/枪头/量程模式合法性检查。",
+    "用户曲线不外推；官方继承曲线在枪头容量内保留上端点值。",
+    "1uL单点恒定配置不是1uL移液性能验证；查询返回时仍需核对实际量程。"
+  ],
+  "rules": [
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          1,
+          35
+        ],
+        [
+          10,
+          24
+        ],
+        [
+          50,
+          35
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          5.0,
+          5.0
+        ],
+        [
+          20.0,
+          15.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          20.0,
+          30.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-19甘油类吸液经验覆盖；普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          1,
+          35
+        ],
+        [
+          10,
+          24
+        ],
+        [
+          50,
+          35
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          30.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-19甘油类吸液经验覆盖；普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          1,
+          35
+        ],
+        [
+          10,
+          24
+        ],
+        [
+          50,
+          35
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          5.0,
+          5.0
+        ],
+        [
+          20.0,
+          15.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          20.0,
+          30.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-19甘油类吸液经验覆盖；普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          1,
+          35
+        ],
+        [
+          10,
+          24
+        ],
+        [
+          50,
+          35
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          30.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-19甘油类吸液经验覆盖；普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          5.0,
+          318.0
+        ],
+        [
+          10.0,
+          478.0
+        ],
+        [
+          50.0,
+          478.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 5.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          30.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          5,
+          100
+        ],
+        [
+          10,
+          60
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          200,
+          300
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          5.0,
+          7.0
+        ],
+        [
+          50.0,
+          50.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          5.0,
+          10.0
+        ],
+        [
+          50.0,
+          50.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          5,
+          100
+        ],
+        [
+          10,
+          60
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          200,
+          300
+        ],
+        [
+          1000,
+          700
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 5,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          10.0,
+          10.0
+        ],
+        [
+          100.0,
+          100.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 10.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          10.0,
+          10.0
+        ],
+        [
+          100.0,
+          100.0
+        ],
+        [
+          1000.0,
+          800.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 10.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          5.0,
+          318.0
+        ],
+        [
+          10.0,
+          478.0
+        ],
+        [
+          50.0,
+          478.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 5.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          30.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          5,
+          100
+        ],
+        [
+          10,
+          60
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          200,
+          300
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          5.0,
+          7.0
+        ],
+        [
+          50.0,
+          50.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          5.0,
+          10.0
+        ],
+        [
+          50.0,
+          50.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          5,
+          100
+        ],
+        [
+          10,
+          60
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          200,
+          300
+        ],
+        [
+          1000,
+          700
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 5,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          10.0,
+          10.0
+        ],
+        [
+          100.0,
+          100.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 10.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          10.0,
+          10.0
+        ],
+        [
+          100.0,
+          100.0
+        ],
+        [
+          1000.0,
+          800.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 10.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          1,
+          35
+        ],
+        [
+          10,
+          24
+        ],
+        [
+          50,
+          35
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          5.0,
+          5.0
+        ],
+        [
+          20.0,
+          15.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          5.0,
+          10.0
+        ],
+        [
+          20.0,
+          30.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-19甘油类吸液经验覆盖；普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          1,
+          35
+        ],
+        [
+          10,
+          24
+        ],
+        [
+          50,
+          35
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          30.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          5,
+          35
+        ],
+        [
+          10,
+          60
+        ],
+        [
+          50,
+          80
+        ],
+        [
+          200,
+          80
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          5.0,
+          7.0
+        ],
+        [
+          50.0,
+          50.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          5.0,
+          10.0
+        ],
+        [
+          50.0,
+          50.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          1,
+          35
+        ],
+        [
+          10,
+          24
+        ],
+        [
+          50,
+          35
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          30.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          5,
+          35
+        ],
+        [
+          10,
+          60
+        ],
+        [
+          50,
+          80
+        ],
+        [
+          200,
+          80
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-12确认的自定义吸液规则"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          5.0,
+          7.0
+        ],
+        [
+          50.0,
+          50.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          5.0,
+          10.0
+        ],
+        [
+          50.0,
+          50.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 5.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "liquid": "water",
+      "action": "aspirate",
+      "points": [
+        [
+          1.0,
+          200.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "liquid": "organic",
+      "action": "aspirate",
+      "points": [
+        [
+          10.0,
+          10.0
+        ],
+        [
+          100.0,
+          100.0
+        ],
+        [
+          200.0,
+          200.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 10.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "liquid": "glycerol",
+      "action": "aspirate",
+      "points": [
+        [
+          10.0,
+          10.0
+        ],
+        [
+          100.0,
+          100.0
+        ],
+        [
+          200.0,
+          200.0
+        ],
+        [
+          1000.0,
+          200.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 10.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户明确继承官方液体类v3吸液配置；organic源于ethanol_80，glycerol源于glycerol_50"
+    }
+  ]
+}

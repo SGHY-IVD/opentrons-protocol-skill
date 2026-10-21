@@ -1,0 +1,203 @@
+{
+  "schema": 1,
+  "baseline": "2026-10-21.6",
+  "instructions": "只审查每题scope及直接状态依赖；片段不是完整protocol。未展示的加载、标签、流速查表、等待、其他路径和收尾已另核对，不报片段省略；显式state/overrides优先。行号从code首行计。输出每题id,status(pass/issues/unresolved),findings[{line,reason}]；保留分支条件。不得读取答案或历史结果。",
+  "cases": [
+    {
+      "id": "R01",
+      "scope": "push_out",
+      "state": "200µL枪头内100µL液体；目标模型与初始化有效。",
+      "overrides": "无",
+      "code": "pipette.dispense(80, well.meniscus(z=0, target=\"dynamic\"), flow_rate=100, push_out=3)"
+    },
+    {
+      "id": "R02",
+      "scope": "push_out",
+      "state": "200µL枪头内100µL液体；目标模型与初始化有效。",
+      "overrides": "无",
+      "code": "pipette.dispense(100, well.meniscus(z=0, target=\"dynamic\"), flow_rate=100, push_out=3)"
+    },
+    {
+      "id": "R03",
+      "scope": "push_out",
+      "state": "200µL枪头内100µL；目标固定位置已确认可达。",
+      "overrides": "本次用户明确要求在bottom(2)排空并push_out=4",
+      "code": "pipette.dispense(100, well.bottom(2), flow_rate=100, push_out=4)"
+    },
+    {
+      "id": "R04",
+      "scope": "push_out",
+      "state": "枪头内100µL；耗材无体积模型；用户给定固定终点但未要求push_out。",
+      "overrides": "无",
+      "code": "pipette.dispense(100, well.bottom(2), flow_rate=100, push_out=0)"
+    },
+    {
+      "id": "R05",
+      "scope": "活塞准备",
+      "state": "水相200µL枪头；刚在上一孔执行非零push_out，现为空。",
+      "overrides": "无",
+      "code": "pipette.move_to(source.top())\npipette.move_to(source.bottom(0.8), speed=20)\npipette.aspirate(50, source.bottom(0.8), flow_rate=100)"
+    },
+    {
+      "id": "R06",
+      "scope": "活塞准备",
+      "state": "水相200µL枪头；刚发生blow_out，现为空。",
+      "overrides": "无",
+      "code": "pipette.move_to(source.top())\npipette.prepare_to_aspirate()\npipette.move_to(source.bottom(0.8), speed=20)\npipette.aspirate(50, source.bottom(0.8), flow_rate=100)"
+    },
+    {
+      "id": "R07",
+      "scope": "活塞准备",
+      "state": "刚发生非零push_out；枪头已空；这是协议最后一条动作。",
+      "overrides": "无",
+      "code": "pipette.drop_tip()"
+    },
+    {
+      "id": "R08",
+      "scope": "保留液与活塞",
+      "state": "混匀普通轮次末，枪头留14µL且无待准备事件；当前位于well.bottom(0.8)。",
+      "overrides": "无",
+      "code": "pipette.prepare_to_aspirate()\npipette.aspirate(126, well.bottom(0.8), flow_rate=100)"
+    },
+    {
+      "id": "R09",
+      "scope": "保留液与容量",
+      "state": "当前well.bottom(0.8)，保留液14µL；有效容量200µL，无待准备。",
+      "overrides": "无",
+      "code": "pipette.aspirate(126, well.bottom(0.8), flow_rate=100)\npipette.dispense(126, well.bottom(0.8), flow_rate=100, push_out=0)"
+    },
+    {
+      "id": "R10",
+      "scope": "容量",
+      "state": "枪头内20µL保留液；有效容量200µL；当前吸液位置正确。",
+      "overrides": "无",
+      "code": "pipette.aspirate(200, well.bottom(0.8), flow_rate=100)"
+    },
+    {
+      "id": "R11",
+      "scope": "混匀截断与保留液",
+      "state": "孔内400µL，200µL枪头/有效容量200µL；N=2，起始空头且已准备；已向用户说明70%为280µL截断至200µL；模型有效。",
+      "overrides": "无",
+      "code": "pipette.aspirate(200, well.bottom(0.8), flow_rate=100)\npipette.dispense(180, well.bottom(0.8), flow_rate=100, push_out=0)\npipette.aspirate(180, well.bottom(0.8), flow_rate=100)\npipette.dispense(200, well.bottom(0.8), end_location=well.bottom(z=well.height_from_volume(400)), flow_rate=100, push_out=3)"
+    },
+    {
+      "id": "R12",
+      "scope": "模式切换与立即混匀",
+      "state": "Flex50、50µL枪头，当前低体积模式，头内3µL；在目标孔内加液后需要正常模式混匀。",
+      "overrides": "无",
+      "code": "pipette.dispense(3, well.bottom(0.8), flow_rate=10, push_out=0)\npipette.configure_for_volume(35)\npipette.aspirate(35, well.bottom(0.8), flow_rate=30)"
+    },
+    {
+      "id": "R13",
+      "scope": "模式切换与准备",
+      "state": "Flex50、50µL枪头，当前低体积模式；空头刚完成动态排液且在液面0；水相。",
+      "overrides": "无",
+      "code": "pipette.move_to(well.top(), speed=10)\npipette.configure_for_volume(35)\npipette.prepare_to_aspirate()\npipette.move_to(well.bottom(0.8), speed=10)\npipette.aspirate(35, well.bottom(0.8), flow_rate=30)"
+    },
+    {
+      "id": "R14",
+      "scope": "跨孔路径",
+      "state": "当前在source.top；source与dest是不同孔；水相200µL枪头。",
+      "overrides": "无",
+      "code": "pipette.move_to(dest.bottom(0.8), speed=20)"
+    },
+    {
+      "id": "R15",
+      "scope": "跨孔路径",
+      "state": "当前在source.top；source与dest不同孔；水相200µL枪头。",
+      "overrides": "无",
+      "code": "pipette.move_to(dest.top())\npipette.move_to(dest.bottom(0.8), speed=20)"
+    },
+    {
+      "id": "R16",
+      "scope": "跨孔路径",
+      "state": "当前在source.top；source与dest不同孔；目标高度已确认。",
+      "overrides": "用户明确要求本段跨孔全程20mm/s直接移至目标，保留并在交付说明",
+      "code": "pipette.move_to(dest.bottom(0.8), speed=20)"
+    },
+    {
+      "id": "R17",
+      "scope": "模块冗余",
+      "state": "tc盖已知关闭，无人工干预；只检查盖状态冗余。",
+      "overrides": "无",
+      "code": "tc.open_lid()\nprotocol.delay(seconds=1)\ntc.open_lid()"
+    },
+    {
+      "id": "R18",
+      "scope": "模块冗余",
+      "state": "tc盖已知关闭；中间pause允许人工操作盖子。",
+      "overrides": "无",
+      "code": "tc.open_lid()\nprotocol.pause(\"请人工检查并调整盖子，完成后继续\")\ntc.open_lid()"
+    },
+    {
+      "id": "R19",
+      "scope": "默认吸液高度",
+      "state": "常规水相50µL吸取，200µL枪头；无位置覆盖。",
+      "overrides": "无",
+      "code": "pipette.aspirate(50, source.bottom(1), flow_rate=100)"
+    },
+    {
+      "id": "R20",
+      "scope": "默认吸液高度",
+      "state": "常规水相50µL吸取，200µL枪头。",
+      "overrides": "用户明确指定本次源孔吸液高度bottom1",
+      "code": "pipette.aspirate(50, source.bottom(1), flow_rate=100)"
+    },
+    {
+      "id": "R21",
+      "scope": "组合：模式/路径/混匀/容量/push_out/准备",
+      "state": "Flex50、50µL枪头低体积模式，头内3µL，当前well内；排完后孔内总量50µL，模型有效；混匀2次M35/R3.5/S31.5；水相，最终弃头。",
+      "overrides": "无",
+      "code": "pipette.dispense(3, well.meniscus(z=0, target=\"dynamic\"), flow_rate=10, push_out=1)\npipette.move_to(well.top(), speed=10)\npipette.configure_for_volume(35)\npipette.prepare_to_aspirate()\npipette.move_to(well.bottom(0.8), speed=10)\npipette.aspirate(35, well.bottom(0.8), flow_rate=30)\npipette.dispense(31.5, well.bottom(0.8), flow_rate=30, push_out=0)\npipette.aspirate(31.5, well.bottom(0.8), flow_rate=30)\npipette.dispense(35, well.bottom(0.8), end_location=well.bottom(z=well.height_from_volume(50)), flow_rate=30, push_out=1)\npipette.drop_tip()"
+    },
+    {
+      "id": "R22",
+      "scope": "组合：分支/余量/push_out/准备",
+      "state": "水相200µL枪头内100µL；take_all为未固定的合法布尔参数，两分支都可达；dest模型初始化有效；随后还要吸液。",
+      "overrides": "无",
+      "code": "if take_all:\n    pipette.dispense(100, dest.meniscus(z=0, target=\"dynamic\"), flow_rate=100, push_out=3)\nelse:\n    pipette.dispense(80, dest.meniscus(z=0, target=\"dynamic\"), flow_rate=100, push_out=0)\npipette.move_to(dest.top(), speed=20)\npipette.move_to(source.top())\npipette.prepare_to_aspirate()\npipette.move_to(source.bottom(0.8), speed=20)\npipette.aspirate(20, source.bottom(0.8), flow_rate=100)"
+    },
+    {
+      "id": "R23",
+      "scope": "活塞准备与未知状态",
+      "state": "片段起点枪头已安装但余量未知；前一外部过程标记待准备；source.top已在液面外。",
+      "overrides": "无",
+      "code": "pipette.move_to(source.top())\npipette.prepare_to_aspirate()"
+    },
+    {
+      "id": "R24",
+      "scope": "储液槽部分喷嘴定位与确认；其他维度已核对",
+      "state": "H1起4喷嘴；用户已确认完整8通道对齐；标准Y居中、9mm间距，无额外格点补偿；当前位置为source.top的同Y偏移位置。",
+      "overrides": "按state中的用户选择",
+      "code": "pipette.aspirate(50, source.bottom(0.8).move(Point(0, -18, 0)), flow_rate=100)"
+    },
+    {
+      "id": "R25",
+      "scope": "储液槽部分喷嘴定位与确认；其他维度已核对",
+      "state": "SINGLE A1；用户已确认完整8通道对齐；标准Y居中、9mm间距，无额外补偿。",
+      "overrides": "按state中的用户选择",
+      "code": "pipette.aspirate(50, source.bottom(0.8).move(Point(0, -31.5, 0)), flow_rate=100)"
+    },
+    {
+      "id": "R26",
+      "scope": "储液槽部分喷嘴定位与确认；其他维度已核对",
+      "state": "H1起4喷嘴；用户明确选择官方默认Y居中。",
+      "overrides": "按state中的用户选择",
+      "code": "pipette.aspirate(50, source.bottom(0.8), flow_rate=100)"
+    },
+    {
+      "id": "R27",
+      "scope": "储液槽部分喷嘴定位与确认；其他维度已核对",
+      "state": "H1起4喷嘴；使用12道储液槽，未确认定位策略。",
+      "overrides": "按state中的用户选择",
+      "code": "pipette.aspirate(50, source.bottom(0.8), flow_rate=100)"
+    },
+    {
+      "id": "R28",
+      "scope": "储液槽部分喷嘴定位与确认；其他维度已核对",
+      "state": "H1起4喷嘴；用户选完整8通道对齐；标准Y居中无补偿，当前在该槽偏移top；水相200µL枪头。",
+      "overrides": "按state中的用户选择",
+      "code": "pipette.move_to(source.bottom(0.8).move(Point(0, -18, 0)), speed=20)\npipette.aspirate(50, source.bottom(0.8), flow_rate=100)"
+    }
+  ]
+}

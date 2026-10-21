@@ -1,0 +1,138 @@
+Opentrons 官方耗材与硬件 load name 清单
+更新日期：2026-10-12
+范围：原脚本中的官方耗材 + 本次授权补齐的 Flex 枪头盒、Flex 移液器、官方适配器和模块。自定义耗材暂不收录。
+本清单只维护名称与必要的类别区别；收录名称不代表已补齐对应的执行接口或验证所有组合。
+
+1. Flex 枪头盒（无滤芯）
+opentrons_flex_96_tiprack_20ul
+opentrons_flex_96_tiprack_50ul
+opentrons_flex_96_tiprack_200ul
+opentrons_flex_96_tiprack_1000ul
+
+2. Flex 枪头盒（带滤芯）
+opentrons_flex_96_filtertiprack_20ul
+opentrons_flex_96_filtertiprack_50ul
+opentrons_flex_96_filtertiprack_200ul
+opentrons_flex_96_filtertiprack_1000ul
+
+3. 孔板（保留原脚本中的官方型号）
+biorad_96_wellplate_200ul_pcr
+corning_384_wellplate_112ul_flat
+corning_96_wellplate_330ul
+nest_96_wellplate_2ml_deep
+opentrons_96_wellplate_200ul_pcr_full_skirt
+
+4. 储液槽
+nest_12_reservoir_15ml
+nest_1_reservoir_195ml
+opentrons_tough_4_reservoir_72ml
+
+5. 管架
+opentrons_24_tuberack_nest_1.5ml_snapcap
+
+6. 板盖
+opentrons_tough_universal_lid
+
+7. 独立适配器（官方定义 allowedRoles 包含 adapter，共16项）
+ev_resin_tips_flex_96_tiprack_adapter  |  Opentrons Flex EV Resin Tips Tall Adapter for Third-party Evotips in 96 Tip Rack Adapter
+ev_resin_tips_flex_short_adapter  |  Opentrons Flex EV Resin Tips Short Adapter for Third-party Evotips
+ev_resin_tips_flex_tall_adapter  |  Opentrons Flex EV Resin Tips Tall Adapter for Third-party Evotips
+opentrons_12_well_aluminumblock_tough_22ml  |  Opentrons 12 Well Aluminum Block
+opentrons_1_well_aluminumblock_tough_300ml  |  Opentrons 1 Well Aluminum Block
+opentrons_4_well_aluminumblock_tough_72ml  |  Opentrons 4 Well Aluminum Block
+opentrons_96_deep_well_adapter  |  Opentrons 96 Deep Well Heater-Shaker Adapter
+opentrons_96_deep_well_temp_mod_adapter  |  Opentrons 96 Deep Well Temperature Module Adapter
+opentrons_96_flat_bottom_adapter  |  Opentrons 96 Flat Bottom Heater-Shaker Adapter
+opentrons_96_pcr_adapter  |  Opentrons 96 PCR Heater-Shaker Adapter
+opentrons_96_well_aluminum_block  |  Opentrons 96 Well Aluminum Block
+opentrons_aluminum_flat_bottom_plate  |  Opentrons Aluminum Flat Bottom Plate
+opentrons_flex_96_tiprack_adapter  |  Opentrons Flex 96 Tip Rack Adapter
+opentrons_universal_flat_adapter  |  Opentrons Universal Flat Heater-Shaker Adapter
+opentrons_universal_flat_adapter_type_b  |  Opentrons Universal Flat Heater-Shaker Adapter Type B
+
+opentrons_flex_deck_riser  |  Opentrons Flex Deck Riser
+
+8. Flex 移液器（官方完整6种）
+flex_1channel_50
+flex_1channel_1000
+flex_8channel_50
+flex_8channel_1000
+flex_96channel_200
+flex_96channel_1000
+
+9. 模块（官方 Available modules 完整10种；同一行多个名字是别名）
+Temperature Module GEN1 | temperature module | tempdeck
+Temperature Module GEN2 | temperature module gen2
+Magnetic Module GEN1 | magnetic module | magdeck
+Magnetic Module GEN2 | magnetic module gen2
+Thermocycler Module GEN1 | thermocycler module | thermocycler
+Thermocycler Module GEN2 | thermocycler module gen2 | thermocyclerModuleV2
+Heater-Shaker Module GEN1 | heaterShakerModuleV1
+Magnetic Block GEN1 | magneticBlockV1
+Absorbance Plate Reader Module | absorbanceReaderV1
+Flex Stacker Module | flexStackerModuleV1
+说明：本段照录跨机器人型号的官方加载名列表；列表存在某型号不表示能直接用于 Flex。日常 Flex 不自动选用旧代型号或磁力模块替代磁力架。
+
+10. 官方适配器相关组合耗材 / 铝块（不是独立 adapter；单独列名）
+opentrons_24_aluminumblock_generic_2ml_screwcap
+opentrons_24_aluminumblock_nest_0.5ml_screwcap
+opentrons_24_aluminumblock_nest_1.5ml_screwcap
+opentrons_24_aluminumblock_nest_1.5ml_snapcap
+opentrons_24_aluminumblock_nest_2ml_screwcap
+opentrons_24_aluminumblock_nest_2ml_snapcap
+opentrons_40_aluminumblock_eppendorf_24x2ml_safelock_snapcap_generic_16x0.2ml_pcr_strip
+opentrons_96_aluminumblock_biorad_wellplate_200ul
+opentrons_96_aluminumblock_generic_pcr_strip_200ul
+opentrons_96_aluminumblock_nest_wellplate_100ul
+opentrons_96_deep_well_adapter_nest_wellplate_2ml_deep
+opentrons_96_flat_bottom_adapter_nest_wellplate_200ul_flat
+opentrons_96_pcr_adapter_armadillo_wellplate_200ul
+opentrons_96_pcr_adapter_nest_wellplate_100ul_pcr_full_skirt
+opentrons_universal_flat_adapter_corning_384_wellplate_112ul_flat
+
+11. 官方校准适配器（校准件，单列，不作为普通实验适配器）
+opentrons_calibration_adapter_heatershaker_module
+opentrons_calibration_adapter_temperature_module
+opentrons_calibration_adapter_thermocycler_module
+
+来源（本次官方核查；日常使用只查维护后的清单）
+https://docs.opentrons.com/python-api/pipettes/loading/
+https://docs.opentrons.com/python-api/modules/setup/
+https://github.com/Opentrons/opentrons/tree/edge/shared-data/labware/definitions/2
+适配器依据该官方仓库目录下各名称的 1.json 中 parameters.loadName、metadata 和 allowedRoles 区分；edge 为本次读取的目录，不代表全部定义已在当前机器人软件中发布。
+
+ev_resin_tips_flex_96_tiprack_adapter | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/ev_resin_tips_flex_96_tiprack_adapter/1.json
+ev_resin_tips_flex_short_adapter | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/ev_resin_tips_flex_short_adapter/1.json
+ev_resin_tips_flex_tall_adapter | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/ev_resin_tips_flex_tall_adapter/1.json
+opentrons_12_well_aluminumblock_tough_22ml | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_12_well_aluminumblock_tough_22ml/1.json
+opentrons_1_well_aluminumblock_tough_300ml | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_1_well_aluminumblock_tough_300ml/1.json
+opentrons_24_aluminumblock_generic_2ml_screwcap | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_generic_2ml_screwcap/1.json
+opentrons_24_aluminumblock_nest_0.5ml_screwcap | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_nest_0.5ml_screwcap/1.json
+opentrons_24_aluminumblock_nest_1.5ml_screwcap | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_nest_1.5ml_screwcap/1.json
+opentrons_24_aluminumblock_nest_1.5ml_snapcap | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_nest_1.5ml_snapcap/1.json
+opentrons_24_aluminumblock_nest_2ml_screwcap | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_nest_2ml_screwcap/1.json
+opentrons_24_aluminumblock_nest_2ml_snapcap | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_nest_2ml_snapcap/1.json
+opentrons_40_aluminumblock_eppendorf_24x2ml_safelock_snapcap_generic_16x0.2ml_pcr_strip | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_40_aluminumblock_eppendorf_24x2ml_safelock_snapcap_generic_16x0.2ml_pcr_strip/1.json
+opentrons_4_well_aluminumblock_tough_72ml | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_4_well_aluminumblock_tough_72ml/1.json
+opentrons_96_aluminumblock_biorad_wellplate_200ul | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_aluminumblock_biorad_wellplate_200ul/1.json
+opentrons_96_aluminumblock_generic_pcr_strip_200ul | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_aluminumblock_generic_pcr_strip_200ul/1.json
+opentrons_96_aluminumblock_nest_wellplate_100ul | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_aluminumblock_nest_wellplate_100ul/1.json
+opentrons_96_deep_well_adapter | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_deep_well_adapter/1.json
+opentrons_96_deep_well_adapter_nest_wellplate_2ml_deep | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_deep_well_adapter_nest_wellplate_2ml_deep/1.json
+opentrons_96_deep_well_temp_mod_adapter | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_deep_well_temp_mod_adapter/1.json
+opentrons_96_flat_bottom_adapter | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_flat_bottom_adapter/1.json
+opentrons_96_flat_bottom_adapter_nest_wellplate_200ul_flat | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_flat_bottom_adapter_nest_wellplate_200ul_flat/1.json
+opentrons_96_pcr_adapter | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_pcr_adapter/1.json
+opentrons_96_pcr_adapter_armadillo_wellplate_200ul | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_pcr_adapter_armadillo_wellplate_200ul/1.json
+opentrons_96_pcr_adapter_nest_wellplate_100ul_pcr_full_skirt | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_pcr_adapter_nest_wellplate_100ul_pcr_full_skirt/1.json
+opentrons_96_well_aluminum_block | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_well_aluminum_block/1.json
+opentrons_aluminum_flat_bottom_plate | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_aluminum_flat_bottom_plate/1.json
+opentrons_calibration_adapter_heatershaker_module | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_calibration_adapter_heatershaker_module/1.json
+opentrons_calibration_adapter_temperature_module | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_calibration_adapter_temperature_module/1.json
+opentrons_calibration_adapter_thermocycler_module | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_calibration_adapter_thermocycler_module/1.json
+opentrons_flex_96_tiprack_adapter | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_96_tiprack_adapter/1.json
+opentrons_universal_flat_adapter | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_universal_flat_adapter/1.json
+opentrons_universal_flat_adapter_corning_384_wellplate_112ul_flat | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_universal_flat_adapter_corning_384_wellplate_112ul_flat/1.json
+opentrons_universal_flat_adapter_type_b | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_universal_flat_adapter_type_b/1.json
+
+安装关系见《Opentrons_安装关系库.txt》；垃圾桶、垃圾槽和夹爪的入口见API速查表布局加载部分。

@@ -1,0 +1,251 @@
+{
+  "checked_date": "2026-10-16",
+  "repository_commit": "05b494ba81636978fb79f08bbc20468f94464d5c",
+  "scope": "Selected latest Flex hardware revisions at pinned commit; diagnostic only, not installed-device identity or generation defaults",
+  "records": [
+    {
+      "channel": "eight_channel",
+      "model": "p1000",
+      "revision": "3_6",
+      "mode": "default",
+      "min_volume": 5,
+      "max_volume": 1000,
+      "positions_mm": {
+        "top": 0.0,
+        "bottom": 71.5,
+        "blowout": 76.5,
+        "drop": 91.5
+      },
+      "shaft_ul_per_mm": 15.904,
+      "max_push_out_ul": 79.52,
+      "tip_default_push_out_ul": {
+        "t50": 7,
+        "t200": 5,
+        "t1000": 20
+      },
+      "sources": [
+        {
+          "path": "shared-data/pipette/definitions/2/liquid/eight_channel/p1000/default/3_6.json",
+          "sha256": "198e9e0e38b6bf661739f020867a4f3fa18ef9a46d062c6796779b018cc31ed2"
+        },
+        {
+          "path": "shared-data/pipette/definitions/2/general/eight_channel/p1000/3_6.json",
+          "sha256": "c8295cf2b50597551f56810c623c21e960bc66a9c572b843ce94b75e2835d096"
+        }
+      ]
+    },
+    {
+      "channel": "eight_channel",
+      "model": "p50",
+      "revision": "3_5",
+      "mode": "default",
+      "min_volume": 5,
+      "max_volume": 50,
+      "positions_mm": {
+        "blowout": 76.5,
+        "bottom": 71.5,
+        "drop": 91.5,
+        "top": 0
+      },
+      "shaft_ul_per_mm": 0.785,
+      "max_push_out_ul": 3.925,
+      "tip_default_push_out_ul": {
+        "t20": 2,
+        "t50": 2
+      },
+      "sources": [
+        {
+          "path": "shared-data/pipette/definitions/2/liquid/eight_channel/p50/default/3_5.json",
+          "sha256": "322141678818976240a06b0403766eaf1218df24df6e568de54d3f3ee6e020cc"
+        },
+        {
+          "path": "shared-data/pipette/definitions/2/general/eight_channel/p50/3_5.json",
+          "sha256": "c41f0cb6348e78028fd6fb3f831fd1075b9caa1cb741df70e228346c4b166d60"
+        }
+      ]
+    },
+    {
+      "channel": "eight_channel",
+      "model": "p50",
+      "revision": "3_5",
+      "mode": "lowVolumeDefault",
+      "min_volume": 0.5,
+      "max_volume": 30,
+      "positions_mm": {
+        "blowout": 76.5,
+        "bottom": 61.5,
+        "drop": 91.5,
+        "top": 0
+      },
+      "shaft_ul_per_mm": 0.785,
+      "max_push_out_ul": 11.775,
+      "tip_default_push_out_ul": {
+        "t20": 7,
+        "t50": 7
+      },
+      "sources": [
+        {
+          "path": "shared-data/pipette/definitions/2/liquid/eight_channel/p50/lowVolumeDefault/3_5.json",
+          "sha256": "fb971f023d5bc87aab6dfbef3eb338b4c58adb59d5222ae950f6aae76b3813a6"
+        },
+        {
+          "path": "shared-data/pipette/definitions/2/general/eight_channel/p50/3_5.json",
+          "sha256": "c41f0cb6348e78028fd6fb3f831fd1075b9caa1cb741df70e228346c4b166d60"
+        }
+      ]
+    },
+    {
+      "channel": "ninety_six_channel",
+      "model": "p1000",
+      "revision": "3_7",
+      "mode": "default",
+      "min_volume": 5,
+      "max_volume": 1000,
+      "positions_mm": {
+        "top": 0.5,
+        "bottom": 68.5,
+        "blowout": 73.5,
+        "drop": 80
+      },
+      "shaft_ul_per_mm": 15.904,
+      "max_push_out_ul": 79.52,
+      "tip_default_push_out_ul": {
+        "t50": 7,
+        "t200": 5,
+        "t1000": 20
+      },
+      "sources": [
+        {
+          "path": "shared-data/pipette/definitions/2/liquid/ninety_six_channel/p1000/default/3_7.json",
+          "sha256": "da31f720911f56725aedad793f1540afe1a4a446b29794b7440c4c43a9414f78"
+        },
+        {
+          "path": "shared-data/pipette/definitions/2/general/ninety_six_channel/p1000/3_7.json",
+          "sha256": "c1e75867e01b307380ce48a4173e8610b7ae51dd9d21e6808893e60edfebc7e2"
+        }
+      ]
+    },
+    {
+      "channel": "ninety_six_channel",
+      "model": "p200",
+      "revision": "3_3",
+      "mode": "default",
+      "min_volume": 0.5,
+      "max_volume": 200,
+      "positions_mm": {
+        "blowout": 73.5,
+        "bottom": 68.5,
+        "drop": 80,
+        "top": 0.5
+      },
+      "shaft_ul_per_mm": 3.14159,
+      "max_push_out_ul": 15.70795,
+      "tip_default_push_out_ul": {
+        "t20": 2,
+        "t50": 5,
+        "t200": 5
+      },
+      "sources": [
+        {
+          "path": "shared-data/pipette/definitions/2/liquid/ninety_six_channel/p200/default/3_3.json",
+          "sha256": "a49c79dedcfeb060c1d6c3cb84afed9163ec9a9d65214a10f83a4ad81ec09726"
+        },
+        {
+          "path": "shared-data/pipette/definitions/2/general/ninety_six_channel/p200/3_3.json",
+          "sha256": "96254481c6bcd3d017a13e3a38ff38e75cab2d65c6ac157946f9d773f60ce0f9"
+        }
+      ]
+    },
+    {
+      "channel": "single_channel",
+      "model": "p1000",
+      "revision": "3_7",
+      "mode": "default",
+      "min_volume": 5,
+      "max_volume": 1000,
+      "positions_mm": {
+        "top": 0.0,
+        "bottom": 71.5,
+        "blowout": 76.5,
+        "drop": 90.5
+      },
+      "shaft_ul_per_mm": 15.904,
+      "max_push_out_ul": 79.52,
+      "tip_default_push_out_ul": {
+        "t50": 7,
+        "t200": 5,
+        "t1000": 20
+      },
+      "sources": [
+        {
+          "path": "shared-data/pipette/definitions/2/liquid/single_channel/p1000/default/3_7.json",
+          "sha256": "42b2f3de94bf1ac1fa4b81ff5650ce8764a837ddf19b446c67efee07a0780b82"
+        },
+        {
+          "path": "shared-data/pipette/definitions/2/general/single_channel/p1000/3_7.json",
+          "sha256": "5f5c5724fd792bcdc1e2e31308beba5947e6f0767031d51cb698ebbd4cf37279"
+        }
+      ]
+    },
+    {
+      "channel": "single_channel",
+      "model": "p50",
+      "revision": "3_7",
+      "mode": "default",
+      "min_volume": 5,
+      "max_volume": 50,
+      "positions_mm": {
+        "blowout": 76.5,
+        "bottom": 71.5,
+        "drop": 90.5,
+        "top": 0
+      },
+      "shaft_ul_per_mm": 0.785,
+      "max_push_out_ul": 3.925,
+      "tip_default_push_out_ul": {
+        "t20": 3.5,
+        "t50": 2
+      },
+      "sources": [
+        {
+          "path": "shared-data/pipette/definitions/2/liquid/single_channel/p50/default/3_7.json",
+          "sha256": "a84c3069244e1f9cc36318dfc73902c8ca67f737ac6b8b1999a8d6a931ae1d0f"
+        },
+        {
+          "path": "shared-data/pipette/definitions/2/general/single_channel/p50/3_7.json",
+          "sha256": "e7b8272af9069ea199fd906d296e3ac70e6aeda2961e2735711b9651c5e9fef8"
+        }
+      ]
+    },
+    {
+      "channel": "single_channel",
+      "model": "p50",
+      "revision": "3_7",
+      "mode": "lowVolumeDefault",
+      "min_volume": 0.5,
+      "max_volume": 30,
+      "positions_mm": {
+        "blowout": 76.5,
+        "bottom": 61.5,
+        "drop": 90.5,
+        "top": 0
+      },
+      "shaft_ul_per_mm": 0.785,
+      "max_push_out_ul": 11.775,
+      "tip_default_push_out_ul": {
+        "t20": 3.5,
+        "t50": 7
+      },
+      "sources": [
+        {
+          "path": "shared-data/pipette/definitions/2/liquid/single_channel/p50/lowVolumeDefault/3_7.json",
+          "sha256": "7b1768bcd52face42736a419337ed90ba3740781757bcaa2095dc3f687559ad2"
+        },
+        {
+          "path": "shared-data/pipette/definitions/2/general/single_channel/p50/3_7.json",
+          "sha256": "e7b8272af9069ea199fd906d296e3ac70e6aeda2961e2735711b9651c5e9fef8"
+        }
+      ]
+    }
+  ]
+}

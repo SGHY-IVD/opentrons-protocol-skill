@@ -1,0 +1,219 @@
+{
+  "schema": 1,
+  "baseline": "2026-10-21.6",
+  "answers": {
+    "R01": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "排后仍有20µL，非零push_out不合法"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R02": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R03": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R04": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R05": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "待准备状态下吸液，缺少源孔top的显式prepare_to_aspirate"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R06": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R07": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R08": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "有保留液时执行活塞准备；普通混匀轮次无需准备"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R09": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R10": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "峰值220µL超过200µL有效容量"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R11": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R12": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "需要模式切换，不满足原位立即混匀，应采用常规动态排液"
+        },
+        {
+          "line": 2,
+          "reason": "模式切换前未退出液面到top"
+        },
+        {
+          "line": 3,
+          "reason": "模式切换后下一次吸液缺少top准备"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R13": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R14": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "缺少dest.top，跨孔长距离被入液慢速覆盖"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R15": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R16": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R17": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "同模块已打开且中间未改变状态，重复开盖"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R18": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R19": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "无覆盖却沿用旧bottom1，应为bottom0.8"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R20": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R21": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R22": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 7,
+          "reason": "take_all=False时仍有20µL，合流后无条件活塞准备不合法；True分支准备合法"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R23": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "余量未知，无法确认空枪头准备条件；不能猜为空或宣称已知有液体"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R24": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/reservoir-partial-nozzles.md"
+    },
+    "R25": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "A1应为正31.5mm，此处符号反了"
+        }
+      ],
+      "rule": "references/reservoir-partial-nozzles.md"
+    },
+    "R26": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/reservoir-partial-nozzles.md"
+    },
+    "R27": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "生成前须聊天确认定位策略，并说明控制机身位置减少伸向邻位的目的；不自动加偏移"
+        }
+      ],
+      "rule": "references/reservoir-partial-nozzles.md"
+    },
+    "R28": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "吸液位置遗漏Y偏移，会回到默认居中位置"
+        }
+      ],
+      "rule": "references/reservoir-partial-nozzles.md"
+    }
+  }
+}

@@ -1,0 +1,176 @@
+Opentrons 安装关系库（首版）
+更新：2026-10-12；适用主线：Flex；范围：当前官方耗材清单与6类Flex模块。
+用途：依据用户给定布局核对加载层级及官方明确约束；不替用户设计台面，不进行完整碰撞模拟。
+查询顺序：安装孔位→甲板夹具→可用位置；硬件→slot；模块→适配器；适配器→耗材；必要时查询板盖/堆叠。
+状态含义：明确支持=有官方条目；明确禁止=有显式约束；未收录/未确认=不自动判断兼容或不兼容，反馈缺失。
+用户经验规则与官方事实分别记录。日常只查询本库，升级经用户提出后再外查。
+
+一、垃圾处理与夹爪（官方接口事实 + 用户生成规范）
+官方：load_trash_bin(location: DeckLocation) -> TrashBin；location 必填。允许 A1/B1/C1/D1/A3/B3/C3/D3 的空位置；禁止第2、4列。
+官方：load_waste_chute() -> WasteChute；无参数，固定占用D3，不能与另一件占用D3的设备共占槽位。
+官方：夹爪无需独立加载，move_labware/move_lid 通过 use_gripper=True 使用。
+用户规范：脚本出现 drop_tip() 时加载垃圾桶或垃圾槽；除非特别说明，默认 load_trash_bin()。垃圾桶位置仍由用户布局提供。该规范不是对API所有合法调用方式的穷举声明。
+
+二、硬件→slot（明确支持；不等于检查完全部组合冲突）
+垃圾桶 | A1/B1/C1/D1/A3/B3/C3/D3
+外置垃圾槽 | D3
+heaterShakerModuleV1 | A1/B1/C1/D1/A3/B3/C3/D3
+temperature module gen2（内部model temperatureModuleV2） | A1/B1/C1/D1/A3/B3/C3/D3
+thermocycler module gen2 / thermocyclerModuleV2 | 加载锚点B1；实体占用A1+B1
+magneticBlockV1 | A1–D3全部12个工作区槽位
+absorbanceReaderV1 | A3/B3/C3/D3；同排第4列为专用盖停放区，不得作为普通耗材槽使用
+flexStackerModuleV1 | API加载位置A4/B4/C4/D4；其夹具安装在对应第3列cutout，出入料会使用同排第3列
+明确限制：第4列仅夹爪可达，移液器不可达。
+明确限制：使用常规第4列暂存夹具与同排第3列下沉式通电模块存在夹具冲突。
+条件关系：D3垃圾槽与D4可共存，但必须使用对应带暂存区的垃圾槽夹具；96通道/夹爪使用垃圾槽需要无盖配置。
+条件关系：shared-data另有磁力架+暂存区、Stacker+磁力架、Stacker+垃圾槽的专用组合夹具；不得用“同排第3/4列一律冲突”替代具体配置规则。
+
+二补充、甲板夹具与可用位置（安装依赖）
+Flex位置命名：A–D为行，1–4为列；A在后、D在前。第1–3列组成12个工作区位置，第4列为暂存/扩展位置，仅夹爪可达，不用于直接移液。
+区分三个层次：cutout=物理安装孔位；cutoutFixture=安装在孔位上的夹具/硬件配置；addressableArea=该配置提供的可寻址区域。第4列暂存区由对应第3列的夹具提供，并非另有一个独立的第4列安装孔位。
+官方字段：mayMountTo限定夹具可安装的cutout；providesAddressableAreas按cutout列出提供的区域；fixtureGroup用于关联多孔位配置。以下fixture id均为shared-data内部标识，不是耗材load name，也不是需要生成的load调用。
+
+普通扩展夹具 | stagingAreaRightSlot | cutoutA3/B3/C3/D3 | 提供同排第3列普通位置和第4列暂存位置；例如cutoutC3→C3+C4。
+垃圾桶夹具 | trashBinAdapter | 第1、3列允许的cutout | 例如cutoutC3→movableTrashC3；不提供C4，不能同时在同一cutout安装普通扩展夹具。
+磁力架+扩展组合 | stagingAreaSlotWithMagneticBlockV1 | cutoutA3/B3/C3/D3 | 例如cutoutC3→magneticBlockV1C3+C4；第3列是磁力架区域，第4列是暂存位置。
+带盖垃圾槽+扩展组合 | stagingAreaSlotWithWasteChuteRightAdapterCovered | cutoutD3 | 提供1ChannelWasteChute、8ChannelWasteChute及D4。
+无盖垃圾槽+扩展组合 | stagingAreaSlotWithWasteChuteRightAdapterNoCover | cutoutD3 | 提供1ChannelWasteChute、8ChannelWasteChute、96ChannelWasteChute、gripperWasteChute及D4。
+
+核对逻辑：先确定用户布局要求的区域，再核对同一cutout是否存在能共同提供这些区域的已收录配置。普通C3耗材+C4可由普通扩展夹具提供；C3垃圾桶+C4不受已收录垃圾桶夹具支持；C3磁力架+C4及D3垃圾槽+D4分别有专用组合。不得概括为“第3列有设备，第4列就不可用”。磁力架本体与底部夹具在甲板配置中按组合表达；这不意味着磁力架被作为普通可由move_labware搬运的耗材。
+代码生成：直接使用用户指定的A4–D4作为load_labware的location或move_labware的new_location；无需另写扩展板位加载接口。引用第4列位置表达所需甲板配置，实际硬件和App/机器人上的deck configuration仍须与之匹配，代码不会自动安装扩展件。
+加载边界：夹爪无独立加载调用，通过use_gripper=True使用；垃圾槽仍必须显式load_waste_chute()，不能与“扩展夹具无需加载”混为一谈。
+本节依据官方deck definition v5的当前edge快照及deck-slots文档。记录内部字段用于核对关系，不凭此擅自增加执行接口；若机器人实际配置涉及未收录组合，则反馈缺失。
+
+三、模块→独立适配器（官方文档明确支持）
+heaterShakerModuleV1 -> opentrons_universal_flat_adapter
+heaterShakerModuleV1 -> opentrons_universal_flat_adapter_type_b
+heaterShakerModuleV1 -> opentrons_96_pcr_adapter
+heaterShakerModuleV1 -> opentrons_96_deep_well_adapter
+heaterShakerModuleV1 -> opentrons_96_flat_bottom_adapter
+temperatureModuleV2 -> opentrons_aluminum_flat_bottom_plate
+temperatureModuleV2 -> opentrons_96_well_aluminum_block
+temperatureModuleV2 -> opentrons_96_deep_well_temp_mod_adapter
+台面直接加载：opentrons_flex_96_tiprack_adapter、opentrons_flex_deck_riser。
+热震荡模块需搬入搬出孔板时，使用独立适配器与独立孔板定义；不要使用一体组合定义代替。
+以上是已收录关系，不把模块文档未列出的适配器自动判为禁止。
+
+四、适配器→耗材（来自上层耗材的 stackingOffsetWithLabware）
+下面每条包含上层耗材定义版本和官方坐标重叠量；这些数值不是需要用户另加的校准偏移。
+opentrons_96_well_aluminum_block -> biorad_96_wellplate_200ul_pcr | 子定义v5 | overlap={"x": 0, "y": 0, "z": 15.41}
+opentrons_96_pcr_adapter -> biorad_96_wellplate_200ul_pcr | 子定义v5 | overlap={"x": 0, "y": 0, "z": 10.16}
+opentrons_universal_flat_adapter -> corning_384_wellplate_112ul_flat | 子定义v5 | overlap={"x": 0, "y": 0, "z": 8.32}
+opentrons_aluminum_flat_bottom_plate -> corning_384_wellplate_112ul_flat | 子定义v5 | overlap={"x": 0, "y": 0, "z": 4.4}
+opentrons_96_deep_well_adapter -> nest_96_wellplate_2ml_deep | 子定义v5 | overlap={"x": 0, "y": 0, "z": 16.3}
+opentrons_96_deep_well_temp_mod_adapter -> nest_96_wellplate_2ml_deep | 子定义v5 | overlap={"x": 0, "y": 0, "z": 16.1}
+opentrons_96_pcr_adapter -> opentrons_96_wellplate_200ul_pcr_full_skirt | 子定义v4 | overlap={"x": 0, "y": 0, "z": 10.95}
+opentrons_96_well_aluminum_block -> opentrons_96_wellplate_200ul_pcr_full_skirt | 子定义v4 | overlap={"x": 0, "y": 0, "z": 11.91}
+opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_filtertiprack_1000ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
+opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_filtertiprack_200ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
+opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_filtertiprack_20ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
+opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_filtertiprack_50ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
+opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_tiprack_1000ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
+opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_tiprack_200ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
+opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_tiprack_20ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
+opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_tiprack_50ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
+opentrons_4_well_aluminumblock_tough_72ml -> opentrons_tough_4_reservoir_72ml | 子定义v2 | overlap={"x": 0, "y": 0, "z": 23.75}
+opentrons_flex_deck_riser -> opentrons_tough_universal_lid | 子定义v2 | overlap={"x": 0, "y": 0, "z": 34}
+
+五、模块→耗材直接叠放（来自 stackingOffsetWithModule；只表示该定义显式记录的关系）
+thermocyclerModuleV2 -> biorad_96_wellplate_200ul_pcr | 子定义v5 | overlap={"x": 0, "y": 0, "z": 10.75}
+magneticBlockV1 -> biorad_96_wellplate_200ul_pcr | 子定义v5 | overlap={"x": 0, "y": 0, "z": 3.87}
+magneticBlockV1 -> nest_96_wellplate_2ml_deep | 子定义v5 | overlap={"x": 0, "y": 0, "z": 2.66}
+magneticBlockV1 -> opentrons_96_wellplate_200ul_pcr_full_skirt | 子定义v4 | overlap={"x": 0, "y": 0, "z": 3.54}
+thermocyclerModuleV2 -> opentrons_96_wellplate_200ul_pcr_full_skirt | 子定义v4 | overlap={"x": 0, "y": 0, "z": 10.7}
+thermocyclerModuleV2 -> opentrons_calibration_adapter_thermocycler_module | 子定义v1 | overlap={"x": 0, "y": 0, "z": 11.0}
+
+六、板盖、同类堆叠及其他父层关系（保持原始字段语义）
+biorad_96_wellplate_200ul_pcr -> biorad_96_wellplate_200ul_pcr | stackingOffsetWithLabware | 子定义v5 | overlap={"x": 0, "y": 0, "z": 3.32}
+nest_96_wellplate_2ml_deep -> nest_96_wellplate_2ml_deep | stackingOffsetWithLabware | 子定义v5 | overlap={"x": 0, "y": 0, "z": 2.75}
+opentrons_96_wellplate_200ul_pcr_full_skirt -> opentrons_96_wellplate_200ul_pcr_full_skirt | stackingOffsetWithLabware | 子定义v4 | overlap={"x": 0, "y": 0, "z": 3.68}
+opentrons_flex_tiprack_lid -> opentrons_flex_96_filtertiprack_1000ul | stackingOffsetWithLabware | 子定义v1 | overlap={"x": 0, "y": 0, "z": 0.25}
+opentrons_flex_tiprack_lid -> opentrons_flex_96_filtertiprack_200ul | stackingOffsetWithLabware | 子定义v1 | overlap={"x": 0, "y": 0, "z": 0.25}
+opentrons_flex_tiprack_lid -> opentrons_flex_96_filtertiprack_20ul | stackingOffsetWithLabware | 子定义v1 | overlap={"x": 0, "y": 0, "z": 0.25}
+opentrons_flex_tiprack_lid -> opentrons_flex_96_filtertiprack_50ul | stackingOffsetWithLabware | 子定义v1 | overlap={"x": 0, "y": 0, "z": 0.25}
+opentrons_flex_tiprack_lid -> opentrons_flex_96_tiprack_1000ul | stackingOffsetWithLabware | 子定义v1 | overlap={"x": 0, "y": 0, "z": 0.25}
+opentrons_flex_tiprack_lid -> opentrons_flex_96_tiprack_200ul | stackingOffsetWithLabware | 子定义v1 | overlap={"x": 0, "y": 0, "z": 0.25}
+opentrons_flex_tiprack_lid -> opentrons_flex_96_tiprack_20ul | stackingOffsetWithLabware | 子定义v1 | overlap={"x": 0, "y": 0, "z": 0.25}
+opentrons_flex_tiprack_lid -> opentrons_flex_96_tiprack_50ul | stackingOffsetWithLabware | 子定义v1 | overlap={"x": 0, "y": 0, "z": 0.25}
+default -> opentrons_tough_universal_lid | stackingOffsetWithLabware | 子定义v2 | overlap={"x": 0, "y": 0, "z": 7.1} | 特殊键，不是普通耗材load name
+opentrons_96_wellplate_200ul_pcr_full_skirt -> opentrons_tough_universal_lid | stackingOffsetWithLabware | 子定义v2 | overlap={"x": 0, "y": 0, "z": 6.1}
+protocol_engine_lid_stack_object -> opentrons_tough_universal_lid | stackingOffsetWithLabware | 子定义v2 | overlap={"x": 0, "y": 0, "z": 0} | 特殊键，不是普通耗材load name
+opentrons_tough_universal_lid -> opentrons_tough_universal_lid | stackingOffsetWithLabware | 子定义v2 | overlap={"x": 0, "y": 0, "z": 1}
+opentrons_96_wellplate_200ul_pcr_full_skirt | compatibleParentLabware=["opentrons_96_wellplate_200ul_pcr_full_skirt"]
+opentrons_96_wellplate_200ul_pcr_full_skirt | stackLimit=4
+opentrons_tough_universal_lid | stackLimit=5
+default 是默认几何条目，不作为“所有耗材兼容”的证明。外部父项若尚未收录其定义，不能据一条几何记录自动补全其全部能力。
+字段解释：stackingOffsetWithLabware 的键为下层对象；记录位于上层耗材定义中。stackingOffsetWithModule 同理。compatibleParentLabware 需按其字段语义保留，不能与几何偏移简单互换。
+
+七、未收录/未确认
+未覆盖OT-2专属/旧代模块的完整安装约束；不会拿它们自动替代Flex模块。
+当前52份耗材定义中，没有显式关系的组合均保持未确认；例如 corning_96_wellplate_330ul 未提取到适配器叠放记录，不因此判定不可安装。
+EV Resin适配器、部分Tough储液槽铝块的模块安装关系尚未由本轮模块文档确认；保持名称已收录、对应安装关系未确认。
+尚未覆盖官方耗材库全部耗材；本库只涵盖当前名称清单的关系与直接引用。
+
+八、来源与版本
+https://docs.opentrons.com/python-api/deck-slots/
+https://docs.opentrons.com/python-api/reference/protocols/
+https://docs.opentrons.com/python-api/modules/heater-shaker/
+https://docs.opentrons.com/python-api/modules/temperature-module/
+https://docs.opentrons.com/python-api/modules/absorbance-plate-reader/
+https://docs.opentrons.com/python-api/modules/flex-stacker/
+https://docs.opentrons.com/python-api/modules/thermocycler/
+https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/deck/definitions/5/ot3_standard.json
+https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/schemas/2.json
+关系的几何条目按本次官方仓库各耗材最高可见定义版本提取；edge快照不等于全部条目已被当前机器人软件发布。模块位置优先采用在线API文档，并与deck的mayMountTo/providesAddressableAreas/fixtureGroup核对。
+biorad_96_wellplate_200ul_pcr | definition version=5 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/biorad_96_wellplate_200ul_pcr/5.json
+corning_384_wellplate_112ul_flat | definition version=5 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/corning_384_wellplate_112ul_flat/5.json
+corning_96_wellplate_330ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/corning_96_wellplate_330ul/1.json
+ev_resin_tips_flex_96_tiprack_adapter | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/ev_resin_tips_flex_96_tiprack_adapter/1.json
+ev_resin_tips_flex_short_adapter | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/ev_resin_tips_flex_short_adapter/1.json
+ev_resin_tips_flex_tall_adapter | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/ev_resin_tips_flex_tall_adapter/1.json
+nest_12_reservoir_15ml | definition version=3 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/nest_12_reservoir_15ml/3.json
+nest_1_reservoir_195ml | definition version=5 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/nest_1_reservoir_195ml/5.json
+nest_96_wellplate_2ml_deep | definition version=5 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/nest_96_wellplate_2ml_deep/5.json
+opentrons_12_well_aluminumblock_tough_22ml | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_12_well_aluminumblock_tough_22ml/1.json
+opentrons_1_well_aluminumblock_tough_300ml | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_1_well_aluminumblock_tough_300ml/1.json
+opentrons_24_aluminumblock_generic_2ml_screwcap | definition version=3 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_generic_2ml_screwcap/3.json
+opentrons_24_aluminumblock_nest_0.5ml_screwcap | definition version=4 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_nest_0.5ml_screwcap/4.json
+opentrons_24_aluminumblock_nest_1.5ml_screwcap | definition version=3 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_nest_1.5ml_screwcap/3.json
+opentrons_24_aluminumblock_nest_1.5ml_snapcap | definition version=3 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_nest_1.5ml_snapcap/3.json
+opentrons_24_aluminumblock_nest_2ml_screwcap | definition version=3 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_nest_2ml_screwcap/3.json
+opentrons_24_aluminumblock_nest_2ml_snapcap | definition version=3 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_aluminumblock_nest_2ml_snapcap/3.json
+opentrons_24_tuberack_nest_1.5ml_snapcap | definition version=2 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_24_tuberack_nest_1.5ml_snapcap/2.json
+opentrons_40_aluminumblock_eppendorf_24x2ml_safelock_snapcap_generic_16x0.2ml_pcr_strip | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_40_aluminumblock_eppendorf_24x2ml_safelock_snapcap_generic_16x0.2ml_pcr_strip/1.json
+opentrons_4_well_aluminumblock_tough_72ml | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_4_well_aluminumblock_tough_72ml/1.json
+opentrons_96_aluminumblock_biorad_wellplate_200ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_aluminumblock_biorad_wellplate_200ul/1.json
+opentrons_96_aluminumblock_generic_pcr_strip_200ul | definition version=4 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_aluminumblock_generic_pcr_strip_200ul/4.json
+opentrons_96_aluminumblock_nest_wellplate_100ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_aluminumblock_nest_wellplate_100ul/1.json
+opentrons_96_deep_well_adapter | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_deep_well_adapter/1.json
+opentrons_96_deep_well_adapter_nest_wellplate_2ml_deep | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_deep_well_adapter_nest_wellplate_2ml_deep/1.json
+opentrons_96_deep_well_temp_mod_adapter | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_deep_well_temp_mod_adapter/1.json
+opentrons_96_flat_bottom_adapter | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_flat_bottom_adapter/1.json
+opentrons_96_flat_bottom_adapter_nest_wellplate_200ul_flat | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_flat_bottom_adapter_nest_wellplate_200ul_flat/1.json
+opentrons_96_pcr_adapter | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_pcr_adapter/1.json
+opentrons_96_pcr_adapter_armadillo_wellplate_200ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_pcr_adapter_armadillo_wellplate_200ul/1.json
+opentrons_96_pcr_adapter_nest_wellplate_100ul_pcr_full_skirt | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_pcr_adapter_nest_wellplate_100ul_pcr_full_skirt/1.json
+opentrons_96_well_aluminum_block | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_well_aluminum_block/1.json
+opentrons_96_wellplate_200ul_pcr_full_skirt | definition version=4 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_96_wellplate_200ul_pcr_full_skirt/4.json
+opentrons_aluminum_flat_bottom_plate | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_aluminum_flat_bottom_plate/1.json
+opentrons_calibration_adapter_heatershaker_module | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_calibration_adapter_heatershaker_module/1.json
+opentrons_calibration_adapter_temperature_module | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_calibration_adapter_temperature_module/1.json
+opentrons_calibration_adapter_thermocycler_module | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_calibration_adapter_thermocycler_module/1.json
+opentrons_flex_96_filtertiprack_1000ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_96_filtertiprack_1000ul/1.json
+opentrons_flex_96_filtertiprack_200ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_96_filtertiprack_200ul/1.json
+opentrons_flex_96_filtertiprack_20ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_96_filtertiprack_20ul/1.json
+opentrons_flex_96_filtertiprack_50ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_96_filtertiprack_50ul/1.json
+opentrons_flex_96_tiprack_1000ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_96_tiprack_1000ul/1.json
+opentrons_flex_96_tiprack_200ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_96_tiprack_200ul/1.json
+opentrons_flex_96_tiprack_20ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_96_tiprack_20ul/1.json
+opentrons_flex_96_tiprack_50ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_96_tiprack_50ul/1.json
+opentrons_flex_96_tiprack_adapter | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_96_tiprack_adapter/1.json
+opentrons_tough_4_reservoir_72ml | definition version=2 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_tough_4_reservoir_72ml/2.json
+opentrons_tough_universal_lid | definition version=2 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_tough_universal_lid/2.json
+opentrons_universal_flat_adapter | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_universal_flat_adapter/1.json
+opentrons_universal_flat_adapter_corning_384_wellplate_112ul_flat | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_universal_flat_adapter_corning_384_wellplate_112ul_flat/1.json
+opentrons_universal_flat_adapter_type_b | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_universal_flat_adapter_type_b/1.json
+opentrons_flex_deck_riser | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_deck_riser/1.json

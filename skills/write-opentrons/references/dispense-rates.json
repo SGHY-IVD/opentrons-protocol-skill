@@ -1,0 +1,2162 @@
+{
+  "revision": "2026-10-21-v1",
+  "units": {
+    "volume": "uL",
+    "flow_rate": "uL/s"
+  },
+  "sources": [
+    {
+      "name": "water",
+      "url": "https://github.com/Opentrons/opentrons/blob/edge/shared-data/liquid-class/definitions/1/water/3.json",
+      "blob_sha": "0d2b74e0dcc9611643c8c2659f243bead0f0b5ab"
+    },
+    {
+      "name": "ethanol_80",
+      "url": "https://github.com/Opentrons/opentrons/blob/edge/shared-data/liquid-class/definitions/1/ethanol_80/3.json",
+      "blob_sha": "d63c6cfbbaa0b2afaca4c658bb308584c47f4192"
+    },
+    {
+      "name": "glycerol_50",
+      "url": "https://github.com/Opentrons/opentrons/blob/edge/shared-data/liquid-class/definitions/1/glycerol_50/3.json",
+      "blob_sha": "7fc80aa588477c81e922d3620e0c6d511eaa0fc7"
+    }
+  ],
+  "rules": [
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_20ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          10
+        ],
+        [
+          9.999,
+          10
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          20,
+          20
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_20ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          10
+        ],
+        [
+          9.999,
+          10
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          20,
+          20
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          50
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          50
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_20ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          10
+        ],
+        [
+          9.999,
+          55
+        ],
+        [
+          10,
+          55
+        ],
+        [
+          20,
+          55
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_20ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          10
+        ],
+        [
+          9.999,
+          55
+        ],
+        [
+          10,
+          55
+        ],
+        [
+          20,
+          55
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          50
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          50
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          5,
+          80
+        ],
+        [
+          10,
+          80
+        ],
+        [
+          50,
+          100
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 5,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-21水相排液经验覆盖；单/八通道1000µL配50µL枪头，普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          5,
+          80
+        ],
+        [
+          10,
+          80
+        ],
+        [
+          50,
+          100
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 5,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-21水相排液经验覆盖；单/八通道1000µL配50µL枪头，普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          10,
+          40
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          100,
+          200
+        ],
+        [
+          200,
+          300
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 10,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-16水相排液经验覆盖；单/八通道与普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          10,
+          40
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          100,
+          200
+        ],
+        [
+          200,
+          300
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 10,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-16水相排液经验覆盖；单/八通道与普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_1000ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          10,
+          40
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          100,
+          150
+        ],
+        [
+          200,
+          200
+        ],
+        [
+          500,
+          400
+        ],
+        [
+          1000,
+          700
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 10,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-16水相排液经验覆盖；单/八通道与普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_1000ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          10,
+          40
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          100,
+          150
+        ],
+        [
+          200,
+          200
+        ],
+        [
+          500,
+          400
+        ],
+        [
+          1000,
+          700
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 10,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-16水相排液经验覆盖；单/八通道与普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          5,
+          80
+        ],
+        [
+          10,
+          80
+        ],
+        [
+          50,
+          100
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 5,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-21水相排液经验覆盖；单/八通道1000µL配50µL枪头，普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          5,
+          80
+        ],
+        [
+          10,
+          80
+        ],
+        [
+          50,
+          100
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 5,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-21水相排液经验覆盖；单/八通道1000µL配50µL枪头，普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          10,
+          40
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          100,
+          200
+        ],
+        [
+          200,
+          300
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 10,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-16水相排液经验覆盖；单/八通道与普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          10,
+          40
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          100,
+          200
+        ],
+        [
+          200,
+          300
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 10,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-16水相排液经验覆盖；单/八通道与普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_1000ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          10,
+          40
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          100,
+          150
+        ],
+        [
+          200,
+          200
+        ],
+        [
+          500,
+          400
+        ],
+        [
+          1000,
+          700
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 10,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-16水相排液经验覆盖；单/八通道与普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_1000ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          10,
+          40
+        ],
+        [
+          50,
+          100
+        ],
+        [
+          100,
+          150
+        ],
+        [
+          200,
+          200
+        ],
+        [
+          500,
+          400
+        ],
+        [
+          1000,
+          700
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 10,
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-16水相排液经验覆盖；单/八通道与普通/滤芯共用；分段线性插值，不外推"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_20ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          10
+        ],
+        [
+          9.999,
+          10
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          20,
+          22
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_20ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          10
+        ],
+        [
+          9.999,
+          10
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          20,
+          22
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          80
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          80
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          80
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          80
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          50,
+          80
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          200
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          200
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          200
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_1000ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          200
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_1000ul/1",
+      "liquid": "water",
+      "action": "dispense",
+      "points": [
+        [
+          1,
+          200
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_20ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_20ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_20ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_20ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          35.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          35.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_1000ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          300.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_1000ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          300.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_1000ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          300.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_1000ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          300.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          100.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_1000ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_1000ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          200.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_20ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_20ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ],
+        [
+          10.0,
+          60.0
+        ],
+        [
+          50.0,
+          60.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ],
+        [
+          10.0,
+          60.0
+        ],
+        [
+          50.0,
+          60.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 0.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ],
+        [
+          10.0,
+          100.0
+        ],
+        [
+          200.0,
+          100.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "organic",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          7.0
+        ],
+        [
+          10.0,
+          100.0
+        ],
+        [
+          200.0,
+          100.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 ethanol_80.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_20ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_20ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_20ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_20ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          50.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          50.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_1000ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          250.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_1000ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          250.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          50.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          50.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_1000ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          250.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_1000ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          250.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          50.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          50.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_1000ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          250.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_1000ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          250.0
+        ]
+      ],
+      "max_volume": 1000,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_20ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_20ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 20,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_50ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          1.0,
+          7.0
+        ],
+        [
+          10.0,
+          10.0
+        ],
+        [
+          50.0,
+          40.0
+        ]
+      ],
+      "max_volume": 50,
+      "min_rule_volume": 1.0,
+      "upper_endpoint": "hold",
+      "provenance": "用户2026-10-19甘油类排液覆盖；沿用96通道1000µL配50µL枪头的线性曲线；适用于已收录20/50µL枪头普通及滤芯配置；按枪头容量限制，不向低于首点外推"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": false,
+      "tiprack": "opentrons/opentrons_flex_96_tiprack_200ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          25.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": true,
+      "tiprack": "opentrons/opentrons_flex_96_filtertiprack_200ul/1",
+      "liquid": "glycerol",
+      "action": "dispense",
+      "points": [
+        [
+          0.0,
+          25.0
+        ]
+      ],
+      "max_volume": 200,
+      "min_rule_volume": 0,
+      "upper_endpoint": "hold",
+      "provenance": "用户授权采用官方v3 glycerol_50.singleDispense.flowRateByVolume；仅继承流速"
+    }
+  ]
+}

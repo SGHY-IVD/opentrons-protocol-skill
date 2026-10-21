@@ -1,0 +1,5021 @@
+{
+  "revision": "2026-10-16-official-v3",
+  "units": "seconds",
+  "sources": [
+    {
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "url": "https://github.com/Opentrons/opentrons/blob/edge/shared-data/liquid-class/definitions/1/water/3.json",
+      "normalized_snapshot_sha256": "424355df50490039202c6eda9299e507481a62a56ba1a86e6a3cf0c776a65651"
+    },
+    {
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "url": "https://github.com/Opentrons/opentrons/blob/edge/shared-data/liquid-class/definitions/1/ethanol_80/3.json",
+      "normalized_snapshot_sha256": "a663e5ce4cff352a106a216d776e5bd7eb24768b26c97f881c79315d5e8f4504"
+    },
+    {
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "url": "https://github.com/Opentrons/opentrons/blob/edge/shared-data/liquid-class/definitions/1/glycerol_50/3.json",
+      "normalized_snapshot_sha256": "9e7cf4bf73a7ae9cad495d56817790b79f75f625352c8822dd4fca826a2da5b1"
+    }
+  ],
+  "rules": [
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.75
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.75
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.75
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.75
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.75
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.75
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.75
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0
+          },
+          "after": {
+            "enabled": false,
+            "duration": 0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "organic",
+      "official_name": "ethanol_80",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": true,
+            "duration": 0.5
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 20,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_50",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.7
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.7
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.7
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.7
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.7
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 1000,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.7
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 20,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 2.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
+      "filtered": true,
+      "liquid": "glycerol",
+      "official_name": "glycerol_50",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 1.0
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": false,
+            "duration": 0.0
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.5
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      }
+    }
+  ]
+}

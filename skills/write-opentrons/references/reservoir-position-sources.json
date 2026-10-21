@@ -1,0 +1,123 @@
+{
+  "checked": "2026-10-21",
+  "upstream_tree": "72fd2310e5b8f39e6024f3926c95bfc4468be260",
+  "sources": [
+    {
+      "path": "api/src/opentrons/protocol_engine/state/motion.py",
+      "blob_sha": "0753949d95017e6bdb9f0b75214fcbdf7974fe43",
+      "url": "https://github.com/Opentrons/opentrons/blob/72fd2310e5b8f39e6024f3926c95bfc4468be260/api/src/opentrons/protocol_engine/state/motion.py"
+    },
+    {
+      "path": "api/src/opentrons/protocol_engine/state/labware.py",
+      "blob_sha": "11f3bd16d273c173de7a3e2a501a3b2bd4685daa",
+      "url": "https://github.com/Opentrons/opentrons/blob/72fd2310e5b8f39e6024f3926c95bfc4468be260/api/src/opentrons/protocol_engine/state/labware.py"
+    },
+    {
+      "path": "api/src/opentrons/protocol_engine/state/pipettes.py",
+      "blob_sha": "5222da110095a0c257c10f10988b8974c56f5e76",
+      "url": "https://github.com/Opentrons/opentrons/blob/72fd2310e5b8f39e6024f3926c95bfc4468be260/api/src/opentrons/protocol_engine/state/pipettes.py"
+    },
+    {
+      "path": "api/src/opentrons/hardware_control/nozzle_manager.py",
+      "blob_sha": "15775c57b1543c493d4b0ae76dc76f06165d3900",
+      "url": "https://github.com/Opentrons/opentrons/blob/72fd2310e5b8f39e6024f3926c95bfc4468be260/api/src/opentrons/hardware_control/nozzle_manager.py"
+    },
+    {
+      "path": "shared-data/pipette/definitions/2/geometry/eight_channel/p50/3_0.json",
+      "blob_sha": "4bd9c9048f9dfba791efac05559a3731ef7f5e71",
+      "url": "https://github.com/Opentrons/opentrons/blob/72fd2310e5b8f39e6024f3926c95bfc4468be260/shared-data/pipette/definitions/2/geometry/eight_channel/p50/3_0.json"
+    },
+    {
+      "path": "shared-data/pipette/definitions/2/geometry/eight_channel/p1000/3_0.json",
+      "blob_sha": "a6294f329cd12ad5d41c6f8a400519a4f767d138",
+      "url": "https://github.com/Opentrons/opentrons/blob/72fd2310e5b8f39e6024f3926c95bfc4468be260/shared-data/pipette/definitions/2/geometry/eight_channel/p1000/3_0.json"
+    }
+  ],
+  "nozzle_coordinates_mm": {
+    "p50": {
+      "A1": [
+        -8.0,
+        -16.0,
+        -259.15
+      ],
+      "B1": [
+        -8.0,
+        -25.0,
+        -259.15
+      ],
+      "C1": [
+        -8.0,
+        -34.0,
+        -259.15
+      ],
+      "D1": [
+        -8.0,
+        -43.0,
+        -259.15
+      ],
+      "E1": [
+        -8.0,
+        -52.0,
+        -259.15
+      ],
+      "F1": [
+        -8.0,
+        -61.0,
+        -259.15
+      ],
+      "G1": [
+        -8.0,
+        -70.0,
+        -259.15
+      ],
+      "H1": [
+        -8.0,
+        -79.0,
+        -259.15
+      ]
+    },
+    "p1000": {
+      "A1": [
+        -8.0,
+        -16.0,
+        -259.15
+      ],
+      "B1": [
+        -8.0,
+        -25.0,
+        -259.15
+      ],
+      "C1": [
+        -8.0,
+        -34.0,
+        -259.15
+      ],
+      "D1": [
+        -8.0,
+        -43.0,
+        -259.15
+      ],
+      "E1": [
+        -8.0,
+        -52.0,
+        -259.15
+      ],
+      "F1": [
+        -8.0,
+        -61.0,
+        -259.15
+      ],
+      "G1": [
+        -8.0,
+        -70.0,
+        -259.15
+      ],
+      "H1": [
+        -8.0,
+        -79.0,
+        -259.15
+      ]
+    }
+  },
+  "validation": "Both models: all H1 layouts N=1..8 and SINGLE A1 preserve ALL-mode gantry Y under standard centering; no simulator or physical test."
+}
