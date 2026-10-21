@@ -1,0 +1,292 @@
+{
+  "results": [
+    {
+      "id": "R01",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "排80µL后仍余20µL，非零push_out不合法，应为0。"
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R03",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R04",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R05",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "此前非零push_out留下待准备状态；下一次吸液前须在source.top且空枪头时显式prepare_to_aspirate，再控速入液。"
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R07",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R08",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "枪头仍有14µL保留液，且无待准备事件；普通留液混匀不应重复准备，当前孔内位置也不满足液面外准备条件。"
+        }
+      ]
+    },
+    {
+      "id": "R09",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R10",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "20µL保留液加200µL新吸液共220µL，超过200µL有效容量。"
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R12",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "后续需要模式切换，不满足原位立即混匀条件；首次加液应按常规动态液面排液后退出top。"
+        },
+        {
+          "line": 2,
+          "reason": "虽然排液后枪头已空，但尚未退出液面至top，不能在此切换模式。"
+        },
+        {
+          "line": 3,
+          "reason": "模式切换标记待准备，须在top显式准备并控速入液后再吸取。"
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R14",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "跨孔直接以入液低速到dest孔内，缺少先到dest.top的跨孔段。"
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R16",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R17",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "第1行已打开盖，delay不改变盖状态且无人工干预，第3行重复开盖冗余。"
+        }
+      ]
+    },
+    {
+      "id": "R18",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R19",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "无用户覆盖的常规吸液默认高度应为bottom(0.8)，不是bottom(1)。"
+        }
+      ]
+    },
+    {
+      "id": "R20",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R21",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R22",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 7,
+          "reason": "take_all=False分支仍有20µL余液且无待准备事件，不得无条件准备；仅take_all=True排空并触发push_out后需要此准备。"
+        }
+      ]
+    },
+    {
+      "id": "R23",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "枪头余量未知，不能证明满足空枪头prepare_to_aspirate前提；须先确定余量及前序状态，不得认定通过。"
+        }
+      ]
+    },
+    {
+      "id": "R24",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R25",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "SINGLE A1完整8通道对齐偏移应为Y=+31.5mm，此处-31.5mm符号错误。"
+        }
+      ]
+    },
+    {
+      "id": "R26",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R27",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "部分喷嘴储液槽定位策略尚未确认；须确认官方默认定位或完整8通道对齐，不得擅自选择或标通过。"
+        }
+      ]
+    },
+    {
+      "id": "R28",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "入液使用Y=-18mm，但aspirate重新指定未偏移位置，会回到默认居中；同槽吸液位置须一致保留-18mm。"
+        }
+      ]
+    },
+    {
+      "id": "R29",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 4,
+          "reason": "新取枪头首次吸液须在source.top显式prepare_to_aspirate后再控速入液；片段缺少此准备。"
+        }
+      ]
+    },
+    {
+      "id": "R30",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R31",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "目标接触液体为水相且200µL枪头，入液速度应为20mm/s；源端甘油的10mm/s不能沿用到此。"
+        }
+      ]
+    },
+    {
+      "id": "R32",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R33",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R34",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "主体排27µL后孔内总量为97µL，中间液面终点须按F−T=97计算，不能提前到最终100µL液面。"
+        }
+      ]
+    },
+    {
+      "id": "R35",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "第1段已到97µL中间液面，末段须从该位置连续排到100µL最终液面，不能将location重置为bottom(0.8)。"
+        }
+      ]
+    },
+    {
+      "id": "R36",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "50µL移液器配50µL枪头，非零push_out排30µL严格超过10µL阈值，须拆为27µL主体与3µL末段，两段分别查速率并以0.2秒衔接，仅末段push_out=1。"
+        }
+      ]
+    },
+    {
+      "id": "R37",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R38",
+      "status": "pass",
+      "findings": []
+    }
+  ]
+}

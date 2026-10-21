@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "baseline": "2026-10-21.20",
+  "baseline": "2026-10-22.3",
   "answers": {
     "R01": {
       "status": "issues",
@@ -244,6 +244,51 @@
       "status": "pass",
       "findings": [],
       "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R33": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/patterns.md"
+    },
+    "R34": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "主体终点应按97µL而非最终100µL计算；与第二段起点不连续"
+        }
+      ],
+      "rule": "references/operations.md；references/patterns.md"
+    },
+    "R35": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "末段重置到底部，未复用主体终点"
+        }
+      ],
+      "rule": "references/operations.md；references/patterns.md"
+    },
+    "R36": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "P50配50µL枪头原量30>10且push_out非零，应拆27+3"
+        }
+      ],
+      "rule": "references/operations.md；references/patterns.md"
+    },
+    "R37": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/patterns.md"
+    },
+    "R38": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/patterns.md"
     }
   }
 }

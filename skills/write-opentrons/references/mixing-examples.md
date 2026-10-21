@@ -9,7 +9,7 @@
 ## 适用边界
 这是局部原子代码实例，不是可直接上机的完整协议。protocol、pipette、well及dry_run须由完整协议定义；实际使用先查operations、API和流速工具，实例数值不替代规则。完整协议仍含液体初始化、独立且默认False的dry_run/return_tips与真实技能版本标识。
 本页水相实例在正常/dry_run下流速相同，无需增加选择分支。实例用于非水相时，按patterns.md的dry_run赋值结构分别选择M/S吸排速率，覆盖N=1与N>=2全部分支，不直接保留本页流速。
-两个实例明确假设：水相；无滤芯枪头；源/目标有模型、已初始化；bottom(0.8)可达；每次吸后/排后等待0.2秒，进入/退出速度按operations：A的200µL枪头为20mm/s，B的50µL枪头为10mm/s。等待0.2秒是演示输入，不是新增默认。无模型时不能照搬动态终点。以下混匀均为每通道体积，普通轮次不退出液面。
+两个实例明确假设：水相；无滤芯枪头；源/目标有模型、已初始化；bottom(0.8)可达；每次吸后/排后等待0.2秒，进入/退出速度按operations：A的200µL枪头为20mm/s，B的50µL枪头为10mm/s。本历史示例显式演示覆盖为入液等待0、吸后/排后0.2秒，不代表当前水相默认；实例化新协议须重查delays.md并在实际进入段补适用入液等待。无模型时不能照搬动态终点。以下混匀均为每通道体积，普通轮次不退出液面。
 
 ## A：容量截断与保留液
 Flex八通道1000配200µL枪头；加液后孔内300µL；当前枪头为空、活塞已准备、尖端在bottom(0.8)，无需模式切换。原算210µL，受枪头容量限制采用M=200µL；保留R=20µL，往返S=180µL。交付必须说明截断。
@@ -19,9 +19,13 @@ mix_cycles = 1 if dry_run else 3
 if mix_cycles == 1:
     pipette.aspirate(200, well.bottom(z=0.8), flow_rate=300)
     protocol.delay(seconds=0.2)
-    pipette.dispense(200, location=well.bottom(z=0.8),
-                     end_location=well.bottom(z=well.height_from_volume(300)),
-                     flow_rate=300, push_out=3)
+    pipette.dispense(190, location=well.bottom(z=0.8),
+        end_location=well.bottom(well.height_from_volume(290)),
+        flow_rate=290, push_out=0)
+    protocol.delay(seconds=0.2)
+    pipette.dispense(10, location=well.bottom(well.height_from_volume(290)),
+        end_location=well.bottom(well.height_from_volume(300)),
+        flow_rate=40, push_out=3)
     protocol.delay(seconds=0.2)
 else:
     pipette.aspirate(200, well.bottom(z=0.8), flow_rate=300)
@@ -35,9 +39,13 @@ else:
         protocol.delay(seconds=0.2)
     pipette.aspirate(180, well.bottom(z=0.8), flow_rate=273.333333)
     protocol.delay(seconds=0.2)
-    pipette.dispense(200, location=well.bottom(z=0.8),
-                     end_location=well.bottom(z=well.height_from_volume(300)),
-                     flow_rate=300, push_out=3)
+    pipette.dispense(190, location=well.bottom(z=0.8),
+        end_location=well.bottom(well.height_from_volume(290)),
+        flow_rate=290, push_out=0)
+    protocol.delay(seconds=0.2)
+    pipette.dispense(10, location=well.bottom(well.height_from_volume(290)),
+        end_location=well.bottom(well.height_from_volume(300)),
+        flow_rate=40, push_out=3)
     protocol.delay(seconds=0.2)
 ```
 
@@ -51,7 +59,8 @@ Flex八通道50配50µL枪头，目前低体积模式，已吸入2µL水相准�
 pipette.move_to(well.top())
 pipette.move_to(well.meniscus(z=0, target="start"), speed=10)
 pipette.dispense(2, well.meniscus(z=0, target="dynamic"),
-                 flow_rate=50, push_out=1)
+                 flow_rate=29.444444, push_out=1)
+protocol.delay(seconds=0.2)
 pipette.move_to(well.top(), speed=10)
 pipette.configure_for_volume(50)
 pipette.prepare_to_aspirate()
@@ -60,25 +69,33 @@ mix_cycles = 1 if dry_run else 3
 if mix_cycles == 1:
     pipette.aspirate(50, well.bottom(z=0.8), flow_rate=35)
     protocol.delay(seconds=0.2)
-    pipette.dispense(50, location=well.bottom(z=0.8),
-                     end_location=well.bottom(z=well.height_from_volume(100)),
-                     flow_rate=50, push_out=1)
+    pipette.dispense(47, location=well.bottom(z=0.8),
+        end_location=well.bottom(well.height_from_volume(97)),
+        flow_rate=48.5, push_out=0)
+    protocol.delay(seconds=0.2)
+    pipette.dispense(3, location=well.bottom(well.height_from_volume(97)),
+        end_location=well.bottom(well.height_from_volume(100)),
+        flow_rate=28.888889, push_out=1)
     protocol.delay(seconds=0.2)
 else:
     pipette.aspirate(50, well.bottom(z=0.8), flow_rate=35)
     protocol.delay(seconds=0.2)
-    pipette.dispense(45, well.bottom(z=0.8), flow_rate=50, push_out=0)
+    pipette.dispense(45, well.bottom(z=0.8), flow_rate=47.5, push_out=0)
     protocol.delay(seconds=0.2)
     for _ in range(mix_cycles - 2):
         pipette.aspirate(45, well.bottom(z=0.8), flow_rate=33.625)
         protocol.delay(seconds=0.2)
-        pipette.dispense(45, well.bottom(z=0.8), flow_rate=50, push_out=0)
+        pipette.dispense(45, well.bottom(z=0.8), flow_rate=47.5, push_out=0)
         protocol.delay(seconds=0.2)
     pipette.aspirate(45, well.bottom(z=0.8), flow_rate=33.625)
     protocol.delay(seconds=0.2)
-    pipette.dispense(50, location=well.bottom(z=0.8),
-                     end_location=well.bottom(z=well.height_from_volume(100)),
-                     flow_rate=50, push_out=1)
+    pipette.dispense(47, location=well.bottom(z=0.8),
+        end_location=well.bottom(well.height_from_volume(97)),
+        flow_rate=48.5, push_out=0)
+    protocol.delay(seconds=0.2)
+    pipette.dispense(3, location=well.bottom(well.height_from_volume(97)),
+        end_location=well.bottom(well.height_from_volume(100)),
+        flow_rate=28.888889, push_out=1)
     protocol.delay(seconds=0.2)
 ```
 
@@ -95,3 +112,5 @@ pipette.move_to(well.bottom(z=0.8), speed=entry_speed)
 ```
 
 entry_speed/exit_speed按operations中液体类别及实际枪头规格赋值。然后接按流程确认的吸液前等待和显式flow_rate吸液。下一次为20/50µL枪头且<=10µL时，仍需满足小体积定位确认；此处bottom(0.8)不覆盖该规则。若换孔，先退出当前孔，再移动至下一孔top准备/控速进入。
+
+A/B最后一次排液按分段排空展开；中间孔内体积分别290/97µL，最终300/100µL。分段不增加混匀次数；普通保留液轮次不拆。

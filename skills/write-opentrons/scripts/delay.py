@@ -1,4 +1,4 @@
-"""Generation-time official liquid-class delay lookup. No network or robot actions."""
+"""Generation-time maintained delay lookup (user overrides before official defaults). No network or robot actions."""
 import argparse
 import json
 from pathlib import Path
@@ -24,7 +24,7 @@ def query(model, tip, liquid, action="aspirate", filtered=False):
     return dict(model=model, tip_volume=tip, filtered=filtered, liquid=liquid,
                 official_name=rule["official_name"], action=action, phases=phases,
                 units="seconds", revision=data["revision"],
-                provenance="official liquid class v3; delay fields only")
+                provenance=rule.get("provenance", "official liquid class v3; delay fields only"))
 
 
 def main():

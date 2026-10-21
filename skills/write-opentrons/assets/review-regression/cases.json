@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "baseline": "2026-10-21.20",
-  "instructions": "只审查每题scope及直接状态依赖；片段不是完整protocol。未展示的加载、标签、流速查表、等待、其他路径和收尾已另核对，不报片段省略；显式state/overrides优先。行号从code首行计。输出每题id,status(pass/issues/unresolved),findings[{line,reason}]；保留分支条件。不得读取答案或历史结果。",
+  "baseline": "2026-10-22.3",
+  "instructions": "只审查每题scope及直接状态依赖；片段不是完整protocol。未展示的加载、标签、流速查表、等待、其他路径和收尾已另核对，不报片段省略；显式state/overrides优先。行号从code首行计。输出每题id,status(pass/issues/unresolved),findings[{line,reason}]；保留分支条件。不得读取答案或历史结果。 旧题R01–R32只审查原scope；排液拆段策略单独由R33起覆盖，不把旧题的未展开命令另报缺陷。",
   "cases": [
     {
       "id": "R01",
@@ -226,6 +226,48 @@
       "overrides": "无",
       "id": "R32",
       "code": "pipette.move_to(source.top(), speed=10)\npipette.move_to(destination.top())\npipette.move_to(destination.bottom(0.8), speed=20)"
+    },
+    {
+      "id": "R33",
+      "scope": "分段排空：触发、体积、路径、速率与等待",
+      "state": "P50八通道配50µL普通枪头，水相，当前位置bottom(0.8)。枪头内量等于所示总排量；最终孔内100µL，模型有效且全部位置可达。末次混匀或独立排液均适用。",
+      "overrides": "无；未展示的其他动作已核对。",
+      "code": "pipette.dispense(27, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(97)), flow_rate=37.75, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(3, location=well.bottom(well.height_from_volume(97)), end_location=well.bottom(well.height_from_volume(100)), flow_rate=28.888889, push_out=1)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R34",
+      "scope": "分段排空：触发、体积、路径、速率与等待",
+      "state": "P50八通道配50µL普通枪头，水相，当前位置bottom(0.8)。枪头内量等于所示总排量；最终孔内100µL，模型有效且全部位置可达。末次混匀或独立排液均适用。",
+      "overrides": "无；未展示的其他动作已核对。",
+      "code": "pipette.dispense(27, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(100)), flow_rate=37.75, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(3, location=well.bottom(well.height_from_volume(97)), end_location=well.bottom(well.height_from_volume(100)), flow_rate=28.888889, push_out=1)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R35",
+      "scope": "分段排空：触发、体积、路径、速率与等待",
+      "state": "P50八通道配50µL普通枪头，水相，当前位置bottom(0.8)。枪头内量等于所示总排量；最终孔内100µL，模型有效且全部位置可达。末次混匀或独立排液均适用。",
+      "overrides": "无；未展示的其他动作已核对。",
+      "code": "pipette.dispense(27, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(97)), flow_rate=37.75, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(3, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(100)), flow_rate=28.888889, push_out=1)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R36",
+      "scope": "分段排空：触发、体积、路径、速率与等待",
+      "state": "P50八通道配50µL普通枪头，水相，当前位置bottom(0.8)。枪头内量等于所示总排量；最终孔内100µL，模型有效且全部位置可达。末次混匀或独立排液均适用。",
+      "overrides": "无；未展示的其他动作已核对。",
+      "code": "pipette.dispense(30, well.meniscus(z=0, target=\"dynamic\"), flow_rate=40, push_out=1)"
+    },
+    {
+      "id": "R37",
+      "scope": "分段排空：触发、体积、路径、速率与等待",
+      "state": "P50八通道配50µL普通枪头，水相，当前位置bottom(0.8)。枪头内量等于所示总排量；最终孔内100µL，模型有效且全部位置可达。末次混匀或独立排液均适用。",
+      "overrides": "无；未展示的其他动作已核对。",
+      "code": "pipette.dispense(10, well.meniscus(z=0, target=\"dynamic\"), flow_rate=25, push_out=1)"
+    },
+    {
+      "id": "R38",
+      "scope": "分段排空：触发、体积、路径、速率与等待",
+      "state": "P50八通道配50µL普通枪头，水相，当前位置bottom(0.8)。枪头内量等于所示总排量；最终孔内100µL，模型有效且全部位置可达。末次混匀或独立排液均适用。",
+      "overrides": "无；未展示的其他动作已核对。",
+      "code": "pipette.dispense(30, well.bottom(0.8), flow_rate=40, push_out=0)"
     }
   ]
 }

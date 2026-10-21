@@ -5,10 +5,11 @@
 等倍、各级等体积转移；首孔原液均匀；同一移液器模式下完成加液和混匀；完整通道取头。至少2个梯度孔。四个独立选择：stock_preloaded、diluent_preloaded、change_tips_between_steps、remove_final_excess。末孔另有final_disposal="trash"或"waste_well"，必须明确。末孔移除统一为吸液→排入指定废液位置→处理枪头；垃圾桶与废液孔只区别排液目标，不设带液直接弃头分支。
 
 ## 输入与预检查
-所有下列变量先按当前流程赋值，禁止未定义占位交付。体积/流速按规则生成阶段计算；等待查询delays.md的官方阶段配置，明确指定优先；有模型且初始化为0的空孔首次加液同样采用常规动态液面排液，不需要另给固定起点。source/destination为真实孔，完整八通道时为列主孔；初始化须覆盖所有通道实际参与孔。
+所有下列变量先按当前流程赋值，禁止未定义占位交付。体积/流速按规则生成阶段计算；等待查询delays.md的维护阶段配置，明确指定优先；有模型且初始化为0的空孔首次加液同样采用常规动态液面排液，不需要另给固定起点。source/destination为真实孔，完整八通道时为列主孔；初始化须覆盖所有通道实际参与孔。
 - dilution_wells按梯度顺序；first_column_wells、target_column_wells为用于批量初始化的全部实际孔，勿只标主孔。stock_source_wells、diluent_source_wells及其labware指向实际源孔/耗材。共享槽声明的是多通道总供液量。
 - first_well_initial_volume（已就位量）、stock_load_volume（未就位加样量）、diluent_volume、transfer_volume、mixed_well_volume、mix_volume、stroke_volume、final_remove_volume分别核算；两种首孔路径应满足实验所需起始量。末孔移除量不超可吸量。
 - 移动速度按各阶段源液/目标接触液分别确定，使用下列分阶段变量；级间类别改变时在对应迭代赋值，不把原液、稀释液与混合液共用一套速度。数值一致时最终脚本可合并变量。
+- 本页为流程骨架：符合operations“分段排空”的dispense在生成时展开为patterns对应两段，涵盖预铺、原液就位和混匀末次；两段分别查速率与连续路径，不照抄未展开命令。
 - 每步实际体积查询对应flow_rate；全部push_out依operations判定。原位立即混匀的addition_push_out应符合不需退出准备的条件；若不符则替换入口，不强套本例。
 - tip位置按阶段分配且不重叠；return_tips不意味着跨浓度随意复用。移液器tip_racks和trash_container已加载。dry_run按rates.md统一切换水相吸排速率，并改变确认过的等待/混匀次数，不自行取消末孔液体去向。所有流速变量按patterns.md先完成正常/水相定值选择，覆盖原液、稀释液、级间转移、混匀及末孔移除。
 - 本例stock_source为均匀原液，首孔不另加稀释液，首次加样后不额外混匀。小体积定位、容量分批、模式切换或无模型等不满足本例条件时，从原子模板替换相应部分。
@@ -65,6 +66,7 @@ if not diluent_preloaded:
         pipette.move_to(destination.top())
         prefill_start = destination.meniscus(z=0, target="start")
         pipette.move_to(prefill_start, speed=prefill_entry_speed)
+        protocol.delay(seconds=prefill_submerge_delay)
         pipette.dispense(diluent_volume,
             location=destination.meniscus(z=0, target="dynamic"),
             flow_rate=diluent_dispense_rate, push_out=prefill_push_out)
@@ -94,6 +96,7 @@ if not stock_preloaded:
     pipette.move_to(first_well.top())
     stock_dispense_start = first_well.meniscus(z=0, target="start")
     pipette.move_to(stock_dispense_start, speed=stock_destination_entry_speed)
+    protocol.delay(seconds=stock_dispense_submerge_delay)
     pipette.dispense(stock_load_volume,
         location=first_well.meniscus(z=0, target="dynamic"),
         flow_rate=stock_dispense_rate, push_out=stock_load_push_out)
@@ -127,6 +130,7 @@ for index in range(len(dilution_wells) - 1):
     protocol.delay(seconds=transfer_aspirate_retract_delay)
     pipette.move_to(destination.top())
     pipette.move_to(destination.bottom(z=0.8), speed=transfer_destination_entry_speed)
+    protocol.delay(seconds=transfer_dispense_submerge_delay)
     pipette.dispense(transfer_volume, location=destination.bottom(z=0.8),
                     flow_rate=transfer_dispense_rate, push_out=addition_push_out)
     protocol.delay(seconds=transfer_dispense_delay)
@@ -181,4 +185,4 @@ else:
 本例prepare条件来自新取枪头或上一阶段非零push_out；若组合其他动作，须按核心规则补入其待准备事件，而非照抄条件。先检查四开关与末孔去向，按需要抽取片段。所有变量来源应可追溯到核心规则/用户指定/速率工具，不把示例变量当完整配置。保留液、流速、位置、活塞、枪头规则均不在本文件重新定义。末孔移除统一使用独立排液，按目标核对位置/速度/接收容量；不额外添加blow_out，push_out仍按核心规则。
 最后交付技能标识、液体分类依据、参数来源、实际验证结果；本参考本身不构成实机验证。
 
-等待变量按diluent/stock/transfer/mix/removal实际液体分别查询，不通用复用同一秒数。所有delay占位在生成时按enabled/effective_seconds裁剪，0秒删除。当前官方入液等待均为0，排液前无有效等待；若用户覆盖则在实际入液后添加。末孔废液排出后实际无撤离动作，不伪造撤离来添加延时。
+等待变量按diluent/stock/transfer/mix/removal实际液体分别查询，不通用复用同一秒数。所有delay占位在生成时按enabled/effective_seconds裁剪，0秒删除。吸液端和排液端实际入液后均按表添加submerge等待；水相采用按枪头容量的用户覆盖。原位连续吸排及混匀不重复添加入液等待。末孔废液排出后实际无撤离动作，不伪造撤离来添加延时。

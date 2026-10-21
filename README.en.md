@@ -9,13 +9,13 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
 
 
-## Update: 2026-10-21.20
+## Update: 2026-10-22.3
 
-- Added targeted upstream source navigation, deep-labware confirmation, and a tip-length screening reference.
-- Updated multidispense leading/trailing volumes and the 50 µL post-detection handling reference and example.
-- Added environment-aware delivery simulation: run the final protocol when `opentrons_simulate` is usable; otherwise report why it was skipped, without automatically installing dependencies. Report skill review and simulation separately.
-- Separated source explanations from concise operator-facing text; added short labware purpose labels and placed debugging parameters last by default.
-- Audited the architecture, aligned template plunger preparation and per-stage motion speeds with core rules, and repaired three reference links. All 32 regression verdicts, locations, and reasoning matched expectations. See the [audit record](skills/write-opentrons/assets/review-regression/architecture-report-2026-10-21.md) for evidence and coverage limits.
+- Added two-stage emptying for qualifying nonzero push-out actions, with tip/model-specific terminal volumes, separate rate lookups and a default 0.2-second interstage wait.
+- Final mixing dispenses retain continuous motion: the intermediate height uses final well volume minus terminal volume, then the terminal segment continues to the final liquid surface. Updated atomic examples and review checks.
+- Set water entry/post-aspiration/post-dispense waits by tip capacity, retaining zero retract waits. Updated water dispense curves and the P50 single-channel/50 µL tip organic dispense rate.
+- Added lightweight change validation, versioning, publication and rollback guidance. API baseline remains 2.30; installation does not automatically refresh upstream data.
+- Expanded the regression set to 38 cases. See the [validation record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md).
 
 ## What it helps with
 
@@ -86,7 +86,7 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 
 Initial public snapshot: **rule version 2026-10-21.9, maintained API documentation baseline 2.30**. This is a maintained baseline, not a promise to track the latest upstream version. Explicit older targets are checked against the version index rather than silently upgraded.
 
-The regression set currently contains 32 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, and partial-nozzle reservoir alignment. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
+The regression set currently contains 38 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, and partial-nozzle reservoir alignment. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py
@@ -103,4 +103,4 @@ Official sources include [Opentrons/opentrons](https://github.com/Opentrons/open
 No open-source license has yet been selected for original project content. Public visibility does not grant general redistribution or commercial-use rights. Third-party material retains its applicable terms and attribution. The maintainer may select a project license later.
 
 
-Official reference snapshots ship with the skill and do not refresh automatically on installation. See the [upstream maintenance guide](skills/write-opentrons/references/upstream-maintenance.md) for scoped updates. Current rule version: **2026-10-21.20**; the API baseline remains 2.30.
+Official reference snapshots ship with the skill and do not refresh automatically on installation. See the [upstream maintenance guide](skills/write-opentrons/references/upstream-maintenance.md) for scoped updates. Current rule version: **2026-10-22.3**; the API baseline remains 2.30.

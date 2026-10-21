@@ -5,7 +5,7 @@ description: 按用户确定的实验流程、Flex甲板布局和移液经验编
 
 # Opentrons代码助手
 
-规则版本：2026-10-21.20（交付标识使用实际读取版本）。
+规则版本：2026-10-22.3（交付标识使用实际读取版本）。
 
 将用户设计的流程和布局转换成可审阅的原子命令脚本。文档基线API 2.30；新建未指定时按此基线，指定版本或修改既有脚本按[版本索引](references/api-versions.md)确定目标，不静默升级。当前用户指令优先于经验默认；与硬件/API明确限制冲突时报告，不静默改布局。
 
@@ -16,7 +16,7 @@ description: 按用户确定的实验流程、Flex甲板布局和移液经验编
 - 每步aspirate、dispense、air_gap显式flow_rate；air_gap默认20µL/s。blow_out例外：默认省略flow_rate使用官方默认，仅用户指定时显式覆盖。禁止全局流速和rate倍率代替。查询/插值在生成阶段完成，脚本只保留算好的数值或赋定值变量。
 - 所有脚本加载液体用于可视化及液量跟踪。覆盖实际参与的源孔、样本孔、反应孔和接收孔。试剂色鲜明；空反应孔优先浅灰Liquid、volume=0，按用途命名，优先4–5字/字符内；不需颜色可load_empty。批量列表/映射初始化，禁止逐孔调用可合并的load_liquid。
 - 常规吸液默认bottom(z=0.8)，排液默认meniscus(z=0,target="dynamic")。使用end_location时location默认操作孔bottom(0.8)，用户明确起点优先；混匀末次引用此规则移动排至最终液面；小体积吸液确认、立即混匀和无模型位置按操作经验处理，实测仅明确指定时启用。
-- dispense显式push_out；基础默认0，仅满足操作经验的余液/液面条件时自动启用规格默认值，明确覆盖仍校验余液。保持受控入液/退出、top准备、delay，不作为冗余删除；吸排液等待按官方等待配置匹配型号/枪头/滤芯/液体，见等待路由。活塞准备统一归入吸液前检查：blow_out/非零push_out/模式切换只标记待准备；下一次aspirate前才在该吸液孔top、空枪头状态显式prepare_to_aspirate，再控速入液；没有下一次吸液就不触发。
+- dispense显式push_out；基础默认0，仅满足操作经验的余液/液面条件时自动启用规格默认值，明确覆盖仍校验余液。保持受控入液/退出、top准备、delay，不作为冗余删除；吸排液等待按维护配置（用户覆盖优先）匹配型号/枪头/滤芯/液体，见等待路由。活塞准备统一归入吸液前检查：blow_out/非零push_out/模式切换只标记待准备；下一次aspirate前才在该吸液孔top、空枪头状态显式prepare_to_aspirate，再控速入液；没有下一次吸液就不触发。
 - 每次加载和搬运都查安装关系并更新占位。第4列先查同排第3列，不能直接移液；热循环占A1+B1。冲突反馈，不擅自重新设计。
 - 部分喷嘴取头默认禁止返回；仅用户针对该场景明确允许才例外。dry_run/return_tips开关不构成该例外。
 - 不把单次特例自动推广成全局经验，不把用户经验说成官方保证。
@@ -40,6 +40,7 @@ description: 按用户确定的实验流程、Flex甲板布局和移液经验编
 |液体标签/初始化、meniscus|[孔位与液体API](references/api-wells-liquids.md)、操作经验|
 |计算吸排液速度/air_gap默认值|[说明](references/rates.md)、运行scripts/flow_rate.py；吸液[JSON](references/aspiration-rates.json)、排液[JSON](references/dispense-rates.json)|
 |吸排液/混匀/撤离等待|[等待规则](references/delays.md)、运行scripts/delay.py；数值源[JSON](references/delay-rates.json)，按阶段输出|
+|非零push_out排空分段|操作规则的“分段排空”，生成时展开；[原子片段](references/patterns.md)提供动态液面和显式终点两种路径|
 |混匀或常规移液|[原子片段](references/patterns.md)，按任务实例化；容量截断/保留液/切换模式组合见[混匀实例](references/mixing-examples.md)|
 |仅排查余液/空气/容量/活塞异常|[状态与体积核算参考](references/pipette-mechanics.md)，数值[源码快照](references/pipette-mechanics-data.json)；非日常生成必读，不覆盖经验默认|
 |明确一吸多分|操作规则的“一吸多分”：按枪头查首尾量；组合现有路径、流速、等待及push_out规则|
@@ -71,6 +72,8 @@ description: 按用户确定的实验流程、Flex甲板布局和移液经验编
 - 模板按需选一个最相关片段，其余直接由原子规则组合；不反复比较所有流程参考。只重查发生变化的状态及其下游依赖。
 
 ## 维护
+
+技能项目的修改、项目级审查、版本与公开发布按[项目维护规则](references/project-maintenance.md)执行；仅维护时读取，不加入协议生成流程。
 
 特殊问题排查与官方资料更新按[官方仓库导航与更新入口](references/upstream-maintenance.md)执行，仅相关排查/维护时读取；安装不自动刷新，来源与经验覆盖分开保留。
 
