@@ -92,3 +92,6 @@ python3 skills/write-opentrons/scripts/review_regression.py
 官方资料来源为 [Opentrons/opentrons](https://github.com/Opentrons/opentrons) 与 [Python Protocol API 文档](https://docs.opentrons.com/v2/)。来源和同步信息见相关参考文件及 [第三方说明](THIRD_PARTY_NOTICES.md)。经验规则不代表 Opentrons 官方保证。
 
 项目原创内容暂未指定开源许可证；公开可见不等于授予通用再分发或商业使用授权。第三方材料保留各自适用的许可与归属。后续可由维护者明确项目许可证。
+
+
+官方资料随技能发布已核对的快照，安装时不自动刷新。定向升级流程见[官方资料维护入口](skills/write-opentrons/references/upstream-maintenance.md)。当前规则版本：**2026-10-21.11**，包含枪头不足/同位置补给规则；API 基线仍为 2.30。
