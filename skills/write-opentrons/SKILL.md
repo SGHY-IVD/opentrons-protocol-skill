@@ -5,7 +5,7 @@ description: 按用户实验需求、Flex配置和维护的移液经验编写、
 
 # Opentrons代码助手
 
-规则版本：2026-10-22.6（交付标识使用实际读取版本）。
+规则版本：2026-10-22.7（交付标识使用实际读取版本）。
 
 将用户设计的流程和布局转换成可审阅的原子命令脚本。文档基线API 2.30；新建未指定时按此基线，指定版本或修改既有脚本按[版本索引](references/api-versions.md)确定目标，不静默升级。当前用户指令优先于经验默认；与硬件/API明确限制冲突时报告，不静默改布局。
 
@@ -15,7 +15,7 @@ description: 按用户实验需求、Flex配置和维护的移液经验编写、
 - 证据约束同时覆盖代码、注释和聊天建议，按operations的“证据与能力边界”执行。做不到、查不到或无法验证时明确报告缺口；不得猜补后称审查通过。交付前按protocol-review核对事实依据、文案与代码及实际验证范围。
 - 编写完整协议前按operations的“布局与耗材确认”复用已有信息；需求笼统时给贴合实验的一段完整描述示例，集中补充后按已说明的推荐值处理省略项，不逐阶段连问。区分用户提供、推荐补齐和真实未决条件，已有信息足够时直接生成。
 - 用aspirate、dispense、move_to、delay与显式循环组装。默认不用transfer/distribute/consolidate；混匀不用mix/dynamic_mix。避免过度封装。
-- 每步aspirate、dispense、air_gap显式flow_rate；air_gap默认20µL/s。blow_out例外：默认省略flow_rate使用官方默认，仅用户指定时显式覆盖。禁止全局流速和rate倍率代替。查询/插值在生成阶段完成，脚本只保留算好的数值或赋定值变量。
+- 每步aspirate、dispense、air_gap显式flow_rate；air_gap默认20µL/s。blow_out例外：默认省略flow_rate使用官方默认，仅用户指定时显式覆盖。禁止全局流速和rate倍率代替。查询/插值在生成阶段完成，脚本只保留算好的数值、定值变量或预计算方案映射；运行参数/CSV改变实际体积时按rates的“可变体积与运行时输入”处理。
 - 所有脚本加载液体用于可视化及液量跟踪。覆盖实际参与的源孔、样本孔、反应孔和接收孔。试剂色鲜明；空反应孔优先浅灰Liquid、volume=0，按用途命名，优先4–5字/字符内；不需颜色可load_empty。批量列表/映射初始化，禁止逐孔调用可合并的load_liquid。
 - 常规吸液默认bottom(z=0.8)，排液默认meniscus(z=0,target="dynamic")。使用end_location时location默认操作孔bottom(0.8)，用户明确起点优先；混匀末次引用此规则移动排至最终液面；小体积吸液确认、立即混匀和无模型位置按操作经验处理，实测仅明确指定时启用。
 - dispense显式push_out；基础默认0，仅满足操作经验的余液/液面条件时自动启用规格默认值，明确覆盖仍校验余液。保持受控入液/退出、top准备、delay，不作为冗余删除；吸排液等待按维护配置（用户覆盖优先）匹配型号/枪头/滤芯/液体，见等待路由。活塞准备统一归入吸液前检查：blow_out/非零push_out/模式切换只标记待准备；下一次aspirate前才在该吸液孔top、空枪头状态显式prepare_to_aspirate，再控速入液；没有下一次吸液就不触发。
@@ -49,7 +49,7 @@ description: 按用户实验需求、Flex配置和维护的移液经验编写、
 |梯度稀释流程快速参考|[完整流程示例](references/serial-dilution.md)，仅作组合参考；核心规则/原子模板优先，可不使用该参考重新生成|
 |8通道1–7喷嘴在储液槽吸排液|[储液槽定位经验](references/reservoir-partial-nozzles.md)：主动确认默认定位或完整8通道对齐，仅确认后计算Y偏移|
 |部分取头、复用、空跑、枪头不足/同位置补给|操作规则的枪头管理、测试运行参数及移液器API|
-|参数/CSV、展示文案与参数排序|[参数API](references/api-parameters-csv.md)、操作规则的“源码说明与运行文案”|
+|参数/CSV、展示文案与参数排序|[参数API](references/api-parameters-csv.md)、操作规则的“源码说明与运行文案”；体积可变时另读[rates](references/rates.md#可变体积与运行时输入)|
 |夹爪/板盖/搬运|[搬运API](references/api-gripper.md)、安装关系；更新位置账本|
 |模块操作|[模块API索引](references/api-modules.md)、[硬性条件](references/module-conditions.md)、[使用经验](references/module-practices.md)对应章节；安装关系独立|
 |从零生成后的完整审查／修改后的按需检查|[沿执行路径的状态推演](references/protocol-review.md)，引用已有规则，不另造数值或强制依赖官方模拟|

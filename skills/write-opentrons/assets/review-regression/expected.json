@@ -445,6 +445,74 @@
       "status": "pass",
       "findings": [],
       "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R57": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "当前水相30µL排液查询值40µL/s，旧例50不再匹配；改为40，不能沿用修改前模拟结论"
+        }
+      ],
+      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+    },
+    "R58": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+    },
+    "R59": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "166.666667仅匹配100µL，150µL应为233.333333；不能全部choices沿用默认体积速率"
+        }
+      ],
+      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+    },
+    "R60": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+    },
+    "R61": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "未在首次取头/移液前检查整份CSV支持域，前面的合法行可能已经执行后才遇到不支持值"
+        },
+        {
+          "line": 3,
+          "reason": "未覆盖体积被静默回退为100µL流速，应报告具体行和值及允许域，不使用默认速率代替"
+        }
+      ],
+      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+    },
+    "R62": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+    },
+    "R63": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "选择150时M截断为200µL，吸液速率应300而非140µL的220"
+        },
+        {
+          "line": 4,
+          "reason": "选择150时主体190µL，200µL枪头水相排速应290而非130µL的230；派生分段流速也须随方案选择"
+        }
+      ],
+      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+    },
+    "R64": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
     }
   }
 }

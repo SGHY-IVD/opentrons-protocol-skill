@@ -187,7 +187,7 @@ blow_out、非零push_out和模式切换只标记活塞“待准备”；是否�
 
 ## 参数查询与等待
 
-吸排液flow_rate及air_gap/blow_out策略按SKILL.md和rates.md执行；每步按实际体积查询，混匀没有独立速度表。生成阶段算好，协议写定值。
+吸排液flow_rate及air_gap/blow_out策略按SKILL.md和rates.md执行；每步按实际体积查询，混匀没有独立速度表。生成阶段算好，协议写定值；运行参数/CSV改变体积时按rates的预计算方案与输入支持域处理。
 等待数值和阶段放置规则唯一查delays.md、delay-rates.json及scripts/delay.py。按实际液体/型号/枪头/滤芯/动作匹配；只有实际发生入液、吸排或撤离时才放对应阶段，不重复、不合并、不生成delay(0)。孵育/模块等待独立。
 
 ## 组合校验

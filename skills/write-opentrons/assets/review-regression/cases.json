@@ -394,6 +394,62 @@
       "state": "全8通道，两个完整96支枪头盒；实际取头路径如代码，省略的吸排不影响取头次数。末孔保留，不另取头移液；仅审查取头组数、支数及交付统计。",
       "overrides": "无。",
       "code": "pipette.pick_up_tip()  # 稀释液分装，全8通道\npipette.drop_tip()\npipette.pick_up_tip()  # 原液加样，全8通道\npipette.drop_tip()\nfor step in range(11):\n    pipette.pick_up_tip()\n    pipette.drop_tip()\n# 共13组、104支枪头；两盒共24组，足够。"
+    },
+    {
+      "id": "R57",
+      "scope": "探测清膜的当前水相速率",
+      "state": "Flex50µL八通道配50µL普通枪头，SINGLE H1；已准备、处于低体积模式且在source.top(2)，按技能执行30µL水相清膜。只审查清膜流速，其他前置状态与等待已核对。",
+      "overrides": "无。",
+      "code": "pipette.aspirate(30, flow_rate=29.5)\npipette.dispense(30, flow_rate=50, push_out=0)"
+    },
+    {
+      "id": "R58",
+      "scope": "探测清膜的当前水相速率",
+      "state": "Flex50µL八通道配50µL普通枪头，SINGLE H1；已准备、处于低体积模式且在source.top(2)，按技能执行30µL水相清膜。只审查清膜流速，其他前置状态与等待已核对。",
+      "overrides": "无。",
+      "code": "pipette.aspirate(30, flow_rate=29.5)\npipette.dispense(30, flow_rate=40, push_out=0)"
+    },
+    {
+      "id": "R59",
+      "scope": "有限体积参数的预计算覆盖",
+      "state": "Flex8通道1000µL，200µL普通枪头、水相；volume参数的choices只有100和150µL，默认100。当前源量与容量、路径/活塞等已核对；用户未覆盖流速。仅审查体积选择与吸液流速的联动。",
+      "overrides": "无。",
+      "code": "volume = protocol.params.volume\npipette.aspirate(volume, location=source.bottom(0.8), flow_rate=166.666667)"
+    },
+    {
+      "id": "R60",
+      "scope": "有限体积参数的预计算覆盖",
+      "state": "Flex8通道1000µL，200µL普通枪头、水相；volume参数的choices只有100和150µL，默认100。当前源量与容量、路径/活塞等已核对；用户未覆盖流速。仅审查体积选择与吸液流速的联动。",
+      "overrides": "无。",
+      "code": "rates = {100: 166.666667, 150: 233.333333}\nvolume = protocol.params.volume\npipette.aspirate(volume, location=source.bottom(0.8), flow_rate=rates[volume])"
+    },
+    {
+      "id": "R61",
+      "scope": "运行时CSV的支持域与预检",
+      "state": "Flex8通道1000µL、200µL普通枪头、水相；CSV在运行时才提供。csv_volumes已经完成数值/正数/容量校验，但可能含125等尚未列入本协议支持域的体积；known_rates只有{100:166.666667,150:233.333333}。此段之前未取头/移液；仅审查全表支持域预检和流速选择，省略的排液/准备/路径不审。",
+      "overrides": "无。",
+      "code": "for volume in csv_volumes:\n    pipette.pick_up_tip()\n    rate = known_rates.get(volume, 166.666667)\n    pipette.aspirate(volume, location=source.bottom(0.8), flow_rate=rate)\n    pipette.drop_tip()"
+    },
+    {
+      "id": "R62",
+      "scope": "运行时CSV的支持域与预检",
+      "state": "Flex8通道1000µL、200µL普通枪头、水相；CSV在运行时才提供。csv_volumes已经完成数值/正数/容量校验，但可能含125等尚未列入本协议支持域的体积；known_rates只有{100:166.666667,150:233.333333}。此段之前未取头/移液；仅审查全表支持域预检和流速选择，省略的排液/准备/路径不审。",
+      "overrides": "无。",
+      "code": "for row_number, volume in enumerate(csv_volumes, start=2):\n    if volume not in known_rates:\n        raise ValueError(f\"CSV第{row_number}行体积{volume}不支持；允许100或150µL\")\nfor volume in csv_volumes:\n    pipette.pick_up_tip()\n    pipette.aspirate(volume, location=source.bottom(0.8), flow_rate=known_rates[volume])\n    pipette.drop_tip()"
+    },
+    {
+      "id": "R63",
+      "scope": "派生体积与容量截断的速率联动",
+      "state": "Flex8通道1000µL、200µL普通枪头、水相。转移参数100或150µL，目标预有等量稀释液，混匀前F分别200/300µL；M为70%后按200µL容量截断，即140/200。末次排净分段尾10µL，主体130/190，中间孔内总量190/290。仅审查预计算方案中M及主体排量对应流速；其余分段、等待及活塞状态不审。",
+      "overrides": "无。",
+      "code": "plans = {100: (140, 130, 190), 150: (200, 190, 290)}\nM, body, mid = plans[protocol.params.transfer_volume]\npipette.aspirate(M, location=well.bottom(0.8), flow_rate=220)\npipette.dispense(body, location=well.bottom(0.8), end_location=well.bottom(z=well.height_from_volume(mid)), flow_rate=230, push_out=0)"
+    },
+    {
+      "id": "R64",
+      "scope": "派生体积与容量截断的速率联动",
+      "state": "Flex8通道1000µL、200µL普通枪头、水相。转移参数100或150µL，目标预有等量稀释液，混匀前F分别200/300µL；M为70%后按200µL容量截断，即140/200。末次排净分段尾10µL，主体130/190，中间孔内总量190/290。仅审查预计算方案中M及主体排量对应流速；其余分段、等待及活塞状态不审。",
+      "overrides": "无。",
+      "code": "plans = {100: (140, 130, 190, 220, 230), 150: (200, 190, 290, 300, 290)}\nM, body, mid, asp_rate, body_rate = plans[protocol.params.transfer_volume]\npipette.aspirate(M, location=well.bottom(0.8), flow_rate=asp_rate)\npipette.dispense(body, location=well.bottom(0.8), end_location=well.bottom(z=well.height_from_volume(mid)), flow_rate=body_rate, push_out=0)"
     }
   ]
 }
