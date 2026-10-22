@@ -13,7 +13,7 @@
 
 来源：维护版API速查表 v6；文档基线 API 2.30，2026-10-12。用户最新规则见SKILL.md及operations.md。
 
-垃圾处理与夹爪：加载约定 默认使用 protocol.load_trash_bin(location)，location 必填，允许第1或第3列的空槽位。位置依据用户布局；未提供时反馈缺失，不自动固定为D3。 仅特别说明时使用 protocol.load_waste_chute()；它无参数，固定占用D3。两者是硬件加载接口，不是耗材 load name。夹爪无需独立加载。 用户经验/生成规范：协议出现 drop_tip() 时须加载垃圾桶或垃圾槽；不将此项目规范表述为API所有调用方式的绝对限制。 安装层级及明确约束另查《Opentrons_安装关系库.txt》；不重新设计用户台面。
+垃圾处理与夹爪：加载约定 默认使用 protocol.load_trash_bin(location)，location 必填，允许第1或第3列的空槽位。位置按operations的“布局与耗材确认”确定；未提供且未授权代选时反馈缺失，不自动固定为D3。 仅特别说明时使用 protocol.load_waste_chute()；它无参数，固定占用D3。两者是硬件加载接口，不是耗材 load name。夹爪无需独立加载。 用户经验/生成规范：协议出现 drop_tip() 时须加载垃圾桶或垃圾槽；不将此项目规范表述为API所有调用方式的绝对限制。 安装层级及明确约束另查installation.txt；不擅自重新设计用户台面。
 加载移液器、模块、垃圾桶、耗材和适配器。
 ProtocolContext.load_trash_bin ProtocolContext.load_waste_chute ProtocolContext.load_labware ProtocolContext.load_instrument ProtocolContext.load_module ProtocolContext.load_adapter Labware.load_labware HeaterShakerContext.load_adapter TemperatureModuleContext.load_adapter
 

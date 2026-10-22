@@ -9,17 +9,17 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
 
 
-## Update: 2026-10-22.3
+## Update: 2026-10-22.5
 
-- Added two-stage emptying for qualifying nonzero push-out actions, with tip/model-specific terminal volumes, separate rate lookups and a default 0.2-second interstage wait.
-- Final mixing dispenses retain continuous motion: the intermediate height uses final well volume minus terminal volume, then the terminal segment continues to the final liquid surface. Updated atomic examples and review checks.
-- Set water entry/post-aspiration/post-dispense waits by tip capacity, retaining zero retract waits. Updated water dispense curves and the P50 single-channel/50 µL tip organic dispense rate.
-- Added lightweight change validation, versioning, publication and rollback guidance. API baseline remains 2.30; installation does not automatically refresh upstream data.
-- Expanded the regression set to 38 cases. See the [validation record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md).
+- Apply evidence requirements to code, comments, runtime text, and chat advice. Report missing information; critical unknowns must not be presented as review success.
+- Confirm equipment, labware, and deck configuration in stages by default. Choose labware or layout only within explicit user delegation, and reuse established configuration.
+- Review configuration provenance, agreement between code and delivery text, and actual validation objects and scope. Trace rule changes through templates, examples, review checks, and regression cases.
+- Expanded the regression set from 38 to 50 cases, adding evidence, unknown-state, validation-claim, and configuration-delegation controls. Independent review matched all 50 verdicts and locations; reasons were checked. This does not validate every model or experimental combination.
+- API baseline remains 2.30. Flow-rate/delay data and pipetting action templates are unchanged. See the [validation record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md) for scope and limits.
 
 ## What it helps with
 
-You define the experiment, steps, equipment, and deck layout. The assistant uses the skill to write, modify, and review the protocol:
+You define the experiment and steps, and specify equipment, labware, and deck layout. You may explicitly delegate labware selection or layout planning; these permissions are separate. The assistant uses the skill to write, modify, and review the protocol:
 
 - Convert an SOP and established layout into a complete Flex protocol.
 - Compose transfers, handwritten mixing, one-to-many dispensing, and serial dilution.
@@ -57,7 +57,7 @@ Example request:
 > Transfer volumes, mixing, and tip-change requirements: …  
 > Special liquids, initial volumes, and other overrides, if applicable: …
 
-You do not need to specify every parameter in advance. The skill applies maintained defaults and concentrates questions on high-impact choices such as small-volume aspiration and unusual positions. When initial reagent volume is unspecified, visualization uses calculated protocol demand, with separate advice on additional loading volume.
+You do not need to specify every parameter in advance. Missing equipment, labware, or slots are confirmed in stages; asking for a protocol does not authorize autonomous configuration choices. Valid maintained operation defaults still apply, with questions focused on high-impact choices such as small-volume aspiration and unusual positions. When initial reagent volume is unspecified, visualization uses calculated protocol demand, with separate advice on additional loading volume.
 
 Delivery should include the protocol, the rule version actually used, key operation parameters, and truthful review results. A skill-use label is not proof of review; simulation must not be claimed unless it was actually run.
 
@@ -86,13 +86,15 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 
 Initial public snapshot: **rule version 2026-10-21.9, maintained API documentation baseline 2.30**. This is a maintained baseline, not a promise to track the latest upstream version. Explicit older targets are checked against the version index rather than silently upgraded.
 
-The regression set currently contains 38 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, and partial-nozzle reservoir alignment. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
+The regression set currently contains 50 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, and configuration delegation. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py
 ```
 
 This command checks fixture structure and snippet syntax only. See the [maintenance guide](skills/write-opentrons/assets/review-regression/maintenance.md) for scoring independent review results. The scorer is not a protocol analyzer; reasoning and branch semantics still require review. Framework review, official simulation, and physical validation provide different evidence and do not guarantee or replace one another.
+
+For cross-model comparisons, fix the skill version and input, use fresh conversations, and record the model, raw responses, generated code, and actual tool results. Review tests should receive only the cases and rules, without expected answers or historical review outputs.
 
 ## Maintenance, sources, and licensing
 
@@ -103,4 +105,4 @@ Official sources include [Opentrons/opentrons](https://github.com/Opentrons/open
 No open-source license has yet been selected for original project content. Public visibility does not grant general redistribution or commercial-use rights. Third-party material retains its applicable terms and attribution. The maintainer may select a project license later.
 
 
-Official reference snapshots ship with the skill and do not refresh automatically on installation. See the [upstream maintenance guide](skills/write-opentrons/references/upstream-maintenance.md) for scoped updates. Current rule version: **2026-10-22.3**; the API baseline remains 2.30.
+Official reference snapshots ship with the skill and do not refresh automatically on installation. See the [upstream maintenance guide](skills/write-opentrons/references/upstream-maintenance.md) for scoped updates. The current rule version is defined in the [skill entry point](skills/write-opentrons/SKILL.md); the API baseline remains 2.30.

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "baseline": "2026-10-22.3",
+  "baseline": "2026-10-22.5",
   "answers": {
     "R01": {
       "status": "issues",
@@ -289,6 +289,113 @@
       "status": "pass",
       "findings": [],
       "rule": "references/operations.md；references/patterns.md"
+    },
+    "R39": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "型号清单无flex_1channel_200；不能把枪头容量拼接为移液器型号或推荐未收录型号"
+        },
+        {
+          "line": 2,
+          "reason": "没有对应配置的对照性能依据，不能用枪头容量比例推导精度必然更差"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R40": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R41": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "无依据将未知原液归为水相，并虚称用户已确认"
+        },
+        {
+          "line": 2,
+          "reason": "关键液体分类仍未确定，不能标全量通过或无未决项"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R42": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "关键液体类别缺失，流程仍未决；应保留缺口，不猜水相；此处如实报告未通过，不是虚假通过"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R43": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "与实际账本及末孔例外冲突，H1为200µL；应改说明，不擅改用户保留末孔的流程"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R44": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R45": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "副本默认分支结果不能升级为最终文件全部分支通过，须保留目标/对象/覆盖范围差异"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R46": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R47": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "未确认且未获代选授权，自行选定板型和槽位，应先逐步确认配置"
+        },
+        {
+          "line": 2,
+          "reason": "将自选配置写成用户指定，并在关键配置未确认时宣称可执行"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R48": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R49": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "仅授权布局不等于授权更换耗材；应保留用户指定板型，或先确认更换"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R50": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
     }
   }
 }

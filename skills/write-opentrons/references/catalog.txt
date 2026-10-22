@@ -135,4 +135,4 @@ opentrons_universal_flat_adapter | https://raw.githubusercontent.com/Opentrons/o
 opentrons_universal_flat_adapter_corning_384_wellplate_112ul_flat | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_universal_flat_adapter_corning_384_wellplate_112ul_flat/1.json
 opentrons_universal_flat_adapter_type_b | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_universal_flat_adapter_type_b/1.json
 
-安装关系见《Opentrons_安装关系库.txt》；垃圾桶、垃圾槽和夹爪的入口见API速查表布局加载部分。
+安装关系见installation.txt；垃圾桶、垃圾槽和夹爪的入口见API速查表布局加载部分。
