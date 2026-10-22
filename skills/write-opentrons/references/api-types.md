@@ -16,7 +16,7 @@ z: float = 0.0
 
 
 ## 枚举与特殊位置
-名称 类型 / 定义 ALL NozzleLayout.ALL SINGLE NozzleLayout.SINGLE COLUMN NozzleLayout.COLUMN PARTIAL_COLUMN NozzleLayout.PARTIAL_COLUMN OFF_DECK OffDeckType 特殊位置对象
+名称 类型 / 定义 ALL NozzleLayout.ALL SINGLE NozzleLayout.SINGLE COLUMN NozzleLayout.COLUMN ROW NozzleLayout.ROW PARTIAL_COLUMN NozzleLayout.PARTIAL_COLUMN OFF_DECK OffDeckType 特殊位置对象
 上述常量均从 opentrons.protocol_api 导入。布局的适用条件见 configure_nozzle_layout 本地说明。
 
 

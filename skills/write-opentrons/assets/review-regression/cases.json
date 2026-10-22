@@ -352,6 +352,48 @@
       "state": "用户已明确plate使用nest_96_wellplate_2ml_deep于D1；其余设备、耗材和槽位一次性给全且已核对。仅审查是否需再次逐步确认。",
       "overrides": "无。",
       "code": "plate = protocol.load_labware(\"nest_96_wellplate_2ml_deep\", \"D1\")\n# 复用本次已明确的全部配置，继续生成，不重复询问。"
+    },
+    {
+      "id": "R51",
+      "scope": "集中描述补充：推荐来源",
+      "state": "已先展示完整描述示例：左侧Flex单通道1000µL，NEST深孔板D1，水相，未写项沿用示例；用户随后只回复“混匀改为5次”。名称、兼容、容量、占位及其余条件已核对，仅审查推荐采用及配置来源。",
+      "overrides": "无。",
+      "code": "plate = protocol.load_labware(\"nest_96_wellplate_2ml_deep\", \"D1\")\n# 板型、槽位和水相均由用户逐项明确指定。"
+    },
+    {
+      "id": "R52",
+      "scope": "集中描述补充：推荐来源",
+      "state": "已先展示完整描述示例：左侧Flex单通道1000µL，NEST深孔板D1，水相，未写项沿用示例；用户随后只回复“混匀改为5次”。名称、兼容、容量、占位及其余条件已核对，仅审查推荐采用及配置来源。",
+      "overrides": "无。",
+      "code": "plate = protocol.load_labware(\"nest_96_wellplate_2ml_deep\", \"D1\")\n# 用户改混匀为5次；板型、D1与水相沿用已说明推荐，不追加常规提问。"
+    },
+    {
+      "id": "R53",
+      "scope": "执行终态与需求对照",
+      "state": "volumes是逐孔体积账本；代码代表7孔连续2倍稀释，后6孔先有50µL水，每级从前孔转50µL到后孔并充分混匀。末孔保留，不另移除。用户要求最终各孔100µL；只审查终态结果与交付结论，省略的混匀及硬件不审。",
+      "overrides": "无。",
+      "code": "volumes = [100.0] + [50.0] * 6\nfor i in range(6):\n    volumes[i] -= 50\n    volumes[i + 1] += 50\n# 最终7孔均100µL，满足用户要求。\n# 液体账本审查通过。"
+    },
+    {
+      "id": "R54",
+      "scope": "执行终态与需求对照",
+      "state": "volumes是逐孔体积账本；代码代表7孔连续2倍稀释，后6孔先有50µL水，每级转50µL并充分混匀。用户明确接受前6孔各50µL、末孔保留100µL；仅审查终态结果与交付一致性。",
+      "overrides": "无。",
+      "code": "volumes = [100.0] + [50.0] * 6\nfor i in range(6):\n    volumes[i] -= 50\n    volumes[i + 1] += 50\n# 最终前6孔各50µL，末孔100µL；各次混匀结束时100µL，后续转出另扣50µL。\n# 与用户接受的终态一致，本题核对范围通过。"
+    },
+    {
+      "id": "R55",
+      "scope": "枪头实际路径计数",
+      "state": "全8通道，两个完整96支枪头盒；实际取头路径如代码，省略的吸排不影响取头次数。末孔保留，不另取头移液；仅审查取头组数、支数及交付统计。",
+      "overrides": "无。",
+      "code": "pipette.pick_up_tip()  # 稀释液分装，全8通道\npipette.drop_tip()\npipette.pick_up_tip()  # 原液加样，全8通道\npipette.drop_tip()\nfor step in range(11):\n    pipette.pick_up_tip()\n    pipette.drop_tip()\n# 共14组、112支枪头，两盒足够。"
+    },
+    {
+      "id": "R56",
+      "scope": "枪头实际路径计数",
+      "state": "全8通道，两个完整96支枪头盒；实际取头路径如代码，省略的吸排不影响取头次数。末孔保留，不另取头移液；仅审查取头组数、支数及交付统计。",
+      "overrides": "无。",
+      "code": "pipette.pick_up_tip()  # 稀释液分装，全8通道\npipette.drop_tip()\npipette.pick_up_tip()  # 原液加样，全8通道\npipette.drop_tip()\nfor step in range(11):\n    pipette.pick_up_tip()\n    pipette.drop_tip()\n# 共13组、104支枪头；两盒共24组，足够。"
     }
   ]
 }

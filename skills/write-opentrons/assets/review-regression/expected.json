@@ -368,7 +368,7 @@
       "findings": [
         {
           "line": 1,
-          "reason": "未确认且未获代选授权，自行选定板型和槽位，应先逐步确认配置"
+          "reason": "首次笼统请求未展示推荐、未获代选授权；先给完整描述示例集中补充，不能直接把自选配置交付为已确认可执行稿"
         },
         {
           "line": 2,
@@ -396,6 +396,55 @@
       "status": "pass",
       "findings": [],
       "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R51": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "可按已展示推荐补齐省略项，但用户只改混匀，不能把推荐采用写成逐项指定；不要求重新逐项确认"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R52": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R53": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 5,
+          "reason": "实际前6孔各50µL、末孔100µL；混匀时100不等于转出后终体积，未满足用户各孔100的目标"
+        },
+        {
+          "line": 6,
+          "reason": "明确终态差异未解决，账本不能标通过，应定位目标与实际值并提出方案调整"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R54": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R55": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 8,
+          "reason": "实际1+1+11=13组，全8通道共104支；两盒足够但14/112统计错误"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R56": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
     }
   }
 }

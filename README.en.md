@@ -1,6 +1,6 @@
 # Opentrons Protocol Skill
 
-**Turn an established experimental workflow and deck layout into reviewable Opentrons Flex Python protocols grounded in practical liquid-handling rules.**
+**Turn experimental requirements, user configuration, and disclosed recommendations into reviewable Opentrons Flex Python protocols grounded in practical liquid-handling rules.**
 
 [中文](README.md) · [Skill entry point](skills/write-opentrons/SKILL.md) · [Review regression cases](skills/write-opentrons/assets/review-regression/maintenance.md)
 
@@ -9,17 +9,17 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
 
 
-## Update: 2026-10-22.5
+## Update: 2026-10-22.6
 
-- Apply evidence requirements to code, comments, runtime text, and chat advice. Report missing information; critical unknowns must not be presented as review success.
-- Confirm equipment, labware, and deck configuration in stages by default. Choose labware or layout only within explicit user delegation, and reuse established configuration.
-- Review configuration provenance, agreement between code and delivery text, and actual validation objects and scope. Trace rule changes through templates, examples, review checks, and regression cases.
-- Expanded the regression set from 38 to 50 cases, adding evidence, unknown-state, validation-claim, and configuration-delegation controls. Independent review matched all 50 verdicts and locations; reasons were checked. This does not validate every model or experimental combination.
-- API baseline remains 2.30. Flow-rate/delay data and pipetting action templates are unchanged. See the [validation record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md) for scope and limits.
+- For vague requests, offer one complete experiment-description example. Users can change only the differing details; fill omissions from the disclosed recommendations after their reply. Reuse sufficient existing information without staged questioning.
+- Compare executed final volumes/concentrations with the requested result, source demand and disposal, tip groups/counts, parameter sources, and actual validation objects. Reuse existing accounting without mandatory long reports or exhaustive parameter runs.
+- Resolve resources from the skill root. Complete the ROW constant and task-based nozzle-layout guidance, and remove an obsolete blanket claim that dispense rates below 10 uL are missing. Numerical tables and pipetting action templates are unchanged.
+- Expanded the regression set from 50 to 56 cases. Independent review matched all 56 verdicts and locations; reasons were checked. See the [validation record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md) for scope.
+- API baseline remains 2.30. Recommended hardware is not confirmed installed hardware; static checks are not official simulation or physical validation.
 
 ## What it helps with
 
-You define the experiment and steps, and specify equipment, labware, and deck layout. You may explicitly delegate labware selection or layout planning; these permissions are separate. The assistant uses the skill to write, modify, and review the protocol:
+Provide the experimental goal, existing workflow, and actual equipment. When the description is incomplete, the assistant offers a complete example for one consolidated reply. Omissions may follow disclosed recommendations while explicit user choices take precedence. The skill supports writing, modifying, and reviewing protocols:
 
 - Convert an SOP and established layout into a complete Flex protocol.
 - Compose transfers, handwritten mixing, one-to-many dispensing, and serial dilution.
@@ -57,7 +57,7 @@ Example request:
 > Transfer volumes, mixing, and tip-change requirements: …  
 > Special liquids, initial volumes, and other overrides, if applicable: …
 
-You do not need to specify every parameter in advance. Missing equipment, labware, or slots are confirmed in stages; asking for a protocol does not authorize autonomous configuration choices. Valid maintained operation defaults still apply, with questions focused on high-impact choices such as small-volume aspiration and unusual positions. When initial reagent volume is unspecified, visualization uses calculated protocol demand, with separate advice on additional loading volume.
+You do not need to specify every parameter in advance. For a vague request, the assistant provides an editable complete experiment description. Change only differing details or accept the recommendation; remaining values follow the disclosed example and maintained defaults and are listed at delivery. Sufficient existing requirements are used directly. New hardware conflicts, unsupported conditions, or specific mechanical risks retain their actual limits; recommendations do not establish the real installed configuration. When initial reagent volume is unspecified, visualization uses calculated protocol demand, with separate advice on additional loading volume.
 
 Delivery should include the protocol, the rule version actually used, key operation parameters, and truthful review results. A skill-use label is not proof of review; simulation must not be claimed unless it was actually run.
 
@@ -86,7 +86,7 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 
 Initial public snapshot: **rule version 2026-10-21.9, maintained API documentation baseline 2.30**. This is a maintained baseline, not a promise to track the latest upstream version. Explicit older targets are checked against the version index rather than silently upgraded.
 
-The regression set currently contains 50 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, and configuration delegation. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
+The regression set currently contains 56 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, and configuration delegation. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py
@@ -106,3 +106,4 @@ No open-source license has yet been selected for original project content. Publi
 
 
 Official reference snapshots ship with the skill and do not refresh automatically on installation. See the [upstream maintenance guide](skills/write-opentrons/references/upstream-maintenance.md) for scoped updates. The current rule version is defined in the [skill entry point](skills/write-opentrons/SKILL.md); the API baseline remains 2.30.
+
