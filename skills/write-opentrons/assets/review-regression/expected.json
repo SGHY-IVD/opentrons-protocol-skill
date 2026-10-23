@@ -368,7 +368,7 @@
       "findings": [
         {
           "line": 1,
-          "reason": "首次笼统请求未展示推荐、未获代选授权；先给完整描述示例集中补充，不能直接把自选配置交付为已确认可执行稿"
+          "reason": "首次笼统请求未确定实际硬件、耗材或槽位，也未获相关代选授权；先按硬件阶段引导描述及核对，不能把自选配置当成已确认可执行稿。"
         },
         {
           "line": 2,
@@ -557,6 +557,41 @@
         }
       ],
       "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R69": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "未取得实际硬件描述和确认，不能按示例推定装机或进入依赖该配置的具体耗材布局；一般代选请求不是实物证据。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R70": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "实际硬件仍缺失，正确保留未知并以硬件描述/回显确认推进，没有据示例猜装机。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R71": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R72": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "已完整提供且核对的内容应直接回显，不强制照模板重新填写或重问已知项。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
     }
   }
 }
