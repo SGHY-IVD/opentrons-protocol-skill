@@ -9,17 +9,17 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
 
 
-## Update: 2026-10-23.2
+## Update: 2026-10-23.3
 
-- Organize intake around two topics: describe, check, and reflect actual hardware for confirmation; then discuss workflow, labware positions, and actions within that configuration. Complete input goes directly to a restatement; valid existing confirmation is reused.
-- The hardware example covers pipettes, gripper, temperature/heater-shaker/thermocycler modules and adapters, waste hardware, and staging areas, including how to say absent or unknown. Examples do not establish installed equipment; adopting experimental recommendations is separate from confirming hardware.
-- Explain the complete experiment in plain language, with reasons, omissions, defects, and suggestions. Users may describe it freely and iterate the same plan. Tables supplement the narrative.
-- Added four cases, bringing the set to 72. Fresh-context independent review matched all 72 verdicts and strict locations; reasons were manually checked. API baseline 2.30, pipetting actions, numerical tables, and lookup tools are unchanged.
-- No official simulation or physical validation was performed. See the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md) for actual dialogue-trial and regression scope.
+- Include robot software in hardware intake and report its supported API limit and the planned target. Ordinary users need not select API numbers. The documentation baseline remains 2.30, but new protocols no longer adopt it unconditionally. Existing or explicit targets are preserved; higher limits trigger a clear maintenance-scope recommendation.
+- Add a read-only environment probe separating package version, SDK limit, same-interpreter simulation, and PATH entry points. Installation/upgrades are optional. Older simulators do not silently lower robot targets; successful environment checks are not protocol simulation.
+- Configuration persistence depends on host capability and user consent, isolated from the shared skill. Historical records are reflected for current confirmation with only differences needed; unchanged current-task details are reused.
+- Added 15 cases for 87 total. Independent review matched all 87 verdicts and 86 strict locations, with one equivalent location manually accepted. Seven synthetic/fault probes passed. Dialogue trials, one planning deviation, and its later correction are recorded honestly.
+- Pipetting actions, rate/delay data, and API reference baseline are unchanged. No real SDK installation, official protocol simulation, or physical validation was performed. See the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md).
 
 ## What it helps with
 
-Provide the experimental goal, existing workflow, and actual equipment. The first stage guides a complete hardware description and reflects the checked configuration for confirmation. The second explains and iterates the workflow, labware layout, and actions within that configuration. Complete input goes directly to a consolidated restatement, without repeated questions. The skill supports writing, modifying, and reviewing protocols:
+Provide the experimental goal, existing workflow, and actual equipment. The first stage guides a complete hardware description including robot software, then reflects the configuration, supported API range, and target for confirmation. The second explains and iterates the workflow, labware layout, and actions within that configuration. Complete input goes directly to a consolidated restatement, without repeated questions. The skill supports writing, modifying, and reviewing protocols:
 
 - Convert an SOP and established layout into a complete Flex protocol.
 - Compose transfers, handwritten mixing, one-to-many dispensing, and serial dilution.
@@ -57,7 +57,9 @@ Example request:
 > Transfer volumes, mixing, and tip-change requirements: …  
 > Special liquids, initial volumes, and other overrides, if applicable: …
 
-You do not need to supply every parameter or follow a fixed form. If actual equipment is unclear, a complete example shows how to describe pipettes, modules/adapters, waste hardware, and staging areas; the assistant checks and restates the real configuration for confirmation. Omitted hardware is not inferred from the example. The next stage explains a complete experiment plan in plain language, including reasons, omissions, and suggested fixes, for you to edit freely. Unchanged experimental details may follow disclosed recommendations; confirmed equipment is preserved. Complete input can be reflected in one integrated plan, and valid existing confirmation is reused without a mandatory extra approval round when generation is explicitly requested. Unspecified initial reagent volume is visualized as calculated demand, with separate advice on additional loading volume.
+You do not need to supply every parameter or follow a fixed form. If actual equipment is unclear, a complete example shows how to describe pipettes, modules/adapters, waste hardware, and staging areas; the assistant checks and restates the real configuration for confirmation. Omitted hardware is not inferred from the example. The next stage explains a complete experiment plan in plain language, including reasons, omissions, and suggested fixes, for you to edit freely. Unchanged experimental details may follow disclosed recommendations; confirmed equipment is preserved. Complete input can be reflected in one integrated plan, and valid confirmation within the current task is reused without a mandatory extra approval round when generation is explicitly requested. Unspecified initial reagent volume is visualized as calculated demand, with separate advice on additional loading volume.
+
+Robot software determines the target API instead of an unconditional 2.30 default. Higher-than-maintained limits are explained with a maintained target recommendation. A read-only probe then separates local package version, SDK limit, and simulator entry points; cloud results are not user-computer results, and an old simulator does not silently lower the protocol target. Simulation setup is optional. Hardware persistence also requires user consent and host support; historical configuration is reflected as a known example for current confirmation rather than assumed unchanged.
 
 Delivery should include the protocol, the rule version actually used, key operation parameters, and truthful review results. A skill-use label is not proof of review; simulation must not be claimed unless it was actually run.
 
@@ -86,7 +88,7 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 
 Initial public snapshot: **rule version 2026-10-21.9, maintained API documentation baseline 2.30**. This is a maintained baseline, not a promise to track the latest upstream version. Explicit older targets are checked against the version index rather than silently upgraded.
 
-The regression set currently contains 72 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, variable-volume/CSV domains, user-input verification, and the two-stage intake boundaries. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
+The regression set currently contains 87 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, variable-volume/CSV domains, user-input verification, the two-stage intake boundaries, robot/API and local-environment separation, and historical hardware confirmation. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py
@@ -106,6 +108,7 @@ No open-source license has yet been selected for original project content. Publi
 
 
 Official reference snapshots ship with the skill and do not refresh automatically on installation. See the [upstream maintenance guide](skills/write-opentrons/references/upstream-maintenance.md) for scoped updates. The current rule version is defined in the [skill entry point](skills/write-opentrons/SKILL.md); the API baseline remains 2.30.
+
 
 
 

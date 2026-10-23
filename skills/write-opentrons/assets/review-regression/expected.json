@@ -592,6 +592,121 @@
         }
       ],
       "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R73": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本地SDK上限不等于机器人上限；Flex9.0.0对应2.28，不能据本地包改成2.30。"
+        }
+      ],
+      "rule": "references/api-versions.md；references/protocol-review.md"
+    },
+    "R74": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-versions.md；references/protocol-review.md"
+    },
+    "R75": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "新建实机目标须依机器人信息确定；Flex9.0.0支持至2.28，不能在拒绝安装后套文档基线2.30。"
+        }
+      ],
+      "rule": "references/api-versions.md；references/protocol-review.md"
+    },
+    "R76": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-versions.md；references/protocol-review.md"
+    },
+    "R77": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "仅有助手云环境检测，不能据此判断用户电脑安装情况。"
+        }
+      ],
+      "rule": "references/api-versions.md；references/protocol-review.md"
+    },
+    "R78": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-versions.md；references/protocol-review.md"
+    },
+    "R79": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户尚未选择安装，不得自动执行pip安装；应说明模拟用途并提供可选引导。"
+        }
+      ],
+      "rule": "references/api-versions.md；references/protocol-review.md"
+    },
+    "R80": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-versions.md；references/protocol-review.md"
+    },
+    "R81": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户未选择持久化，不得擅自保存；客户配置也不能写入共用技能包作为共享内容。"
+        }
+      ],
+      "rule": "references/operations.md；references/api-versions.md；references/protocol-review.md"
+    },
+    "R82": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/api-versions.md；references/protocol-review.md"
+    },
+    "R83": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "历史档案尚未在本任务回显确认，不能直接当本次实物配置；应以已知配置作为引导请确认或修改差异。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R84": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "保存成功不代表状态永远不变，应按本次明确改动核对并更新受影响项，不能让旧档案覆盖新输入。"
+        }
+      ],
+      "rule": "references/operations.md；references/api-versions.md；references/protocol-review.md"
+    },
+    "R85": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "技能维护基线2.30，不得虚称更高API已实机验证；应说明真实设备上限与维护范围差异，并建议已维护目标。"
+        }
+      ],
+      "rule": "references/operations.md；references/api-versions.md；references/protocol-review.md"
+    },
+    "R86": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/api-versions.md；references/protocol-review.md"
+    },
+    "R87": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
     }
   }
 }
