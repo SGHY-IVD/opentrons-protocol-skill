@@ -513,6 +513,50 @@
       "status": "pass",
       "findings": [],
       "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+    },
+    "R65": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户指定不能代替型号核验；清单无flex_8channel_200，不将200µL枪头容量拼成移液器型号。"
+        },
+        {
+          "line": 2,
+          "reason": "型号依据未成立，不得称已核验或可执行；应集中指出冲突而非照抄或擅自替换。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R66": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "实际型号仍待核对；准确指出未能映射并保留未决，不是虚假通过。所提备选不是已确认配置。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R67": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "目录未收录只能说明技能支持证据不足，不能断言实物不存在或用户错误。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
+    },
+    "R68": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "模块名称/安装/接口证据缺失，准确限定受影响步骤并报告未知；不等于证明实物不存在。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md；references/catalog.txt（型号题）"
     }
   }
 }

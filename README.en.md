@@ -9,13 +9,12 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
 
 
-## Update: 2026-10-22.7
+## Update: 2026-10-23.1
 
-- Correct the post-detection cleaning example: dispensing 30 uL of water with a 50 uL tip uses 40 rather than 50 uL/s. The historical simulation applies only to the earlier snippet; the corrected snippet has not been re-simulated.
-- Define variable-volume handling: precompute plans for finite choices at generation time. Runtime CSVs declare a supported domain and validate every row before tip pickup or liquid handling. Unsupported values report the parameter or row instead of falling back to the default-volume rate.
-- Keep transfer volume, capacity-clipped mixing M/R/S, split volumes, liquid-height endpoints, and rates linked. Count-only changes reuse unchanged rates. API baseline 2.30, rate/delay data, and lookup tools are unchanged.
-- Expanded the regression set from 56 to 64 cases; all eight additions matched. Independent review matched all 64 verdicts and 63 strict locations; one merged location was manually accepted as equivalent. A generation trial checked the 100/150 uL plans and associated constants. See the [validation record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md) for scope and limits.
-- No official simulation or physical validation was performed in this update. Local checks do not establish support for arbitrary CSVs or every protocol.
+- For manual SOPs or vague requests, first check experimental calculations and hardware feasibility, then explain a complete automation recommendation in plain language: robot steps, manual preparation, and necessary adjustments. Users can edit it in one reply. Sufficient feasible requirements still go directly to code without a mandatory extra confirmation.
+- Merge user edits with adopted recommendations and recheck only affected models, modules, compatibility, capacity, occupancy, and final results. User confirmation does not replace technical verification; missing maintained information does not prove that a physical product does not exist.
+- Added four cases, bringing the set to 68. Independent review of 18 relevant cases matched all verdicts and strict locations, with reasons manually checked. The other 50 cases were not independently re-reviewed in this update.
+- API baseline 2.30, pipetting actions, numerical tables, and lookup tools are unchanged. No official simulation or physical validation was performed; see the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md) for actual scope.
 
 ## What it helps with
 
@@ -86,7 +85,7 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 
 Initial public snapshot: **rule version 2026-10-21.9, maintained API documentation baseline 2.30**. This is a maintained baseline, not a promise to track the latest upstream version. Explicit older targets are checked against the version index rather than silently upgraded.
 
-The regression set currently contains 64 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, and variable-volume/CSV domains. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
+The regression set currently contains 68 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, variable-volume/CSV domains, and user-input verification. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py
@@ -106,5 +105,6 @@ No open-source license has yet been selected for original project content. Publi
 
 
 Official reference snapshots ship with the skill and do not refresh automatically on installation. See the [upstream maintenance guide](skills/write-opentrons/references/upstream-maintenance.md) for scoped updates. The current rule version is defined in the [skill entry point](skills/write-opentrons/SKILL.md); the API baseline remains 2.30.
+
 
 
