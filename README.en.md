@@ -9,13 +9,12 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
 
 
-## Update: 2026-10-23.3
+## Update: 2026-10-23.4
 
-- Include robot software in hardware intake and report its supported API limit and the planned target. Ordinary users need not select API numbers. The documentation baseline remains 2.30, but new protocols no longer adopt it unconditionally. Existing or explicit targets are preserved; higher limits trigger a clear maintenance-scope recommendation.
-- Add a read-only environment probe separating package version, SDK limit, same-interpreter simulation, and PATH entry points. Installation/upgrades are optional. Older simulators do not silently lower robot targets; successful environment checks are not protocol simulation.
-- Configuration persistence depends on host capability and user consent, isolated from the shared skill. Historical records are reflected for current confirmation with only differences needed; unchanged current-task details are reused.
-- Added 15 cases for 87 total. Independent review matched all 87 verdicts and 86 strict locations, with one equivalent location manually accepted. Seven synthetic/fault probes passed. Dialogue trials, one planning deviation, and its later correction are recorded honestly.
-- Pipetting actions, rate/delay data, and API reference baseline are unchanged. No real SDK installation, official protocol simulation, or physical validation was performed. See the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md).
+- Systematically reviewed cumulative changes from 2026-10-22.6 through 2026-10-23.3 and the previous commit: two-stage hardware/experiment guidance, robot/API targets, local simulation environments, historical configuration confirmation, and variable-volume plans. Independent inspection found no new substantive conflicts within that scope.
+- Existing generation rules are retained. This release clarifies the regression verdict rubric and the scope of one paired case, and records the audit. It adds no confirmation steps and changes no framework structure, pipetting actions, parameter data, API baseline, or expected answers.
+- The initial independent 87-case review matched 86 verdicts and 84 strict verdict/location pairs. Two locations were accepted as equivalent; one paired case exposed scope ambiguity. After clarifying the rubric and scope without changing expected answers, a fresh two-case retest matched both verdicts and locations. Initial results and intermediate deviations are retained; this was not a second full-suite run.
+- Seven synthetic/fault environment checks passed, along with syntax checks for 17 template blocks and four scripts, JSON parsing, and 63 local Markdown targets. No real SDK installation, official protocol simulation, or physical validation was performed. See the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md).
 
 ## What it helps with
 
@@ -108,6 +107,7 @@ No open-source license has yet been selected for original project content. Publi
 
 
 Official reference snapshots ship with the skill and do not refresh automatically on installation. See the [upstream maintenance guide](skills/write-opentrons/references/upstream-maintenance.md) for scoped updates. The current rule version is defined in the [skill entry point](skills/write-opentrons/SKILL.md); the API baseline remains 2.30.
+
 
 
 
