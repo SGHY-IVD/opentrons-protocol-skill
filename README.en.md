@@ -46,6 +46,12 @@ The flow-rate, delay, and regression helper scripts require Python 3 and use its
 
 The core skill resources are currently primarily in Chinese. Requests may be in Chinese or English. Project documentation is bilingual; compatibility with every skill-capable client has not been individually tested.
 
+### Choosing how to receive updates
+
+Whether you copy/import the skill manually or ask an assistant to install it from the repository URL, you decide whether to keep the installed copy in sync. On-demand manual updates are the default. If the host supports background tasks, you may choose periodic update checks and notifications. Automatic synchronization additionally requires the host to support skill updates and the user's explicit authorization, with a frequency and scope of their choice. This repository does not include an automatic updater; available capabilities depend on the client.
+
+An assistant helping with installation should explain the locally supported update options once, after installation, and let the user decide whether to enable one. No choice means manual updates and must not block installation. If background tasks are unavailable, say so rather than promise automatic execution. Checks may compare the installed version/commit with the repository. Updates should synchronize the entire skill folder; copied/imported installations need the corresponding replacement or re-import, while preserving local customizations. These arrangements belong to installation and maintenance, outside the skill's runtime workflow, with no required online check before each use.
+
 ## Start a task
 
 Example request:
