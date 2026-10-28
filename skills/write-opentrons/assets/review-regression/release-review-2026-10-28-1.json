@@ -1,0 +1,830 @@
+{
+  "results": [
+    {
+      "id": "R01",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "枪头原有100µL，排80µL后仍记录有20µL余液，不能使用非零push_out=3；该条件下应为0。"
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R03",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R04",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R05",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "上一孔非零push_out已标记待准备，且本次确需再次吸液；虽然枪头已空并经过source.top()，仍缺少在该top液面外显式prepare_to_aspirate()后再控速入液，不能依赖aspirate自动准备。"
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R07",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R08",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前枪头保留14µL且没有待准备事件，普通原位混匀不应重复准备；此处还在孔底，不能对有记录余液的枪头执行活塞准备。"
+        }
+      ]
+    },
+    {
+      "id": "R09",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R10",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "已有20µL保留液，再吸200µL将达到220µL，超过200µL有效容量；本次最多还能吸180µL。"
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R12",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "后续混匀必须从低体积模式切换为正常模式，因此不满足无需退出或切换的原位立即混匀条件；无位置覆盖时该次加液应按常规动态液面排液，再退出至top处理切换。"
+        },
+        {
+          "line": 2,
+          "reason": "排液后位置仍为well.bottom(0.8)，模式切换虽已无记录余液，仍须先显式到well.top()离开液面，不能在孔内切换。"
+        },
+        {
+          "line": 3,
+          "reason": "configure_for_volume(35)产生待准备状态；下次吸液前应在well.top()、空枪头且液面外显式prepare_to_aspirate()，再控速进入吸液位置，当前直接吸液遗漏该过程。"
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R14",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前为source.top且目标是另一孔的底部，带20mm/s直接跨孔会把入液低速施于跨孔段；应先默认速度到dest.top()，再以20mm/s受控入液。"
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R16",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R17",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "第1行已将已知关闭的盖打开，单纯delay不改变盖状态且没有人工干预，第二次open_lid没有状态或流程信息增量，属于冗余动作。"
+        }
+      ]
+    },
+    {
+      "id": "R18",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R19",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本题常规50µL吸液没有位置覆盖，应使用技能默认source.bottom(0.8)，bottom(1)与该默认不符。"
+        }
+      ]
+    },
+    {
+      "id": "R20",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R21",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R22",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 7,
+          "reason": "仅take_all=True分支排空并产生待准备状态；take_all=False分支排80µL后仍保留20µL且没有待准备事件，合流处无条件prepare_to_aspirate违反空枪头条件，也会破坏保留液状态；准备应只在True分支对应的吸液前执行。"
+        }
+      ]
+    },
+    {
+      "id": "R23",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "外部过程已标记待准备，但起点枪头记录余量未知，无法确认prepare_to_aspirate所需的空枪头条件；top已在液面外不消除该液量缺口。应先核实余量，不能假定为0或直接判通过。"
+        }
+      ]
+    },
+    {
+      "id": "R24",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R25",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户选择完整8通道对齐，标准Y居中且无额外补偿时SINGLE A1应叠加Y=+31.5mm；当前-31.5mm符号相反，不能保持完整阵列机身位置。"
+        }
+      ]
+    },
+    {
+      "id": "R26",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R27",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "H1起4喷嘴在储液槽操作已命中定位策略确认条件，但官方默认居中与完整8通道对齐尚未选择；当前无偏移仅能对应前者，若选择后者则需核对并使用Y=-18mm及一致路径，故本题定位仍未决。"
+        }
+      ]
+    },
+    {
+      "id": "R28",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "H1起4喷嘴的完整8通道对齐偏移为Y=-18mm；第1行入液使用了该偏移，第2行却指定未偏移的source.bottom(0.8)，吸液会回到官方默认居中，破坏同槽定位一致性。"
+        }
+      ]
+    },
+    {
+      "id": "R29",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 4,
+          "reason": "新取枪头的首次吸液按技能必须显式准备；当前在source.top()之后未调用prepare_to_aspirate()就入液并吸取，应在第2行top处完成显式准备后再下降。"
+        }
+      ]
+    },
+    {
+      "id": "R30",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R31",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "200µL枪头目标端接触液体已确认为水相，目标入液移动应为20mm/s；源端甘油退出用10mm/s正确，但不能把该速度沿用到水相目标端。"
+        }
+      ]
+    },
+    {
+      "id": "R32",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R33",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R34",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "总排30µL拆为27+3µL且最终孔内100µL，首段结束时孔内总量应为97µL，故首段终点应按height_from_volume(97)；当前提前到100µL液面，不能与末段从97µL液面起排连续衔接。"
+        }
+      ]
+    },
+    {
+      "id": "R35",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "首段已结束在97µL对应液面，末段应以该中间点为location连续排至100µL液面；当前将location重置为bottom(0.8)，产生不应有的回底路径。"
+        }
+      ]
+    },
+    {
+      "id": "R36",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "P50配50µL枪头、原排量30µL严格超过10µL阈值，且原push_out=1非零，必须在生成阶段拆成27µL主体(push_out=0)和3µL末段(push_out=1)，按各段实际体积采用37.75与28.888889µL/s并保留中间0.2秒等待；当前未拆。"
+        }
+      ]
+    },
+    {
+      "id": "R37",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R38",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R39",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "维护的Flex原生单通道型号只有50µL和1000µL，没有flex_1channel_200；200µL可表示所选枪头容量，不能无依据推荐成另一移液器型号。"
+        },
+        {
+          "line": 2,
+          "reason": "题面没有100µL操作下两种枪头的对照性能证据，仅凭枪头容量比例不能断言精度必然较低；需删除该必然性能比较或补充对应配置与条件的证据。"
+        }
+      ]
+    },
+    {
+      "id": "R40",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R41",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "原液组分、浓度和用途均未知，且用户未授权水相假设，不能将其按water处理后声称用户已确认；该未知会改变实际流速和等待。"
+        },
+        {
+          "line": 2,
+          "reason": "液体类别及其流速、等待仍有关键未决项，当前不能声明全量审查通过且无未决项。"
+        }
+      ]
+    },
+    {
+      "id": "R42",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本行正确保留了原液类别、相关流速和等待的未知，没有虚假通过声明；但本题要求判断当前流程准备状态，关键液体类别尚未确定，受影响流程仍未通过。"
+        }
+      ]
+    },
+    {
+      "id": "R43",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "已核对的终态为A1–G1各100µL、H1为用户要求保留的200µL；全部孔都是100µL的交付声明与代码和需求均不一致。"
+        }
+      ]
+    },
+    {
+      "id": "R44",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R45",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "真实模拟只覆盖API2.28临时副本的默认分支，不能归给最终API2.30文件，更不能扩展为全部分支；最终文件及其他分支应明确记为未模拟。"
+        }
+      ]
+    },
+    {
+      "id": "R46",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R47",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户没有提供该板型或D1槽位，也未授权AI代选耗材和布局；不能把该具体配置作为本次已确定的加载方案。"
+        },
+        {
+          "line": 2,
+          "reason": "板型和槽位并非用户指定，且配置依据尚未建立，不能声称已按用户指定布局完成或可直接运行。"
+        }
+      ]
+    },
+    {
+      "id": "R48",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R49",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户已指定corning_96_wellplate_330ul，只授权安排槽位；加载NEST深孔板超出授权范围，不能擅自更换板型。"
+        }
+      ]
+    },
+    {
+      "id": "R50",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R51",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "用户只明确将混匀改为5次；板型、D1与水相属于已说明推荐的采用，不能改写为用户逐项明确指定。加载本身可沿用推荐，无需额外常规提问。"
+        }
+      ]
+    },
+    {
+      "id": "R52",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R53",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 5,
+          "reason": "展开6次转移后实际终量为前6孔各50µL、末孔100µL，混匀时达到100µL不能替代后续转出后的终量；并非7孔均100µL，不满足本题用户要求。"
+        },
+        {
+          "line": 6,
+          "reason": "终态与每孔100µL的用户目标有确定差异，不能将本题液体账本及目标对照标记为审查通过。"
+        }
+      ]
+    },
+    {
+      "id": "R54",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R55",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 8,
+          "reason": "实际取头为分装1组、原液1组加循环11组，共13组、104支；14组和112支的交付统计错误。两盒共24组仍足够，不应据此新增一次不存在的末孔取头。"
+        }
+      ]
+    },
+    {
+      "id": "R56",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R57",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "本题清膜排液按当前水相、Flex50八通道、50µL普通枪头和实际30µL查表应为40µL/s；50µL/s不符。第1行30µL吸液29.5µL/s正确。"
+        }
+      ]
+    },
+    {
+      "id": "R58",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R59",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "volume=100µL时166.666667µL/s正确，但合法选择150µL时应为233.333333µL/s；应在生成阶段覆盖两个choice并按所选体积取对应定值，不能一直沿用默认100µL的流速。"
+        }
+      ]
+    },
+    {
+      "id": "R60",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R61",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "csv_volumes可能含未支持的125µL等值，当前在全表支持域预检前已开始取头；应在首个取头或移液前逐行验证全部体积并报告不支持的行与允许范围。"
+        },
+        {
+          "line": 3,
+          "reason": "当CSV体积不在known_rates中时，该get会静默回退到100µL对应的166.666667µL/s；未支持体积必须被预先拒绝，不能使用默认体积流速兜底。"
+        }
+      ]
+    },
+    {
+      "id": "R62",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R63",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "transfer_volume=100µL时M=140µL用220µL/s正确；transfer_volume=150µL时容量截断后M=200µL，应取300µL/s，当前固定220未覆盖该合法分支。"
+        },
+        {
+          "line": 4,
+          "reason": "transfer_volume=100µL时主体130µL用230µL/s正确；transfer_volume=150µL时主体190µL应取290µL/s，当前固定230未与派生实际排量联动。"
+        }
+      ]
+    },
+    {
+      "id": "R64",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R65",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "维护型号清单没有flex_8channel_200，用户口述8通道200µL不能直接形成受支持的load_instrument配置；应核对是否为1000µL移液器配200µL枪头或其他实际配置，不能擅自映射。"
+        },
+        {
+          "line": 2,
+          "reason": "用户确认的描述不代替维护清单和兼容关系核验，当前型号尚无法映射，不能宣称已完成型号核验或可执行。"
+        }
+      ]
+    },
+    {
+      "id": "R66",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R67",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本技能未收录模块X只证明名称、安装和接口资料有缺口，不能由此推导实物不存在或客户描述错误。"
+        }
+      ]
+    },
+    {
+      "id": "R68",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R69",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "硬件描述示例不能补成实际已安装设备，用户“你帮我安排”也未提供实物配置或授权假设设备方案；左右移液器和D3垃圾桶未获实际确认，不能声明已确认并进入具体实机耗材布局。"
+        }
+      ]
+    },
+    {
+      "id": "R70",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "该引导如实承认示例不代表实物，表达本身合规；但本题同时要求判断实机方案是否已有硬件依据，左右移液器和固定占位仍未知且未回显确认，当前尚不能进入具体实验布局。"
+        }
+      ]
+    },
+    {
+      "id": "R71",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R72",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "首次消息已完整给出并核对硬件及实验信息，应直接回显整合方案；强制按模板重复填写已知设备和槽位是不必要的重复收集。"
+        }
+      ]
+    },
+    {
+      "id": "R73",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "机器人Flex软件9.0.0按维护映射最高API为2.28；本地opentrons10.0.0/SDK2.30上限不能替代机器人上限，新建目标也应按机器人支持范围采用2.28。"
+        }
+      ]
+    },
+    {
+      "id": "R74",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R75",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "实际Flex软件9.0.0已确认且没有其他目标覆盖，其最高API为2.28，新建实机协议不能采用2.30；拒绝安装本地模拟器不改变机器人支持范围。"
+        }
+      ]
+    },
+    {
+      "id": "R76",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R77",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "检测只发生在助手云端执行环境，结果不能证明用户电脑未安装opentrons；应准确限定被检测环境和无法访问用户电脑的边界。"
+        }
+      ]
+    },
+    {
+      "id": "R78",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R79",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前只检测到缺少opentrons，用户尚未选择安装或升级；按技能不能自动执行pip install，应先保留未模拟状态并提供可选安装路径。"
+        }
+      ]
+    },
+    {
+      "id": "R80",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R81",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户尚未选择配置持久化，且目标是所有用户共用的技能包；不能擅自保存客户硬件，更不能把客户配置写入共享技能。保存应经明确选择并与共享技能/公开仓库隔离。"
+        }
+      ]
+    },
+    {
+      "id": "R82",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R83",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "历史档案只能作为本次引导直接回显，并注明来源和核对日期、确认本次仍一致或仅提供变化；首次进入本任务且尚无本次回显确认，不能仅说明来源就当作当前实物配置直接规划。"
+        }
+      ]
+    },
+    {
+      "id": "R84",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户本次明确将右侧八通道改为1000µL，新信息优先于历史档案；保存成功不保证硬件永不变化，应更新受影响配置，不能继续按旧50µL型号。"
+        }
+      ]
+    },
+    {
+      "id": "R85",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "设备上限2.31已核实，但技能仅维护至2.30，没有技能已实机验证2.31的证据；不能宣称已验证并直接采用未维护的2.31，应分别说明设备上限与资料范围并建议已维护目标。"
+        }
+      ]
+    },
+    {
+      "id": "R86",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R87",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R88",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前没有特殊或自定义耗材线索，且实际硬件未核对；自定义创建、测量和交付选择只在命中具体场景时展开，不能作为首次硬件引导的强制前置环节。"
+        }
+      ]
+    },
+    {
+      "id": "R89",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R90",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R91",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "同为24孔不能证明不同货号Y24与X24是同款；没有尺寸相同或互换依据时，不能直接复用并标记已确认匹配。"
+        }
+      ]
+    },
+    {
+      "id": "R92",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "模糊照片和孔数不能提供准确孔距、孔深与首孔定位尺寸；不能目测填入最终定义并宣称可直接执行，应取得准确图纸、明确差异的可靠基准或实测数据。"
+        }
+      ]
+    },
+    {
+      "id": "R93",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "该声明如实保留尺寸不足并给出有效的数据补充路径；但本题要判断定义是否就绪，孔距、孔深和首孔定位等关键数据仍缺失，相关定义和定位尚未完成。"
+        }
+      ]
+    },
+    {
+      "id": "R94",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "目标实际定义缺少innerLabwareGeometry和参与孔的geometryDefinitionId，没有动态液面换算所需模型；load_liquid(0)只初始化液量，不能创建模型，此处不能直接使用meniscus(dynamic)。"
+        }
+      ]
+    },
+    {
+      "id": "R95",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R96",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "A1引用的geometryDefinitionId为g2，但innerLabwareGeometry只有g1，参与孔模型引用失效；顶层存在其他模型不使height_from_volume(50)可用。"
+        }
+      ]
+    },
+    {
+      "id": "R97",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R98",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "读取C:/labware/X24.json依赖机器人上不存在的客户电脑外部文件，不属于用户选择的单文件内嵌；应将完整定义放入同一脚本的字典或字符串后再from_definition加载。"
+        }
+      ]
+    },
+    {
+      "id": "R99",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R100",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "孔内径从6mm改为8mm会改变体积与高度关系，继续使用明确按6mm计算的旧模型不能保证本次meniscus准确；必须联动核对和更新模型，不能声明无需检查。"
+        }
+      ]
+    },
+    {
+      "id": "R101",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R102",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "能固定在甲板上只说明支撑条件，不能证明所有枪头均能安全下探到底，也不能证明抓手可搬运；这些结论分别需要机身/枪头/管口空间及夹持搬运依据。"
+        }
+      ]
+    },
+    {
+      "id": "R103",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户已明确选择完整内嵌单文件且必要数据已核对，应直接按该选择生成；不能强制重复选择同一交付方式并据未重复回答阻塞生成。"
+        }
+      ]
+    }
+  ]
+}

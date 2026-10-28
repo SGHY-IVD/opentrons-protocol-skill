@@ -1,7 +1,19 @@
-Opentrons 官方耗材与硬件 load name 清单
-更新日期：2026-10-12
-范围：原脚本中的官方耗材 + 本次授权补齐的 Flex 枪头盒、Flex 移液器、官方适配器和模块。自定义耗材暂不收录。
-本清单只维护名称与必要的类别区别；收录名称不代表已补齐对应的执行接口或验证所有组合。
+Opentrons 官方耗材与硬件名称入口
+更新日期：2026-10-28；原常用清单于2026-10-12收录，保留为快速定位入口。
+范围：下面维护常用/既有耗材名称及硬件；references/labware-index.json自动提取官方发布v10.0.0的完整耗材定义目录，含不同定义版本、内部/测试条目和旧格式schema 1，不是实时官方库或当前机器人已安装名单。自定义成品仍独立放assets/labware，不混入官方索引。
+名称只证明对应定义/条目存在，不证明机型、软件版本、执行接口、模型或安装组合均可用。旧组合耗材不因仍在清单就推荐用于新协议；加载层级按已维护API及安装规则。
+客户入口是实际品牌、准确货号及必要实物特征；常用/低频按实物型号组织，同一load_name的定义修订不当成多种耗材向客户逐项询问。定义version可能补字段，也可能修正坐标、尺寸或模型；它与JSON schema、API版本分别管理。技术修订在后台解析，不能另建一份脱离官方实际定义的几何表。
+
+查用顺序（普通生成只检索相关候选，不读取整个索引）：
+1. 用户提供确切JSON或已有匹配定义时优先复用；否则先定位下面的常用项，未命中用 python scripts/labware.py search "品牌英文或货号 规格" 检索全量发布索引。不把常用表当白名单。filtered_matches表示全快照有匹配但被普通候选过滤，先按提示定向调查；不能当not_found_in_snapshot转去重建。
+2. 确切加载名用 python scripts/labware.py get <load_name>；有多个版本/schema时返回全部匹配。已知目标API且未指定定义版本时可加 --api 2.30（替换为实际目标），按该发布官方默认版本策略定位，不按版本号最大值选取；显式版本用 --version。结合实际机器人软件、既有协议/定义核对可用版本，不把技术版本选择都转成用户问答。按品牌、货号和实物匹配，不能用相似容量/孔数替代同款。
+常规官方protocol沿用load_labware(name, location)让官方解析默认定义，不为查询而强制给每个调用加version。生成时核对的JSON须与实际解析结果一致；调用meniscus/height_from_volume等才按operations检查参与孔模型和实际范围，不给每个动作增加重复运行时检查。只有明确固定修订、用户JSON/内嵌或特殊依赖时保留相应身份，并说明采用原因。
+3. 需要完整定义时，用 python scripts/labware.py fetch <结果中的source_path> --output <任务目录/definition.json>，只下载选中的固定提交文件并核对blob与身份；已有相同文件复用。也可用连接器获取结果中的definition_url并核对同一身份/来源。search/get离线，fetch才联网，辅助脚本不随protocol部署。
+4. 快照版本不等于机器人软件版本。目标较旧、快照未命中或仅有开发分支条目时，可定向查对应已发布版本/实际环境定义；未核实前保留软件可用性未决，不擅自升级目标或采用edge。网络失败说明查询受阻；索引无命中只表示本快照没匹配，不等于官方从未支持。
+5. 官方仍无匹配定义时，再按custom-labware.md查同款成品或引导创建；已明确自定义、指定成品或提供JSON时直接复用相应分支。硬件型号、API和安装关系缺项仍反馈证据缺口，不因耗材检索扩大它们的维护基线。
+
+索引源：Opentrons/opentrons v10.0.0，commit e8c6d0a424c25fff1604e2a02e4ccaedac95b9af；完整definitions树878767d05ffaff87c79da80d29990297332e4e69。只存名称/品牌/货号/类别/身份与来源，尺寸及体积模型读取实际JSON；schema 1仅供历史检索，不作为当前load name。安装/下载/生成不自动刷新索引，维护重建见upstream-maintenance.md。
+默认候选排除官方全局展示隐藏项(hidden_from_ui)及没有任何公开默认定义版本的条目(non_default_only)；用 --include-hidden 仅作明确调查，不把隐藏解释为Python不兼容。该快照9个non_default_only条目均为官方明示不供用户加载的schema3test测试数据，保留索引但不作客户推荐，fetch拒绝获取；不是按schema 3一刀切。旧格式检索需 --include-legacy。策略源为同commit的shared-data/js/getLabware.ts及api/src/opentrons/protocol_api/core/engine/_default_labware_versions.py，blob记录在索引；不将仅PD展示排除泛化为Python限制。
 
 1. Flex 枪头盒（无滤芯）
 opentrons_flex_96_tiprack_20ul
@@ -33,7 +45,7 @@ opentrons_24_tuberack_nest_1.5ml_snapcap
 6. 板盖
 opentrons_tough_universal_lid
 
-7. 独立适配器（官方定义 allowedRoles 包含 adapter，共16项）
+7. 独立适配器（既有收录16项；官方定义allowedRoles包含adapter；其余查全量索引）
 ev_resin_tips_flex_96_tiprack_adapter  |  Opentrons Flex EV Resin Tips Tall Adapter for Third-party Evotips in 96 Tip Rack Adapter
 ev_resin_tips_flex_short_adapter  |  Opentrons Flex EV Resin Tips Short Adapter for Third-party Evotips
 ev_resin_tips_flex_tall_adapter  |  Opentrons Flex EV Resin Tips Tall Adapter for Third-party Evotips
@@ -52,7 +64,7 @@ opentrons_universal_flat_adapter_type_b  |  Opentrons Universal Flat Heater-Shak
 
 opentrons_flex_deck_riser  |  Opentrons Flex Deck Riser
 
-8. Flex 移液器（官方完整6种）
+8. Flex 移液器（v10.0.0公开加载文档完整6种，不声明外部实时最新）
 flex_1channel_50
 flex_1channel_1000
 flex_8channel_50
@@ -60,7 +72,7 @@ flex_8channel_1000
 flex_96channel_200
 flex_96channel_1000
 
-9. 模块（官方 Available modules 完整10种；同一行多个名字是别名）
+9. 模块（v10.0.0公开Available modules完整10种；首列为显示名，其后为加载名/别名）
 Temperature Module GEN1 | temperature module | tempdeck
 Temperature Module GEN2 | temperature module gen2
 Magnetic Module GEN1 | magnetic module | magdeck
@@ -72,6 +84,8 @@ Magnetic Block GEN1 | magneticBlockV1
 Absorbance Plate Reader Module | absorbanceReaderV1
 Flex Stacker Module | flexStackerModuleV1
 说明：本段照录跨机器人型号的官方加载名列表；列表存在某型号不表示能直接用于 Flex。日常 Flex 不自动选用旧代型号或磁力模块替代磁力架。
+机型范围：温控GEN1、磁力模块GEN1/2、热循环GEN1仅OT-2；温控GEN2、热循环GEN2、Heater-Shaker GEN1两机型；Magnetic Block、Absorbance Plate Reader、Flex Stacker仅Flex。具体槽位/组合仍查installation.txt，名称不代替安装核对。
+硬件固定来源：上述commit的docs/python-api/docs/pipettes/loading.md、modules/setup.md及docs/flex/docs/modules/index.md、docs/ot-2/docs/modules/index.md，2026-10-28复核。源码内部名或未列公开范围的型号不自动成为可用推荐。
 
 10. 官方适配器相关组合耗材 / 铝块（不是独立 adapter；单独列名）
 opentrons_24_aluminumblock_generic_2ml_screwcap

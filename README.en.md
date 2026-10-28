@@ -9,12 +9,13 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
 
 
-## Update: 2026-10-23.4
+## Update: 2026-10-28.5
 
-- Systematically reviewed cumulative changes from 2026-10-22.6 through 2026-10-23.3 and the previous commit: two-stage hardware/experiment guidance, robot/API targets, local simulation environments, historical configuration confirmation, and variable-volume plans. Independent inspection found no new substantive conflicts within that scope.
-- Existing generation rules are retained. This release clarifies the regression verdict rubric and the scope of one paired case, and records the audit. It adds no confirmation steps and changes no framework structure, pipetting actions, parameter data, API baseline, or expected answers.
-- The initial independent 87-case review matched 86 verdicts and 84 strict verdict/location pairs. Two locations were accepted as equivalent; one paired case exposed scope ambiguity. After clarifying the rubric and scope without changing expected answers, a fresh two-case retest matched both verdicts and locations. Initial results and intermediate deviations are retained; this was not a second full-suite run.
-- Seven synthetic/fault environment checks passed, along with syntax checks for 17 template blocks and four scripts, JSON parsing, and 63 local Markdown targets. No real SDK installation, official protocol simulation, or physical validation was performed. See the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md).
+- Publishes cumulative updates 2026-10-28.1–.5: on-demand custom labware reuse/creation and two BKMAMLAB definitions, retaining their approximate-model and physical-validation limitations.
+- Adds a common-name entry point plus a release-pinned official labware index. Resolves the actual API default definition from Opentrons v10.0.0 and fetches it with source verification; an index match does not establish model or installation compatibility.
+- Reinforces existing confirmation and delivery requirements: a complete first hardware description is not a confirmed restatement, and attachments do not replace key parameters in the chat response. Existing confirmations are reused without a fixed extra approval round.
+- The suite now contains 123 cases. Version 2026-10-28.4 records an independent 119-case review; this update independently reviewed 16 targeted cases with matching verdicts, locations, and checked reasoning. All 123 fixture structures/snippets and 18 labware-tool tests passed. Version-specific scope and raw results are in the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md).
+- This publication leaves flow rates, delays, atomic examples, and API baseline 2.30 unchanged. No official protocol simulation or physical validation was performed.
 
 ## What it helps with
 
@@ -81,13 +82,14 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 - `skills/write-opentrons/references/`: APIs, parameter tables, rules, and examples.
 - `skills/write-opentrons/scripts/`: flow-rate, delay, and regression tools.
 - `skills/write-opentrons/assets/review-regression/`: cases, expected results, and recorded reviews.
+- `skills/write-opentrons/assets/labware/`: custom definitions and limitations, matched to the actual labware.
 - `skills/write-opentrons/agents/`: client presentation metadata.
 
 ## Baseline and validation limits
 
 Initial public snapshot: **rule version 2026-10-21.9, maintained API documentation baseline 2.30**. This is a maintained baseline, not a promise to track the latest upstream version. Explicit older targets are checked against the version index rather than silently upgraded.
 
-The regression set currently contains 87 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, variable-volume/CSV domains, user-input verification, the two-stage intake boundaries, robot/API and local-environment separation, and historical hardware confirmation. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
+The regression set currently contains 123 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, variable-volume/CSV domains, user-input verification, the two-stage intake boundaries, robot/API and local-environment separation, historical hardware confirmation, custom-labware and official-index boundaries, confirmation evidence, and in-chat parameter summaries. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py
@@ -107,9 +109,3 @@ No open-source license has yet been selected for original project content. Publi
 
 
 Official reference snapshots ship with the skill and do not refresh automatically on installation. See the [upstream maintenance guide](skills/write-opentrons/references/upstream-maintenance.md) for scoped updates. The current rule version is defined in the [skill entry point](skills/write-opentrons/SKILL.md); the API baseline remains 2.30.
-
-
-
-
-
-

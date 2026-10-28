@@ -707,6 +707,301 @@
       "status": "pass",
       "findings": [],
       "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R88": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "未命中自定义/缺定义场景，不应把创建与内嵌问答加成开局固定步骤。"
+        }
+      ],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R89": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R90": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R91": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "孔数相同不证明同款，不能将不同货号定义当成已核实匹配。"
+        }
+      ],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R92": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "关键物理数据无依据，目测不能变成准确定位尺寸并据此声明可执行。"
+        }
+      ],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R93": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "声明如实保留缺口，但当前定义仍缺关键物理数据，尚未具备执行依据。"
+        }
+      ],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R94": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "液量初始化不建立耗材体积模型；已知缺模型时不能按meniscus动态排液。"
+        }
+      ],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R95": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R96": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "顶层存在模型不代表参与孔可换算；g2引用无对应模型，不能据此计算高度。"
+        }
+      ],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R97": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R98": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "读取客户电脑外部路径不等于将定义内容内嵌，单文件在目标环境仍缺依赖。"
+        }
+      ],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R99": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R100": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "孔径变化使已知旧模型与实物不匹配，需要联动核对模型，不能保留旧模型还保证液面准确。"
+        }
+      ],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R101": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R102": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "固定并不能证明机械可达性或抓手搬运可行，结论超出已有依据。"
+        }
+      ],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R103": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户已明确选择内嵌且条件齐全，应复用选择，不固定增加重复确认。"
+        }
+      ],
+      "rule": "references/custom-labware.md；references/protocol-review.md；references/api-layout.md"
+    },
+    "R104": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "常用表不是白名单；已有准确官方匹配，应继续核对/复用，不能声称官方没有并强制创建。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R105": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R106": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "相似容量和孔数不证明同款；不能替换明确指定的实物。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R107": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "索引命中不提供体积模型；缺少实际孔有效模型时不能使用数学液面跟随。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R108": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R109": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "快照存在不能证明较旧机器人软件包含定义；必须核对目标环境，不按索引来源升级目标或假定可用。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R110": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "声明如实，但scope所需的目标环境定义可用性仍未知，不能判整体准备完成。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R111": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "开发分支条目不能当目标稳定发布已内置，需核对可用定义和实际支持范围。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R112": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "网络受阻不等于官方不存在；只能说明本快照无匹配和后续查询未完成。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R113": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R114": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "耗材定义存在或模型有效不证明具体模块/适配器安装兼容。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R115": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "如实保留安装缺口，scope所需的实际兼容性仍未知。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R116": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "官方明示测试用途不能因定义存在或显示名相同而推荐为客户耗材。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R117": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R118": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "未指定定义版本时须匹配实际API默认策略，不能用最大版本几何替换实际会加载的版本。"
+        }
+      ],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R119": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/catalog.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R120": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "首次完整描述及布局代选授权不等于回显确认，也不代表接受未展示方案；无确认依据却宣称完整通过及可直接上机。技术检查不替代该确认。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R121": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R122": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "完整生成的聊天正文遗漏关键转移参数，仅有附件说明不能替代聊天摘要；应从已核对代码补紧凑摘要，无需重做计算或状态审查。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R123": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
     }
   }
 }

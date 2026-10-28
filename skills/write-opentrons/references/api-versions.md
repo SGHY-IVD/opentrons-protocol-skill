@@ -67,6 +67,7 @@
 
 |接口/行为|版本分界|参考与用途|
 |---|---|---|
+|ProtocolContext内联定义加载／Labware父件内联加载|甲板耗材from_definition为2.0；甲板适配器及Labware父件方式为2.15|api-layout.md；模块对应方法另查api-module-common.md|
 |dispense(push_out=...)|2.15新增|api-pipette.md；不可在更低版本直接套参数|
 |prepare_to_aspirate()|2.16新增|api-pipette.md及固定源码requires_version|
 |dispense(0)/超当前量|2.17起0不排液、超量报错|api-pipette.md；旧版行为不同|
