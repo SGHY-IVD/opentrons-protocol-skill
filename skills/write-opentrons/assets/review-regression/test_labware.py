@@ -77,15 +77,18 @@ class LabwareLookup(unittest.TestCase):
         self.assertEqual(tool.get(self.index, 'corning_96_wellplate_330ul',
                                   namespace='custom_beta')['status'], 'not_found_in_snapshot')
 
-    def test_legacy_is_explicit_and_cannot_be_fetched_as_modern(self):
-        self.assertFalse(any(r['schema_version'] == 1 for r in
-                             tool.search(self.index, 'plate', limit=1000)['definitions']))
-        result = tool.search(self.index, '12 well plate', limit=1000, include_legacy=True)
-        self.assertTrue(any(r['schema_version'] == 1 for r in result['definitions']))
-        row = next(r for r in self.index['definitions'] if r['schema_version'] == 1)
+    def test_flex_scope_excludes_legacy_and_ot2(self):
+        self.assertTrue(all(tool.in_flex_scope(r) for r in self.index['definitions']))
+        self.assertTrue(all(tool.in_flex_scope(r) for r in
+                            tool.search(self.index, 'OT-2', include_hidden=True)['definitions']))
+        self.assertFalse(tool.get(self.index, 'opentrons_96_tiprack_300ul')['definitions'])
+        self.assertFalse(tool.in_flex_scope({'schema_version': 1}))
+        self.assertFalse(tool.in_flex_scope({'schema_version': 2, 'display_name': 'OT-2 tips'}))
+        self.assertTrue(tool.in_flex_scope({'schema_version': 2, 'display_name': 'Generic plate'}))
+        self.assertTrue(tool.in_flex_scope({'schema_version': 2, 'display_name': 'Spot 20 plate'}))
         with tempfile.TemporaryDirectory() as tmp:
             with self.assertRaises(ValueError):
-                tool.fetch(self.index, row['source_path'], Path(tmp) / 'old.json')
+                tool.fetch(self.index, '2/opentrons_96_tiprack_300ul/1.json', Path(tmp) / 'old.json')
 
 
 class ReleaseRetrieval(unittest.TestCase):
@@ -123,6 +126,29 @@ class ReleaseRetrieval(unittest.TestCase):
 
     def tearDown(self):
         self.tmp.cleanup()
+
+    def test_rebuild_filters_ot2_after_verifying_source(self):
+        self.definition['metadata']['displayName'] = 'Opentrons OT-2 Test Tips'
+        self.raw = json.dumps(self.definition).encode()
+        self.file.write_bytes(self.raw)
+        tree = self.make_tree()
+        index = tool.build_index(self.directory, tree, 'v10.0.0', 'a' * 40,
+                                 '2026-10-28', self.policy)
+        self.assertEqual(index['counts']['definitions'], 0)
+        self.file.write_bytes(self.raw + b' ')
+        with self.assertRaisesRegex(ValueError, 'blob mismatch'):
+            tool.build_index(self.directory, tree, 'v10.0.0', 'a' * 40,
+                             '2026-10-28', self.policy)
+
+    def test_imported_index_cannot_restore_out_of_scope_entries(self):
+        index = json.loads(json.dumps(self.index))
+        row = dict(index['definitions'][0], display_name='OT-2 Test Tips')
+        index['definitions'].append(row)
+        file = self.directory / 'imported-index.json'
+        file.write_text(json.dumps(index))
+        scoped = tool.read_index(file)
+        self.assertEqual(scoped['counts']['definitions'], 1)
+        self.assertTrue(all(tool.in_flex_scope(r) for r in scoped['definitions']))
 
     def test_pinned_fetch_and_reuse_preserve_exact_bytes(self):
         with patch.object(tool.urllib.request, 'urlopen', return_value=io.BytesIO(self.raw)) as network:

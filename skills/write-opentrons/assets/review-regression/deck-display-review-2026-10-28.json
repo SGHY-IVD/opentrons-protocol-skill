@@ -1,0 +1,258 @@
+{
+  "results": [
+    {
+      "id": "R47",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户既未指定耗材与槽位，也未授权代选；直接选定NEST深孔板与D1超出已有配置依据。"
+        },
+        {
+          "line": 2,
+          "reason": "将自行选择的布局写成“用户指定”并称可直接运行，与尚无硬件及布局确认依据的题面不符。"
+        }
+      ]
+    },
+    {
+      "id": "R48",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R49",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户仅授权安排槽位，并已指定corning_96_wellplate_330ul；改用NEST深孔板越过板型授权范围。"
+        }
+      ]
+    },
+    {
+      "id": "R50",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R51",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "板型、D1和水相是用户回复后沿用的已说明推荐，并非由用户逐项明确指定；应如实标注推荐来源。"
+        }
+      ]
+    },
+    {
+      "id": "R52",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R69",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "“你帮我安排”不能证明实机装有示例中的左右移液器及D3垃圾桶；不得补成已确认硬件或据此进入具体实机布局。"
+        }
+      ]
+    },
+    {
+      "id": "R70",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "引导正确保留实际装机未知，但本题还审实机方案准备状态；实际左右移液器及固定设备尚无用户说明和回显确认，具体实验布局仍未就绪。"
+        }
+      ]
+    },
+    {
+      "id": "R71",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R72",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "实际硬件已完整说明且名称关系已核对，应直接整合回显；强制重新填写模板重复索取已知信息。"
+        }
+      ]
+    },
+    {
+      "id": "R87",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R114",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "官方索引命中只支持耗材身份，不能证明其与所选模块/适配器组合安装兼容；题面明确没有该关系的有效证据。"
+        }
+      ]
+    },
+    {
+      "id": "R115",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "兼容声明如实保留了缺口，但该模块/适配器安装关系仍未核实，受影响实机步骤尚不具备就绪依据。"
+        }
+      ]
+    },
+    {
+      "id": "R120",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "首次完整硬件描述及布局授权不等于回显后的硬件确认，也不代表采用尚未展示的预装、预铺、混匀和换头方案；因此不能声称完整确认并可直接上机。"
+        }
+      ]
+    },
+    {
+      "id": "R121",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R122",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "完整脚本交付须在实际聊天正文列关键孔操作参数；将全部流速、高度和移动参数仅指向附件不能替代正文摘要。"
+        }
+      ]
+    },
+    {
+      "id": "R123",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R127",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R128",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R129",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R144",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R145",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "站在机器人前方俯视时A在后、D在前，标准图应A上D下；这里把前后及上下方向颠倒。"
+        }
+      ]
+    },
+    {
+      "id": "R146",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "其他槽位内容未说明，应保留“未说明”；不能推定全部为空或已经可供实验占用。"
+        }
+      ]
+    },
+    {
+      "id": "R147",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R148",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "同一热循环实际同时占A1/B1；加载锚点B1不释放A1，把A1标为空并建议放枪头盒会产生实体占位冲突。"
+        }
+      ]
+    },
+    {
+      "id": "R149",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "题面明确未装第4列扩展/暂存夹具，C4不能标为已确认可用；第4列亦仅夹爪可达，不能安排移液器直接在C4加液。"
+        }
+      ]
+    },
+    {
+      "id": "R150",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R151",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "C2反应板仍是首次提出且未被采用的建议，应标为拟放；不能写成已确认实际布局或以自己的声明充当客户采用依据。"
+        }
+      ]
+    },
+    {
+      "id": "R152",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前C3温控下沉式通电配置与常规C4暂存夹具存在已知冲突，不能把C4标成可用；表格展示本身不构成安装兼容证据。"
+        }
+      ]
+    },
+    {
+      "id": "R153",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "布局已有效确认且本次仅改混匀次数，应复用未变配置；反复重画全甲板并强制重新确认全部布局增加了无依据的批准轮次。"
+        }
+      ]
+    },
+    {
+      "id": "R154",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R155",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "Flex 96通道1000µL移液器同时占用左右双挂载；右侧并非空闲，不能据此再安装八通道50µL。"
+        }
+      ]
+    }
+  ]
+}

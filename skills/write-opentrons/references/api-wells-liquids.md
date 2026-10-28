@@ -198,7 +198,7 @@ parent: str | Labware | ModuleTypes | OffDeckType
 属性类型见上方官方签名；不是可调用方法。
 
 官方参数含义、返回值与使用约束（已保存在本文件） Where the labware is loaded. This corresponds to the physical object that the labware directly rests upon. Returns: str | Labware | ModuleTypes | OffDeckType – If the labware is directly on the robot's deck, the str name of the deck slot,
-like "D1" (Flex) or "1" (OT-2). See Deck Slots . If the labware is on a module, a module context. If the labware is on a labware or adapter, a Labware . If the labware is off-deck, OFF_DECK . Changed in version 2.14: Return type for module parent changed.
+like "D1" on Flex. See Deck Slots . If the labware is on a module, a module context. If the labware is on a labware or adapter, a Labware . If the labware is off-deck, OFF_DECK . Changed in version 2.14: Return type for module parent changed.
 Formerly, the API returned an internal geometry interface. Changed in version 2.15: Returns a Labware if the labware is loaded
     onto a labware/adapter. Returns OFF_DECK if the labware is
     off-deck. Formerly, if the labware was removed by using del on deck , this would return where it was before its removal.

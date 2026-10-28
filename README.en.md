@@ -9,13 +9,14 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
 
 
-## Update: 2026-10-28.5
+## Publication: 2026-10-28.9
 
-- Publishes cumulative updates 2026-10-28.1–.5: on-demand custom labware reuse/creation and two BKMAMLAB definitions, retaining their approximate-model and physical-validation limitations.
-- Adds a common-name entry point plus a release-pinned official labware index. Resolves the actual API default definition from Opentrons v10.0.0 and fetches it with source verification; an index match does not establish model or installation compatibility.
-- Reinforces existing confirmation and delivery requirements: a complete first hardware description is not a confirmed restatement, and attachments do not replace key parameters in the chat response. Existing confirmations are reused without a fixed extra approval round.
-- The suite now contains 123 cases. Version 2026-10-28.4 records an independent 119-case review; this update independently reviewed 16 targeted cases with matching verdicts, locations, and checked reasoning. All 123 fixture structures/snippets and 18 labware-tool tests passed. Version-specific scope and raw results are in the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md).
-- This publication leaves flow rates, delays, atomic examples, and API baseline 2.30 unchanged. No official protocol simulation or physical validation was performed.
+- Publishes cumulative updates 2026-10-28.6–.9. The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version; the maintained API baseline remains 2.30.
+- Limits protocol authoring, modification, and review to **Opentrons Flex**. Removes OT-2-specific modules/APIs and index entries, and adds contamination checks. The scoped official index retains 285 modern definitions and 155 load names, with 127 load names in ordinary search; index inclusion is not verified compatibility.
+- Adjusts three 96-channel aqueous flow-rate curves for both standard and filtered tips, using bounded interpolation without extrapolation. Adds explicit Temperature Module relationships for six 24-well block-and-tube combinations, retaining their official single-load semantics.
+- Reduces unnecessary terminology questions: uniquely mapped Flex modules do not require a separate GEN question; waste hardware is resolved from identity and location, with D3 alone insufficient. Configuration echoes default to a head-configuration table and a compact deck view, optional details for complex stacks, and a slot list when tables cannot render. No additional confirmation round is introduced.
+- The suite contains 155 cases. Recorded independent reviews cover 131 Flex-scope cases, 50 terminology/24-well cases, and 32 layout cases, with original differences and follow-up checks retained. Publication checks cover all 155 fixture structures/snippets and 20 labware-tool tests; this is not a new full 155-case semantic blind review. See the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md).
+- Delay data, atomic pipetting examples, and the API baseline are unchanged. No official protocol simulation or physical validation was performed.
 
 ## What it helps with
 
@@ -27,7 +28,7 @@ Provide the experimental goal, existing workflow, and actual equipment. The firs
 - Review capacity, residual liquid, plunger preparation, motion paths, occupancy, and module states.
 - Choose a targeted or full review based on the impact of a modification.
 
-The primary target is **Opentrons Flex**. Some references include OT-2 module APIs; this does not imply that the complete rule set is adapted for OT-2.
+This skill serves **Opentrons Flex only**. It does not provide OT-2 protocols or OT-2-specific module APIs. Shared interfaces, hardware, and official definition fields applicable to Flex are retained.
 
 ## What is a Skill, and how do I use it?
 
@@ -89,7 +90,7 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 
 Initial public snapshot: **rule version 2026-10-21.9, maintained API documentation baseline 2.30**. This is a maintained baseline, not a promise to track the latest upstream version. Explicit older targets are checked against the version index rather than silently upgraded.
 
-The regression set currently contains 123 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, variable-volume/CSV domains, user-input verification, the two-stage intake boundaries, robot/API and local-environment separation, historical hardware confirmation, custom-labware and official-index boundaries, confirmation evidence, and in-chat parameter summaries. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
+The regression set currently contains 155 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, variable-volume/CSV domains, user-input verification, the two-stage intake boundaries, robot/API and local-environment separation, historical hardware confirmation, custom-labware and official-index boundaries, confirmation evidence, in-chat parameter summaries, Flex scope, 24-well temperature combinations, terminology resolution, and text layout echoes. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py

@@ -1,5 +1,5 @@
 {
-  "revision": "2026-10-22-v1",
+  "revision": "2026-10-28-v1",
   "units": {
     "volume": "uL",
     "flow_rate": "uL/s"
@@ -723,7 +723,7 @@
       "action": "dispense",
       "points": [
         [
-          5,
+          1,
           40
         ],
         [
@@ -740,9 +740,9 @@
         ]
       ],
       "max_volume": 50,
-      "min_rule_volume": 5,
+      "min_rule_volume": 1,
       "upper_endpoint": "error",
-      "provenance": "用户2026-10-22排液流速覆盖；普通/滤芯一致；多点分段线性插值，不外推"
+      "provenance": "用户2026-10-28水相排液流速覆盖；普通/滤芯共用；分段线性插值，不外推"
     },
     {
       "model": "flex_96channel_200",
@@ -753,7 +753,7 @@
       "action": "dispense",
       "points": [
         [
-          5,
+          1,
           40
         ],
         [
@@ -770,9 +770,9 @@
         ]
       ],
       "max_volume": 50,
-      "min_rule_volume": 5,
+      "min_rule_volume": 1,
       "upper_endpoint": "error",
-      "provenance": "用户2026-10-22排液流速覆盖；普通/滤芯一致；多点分段线性插值，不外推"
+      "provenance": "用户2026-10-28水相排液流速覆盖；普通/滤芯共用；分段线性插值，不外推"
     },
     {
       "model": "flex_96channel_200",

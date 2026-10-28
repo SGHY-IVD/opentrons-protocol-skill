@@ -174,43 +174,6 @@
         "current_step_index"
       ]
     },
-    "MagneticModuleContext": {
-      "public_members": [
-        "disengage",
-        "engage",
-        "labware",
-        "load_adapter",
-        "load_adapter_from_definition",
-        "load_labware",
-        "load_labware_by_name",
-        "load_labware_from_definition",
-        "model",
-        "parent",
-        "serial_number",
-        "status",
-        "type"
-      ],
-      "local": [
-        "disengage",
-        "engage",
-        "serial_number",
-        "status"
-      ],
-      "shared": [
-        "labware",
-        "load_adapter",
-        "load_adapter_from_definition",
-        "load_labware",
-        "load_labware_by_name",
-        "load_labware_from_definition",
-        "model",
-        "parent",
-        "type"
-      ],
-      "source_supplement": [
-        "calibrate"
-      ]
-    },
     "MagneticBlockContext": {
       "public_members": [
         "labware",
@@ -322,5 +285,6 @@
         "type"
       ]
     }
-  }
+  },
+  "scope": "Flex-compatible module contexts only; upstream source fingerprint unchanged"
 }

@@ -5,7 +5,7 @@
 ## Heater-Shaker
 
 - 搬入/移出耗材须锁扣打开且停止震荡；上方移液前锁扣关闭、震荡停止。启动震荡前必须由close_labware_latch完成已知关闭，不以人工关闭的外观代替API确认。
-- 开锁扣时不能正在震荡。idle_unknown是复位后的未知状态，不等于已知关闭；opening/closing为过渡状态，不等于完成。邻近移液/开锁扣避碰按API和安装关系核对，不把OT-2的邻位限制无差别推广到Flex。
+- 开锁扣时不能正在震荡。idle_unknown是复位后的未知状态，不等于已知关闭；opening/closing为过渡状态，不等于完成。邻近移液/开锁扣避碰按API和安装关系核对，仅采用已核对的Flex邻位限制。
 - 速度API范围200–3000rpm（含边界）；停止用deactivate_shaker，不用set_shake_speed(0)。加热和震荡独立，停一个不会自动停另一个。
 - 温度：官方产品额定37–95℃；API<2.25校验37≤T≤95；API≥2.25的现有校验代码接受0≤T≤95。它没有主动制冷，低于环境温度不可达；25℃不是统一API下限，室温也不是固定25℃。请求低于环境或无法确认能否达到时说明边界，不改写为能制冷的模块、不等待一个已知不可达目标。
 - set_and_wait_for_temperature、set_and_wait_for_shake_speed阻塞到目标，随后仍维持温控/震荡；set_target_temperature和set_shake_speed在2.27+返回Task，需在依赖目标到达的步骤前等待。到速不等于已完成所需振荡时长，到温不等于已完成孵育。
@@ -25,7 +25,7 @@
 
 ## 其他模块的操作边界
 
-- Flex MagneticBlock为被动磁体，无engage/disengage；主动MagneticModule用于OT-2，不允许借其API控制Flex磁力架。主动模块高度参数及被移除height用法见其API，不猜磁吸时间。
+- Flex MagneticBlock为被动磁体，无engage/disengage；不得生成主动磁力模块控制API；磁吸时间按实验条件核对，不猜补。
 - AbsorbanceReader使用抓手开关盖；初始化前要求在协议中显式close_lid，即使开局外观已闭合也不能当冗余删除。initialize区分single/multi和波长列表；参考波长仅single，常规LED波长/定制硬件范围见API。读取前满足初始化和闭盖条件。模拟读数为0且不写CSV，不能当实测结果。
 - FlexStacker库存声明必须与实物相符；store/retrieve前核对当前取放位、库存及容量，具体同质耗材/盖/适配器限制见set_stored_labware_items等条目。人工fill/empty后按实际结果更新，不将先前库存继续当真。此处不自动新增模块经验流程。
 

@@ -16,7 +16,7 @@
 
 来源：维护版API速查表 v6；文档基线 API 2.30，2026-10-12。用户最新规则见SKILL.md及operations.md。
 
-垃圾处理与夹爪：加载约定 默认使用 protocol.load_trash_bin(location)，location 必填，允许第1或第3列的空槽位。实际位置按operations的硬件描述/回显确认确定；未提供时保留待核对，不按实验推荐推定D3已装垃圾桶。 仅特别说明时使用 protocol.load_waste_chute()；它无参数，固定占用D3。两者是硬件加载接口，不是耗材 load name。夹爪无需独立加载。 用户经验/生成规范：协议出现 drop_tip() 时须加载垃圾桶或垃圾槽；不将此项目规范表述为API所有调用方式的绝对限制。 安装层级及明确约束另查installation.txt；不擅自重新设计用户台面。
+垃圾处理与夹爪：客户称呼消歧与回显见operations的“用户称呼与后台身份/垃圾处理称呼”；不要用本段默认偏好猜实物。加载约定 默认使用 protocol.load_trash_bin(location)，location 必填，允许第1或第3列的空槽位。实际位置按operations的硬件描述/回显确认确定；未提供时保留待核对，不按实验推荐推定D3已装垃圾桶。 仅特别说明时使用 protocol.load_waste_chute()；它无参数，固定占用D3。两者是硬件加载接口，不是耗材 load name。夹爪无需独立加载。 用户经验/生成规范：协议出现 drop_tip() 时须加载垃圾桶或垃圾槽；不将此项目规范表述为API所有调用方式的绝对限制。 安装层级及明确约束另查installation.txt；不擅自重新设计用户台面。
 加载移液器、模块、垃圾桶、耗材和适配器。
 ProtocolContext.load_trash_bin ProtocolContext.load_waste_chute ProtocolContext.load_labware ProtocolContext.load_instrument ProtocolContext.load_module ProtocolContext.load_adapter Labware.load_labware HeaterShakerContext.load_adapter TemperatureModuleContext.load_adapter
 
@@ -31,7 +31,7 @@ load_trash_bin(location: DeckLocation) -> TrashBin
 
 参数名 类型 默认值 / 必填 传参方式 location DeckLocation 必填 位置或关键字
 
-官方参数含义、返回值与使用约束（已保存在本文件） Load a trash bin on the deck of a Flex. See Trash Bin for details. If you try to load a trash bin on an OT-2, the API will raise an error. Parameters: location ( DeckLocation )
+官方参数含义、返回值与使用约束（已保存在本文件） Load a trash bin on the deck of a Flex. See Trash Bin for details. Parameters: location ( DeckLocation )
           – The deck slot where the trash bin is. The
 location can be any unoccupied slot in column 1 or 3. If you try to load a trash bin in column 2 or 4, the API will raise an error.
 
@@ -84,7 +84,7 @@ later in the protocol. Parameters: load_name ( str )
           – A string to use for looking up a labware definition.
 You can find the load_name for any Opentrons-verified labware on the Labware Library . location ( Union[int, str, `OFF_DECK`] )
           – Either a deck slot ,
-like 1 , "1" , or "D1" , or the special value OFF_DECK . Changed in version 2.15: You can now specify a deck slot as a coordinate, like "D1" . label ( str | None , default: None )
+like "D1" , or the special value OFF_DECK . Changed in version 2.15: You can now specify a deck slot as a coordinate, like "D1" . label ( str | None , default: None )
           – An optional special name to give the labware. If specified,
 this is how the labware will appear in the run log, Labware Position
 Check, and elsewhere in the Opentrons App and on the touchscreen. namespace ( str | None , default: None )
@@ -173,12 +173,12 @@ with loaded_modules . Parameters: module_name ( str )
           – The name or model of the module.
 See Available Modules for possible values. location ( DeckLocation | None , default: None )
           – The location of the module. This is usually the name or number of the slot on the deck where you
-will be placing the module, like 1 , "1" , or "D1" . See Deck Slots . The Thermocycler is only valid in one deck location.
+will be placing the module, like "D1" . See Deck Slots . The Thermocycler is only valid in one deck location.
 You don't have to specify a location when loading it, but if you do,
-it must be 7 , "7" , or "B1" . See Thermocycler Module . Changed in version 2.15: You can now specify a deck slot as a coordinate, like "D1" . configuration ( str | None , default: None )
+it must be "B1" . See Thermocycler Module . Changed in version 2.15: You can now specify a deck slot as a coordinate, like "D1" . configuration ( str | None , default: None )
           – Configure a Thermocycler to be in the semi position.
 This parameter does not work. Do not use it. Removed in version 2.14: This parameter dangerously modified the protocol's geometry system,
-and it didn't function properly, so it was removed. Returns: ModuleTypes – The loaded and initialized module: a AbsorbanceReaderContext , FlexStackerContext , HeaterShakerContext , MagneticBlockContext , MagneticModuleContext , TemperatureModuleContext ,
+and it didn't function properly, so it was removed. Returns: ModuleTypes – The loaded and initialized module: a AbsorbanceReaderContext , FlexStackerContext , HeaterShakerContext , MagneticBlockContext , TemperatureModuleContext ,
 or ThermocyclerContext ,
 depending on what you requested with module_name . Changed in version 2.13: Added HeaterShakerContext return value. Changed in version 2.15: Added MagneticBlockContext return value. Changed in version 2.21: Added AbsorbanceReaderContext return value. Changed in version 2.23: Added FlexStackerModuleContext return value.
 
@@ -205,7 +205,7 @@ the adapter and adding it to the protocol) into one. This function returns the c
 later in the protocol. Parameters: load_name ( str )
           – A string to use for looking up a labware definition for the adapter.
 You can find the load_name for any standard adapter on the Opentrons Labware Library . location ( int | str | OffDeckType | ModuleFixtureLocation )
-          – Either a deck slot , like 1 , "1" , or "D1" , or the special value OFF_DECK . namespace ( str | None , default: None )
+          – Either a deck slot , like "D1" , or the special value OFF_DECK . namespace ( str | None , default: None )
           – The namespace that the labware definition belongs to.
 If unspecified, the API will automatically search two namespaces: "opentrons" , to load standard Opentrons labware definitions. "custom_beta" , to load custom labware definitions created with the Custom Labware Creator . You might need to specify an explicit namespace if you have a custom
 definition whose load_name is the same as an Opentrons standard

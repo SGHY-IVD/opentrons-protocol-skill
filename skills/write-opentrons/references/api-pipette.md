@@ -41,7 +41,7 @@ each tip rack, tips will be picked up in the order specified by the labware
 definition and Labware.wells() . To
 adjust where the sequence starts, use starting_tip . The exact position for tip pickup accounts for the length of the tip and how
 much the tip overlaps with the pipette nozzle. These measurements are fixed
-values on Flex, and are based on the results of tip length calibration on OT-2. Note API version 2.19 updates the tip overlap values for Flex. When updating a
+values on Flex. Note API version 2.19 updates the tip overlap values for Flex. When updating a
 protocol from 2.18 (or lower) to 2.19 (or higher), pipette performance
 should improve without additional changes to your protocol. Nevertheless, it
 is good practice after updating to do the following: Run Labware Position Check. Perform a dry run of your protocol. If tip position is slightly higher than expected, adjust the location parameter of pipetting actions to achieve the desired result. Parameters: location ( Location | Well | Labware | None , default: None )
@@ -110,7 +110,7 @@ which is a fixed position. Starting in API version 2.28, you can manually contro
 the drop location with alternate_drop_location . Parameters: location ( Location | Well | TrashBin | WasteChute | None , default: None )
           – Where to drop the tip. Changed in version 2.16 : Accepts TrashBin and WasteChute values. home_after ( bool | None , default: None )
           – Whether to home the pipette's plunger after dropping the tip.
-If not specified, defaults to True on an OT-2. When False , the pipette does not home its plunger. This can save a few
+When False , the pipette does not home its plunger. This can save a few
 seconds, but is not recommended. Homing helps the robot track the
 pipette's position. alternate_drop_location ( bool | None , default: None )
           – Whether to vary the tip drop position to prevent tips from piling up in
@@ -196,7 +196,7 @@ current position. rate ( float , default: 1.0 )
 pipette. Calculated as rate multiplied by flow_rate.aspirate .
 If not specified, defaults to 1.0. See Pipette Flow Rates . flow_rate ( float , default: None )
           – The absolute flow rate in µL/s. If flow_rate is specified, rate must not be set. end_location ( Location , default: None )
-          – Tells the Flex to move the pipette from the specified location to the specified end_location while aspirating liquid. When this argument is used, the location and end_location must both be a Location . Raises an error if used with an OT-2 pipette. movement_delay ( float , default: None )
+          – Tells the Flex to move the pipette from the specified location to the specified end_location while aspirating liquid. When this argument is used, the location and end_location must both be a Location . movement_delay ( float , default: None )
           – Time in seconds to delay after the pipette starts aspirating and before it begins moving
 from the location to the end_location . This option is only valid when using end_location . When this
 argument is used, the pipette will wait the specified time
@@ -247,7 +247,7 @@ all liquid leaves the tip. Measured in µL. The default value is None . When not
 default amount. For a table of default values, see Push Out After Dispense . flow_rate ( float , default: None )
           – The absolute flow rate in µL/s. If flow_rate is specified, rate must not be set. end_location ( `Location` , default: None )
           – Tells the Flex to move from the specified location to the specified end_location while dispensing liquid held in the pipette. When this
-argument is used, the location and end_location must both be a Location . Raises an error if used with an OT-2 pipette. movement_delay ( float , default: None )
+argument is used, the location and end_location must both be a Location . movement_delay ( float , default: None )
           – Time in seconds to delay after the pipette starts dispensing and before it begins moving from the location to the end_location .
 This option is only valid when using end_location . When this argument
 is used, the pipette will wait the specified time after the

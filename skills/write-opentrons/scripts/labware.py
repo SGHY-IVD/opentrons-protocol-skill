@@ -32,7 +32,7 @@ def read_index(path):
             or not isinstance(index.get('definitions'), list)
             or not all(isinstance(row, dict) for row in index['definitions'])):
         raise ValueError('unsupported index format or repository')
-    return index
+    return scope_index(index)
 
 
 def blob_sha(raw):
@@ -122,6 +122,25 @@ def default_version(policy, name, api):
     return 1
 
 
+def in_flex_scope(row):
+    """Local support scope, not a claim of verified Flex compatibility."""
+    return (row.get('schema_version') in (2, 3)
+            and not re.search(r'\bot[ -]?2\b', row.get('display_name', ''), re.I))
+
+
+def scope_index(index):
+    rows = [r for r in index['definitions'] if in_flex_scope(r)]
+    index['definitions'] = rows
+    index['source']['scope'] = 'modern definitions excluding explicitly OT-2-labelled items; Flex discovery scope, not compatibility approval'
+    index['counts'] = {
+        'definitions': len(rows), 'modern_definitions': len(rows), 'legacy_definitions': 0,
+        'modern_load_names': len({r['load_name'] for r in rows}),
+        'non_default_only_definitions': sum(r.get('non_default_only', False) for r in rows),
+        'ordinary_search_load_names': len({r['load_name'] for r in rows
+            if not r.get('non_default_only') and not r.get('hidden_from_ui')})}
+    return index
+
+
 def build_index(directory, tree, release, commit, retrieved_on, policy):
     if not re.fullmatch(r'v\d+\.\d+\.\d+', release):
         raise ValueError('use an explicit stable release tag, not edge/main/latest')
@@ -150,7 +169,7 @@ def build_index(directory, tree, release, commit, retrieved_on, policy):
         available = {r['version'] for r in rows if r.get('load_name') == name}
         row['non_default_only'] = not bool(defaults & available)
         row['hidden_from_ui'] = name in policy['hidden_from_ui']
-    return {
+    return scope_index({
         'schema': 1,
         'source': {'repository': REPOSITORY, 'release': release, 'commit': commit,
                    'definitions_tree': tree['sha'], 'retrieved_on': retrieved_on,
@@ -165,7 +184,7 @@ def build_index(directory, tree, release, commit, retrieved_on, policy):
                         and not r['non_default_only'] and not r['hidden_from_ui']})},
         'default_versions': policy['default_versions'],
         'definitions': rows,
-    }
+    })
 
 
 def normalize(text):
@@ -173,7 +192,7 @@ def normalize(text):
     return re.sub(r'[_\-/]+', ' ', text)
 
 
-def search(index, query, limit=10, include_legacy=False, include_hidden=False):
+def search(index, query, limit=10, include_hidden=False):
     tokens = normalize(query).split()
     if not tokens or limit < 1:
         raise ValueError('provide search words and a positive limit')
@@ -186,15 +205,13 @@ def search(index, query, limit=10, include_legacy=False, include_hidden=False):
         haystack = normalize(' '.join(fields))
         if all(token in haystack for token in tokens):
             snapshot_matches += 1
-            if row['schema_version'] == 1 and not include_legacy:
-                continue
             if not include_hidden and (row.get('non_default_only') or row.get('hidden_from_ui')):
                 continue
             rows.append(row)
     return {'status': 'candidates' if rows else 'filtered_matches' if snapshot_matches else 'not_found_in_snapshot',
             'source': index['source'], 'total': len(rows), 'returned': min(limit, len(rows)),
             'snapshot_matches': snapshot_matches, 'filtered_matches': snapshot_matches-len(rows),
-            'filter_notice': 'filtered rows need explicit --include-hidden/--include-legacy investigation; not an incompatibility judgment',
+            'filter_notice': 'filtered rows need explicit --include-hidden investigation; not an incompatibility judgment',
             'definitions': rows[:limit],
             'scope': 'index match only; confirm the actual item, software, geometry and installation'}
 
@@ -264,7 +281,6 @@ def main(argv=None):
     s = commands.add_parser('search', help='offline keyword search; candidates are not compatibility approval')
     s.add_argument('query')
     s.add_argument('--limit', type=int, default=10)
-    s.add_argument('--include-legacy', action='store_true')
     s.add_argument('--include-hidden', action='store_true', help='include UI-hidden and non-default/test rows for explicit investigation')
     g = commands.add_parser('get', help='offline exact identity lookup; does not silently select versions')
     g.add_argument('load_name')
@@ -298,7 +314,7 @@ def main(argv=None):
         else:
             index = read_index(args.index)
             if args.command == 'search':
-                result = search(index, args.query, args.limit, args.include_legacy, args.include_hidden)
+                result = search(index, args.query, args.limit, args.include_hidden)
             elif args.command == 'get':
                 result = get(index, args.load_name, args.version, args.schema, args.namespace, args.api)
             else:

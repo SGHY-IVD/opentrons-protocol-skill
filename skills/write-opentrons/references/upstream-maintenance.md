@@ -10,7 +10,7 @@
 |---|---|---|
 |API签名、行为与版本边界|api-versions.md、各api-*.md；模块成员覆盖见module-api-coverage.json|按明确目标API及对应软件发布源码核对；不根据API数字自行猜软件tag|
 |常用耗材、硬件型号与安装关系|catalog.txt、installation.txt|维护时定向核对公开文档、相关定义及实现；缺失不等于不兼容|
-|官方全量耗材名称索引|labware-index.json；catalog.txt为查询入口|scripts/labware.py从完整固定发布目录提取；只维护时重建，非逐次生成同步|
+|官方耗材Flex范围索引|labware-index.json；catalog.txt为查询入口|scripts/labware.py校验完整固定发布目录后按Flex范围提取；只维护时重建，非逐次生成同步|
 |自定义耗材构建/字段查证|custom-labware.md|命中按需分支后定向查官方schema/定义及厂家尺寸，不扩展设备API/安装基线|
 |单次任务所需孔几何|operations.md“耗材几何按需查询”|优先实际定义；缺失时按现有例外获取官方JSON，不自动写回技能|
 |官方流速、等待、硬件参数|相关JSON的sources/commit/blob_sha等现有字段及配套说明|保留原始来源与项目覆盖的区别；只更新受影响条目|
@@ -26,7 +26,7 @@
 python scripts/labware.py build --definitions <definitions目录> --tree <完整树JSON> --default-versions <默认版本策略.py> --listing-policy <getLabware.ts> --release <稳定tag> --commit <40位提交> --retrieved-on <日期> --output <临时索引JSON>
 ```
 
-build拒绝截断/删项/散列不符的Git树、缺文件、blob不符及路径/定义身份不一致；输出至新文件，维护者核对新增/删除、定义版本/schema、用途及常用项差异后才替换发布索引，不把部分下载当全量。普通检索排除旧格式、全局UI隐藏项和无公开默认版本的测试/草稿条目，保留完整源行及用途标记；不执行上游Python/TS，不用仅PD名单推断Python支持，也不泛化为schema 3禁用。不要把schema版本、定义version和机器人软件版本混为一谈；目标软件不匹配时按catalog核对对应版本，不自动升级。
+build拒绝截断/删项/散列不符的Git树、缺文件、blob不符及路径/定义身份不一致；输出至新文件，维护者核对新增/删除、定义版本/schema、用途及常用项差异后才替换发布索引，不把部分下载当全量。索引构建先校验全部源文件与完整Git树，再排除旧格式及明确OT-2条目；输出计数只代表该范围，不再宣称跨机器人全量。普通检索另排除全局UI隐藏项和无公开默认版本的测试/草稿条目，保留范围内源行及用途标记；不执行上游Python/TS，不用仅PD名单推断Python支持，也不泛化为schema 3禁用。不要把schema版本、定义version和机器人软件版本混为一谈；目标软件不匹配时按catalog核对对应版本，不自动升级。
 
 实际运行工具验收 `python -m unittest discover -s assets/review-regression -p test_labware.py`；核心路由变化另按项目维护规则执行协议回归。API及硬件名单在明确维护任务中同步并核对兼容范围，不由索引重建顺带扩展。
 

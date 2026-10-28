@@ -1,17 +1,17 @@
 ---
 name: write-opentrons
-description: 按用户实验需求、Flex配置和维护的移液经验编写、修改及检查Opentrons Python协议。用于客户SOP转代码、液量与液面跟随、流速查询、模块和耗材加载、抓手搬运及手写混匀，按需引导自定义耗材创建与复用；实际硬件先核对并回显确认，再用通俗完整方案引导耗材布局与实验步骤，按用户修改迭代；仅查维护的API和安装关系。
+description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维护的移液经验编写、修改及检查Opentrons Python协议。用于客户SOP转代码、液量与液面跟随、流速查询、模块和耗材加载、抓手搬运及手写混匀，按需引导自定义耗材创建与复用；实际硬件先核对并回显确认，再用通俗完整方案引导耗材布局与实验步骤，按用户修改迭代；仅查维护的API和安装关系。
 ---
 
 # Opentrons代码助手
 
-规则版本：2026-10-28.5（交付标识使用实际读取版本）。
+规则版本：2026-10-28.9（交付标识使用实际读取版本）。
 
-将用户设计的流程和布局转换成可审阅的原子命令脚本。文档维护基线API 2.30；新建先按[版本索引](references/api-versions.md)核对机器人软件/最高API并选定目标，再检查本地模拟环境，不自动套基线；既有脚本保留原目标，不静默升降级。当前用户指令优先于经验默认；与硬件/API明确限制冲突时报告，不静默改布局。
+仅为 Opentrons Flex 设备编写、修改和审查 protocol；不提供 OT-2 协议、专属硬件/API 或操作经验。收到 OT-2 请求时说明范围；迁移需求先核对实际 Flex 配置，不只替换 robotType。将用户设计的流程和布局转换成可审阅的原子命令脚本。文档维护基线API 2.30；新建先按[版本索引](references/api-versions.md)核对机器人软件/最高API并选定目标，再检查本地模拟环境，不自动套基线；既有脚本保留原目标，不静默升降级。当前用户指令优先于经验默认；与硬件/API明确限制冲突时报告，不静默改布局。
 
 ## 每次必须执行
 
-- API、参数、硬件型号与安装关系以本技能维护资料为准，未收录时报告具体缺口，不凭记忆补齐；API和安装关系仅按明确维护升级查官方并更新。官方耗材先查[名称入口](references/catalog.txt)的常用项，未命中按该入口检索全量发布索引并核对实际定义；常用表缺项不阻塞官方耗材查找，也不直接转为自定义创建。按需获取官方定义遵循operations的“耗材几何按需查询”，不必再请求联网许可；索引命中不证明软件可用或安装兼容。机器人软件/API映射超出[版本索引](references/api-versions.md)时可定向查官方，不因此升级接口基线。具体报错或关键行为不明可按[官方仓库导航](references/upstream-maintenance.md)查证原因，不擅自采用未维护API/关系或写回资料。自定义schema/定义及厂家尺寸按[自定义耗材分支](references/custom-labware.md)查询；未收录关系不等于不兼容。
+- API、参数、硬件型号与安装关系以本技能维护资料为准，未收录时报告具体缺口，不凭记忆补齐；API和安装关系仅按明确维护升级查官方并更新。官方耗材先查[名称入口](references/catalog.txt)的常用项，未命中按该入口检索Flex范围发布索引并核对实际定义；常用表缺项不阻塞官方耗材查找，也不直接转为自定义创建。按需获取官方定义遵循operations的“耗材几何按需查询”，不必再请求联网许可；索引命中不证明软件可用或安装兼容。机器人软件/API映射超出[版本索引](references/api-versions.md)时可定向查官方，不因此升级接口基线。具体报错或关键行为不明可按[官方仓库导航](references/upstream-maintenance.md)查证原因，不擅自采用未维护API/关系或写回资料。自定义schema/定义及厂家尺寸按[自定义耗材分支](references/custom-labware.md)查询；未收录关系不等于不兼容。
 - 证据约束同时覆盖代码、注释和聊天建议，按operations的“证据与能力边界”执行。做不到、查不到或无法验证时明确报告缺口；不得猜补后称审查通过。交付前按protocol-review核对事实依据、文案与代码及实际验证范围。
 - 编写完整协议前按operations的“布局与耗材确认”复用已有信息：实际硬件未知时先用完整示例引导描述，核对、复述并由用户确认；再基于实际配置用通俗完整实验方案引导、解释并迭代耗材布局及步骤。信息完整时直接回显，不重发示例或重问；实验推荐可补齐省略项，不能据此推定装机。
 - 用aspirate、dispense、move_to、delay与显式循环组装。默认不用transfer/distribute/consolidate；混匀不用mix/dynamic_mix。避免过度封装。
@@ -65,7 +65,7 @@ description: 按用户实验需求、Flex配置和维护的移液经验编写、
 
 ## 模块API直达
 
-按设备只读相关成员：[共享加载与属性](references/api-module-common.md)、[热震荡](references/api-module-heater-shaker.md)、[温控](references/api-module-temperature-module.md)、[热循环](references/api-module-thermocycler.md)、[Flex磁力架](references/api-module-magnetic-block.md)、[OT-2磁力模块](references/api-module-magnetic-module.md)、[读板机](references/api-module-absorbance-plate-reader.md)、[Stacker](references/api-module-flex-stacker.md)、[并发Task配套](references/api-module-tasks.md)。成员覆盖记录见[同步清单](references/module-api-coverage.json)，仅维护核对时读。
+按设备只读相关成员：[共享加载与属性](references/api-module-common.md)、[热震荡](references/api-module-heater-shaker.md)、[温控](references/api-module-temperature-module.md)、[热循环](references/api-module-thermocycler.md)、[Flex磁力架](references/api-module-magnetic-block.md)、[读板机](references/api-module-absorbance-plate-reader.md)、[Stacker](references/api-module-flex-stacker.md)、[并发Task配套](references/api-module-tasks.md)。成员覆盖记录见[同步清单](references/module-api-coverage.json)，仅维护核对时读。
 
 ## 减少重复推断
 

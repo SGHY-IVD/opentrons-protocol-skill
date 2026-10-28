@@ -1,0 +1,433 @@
+{
+  "version": "2026-10-28.8",
+  "method": "Independent context; reviewed current changes and 50 relevant cases without expected answers or historical results.",
+  "review": {
+    "results": [
+      {
+        "id": "R17",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 3,
+            "reason": "盖已打开且delay不改变盖状态，第二次open_lid冗余。"
+          }
+        ]
+      },
+      {
+        "id": "R18",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R47",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 2,
+            "reason": "用户未指定或授权耗材布局，不能称按用户指定且可直接运行。"
+          }
+        ]
+      },
+      {
+        "id": "R48",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R49",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "仅授权布局却更换用户明确指定板型。"
+          }
+        ]
+      },
+      {
+        "id": "R50",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R51",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 2,
+            "reason": "板型、槽位和水相来自已说明推荐，不能写成用户逐项指定。"
+          }
+        ]
+      },
+      {
+        "id": "R52",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R65",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "flex_8channel_200未收录且不能用用户称呼证明型号存在，随后核验完成声明亦无依据。"
+          }
+        ]
+      },
+      {
+        "id": "R66",
+        "status": "unresolved",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "型号还不能映射为受支持配置，相关实机步骤未就绪；缺口报告本身合规。"
+          }
+        ]
+      },
+      {
+        "id": "R67",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "资料未收录不能证明实物不存在；安装及接口仍无依据。"
+          }
+        ]
+      },
+      {
+        "id": "R68",
+        "status": "unresolved",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "模块X的名称、安装和接口无依据，受影响步骤仍未决；未断言实物不存在。"
+          }
+        ]
+      },
+      {
+        "id": "R69",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "描述示例和安排授权不能证明实际左右移液器及垃圾装置已安装确认。"
+          }
+        ]
+      },
+      {
+        "id": "R70",
+        "status": "unresolved",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "实际硬件未知，暂不能进入实机耗材布局；引导措辞正确。"
+          }
+        ]
+      },
+      {
+        "id": "R71",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R72",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "已有完整描述应直接核对回显，强制重填模板构成重复询问。"
+          }
+        ]
+      },
+      {
+        "id": "R88",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "没有自定义耗材迹象时不应在实际硬件引导前强制展开自定义分支。"
+          }
+        ]
+      },
+      {
+        "id": "R89",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R90",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R91",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "孔数相同不能证明不同货号为同款或可互换。"
+          }
+        ]
+      },
+      {
+        "id": "R92",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "模糊照片无法支持准确尺寸及直接执行声明。"
+          }
+        ]
+      },
+      {
+        "id": "R93",
+        "status": "unresolved",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "尺寸关键输入不足，定义定位尚未完成；如实保留了缺口。"
+          }
+        ]
+      },
+      {
+        "id": "R102",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "甲板固定不证明下探、枪头或抓手搬运适用性。"
+          }
+        ]
+      },
+      {
+        "id": "R103",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "用户已明确选内嵌交付且数据完备，不能强制重选而阻塞生成。"
+          }
+        ]
+      },
+      {
+        "id": "R114",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "索引命中与模型匹配不构成所选模块/适配器安装兼容证据。"
+          }
+        ]
+      },
+      {
+        "id": "R115",
+        "status": "unresolved",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "所选模块与适配器安装关系无证据，受影响实机步骤仍未就绪。"
+          }
+        ]
+      },
+      {
+        "id": "R120",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "首次完整描述和布局授权不构成回显后确认，未展示补齐方案也不能标已确认或直接上机。"
+          }
+        ]
+      },
+      {
+        "id": "R121",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R122",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "关键操作参数摘要应实际出现在聊天正文，附件指引不能代替。"
+          }
+        ]
+      },
+      {
+        "id": "R123",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R124",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "实际Flex设备却使用OT-2平台标识。"
+          }
+        ]
+      },
+      {
+        "id": "R125",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "p300_single_gen2为OT-2移液器，不可作为已确认Flex硬件加载。"
+          }
+        ]
+      },
+      {
+        "id": "R126",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "Magnetic Module GEN2及其升磁动作属于OT-2范围，不是Flex磁力架。"
+          }
+        ]
+      },
+      {
+        "id": "R127",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R128",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R129",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R130",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "Flex磁力架没有engage/disengage升降磁动作。"
+          }
+        ]
+      },
+      {
+        "id": "R131",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R132",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R133",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "捏造未维护独立24孔adapter，并把整套组合再次叠放会错误重复层级。"
+          }
+        ]
+      },
+      {
+        "id": "R134",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "实物铝块+管与普通tuberack定义不匹配。"
+          }
+        ]
+      },
+      {
+        "id": "R135",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R136",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "唯一维护的Flex适用型号且无冲突时应在回显说明映射，无需强问GEN。"
+          }
+        ]
+      },
+      {
+        "id": "R137",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "明确GEN1存在冲突，不能自动改GEN2并声称硬件核验通过。"
+          }
+        ]
+      },
+      {
+        "id": "R138",
+        "status": "unresolved",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "D3可对应两种装置且当前类型未明，已正确提出最小消歧，加载仍未决。"
+          }
+        ]
+      },
+      {
+        "id": "R139",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R140",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "已明确且确认trash bin类型，无冲突时重复二选一无必要。"
+          }
+        ]
+      },
+      {
+        "id": "R141",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "明确waste chute在C3是位置冲突，应核对而不是擅自换成trash bin。"
+          }
+        ]
+      },
+      {
+        "id": "R142",
+        "status": "pass",
+        "findings": []
+      },
+      {
+        "id": "R143",
+        "status": "issues",
+        "findings": [
+          {
+            "line": 1,
+            "reason": "容量相同不足以匹配品牌、型号和盖型未知的实物。"
+          }
+        ]
+      }
+    ]
+  },
+  "manual_comparison": {
+    "status_matches": 50,
+    "exact_verdict_location_matches": 47,
+    "accepted_grouped_locations": {
+      "R47": "line 2 groups unauthorized consumable/layout adoption with unsupported executable claim; same causality as lines 1/2",
+      "R65": "line 1 explicitly includes unsupported model and subsequent unsupported verification claim from line 2",
+      "R133": "line 1 explicitly includes invented adapter and duplicate composition from line 2"
+    },
+    "reasons": "Compared all issue/unresolved findings to expected causes, dependencies and scope; no unresolved substantive mismatch in selected cases."
+  }
+}

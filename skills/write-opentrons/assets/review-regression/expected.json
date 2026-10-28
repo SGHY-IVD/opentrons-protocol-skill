@@ -1002,6 +1002,270 @@
       "status": "pass",
       "findings": [],
       "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R124": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "平台明确为OT-2，超出Flex范围"
+        }
+      ],
+      "rule": "SKILL.md；references/protocol-review.md Flex设备范围审查"
+    },
+    "R125": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "OT-2专属移液器加载名不能用于Flex"
+        }
+      ],
+      "rule": "SKILL.md；references/protocol-review.md Flex设备范围审查"
+    },
+    "R126": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "主动磁力模块及engage不属于Flex磁力架"
+        }
+      ],
+      "rule": "SKILL.md；references/protocol-review.md Flex设备范围审查"
+    },
+    "R127": {
+      "status": "pass",
+      "findings": [],
+      "rule": "SKILL.md；references/protocol-review.md Flex设备范围审查"
+    },
+    "R128": {
+      "status": "pass",
+      "findings": [],
+      "rule": "SKILL.md；references/protocol-review.md Flex设备范围审查"
+    },
+    "R129": {
+      "status": "pass",
+      "findings": [],
+      "rule": "SKILL.md；references/protocol-review.md Flex设备范围审查"
+    },
+    "R130": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "注释中的主动磁力模块操作经验混入，Flex磁力架为被动磁体"
+        }
+      ],
+      "rule": "SKILL.md；references/protocol-review.md Flex设备范围审查"
+    },
+    "R131": {
+      "status": "pass",
+      "findings": [],
+      "rule": "SKILL.md；references/protocol-review.md Flex设备范围审查"
+    },
+    "R132": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R133": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "捏造独立铝块名并将已有铝块+管组合再次叠加，应该在模块上一次load_labware"
+        },
+        {
+          "line": 2,
+          "reason": "组合耗材已包含铝块，不得在另一个adapter上重复加载"
+        }
+      ],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R134": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "普通管架定义不等于温控铝块+管组合，不能仅因孔数和容量相同替换"
+        }
+      ],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R135": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R136": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "唯一已维护适用型号可在回显中说明映射，不应把GEN问答设为额外门槛"
+        }
+      ],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R137": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "明确的代际冲突须核对，不能静默换新或虚称装机核验通过"
+        }
+      ],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R138": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "准确保留歧义但装机类型仍未知，相关加载未就绪"
+        }
+      ],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R139": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R140": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "已有明确且一致的实物和英文类型，不需再次二选一"
+        }
+      ],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R141": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "waste chute位置冲突不应靠替换类型消除，应指出D3限制并核对"
+        }
+      ],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R142": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R143": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "容量不能证明管型同款，须补充实际品牌/型号及必要特征，不能默认NEST"
+        }
+      ],
+      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+    },
+    "R144": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+    },
+    "R145": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "前后方向反了；默认A后D前、表中A在上D在下"
+        }
+      ],
+      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+    },
+    "R146": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "未说明不能变成已知空位或可直接使用的位置"
+        }
+      ],
+      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+    },
+    "R147": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+    },
+    "R148": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "把加载锚点当全部实体占位，A1已被同一热循环占用"
+        }
+      ],
+      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+    },
+    "R149": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "未装夹具不能显示成已确认可用位置，且第4列不能直接移液"
+        }
+      ],
+      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+    },
+    "R150": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+    },
+    "R151": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "未采用的建议须标拟放，图表不能制造客户已确认依据"
+        }
+      ],
+      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+    },
+    "R152": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "图表不证明夹具兼容，必须按实际安装关系保留冲突"
+        }
+      ],
+      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+    },
+    "R153": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "布局未变不应机械重印或新增整套确认门槛"
+        }
+      ],
+      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+    },
+    "R154": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 布局回显的文字示意；references/api-layout.md load_instrument"
+    },
+    "R155": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "96通道占双挂载，不能将另一侧当空位再装一台移液器"
+        }
+      ],
+      "rule": "references/operations.md 布局回显的文字示意；references/api-layout.md load_instrument"
     }
   }
 }
