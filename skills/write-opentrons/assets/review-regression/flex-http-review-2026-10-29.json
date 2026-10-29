@@ -1,0 +1,313 @@
+{
+  "results": [
+    {
+      "id": "R47",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "未获授权即自行选择板型和D1槽位；题内既无用户指定也无已采用的推荐依据。"
+        },
+        {
+          "line": 2,
+          "reason": "将自行安排误称为用户指定，并在配置依据未确认时宣称可直接运行。"
+        }
+      ]
+    },
+    {
+      "id": "R48",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R49",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户只授权安排槽位，明确指定Corning 330µL板；擅自换为NEST 2mL深孔板超出授权。"
+        }
+      ]
+    },
+    {
+      "id": "R50",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R51",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "板型、D1及水相来自已说明后采用的推荐，并非用户逐项明确指定；来源声明不实。"
+        }
+      ]
+    },
+    {
+      "id": "R52",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R69",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "示例和“你帮我安排”不证明实物已安装，也不构成实际硬件回显确认；不能据此按该设备进入实机实验布局。"
+        }
+      ]
+    },
+    {
+      "id": "R70",
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "已正确保留未知并请求实际硬件说明，但题内仍无实际左右移液器和固定设备的确认依据；实机方案尚未就绪进入具体实验布局。"
+        }
+      ]
+    },
+    {
+      "id": "R71",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R72",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "首次描述已完整且已核对，应直接回显复述，不强制用户按模板重填已知信息。"
+        }
+      ]
+    },
+    {
+      "id": "R73",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本地SDK上限不能代替机器人上限；已确认机器人9.0.0对应最高API2.28，新建默认目标应为2.28。"
+        }
+      ]
+    },
+    {
+      "id": "R74",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R75",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "机器人9.0.0最高支持API2.28；拒绝安装模拟器不改变设备范围，不能选2.30。"
+        }
+      ]
+    },
+    {
+      "id": "R76",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R77",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "检测仅覆盖助手执行环境，不能据此断言用户电脑没有安装opentrons。"
+        }
+      ]
+    },
+    {
+      "id": "R78",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R79",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "尚无安装授权；环境检查不能直接执行pip安装，应先说明可选安装并由用户选择。"
+        }
+      ]
+    },
+    {
+      "id": "R80",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R85",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "设备上限2.31不证明技能已维护或实机验证2.31；应如实说明基线2.30及资料范围差异，不能直接采用未维护目标。"
+        }
+      ]
+    },
+    {
+      "id": "R86",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R120",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "首次完整硬件描述及布局授权不等于回显确认，也不采用尚未展示的实验补齐方案；没有有效确认时不能宣称全部已确认、完整通过并可直接上机。"
+        }
+      ]
+    },
+    {
+      "id": "R121",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R122",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "完整交付须在实际聊天正文给出关键孔参数摘要；正确附件不能替代正文要求。"
+        }
+      ]
+    },
+    {
+      "id": "R123",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R174",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "内置垃圾桶是固定装置，不是move_labware可抓取搬运的Labware对象；不能用抓手把垃圾桶本体从C3搬到D3。"
+        }
+      ]
+    },
+    {
+      "id": "R175",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R176",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "自动丢弃整块孔板需要已确认的外置垃圾槽及抓手条件；C3内置垃圾桶不能作为该自动丢弃去向，且人工移出替代方案尚未确认。"
+        }
+      ]
+    },
+    {
+      "id": "R177",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R178",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R179",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户未要求touch_tip，也无相关优化反馈；按需功能不能为介绍能力而自动插入普通移液。"
+        }
+      ]
+    },
+    {
+      "id": "R180",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R181",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "现有SDK已支持明确沿用的API2.28及本次接口，机器人较新不构成必须升级SDK的理由，也不应阻止继续编写或模拟。"
+        }
+      ]
+    },
+    {
+      "id": "R182",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本次没有发现或读取设备的真实结果；工具可用不支持“已检测本地连接、已读取配置”的声明。"
+        }
+      ]
+    },
+    {
+      "id": "R183",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R184",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "可达Flex及软件保存布局不等于本次指定设备或实物已核对；未经用户确认不能自动采用为已确认配置。"
+        }
+      ]
+    },
+    {
+      "id": "R185",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R186",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户只授权编写及读取配置，未授权向设备写入该文件；confirmed=True不能替代实际上传授权。"
+        }
+      ]
+    },
+    {
+      "id": "R187",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R188",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "上传成功且分析pending只能说明文件已发送、分析待完成；既不能称分析通过，也无创建run或启动实验的依据。"
+        }
+      ]
+    },
+    {
+      "id": "R189",
+      "status": "pass",
+      "findings": []
+    }
+  ]
+}

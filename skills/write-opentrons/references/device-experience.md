@@ -17,6 +17,24 @@
 |---|---|---|
 |Flex移液器|[状态与体积核算](pipette-mechanics.md)：空气/液体占用、活塞位置、模式、排查；数值见该文引用的源码快照|已确认的默认规范仍在[操作规则](operations.md)相关章节；按需动作如touch_tip/沿壁同处维护，原子结构见patterns.md；储液槽部分喷嘴的主动确认、Y偏移与示例见[储液槽定位](reservoir-partial-nozzles.md)；不另复制一套|
 |热震荡、温控、热循环及其他已收录模块|[模块机制与硬条件](module-conditions.md)对应设备；接口查api-modules.md|[模块装载、状态与收尾经验](module-practices.md)：重点覆盖热震荡/热循环/温控，其余设备不自动套用|
+|Flex协议等待|接口与分析期文案限制见[流程API](api-flow.md)|[操作规则](operations.md)“长孵育分段提示”为默认规范；本页只保留结构示例|
+
+## 长孵育分段提示
+
+来源：用户2026-10-28确认采用的默认方式，非官方要求，尚未实机验证。适用范围与选择顺序唯一见[操作规则](operations.md)“长孵育分段提示”；这里只展示先选择实际总时长、再分段的结构，不设实验时长或试运行缩短值。
+
+```python
+# dry_run已转为bool；两个非负有限秒数由本次实验/试运行方案确定，不照抄未定义变量。
+incubation_seconds = dry_run_incubation_seconds if dry_run else normal_incubation_seconds
+elapsed_seconds = 0.0
+while elapsed_seconds < incubation_seconds:
+    wait_seconds = min(300, incubation_seconds - elapsed_seconds)
+    protocol.delay(seconds=wait_seconds)
+    elapsed_seconds += wait_seconds
+    protocol.comment(f"孵育等待：{elapsed_seconds / 60:g}/{incubation_seconds / 60:g} 分钟")
+```
+
+comment文字在分析期算好，这里表示已执行分段对应的计划等待量，不是实时时钟、自动刷新的倒计时或温度/反应完成证明；不对所有客户端是否另有计时显示作统一断言。接口事实于2026-10-28核对官方[ProtocolContext.comment / delay](https://docs.opentrons.com/python-api/reference/protocols/)，未升级API维护基线。
 
 ## 后续如何沉淀
 

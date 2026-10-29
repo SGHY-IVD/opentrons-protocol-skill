@@ -33,6 +33,7 @@ comment(msg: str) -> None
 so comment() can't communicate real-time information during the
 actual protocol run.
 
+本技能的文案边界见[操作规则](operations.md)“源码说明与运行文案”；comment()是运行日志消息，不是Python源码的#注释。
 
 ## ProtocolContext.pause
 
@@ -65,6 +66,7 @@ delay(seconds: float = 0, minutes: float = 0, msg: str | None = None) -> None
           – The time to delay in seconds. minutes ( float , default: 0 )
           – The time to delay in minutes. If both seconds and minutes are specified, they will be added together.
 
+本技能的长孵育默认写法见[操作规则](operations.md)“长孵育分段提示”；结构示例见[设备经验入口](device-experience.md)。这是用户生成规范，不改变本接口契约或吸排液等待规则。
 
 ## ProtocolContext.set_rail_lights
 

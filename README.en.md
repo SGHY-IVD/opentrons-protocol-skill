@@ -9,14 +9,15 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
 
 
-## Publication: 2026-10-28.9
+## Publication: 2026-10-29.2
 
-- Publishes cumulative updates 2026-10-28.6–.9. The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version; the maintained API baseline remains 2.30.
-- Limits protocol authoring, modification, and review to **Opentrons Flex**. Removes OT-2-specific modules/APIs and index entries, and adds contamination checks. The scoped official index retains 285 modern definitions and 155 load names, with 127 load names in ordinary search; index inclusion is not verified compatibility.
-- Adjusts three 96-channel aqueous flow-rate curves for both standard and filtered tips, using bounded interpolation without extrapolation. Adds explicit Temperature Module relationships for six 24-well block-and-tube combinations, retaining their official single-load semantics.
-- Reduces unnecessary terminology questions: uniquely mapped Flex modules do not require a separate GEN question; waste hardware is resolved from identity and location, with D3 alone insufficient. Configuration echoes default to a head-configuration table and a compact deck view, optional details for complex stacks, and a slot list when tables cannot render. No additional confirmation round is introduced.
-- The suite contains 155 cases. Recorded independent reviews cover 131 Flex-scope cases, 50 terminology/24-well cases, and 32 layout cases, with original differences and follow-up checks retained. Publication checks cover all 155 fixture structures/snippets and 20 labware-tool tests; this is not a new full 155-case semantic blind review. See the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md).
-- Delay data, atomic pipetting examples, and the API baseline are unchanged. No official protocol simulation or physical validation was performed.
+- Publishes cumulative updates 2026-10-28.10–.13 and 2026-10-29.1–.2. The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version; the maintained Python protocol API baseline remains 2.30.
+- Adds an [optional protocol skeleton](skills/write-opentrons/assets/protocol-skeleton.py) showing the official structure and routing to actual rules. Sections, layout, and processing logic remain task-dependent, without mandatory template conformance. Source comments address script authors; runtime messages address laboratory operators. Actual skill version, overrides, and validation declarations remain required by the existing rules.
+- Long blocking incubations default to segments of at most five minutes after selecting the actual normal/dry-run duration, with brief cumulative progress messages and a remainder-only final wait. Module holds, temperature waits, and concurrent Task waits are not automatically rewritten.
+- Standardizes internal trash-bin versus external waste-chute terminology and identifies the chute and gripper required for automatic plate/rack disposal. Improves optional setup/upgrade guidance for missing or incompatible local simulation environments and contextual advice for residual liquid or exterior droplets, preserving existing authorization boundaries.
+- Adds [optional device tools](skills/write-opentrons/references/flex-http.md): mDNS discovery, explicit IP/address probes, identity and saved-configuration reads, authorized protocol/labware-JSON uploads, and device-side analysis. These are independent of the local Opentrons SDK and do not automatically select a robot, upload, or start an experiment. Saved configuration still needs physical confirmation. HTTP API version 4 is maintained separately from the Python protocol API.
+- The suite contains 189 cases. Publication checks rerun all fixture structures/snippets, 20 labware-tool tests, and 28 HTTP/mDNS-tool tests. Historical scoped independent reviews and original differences remain in the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md); this is not a new full 189-case semantic blind review. Real-library mDNS tests use a synthetic local service. No real Flex connection/upload, official protocol simulation, or physical validation was performed.
+- Existing Flex scope, flow-rate/delay data, and Markdown layout echoes are preserved. Post-installation update choices remain part of installation and maintenance, outside the ordinary skill workflow.
 
 ## What it helps with
 
@@ -27,6 +28,7 @@ Provide the experimental goal, existing workflow, and actual equipment. The firs
 - Add liquid visualization, module operations, gripper moves, dry-run and tip-reuse parameters.
 - Review capacity, residual liquid, plunger preparation, motion paths, occupancy, and module states.
 - Choose a targeted or full review based on the impact of a modification.
+- Optionally discover reachable Flex devices, read configuration, and send scripts or inspect device-side analysis with user authorization.
 
 This skill serves **Opentrons Flex only**. It does not provide OT-2 protocols or OT-2-specific module APIs. Shared interfaces, hardware, and official definition fields applicable to Flex are retained.
 
@@ -42,7 +44,7 @@ git clone https://github.com/SGHY-IVD/opentrons-protocol-skill.git
 
 After installation, explicitly ask the assistant to use `write-opentrons` and supply your workflow and layout. If your client does not support native skills, a file-capable assistant can read `skills/write-opentrons/SKILL.md` and follow its resource links. This is a manual workflow, not native installation.
 
-The flow-rate, delay, and regression helper scripts require Python 3 and use its standard library. Executing generated protocols requires a matching Opentrons environment. The assistant needs access to the referenced files and tools; unavailable resources must be reported rather than replaced with guessed values.
+The flow-rate, delay, and regression helper scripts require Python 3; these helpers and the HTTP tool use its standard library. Optional mDNS discovery requires Python 3.10+ and a separate dependency; see the [device-tool reference](skills/write-opentrons/references/flex-http.md). Executing generated protocols requires a matching Opentrons environment. The assistant needs access to the referenced files and tools; unavailable resources must be reported rather than replaced with guessed values.
 
 The core skill resources are currently primarily in Chinese. Requests may be in Chinese or English. Project documentation is bilingual; compatibility with every skill-capable client has not been individually tested.
 
@@ -66,7 +68,7 @@ Example request:
 
 You do not need to supply every parameter or follow a fixed form. If actual equipment is unclear, a complete example shows how to describe pipettes, modules/adapters, waste hardware, and staging areas; the assistant checks and restates the real configuration for confirmation. Omitted hardware is not inferred from the example. The next stage explains a complete experiment plan in plain language, including reasons, omissions, and suggested fixes, for you to edit freely. Unchanged experimental details may follow disclosed recommendations; confirmed equipment is preserved. Complete input can be reflected in one integrated plan, and valid confirmation within the current task is reused without a mandatory extra approval round when generation is explicitly requested. Unspecified initial reagent volume is visualized as calculated demand, with separate advice on additional loading volume.
 
-Robot software determines the target API instead of an unconditional 2.30 default. Higher-than-maintained limits are explained with a maintained target recommendation. A read-only probe then separates local package version, SDK limit, and simulator entry points; cloud results are not user-computer results, and an old simulator does not silently lower the protocol target. Simulation setup is optional. Hardware persistence also requires user consent and host support; historical configuration is reflected as a known example for current confirmation rather than assumed unchanged.
+Robot software determines the target API instead of an unconditional 2.30 default. Higher-than-maintained limits are explained with a maintained target recommendation. A read-only probe then separates local package version, SDK limit, and simulator entry points; cloud results are not user-computer results, and an old simulator does not silently lower the protocol target. When the simulation environment is missing or incompatible, the assistant explains the benefits and can help install/upgrade and recheck it with user consent and suitable execution access. Declining setup still permits protocol writing with truthful untested status. Hardware persistence also requires user consent and host support; historical configuration is reflected as a known example for current confirmation rather than assumed unchanged.
 
 Delivery should include the protocol, the rule version actually used, key operation parameters, and truthful review results. A skill-use label is not proof of review; simulation must not be claimed unless it was actually run.
 
@@ -87,7 +89,8 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 
 - [`skills/write-opentrons/SKILL.md`](skills/write-opentrons/SKILL.md): skill entry point.
 - `skills/write-opentrons/references/`: APIs, parameter tables, rules, and examples.
-- `skills/write-opentrons/scripts/`: flow-rate, delay, and regression tools.
+- `skills/write-opentrons/scripts/`: flow-rate, delay, regression, and optional device-connection tools.
+- `skills/write-opentrons/assets/protocol-skeleton.py`: optional protocol-structure guide.
 - `skills/write-opentrons/assets/review-regression/`: cases, expected results, and recorded reviews.
 - `skills/write-opentrons/assets/labware/`: custom definitions and limitations, matched to the actual labware.
 - `skills/write-opentrons/agents/`: client presentation metadata.
@@ -96,7 +99,7 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 
 Initial public snapshot: **rule version 2026-10-21.9, maintained API documentation baseline 2.30**. This is a maintained baseline, not a promise to track the latest upstream version. Explicit older targets are checked against the version index rather than silently upgraded.
 
-The regression set currently contains 155 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, variable-volume/CSV domains, user-input verification, the two-stage intake boundaries, robot/API and local-environment separation, historical hardware confirmation, custom-labware and official-index boundaries, confirmation evidence, in-chat parameter summaries, Flex scope, 24-well temperature combinations, terminology resolution, and text layout echoes. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
+The regression set currently contains 189 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, variable-volume/CSV domains, user-input verification, the two-stage intake boundaries, robot/API and local-environment separation, historical hardware confirmation, custom-labware and official-index boundaries, confirmation evidence, in-chat parameter summaries, Flex scope, 24-well temperature combinations, terminology resolution, text layout echoes, protocol structure and comment audiences, normal/dry-run incubation timing, contextual advice, and evidence/authorization boundaries for device discovery, reads, uploads, and analysis. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py

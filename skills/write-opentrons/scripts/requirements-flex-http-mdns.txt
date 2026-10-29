@@ -1,0 +1,2 @@
+# Optional, Python >=3.10: only discover needs this; no Opentrons SDK dependency.
+zeroconf==0.151.5

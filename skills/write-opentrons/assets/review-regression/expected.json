@@ -1266,6 +1266,271 @@
         }
       ],
       "rule": "references/operations.md 布局回显的文字示意；references/api-layout.md load_instrument"
+    },
+    "R156": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "apiLevel重复声明，应择一保留；本技能新建建议统一requirements，但不把另一合法位置判为无效"
+        }
+      ],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R157": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R158": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R159": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "普通协议不在顶层自建上下文并手动执行run，混入了交互执行流程"
+        }
+      ],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R160": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "空容器不等于完整内嵌定义，声明无依据"
+        }
+      ],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R161": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "SDK内部相对导入不应复制为独立客户protocol依赖"
+        }
+      ],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R162": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "助手导入成功不证明机器人依赖/硬件接口/安装兼容，包装或导入不构成支持证据"
+        }
+      ],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R163": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "数据区相对metadata的位置是组织建议，不是该条件下的官方禁止"
+        }
+      ],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R164": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R165": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "不能从模板或语法检查复制完整审查/模拟通过结论"
+        }
+      ],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R166": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "移除模板标记不等于已实现真实实验，空run不能支持完整通过声明"
+        }
+      ],
+      "rule": "references/api-types.md 协议组成与骨架/依赖与执行边界；references/protocol-review.md"
+    },
+    "R167": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-types.md 协议组成与骨架；官方v10.0.0 parse.py"
+    },
+    "R168": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+    },
+    "R169": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前dry_run应选20秒，本行仍用正式720秒；分段本身不自动缩短总时长"
+        }
+      ],
+      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+    },
+    "R170": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "末段仍等300秒，累计900秒超过所选720秒；末段应只等120秒，提示封顶不能修复多等的时间"
+        }
+      ],
+      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+    },
+    "R171": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+    },
+    "R172": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 7,
+          "reason": "实际试运行只等20秒，提示总时长仍用正式720秒；分母须与所选incubation_seconds一致"
+        }
+      ],
+      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+    },
+    "R173": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+    },
+    "R174": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "TrashBin是台面固定装置，不是move_labware的Labware搬运对象；人工可调安装位置不构成抓手搬运能力"
+        }
+      ],
+      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+    },
+    "R175": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+    },
+    "R176": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本技能整块孔板自动丢弃采用外置垃圾槽及抓手；不能用内置垃圾桶替代，应核对所需配置或讨论人工移出"
+        }
+      ],
+      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+    },
+    "R177": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+    },
+    "R178": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+    },
+    "R179": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "仅为介绍功能而自动加入touch_tip，违背按需启用；经验建议不构成采用授权"
+        }
+      ],
+      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+    },
+    "R180": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+    },
+    "R181": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前SDK已支持所选API2.28，不能仅因机器人较新或SDK非最新强制升级并阻塞；机器人上限与所选目标仍分别判断"
+        }
+      ],
+      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+    },
+    "R182": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "仅有工具能力而无真实读取结果，不能声称已检测、已连接或已获取本地配置"
+        }
+      ],
+      "rule": "references/flex-http.md；references/operations.md；原有证据、配置确认与交付规则"
+    },
+    "R183": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/flex-http.md；references/operations.md；原有证据、配置确认与交付规则"
+    },
+    "R184": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "可访问设备不自动成为本次目标，已保存配置不等于实物核对；应并入原有回显确认，不能直接当作已确认"
+        }
+      ],
+      "rule": "references/flex-http.md；references/operations.md；原有证据、配置确认与交付规则"
+    },
+    "R185": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/flex-http.md；references/operations.md；原有证据、配置确认与交付规则"
+    },
+    "R186": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "编写或读取配置不构成上传授权，不能由助手自行设置confirmed=True并发送文件"
+        }
+      ],
+      "rule": "references/flex-http.md；references/operations.md；原有证据、配置确认与交付规则"
+    },
+    "R187": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/flex-http.md；references/operations.md；原有证据、配置确认与交付规则"
+    },
+    "R188": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "上传成功不代表分析通过或开始实验；pending仍待结果，本工具不创建run或启动实验"
+        }
+      ],
+      "rule": "references/flex-http.md；references/operations.md；原有证据、配置确认与交付规则"
+    },
+    "R189": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/flex-http.md；references/operations.md；原有证据、配置确认与交付规则"
     }
   }
 }

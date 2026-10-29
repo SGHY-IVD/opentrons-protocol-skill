@@ -1,11 +1,11 @@
 ---
 name: write-opentrons
-description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维护的移液经验编写、修改及检查Opentrons Python协议。用于客户SOP转代码、液量与液面跟随、流速查询、模块和耗材加载、抓手搬运及手写混匀，按需引导自定义耗材创建与复用；实际硬件先核对并回显确认，再用通俗完整方案引导耗材布局与实验步骤，按用户修改迭代；仅查维护的API和安装关系。
+description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维护的移液经验编写、修改及检查Opentrons Python协议。用于客户SOP转代码、液量与液面跟随、流速查询、模块和耗材加载、抓手搬运及手写混匀，按需引导自定义耗材创建与复用；实际硬件先核对并回显确认，再用通俗完整方案引导耗材布局与实验步骤，按用户修改迭代；按需辅助Flex设备发现、配置读取与协议发送；仅查维护的API和安装关系。
 ---
 
 # Opentrons代码助手
 
-规则版本：2026-10-28.9（交付标识使用实际读取版本）。
+规则版本：2026-10-29.2（交付标识使用实际读取版本）。
 
 仅为 Opentrons Flex 设备编写、修改和审查 protocol；不提供 OT-2 协议、专属硬件/API 或操作经验。收到 OT-2 请求时说明范围；迁移需求先核对实际 Flex 配置，不只替换 robotType。将用户设计的流程和布局转换成可审阅的原子命令脚本。文档维护基线API 2.30；新建先按[版本索引](references/api-versions.md)核对机器人软件/最高API并选定目标，再检查本地模拟环境，不自动套基线；既有脚本保留原目标，不静默升降级。当前用户指令优先于经验默认；与硬件/API明确限制冲突时报告，不静默改布局。
 
@@ -36,6 +36,7 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 |---|---|
 |本次设备的额外使用经验|[设备经验入口](references/device-experience.md)：按设备/操作定位；机制参数仅疑难判断时展开，技巧按场景查；没有条目不阻塞生成|
 |机器人软件／目标API选择／本地模拟环境|[版本索引](references/api-versions.md)：机器人软件→回显最高API及采用目标→运行scripts/check_environment.py核对当前环境；本地软件版本不当机器人版本|
+|按需发现/读取Flex配置，或将文件发送到设备|[设备连接与发送](references/flex-http.md)：可选工具，含mDNS发现；普通协议编写不必读取或调用|
 |任何硬件/耗材加载|[名称入口](references/catalog.txt)：常用项直接定位，其他官方耗材用scripts/labware.py检索索引；[安装关系](references/installation.txt)、[加载API](references/api-layout.md)|
 |吸排液、取弃头、活塞、移动|[移液器API](references/api-pipette.md)、[孔位API](references/api-wells-liquids.md)|
 |自定义耗材的复用、创建及内嵌交付|[自定义耗材经验](references/custom-labware.md)；官方检索缺匹配或已明确自定义时进入，仅命中时查assets/labware，普通开局不展开|
@@ -55,7 +56,7 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 |模块操作|[模块API索引](references/api-modules.md)、[硬性条件](references/module-conditions.md)、[使用经验](references/module-practices.md)对应章节；安装关系独立|
 |从零生成后的完整审查／修改后的按需检查|[沿执行路径的状态推演](references/protocol-review.md)，引用已有规则，不另造数值或强制依赖官方模拟|
 |暂停/延时/归位/灯光|[流程API](references/api-flow.md)|
-|类型/Point/枚举/入口|[类型参考](references/api-types.md)|
+|协议结构/导入依赖/类型/Point/枚举/入口|[结构与类型参考](references/api-types.md)；可按需参考[协议骨架](assets/protocol-skeleton.py)，仅作导航与示例，不要求逐份套用或展开全部区块|
 |明确单次液面实测|[探测API](references/api-probe.md)及operations的“50µL移液器探测后清膜”，不默认调用|
 
 3. 流速仍在生成阶段算好。需要按给定体积确定位置时，直接在脚本使用well.bottom(z=well.height_from_volume(vol))，可用于location/end_location；不再要求生成前算成固定高度，不自写几何公式。vol是该孔在目标时刻的总液量，不一定等于本次移液量。常规动态液面吸排仍用meniscus；用户明确指定按体积换算时，不擅自改为meniscus。耗材模型不支持时反馈，不自行近似。

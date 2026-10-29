@@ -1,0 +1,221 @@
+{
+  "version": "2026-10-28.10",
+  "method": "Independent context; expected answers and regression maintenance/history were not read. Targeted review of 26 cases, followed by architecture-only recheck of the user-requested optional wording.",
+  "results": [
+    {
+      "id": "R45",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "真实证据仅覆盖API2.28临时副本的默认分支，最终API2.30文件及其余分支未模拟；不能称最终文件全部分支官方模拟通过。"
+        }
+      ]
+    },
+    {
+      "id": "R46",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R73",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本地软件包/SDK支持上限不能代替实际机器人的上限；已确认Flex软件9.0.0对应最高API2.28，新建目标不得据本地10.0.0改为2.30。"
+        }
+      ]
+    },
+    {
+      "id": "R74",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R75",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "实际Flex软件9.0.0已确认且用户未另指定目标，对应应采用API2.28；无本地模拟器或拒绝安装不构成使用2.30的依据。"
+        }
+      ]
+    },
+    {
+      "id": "R76",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R77",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "检测仅发生于助手云端环境，没有用户电脑的检测结果；不能据此声称用户电脑未安装opentrons。"
+        }
+      ]
+    },
+    {
+      "id": "R78",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R79",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户尚未选择安装或升级，技能要求先取得该选择；此调用已直接安装opentrons。"
+        }
+      ]
+    },
+    {
+      "id": "R80",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R98",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "单文件内嵌不能依赖机器人不存在的客户电脑路径；此处仍从C:/labware/X24.json读取定义，未随脚本提供完整定义。"
+        }
+      ]
+    },
+    {
+      "id": "R99",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R124",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本技能和实际设备均限定Flex，robotType却声明为OT-2；不能按该平台声明交付Flex协议。"
+        }
+      ]
+    },
+    {
+      "id": "R125",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "p300_single_gen2为OT-2专属加载名，不能作为已确认Flex设备的移液器加载。"
+        }
+      ]
+    },
+    {
+      "id": "R156",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "apiLevel已在第1行metadata声明，又在requirements重复声明；官方要求两处择一，不能同时声明。"
+        }
+      ]
+    },
+    {
+      "id": "R157",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R158",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R159",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "交付对象为普通App/触摸屏协议，此处通过get_protocol_api自建上下文并在第3行手动执行run，混入交互式执行方式；应由机器人软件传入上下文并调用入口。"
+        }
+      ]
+    },
+    {
+      "id": "R160",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "当前仅有空字典且没有任何实际定义内容，不能声称完整内嵌JSON或可直接加载。"
+        }
+      ]
+    },
+    {
+      "id": "R161",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "拟交付文件是普通独立.py，没有SDK包内部的相对导入上下文；不能复制.csv_parameter_interface等SDK内部相对导入作为客户依赖。"
+        }
+      ]
+    },
+    {
+      "id": "R162",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "助手环境可导入vendor_driver不证明客户机器人/分析环境可用，更不证明外接硬件接口及安装兼容；这些尚未核对，不能声称已验证或可直接控制。"
+        }
+      ]
+    },
+    {
+      "id": "R163",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "无副作用的完整静态定义放在metadata前属于合法Python组织方式，骨架位置是建议；不能把该相对位置说成官方运行限制。"
+        }
+      ]
+    },
+    {
+      "id": "R164",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R165",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "实际仅做模板语法检查，未审客户实验或运行官方模拟；完整实验通过及全部分支模拟通过均超出真实证据。"
+        }
+      ]
+    },
+    {
+      "id": "R166",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "删除模板阻断标记本身不能证明实验完整；run仍为pass且缺少实际配置、耗材、液体初始化及移液动作，不能据此称完整实验审查通过或可上机。"
+        }
+      ]
+    },
+    {
+      "id": "R167",
+      "status": "pass",
+      "findings": []
+    }
+  ],
+  "comparison": {
+    "verdict_location_matches": 26,
+    "semantic_reasons": "Manually checked against case states, expected causes and scope; consistent.",
+    "architecture": "No remaining blockers after separating parser-accepted API placement from new-file convention and making all non-contract skeleton sections optional."
+  }
+}

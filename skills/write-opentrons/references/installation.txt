@@ -10,6 +10,7 @@ Opentrons 安装关系库（首版）
 官方：load_waste_chute() -> WasteChute；无参数，固定占用D3，不能与另一件占用D3的设备共占槽位。
 官方：夹爪无需独立加载，move_labware/move_lid 通过 use_gripper=True 使用。
 用户规范：脚本出现 drop_tip() 时加载垃圾桶或垃圾槽；除非特别说明，默认 load_trash_bin()。垃圾桶位置按operations“布局与耗材确认”确定。该规范不是对API所有合法调用方式的穷举声明。
+AI判断边界：内置垃圾桶是可人工调整安装位置的台面固定装置，不是抓手搬运的耗材，不作为move_labware的labware对象。此说明用于内部硬件判断，正常用户回显只需名称和位置；官方API及movableTrash等内部标识保持原名。
 
 二、硬件→slot（明确支持；不等于检查完全部组合冲突）
 垃圾桶 | A1/B1/C1/D1/A3/B3/C3/D3

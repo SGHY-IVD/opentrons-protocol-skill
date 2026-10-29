@@ -1,0 +1,64 @@
+{
+  "results": [
+    {
+      "id": "R17",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "第1行已将同一热循环模块盖打开，第2行delay不改变盖状态，且题设无人工干预；第3行重复open_lid没有状态变化需求，属于可删除的冗余开盖。"
+        }
+      ]
+    },
+    {
+      "id": "R18",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R168",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R169",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本题dry_run=True且本次方案要求试运行20秒，但直接选择normal_seconds=720，使累计等待为720秒；应先选择dry_seconds=20，再按所选总时长分段并提示。"
+        }
+      ]
+    },
+    {
+      "id": "R170",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "720秒对应range的三轮起点0、300、600，但每轮固定等待300秒，累计900秒；末轮只应等待余下120秒。completed被截为720只修饰提示，不能纠正实际多等的180秒。"
+        }
+      ]
+    },
+    {
+      "id": "R171",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R172",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 7,
+          "reason": "dry_run选择的实际总时长为20秒，但提示分母仍使用normal_seconds=720，完成时显示约0.333333/12分钟，与本次等待总时长不一致；提示分母应使用incubation_seconds。"
+        }
+      ]
+    },
+    {
+      "id": "R173",
+      "status": "pass",
+      "findings": []
+    }
+  ]
+}

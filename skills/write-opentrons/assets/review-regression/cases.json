@@ -967,14 +967,14 @@
       "scope": "垃圾处理歧义及当前装机方案是否就绪",
       "state": "Flex客户只说D3有垃圾处理装置；无英文、实物描述或已确认类型，D3两者均可。",
       "overrides": "无",
-      "code": "# D3可能是机内可移动垃圾桶，也可能是通向机外的waste chute。请确认是哪种；相关加载暂待确定。"
+      "code": "# D3可能是内置垃圾桶，也可能是通向机外的waste chute。请确认是哪种；相关加载暂待确定。"
     },
     {
       "id": "R139",
       "scope": "明确垃圾处理类型的沟通",
       "state": "客户明确waste chute在D3，装机已回显确认，无冲突。",
       "overrides": "无",
-      "code": "# D3为已确认的外置废弃物通道waste chute，沿用load_waste_chute()，不再重复问类型。"
+      "code": "# D3为已确认的外置垃圾槽waste chute，沿用load_waste_chute()，不再重复问类型。"
     },
     {
       "id": "R140",
@@ -995,7 +995,7 @@
       "scope": "垃圾处理中文称呼结合位置回显，不审查尚待回显确认的实机就绪状态",
       "state": "客户只称“Flex的垃圾桶在C3”，未给英文；无其他冲突，C3是维护的垃圾桶合法位置且不是waste chute位置。",
       "overrides": "无",
-      "code": "# 结合C3位置，按机内可移动垃圾桶trash bin理解并在整合配置中回显，请核对，不另加桶/槽二选一。"
+      "code": "# 结合C3位置，按内置垃圾桶trash bin理解并在整合配置中回显，请核对，不另加桶/槽二选一。"
     },
     {
       "id": "R143",
@@ -1087,6 +1087,244 @@
       "state": "实际Flex装一台96通道1000µL移液器，占双挂载，另有抓手；已确认，无特殊改装。",
       "overrides": "无",
       "code": "# 机头配置表：左为96通道1000µL，右侧空闲，因此还可装八通道50µL。"
+    },
+    {
+      "id": "R156",
+      "scope": "Flex平台及唯一API版本声明",
+      "state": "Flex目标2.30已确认，仅审查文件声明。",
+      "overrides": "无",
+      "code": "metadata = {\"protocolName\": \"示例\", \"apiLevel\": \"2.30\"}\nrequirements = {\"robotType\": \"Flex\", \"apiLevel\": \"2.30\"}"
+    },
+    {
+      "id": "R157",
+      "scope": "辅助类与布局代码组织",
+      "state": "完整实验已有可信审查，现只抽出纯数据处理类并重排声明；不存在顶层设备副作用，实际动作与数据不变。",
+      "overrides": "无",
+      "code": "class DataPlan:\n    def __init__(self, rows):\n        self.rows = tuple(rows)\n\ndef run(ctx):\n    rows = [[\"A1\", \"10\"]]\n    plan = DataPlan(rows)\n    ctx.comment(str(len(plan.rows)))"
+    },
+    {
+      "id": "R158",
+      "scope": "既有协议的官方入口形式，不检查省略的实验",
+      "state": "既有Flex协议无运行参数，本次只改说明；未动合法执行内容。这里只展示入口形式。",
+      "overrides": "无",
+      "code": "def run(ctx):\n    ctx.comment(\"使用传入的上下文\")"
+    },
+    {
+      "id": "R159",
+      "scope": "普通App协议与交互式执行方式",
+      "state": "交付对象为App/触摸屏正常运行的Flex协议，并非Jupyter或外部执行器。",
+      "overrides": "无",
+      "code": "from opentrons.execute import get_protocol_api\nprotocol = get_protocol_api(\"2.30\")\nrun(protocol)"
+    },
+    {
+      "id": "R160",
+      "scope": "内嵌定义内容与交付声明",
+      "state": "客户要求单文件包含完整定义，目前没有任何实际定义内容。",
+      "overrides": "无",
+      "code": "EMBEDDED_LABWARE_DEFINITIONS = {}\n# 已完整内嵌客户耗材JSON，可直接加载。"
+    },
+    {
+      "id": "R161",
+      "scope": "导入依赖边界",
+      "state": "以下是拟交付客户的普通独立.py，不属于SDK包内部。",
+      "overrides": "无",
+      "code": "from .csv_parameter_interface import CSVParameter"
+    },
+    {
+      "id": "R162",
+      "scope": "第三方库及外接硬件支持声明",
+      "state": "假设vendor_driver仅在助手环境可导入；客户机器人、分析环境、实际设备接口和安装均未核对。",
+      "overrides": "无",
+      "code": "import vendor_driver\n# 助手import成功，因此客户Flex可直接控制该第三方模块，已验证兼容。"
+    },
+    {
+      "id": "R163",
+      "scope": "模板可变位置是否被误作官方限制",
+      "state": "用户完整定义已核实，置于metadata之前的模块常量；解析和from_definition使用正确，无副作用，完整协议其他规则已核对。",
+      "overrides": "无",
+      "code": "# JSON放在metadata之前违反官方protocol框架，必须移动后才能运行。"
+    },
+    {
+      "id": "R164",
+      "scope": "教学骨架和实机协议状态的区别，仅审查结构教学是否可交付",
+      "state": "用户只要结构示例，未要求真实实验；示例明确尚无耗材定义/硬件方案，未声称内嵌成功或实机就绪。",
+      "overrides": "无",
+      "code": "def run(protocol):\n    raise NotImplementedError(\"仅结构导航，实际实验尚未填入\")"
+    },
+    {
+      "id": "R165",
+      "scope": "模板注释与实际审查范围",
+      "state": "模板只经过语法检查；客户实验尚未检查，未进行官方模拟。",
+      "overrides": "无",
+      "code": "# 框架审查：完整实验通过；官方模拟：全部分支通过。"
+    },
+    {
+      "id": "R166",
+      "scope": "删除模板标记是否证明实验完整",
+      "state": "需求是完整移液实验；交付者只删除模板raise，没补配置、耗材、液体初始化或移液动作。",
+      "overrides": "无",
+      "code": "def run(protocol):\n    pass\n# 已删除阻断标记，所以完整实验审查通过，可上机。"
+    },
+    {
+      "id": "R167",
+      "scope": "已有Flex协议的合法API声明位置",
+      "state": "官方固定发布解析器已核对支持metadata/requirements中apiLevel择一；设备目标2.30已确认，本次只检查结构，不改原有运行行为。",
+      "overrides": "无",
+      "code": "metadata = {\"protocolName\": \"示例\", \"apiLevel\": \"2.30\"}\nrequirements = {\"robotType\": \"Flex\"}\ndef run(ctx):\n    ctx.comment(\"合法单一API声明\")"
+    },
+    {
+      "id": "R168",
+      "scope": "正式运行的孵育分段、总量与提示",
+      "state": "已满足本次孵育准备条件；dry_run=False（已正确读取为bool），normal_seconds=720，dry_seconds=20；这两个时长由本次方案确定。只核对本题等待和提示，其余初始化、移液等不在范围。",
+      "overrides": "无",
+      "code": "incubation_seconds = dry_seconds if dry_run else normal_seconds\nelapsed_seconds = 0\nwhile elapsed_seconds < incubation_seconds:\n    wait_seconds = min(300, incubation_seconds - elapsed_seconds)\n    protocol.delay(seconds=wait_seconds)\n    elapsed_seconds += wait_seconds\n    protocol.comment(f\"孵育：{elapsed_seconds / 60:g}/{incubation_seconds / 60:g} 分钟\")"
+    },
+    {
+      "id": "R169",
+      "scope": "试运行的孵育分段、总量与提示",
+      "state": "已满足本次孵育准备条件；dry_run=True（已正确读取为bool），normal_seconds=720，dry_seconds=20；本次方案要求试运行采用20秒。只核对本题等待和提示。",
+      "overrides": "无",
+      "code": "incubation_seconds = normal_seconds\nelapsed_seconds = 0\nwhile elapsed_seconds < incubation_seconds:\n    wait_seconds = min(300, incubation_seconds - elapsed_seconds)\n    protocol.delay(seconds=wait_seconds)\n    elapsed_seconds += wait_seconds\n    protocol.comment(f\"孵育：{elapsed_seconds / 60:g}/{incubation_seconds / 60:g} 分钟\")"
+    },
+    {
+      "id": "R170",
+      "scope": "分段孵育的累计等待和余时",
+      "state": "正式运行已选incubation_seconds=720，单位秒；前置准备已完成。只核对本题分段等待及提示。",
+      "overrides": "无",
+      "code": "for elapsed_seconds in range(0, incubation_seconds, 300):\n    protocol.delay(seconds=300)\n    completed = min(elapsed_seconds + 300, incubation_seconds)\n    protocol.comment(f\"孵育：{completed / 60:g}/{incubation_seconds / 60:g} 分钟\")"
+    },
+    {
+      "id": "R171",
+      "scope": "试运行分段与不同组织写法",
+      "state": "已选实际试运行时长total_seconds=20（非本技能通用默认），取值为整数秒；前置准备已完成。只核对等待总量和提示。",
+      "overrides": "无",
+      "code": "for start in range(0, total_seconds, 300):\n    duration = min(300, total_seconds - start)\n    protocol.delay(seconds=duration)\n    protocol.comment(f\"孵育：{(start + duration) / 60:g}/{total_seconds / 60:g} 分钟\")"
+    },
+    {
+      "id": "R172",
+      "scope": "试运行的累计提示与总时长",
+      "state": "已满足准备条件；dry_run=True，normal_seconds=720，dry_seconds=20，均为已确定的秒数。只核对本题等待和提示。",
+      "overrides": "无",
+      "code": "incubation_seconds = dry_seconds if dry_run else normal_seconds\nelapsed_seconds = 0\nwhile elapsed_seconds < incubation_seconds:\n    wait_seconds = min(300, incubation_seconds - elapsed_seconds)\n    protocol.delay(seconds=wait_seconds)\n    elapsed_seconds += wait_seconds\n    protocol.comment(f\"孵育：{elapsed_seconds / 60:g}/{normal_seconds / 60:g} 分钟\")"
+    },
+    {
+      "id": "R173",
+      "scope": "模块保温与长孵育默认的适用边界",
+      "state": "dry_run=False；本次实验明确采用热循环模块原生保温，tc已正确加载且盖已关闭；37℃和720秒为实验给定。只核对是否需要因长孵育分段规范而改写这条原生hold命令，其他模块条件和收尾不在范围。",
+      "overrides": "无",
+      "code": "tc.set_block_temperature(temperature=37, hold_time_seconds=720)"
+    },
+    {
+      "id": "R174",
+      "scope": "固定装置与可搬运耗材的区分",
+      "state": "Flex内置垃圾桶安装在C3，D3空闲，有抓手。只核对垃圾桶本体能否作为本题搬运对象；其他配置已确认。",
+      "overrides": "无",
+      "code": "trash = protocol.load_trash_bin(\"C3\")\nprotocol.move_labware(labware=trash, new_location=\"D3\", use_gripper=True)"
+    },
+    {
+      "id": "R175",
+      "scope": "内部硬件说明与用户回显分工",
+      "state": "客户确认C3为trash bin；无位置或类型冲突。只检查本次简短回显是否恰当，不要求复述内部判定依据。",
+      "overrides": "无",
+      "code": "# 硬件回显：C3内置垃圾桶，沿用load_trash_bin(\"C3\")。"
+    },
+    {
+      "id": "R176",
+      "scope": "整块孔板的自动丢弃去向",
+      "state": "已核对plate可抓取，trash是C3内置垃圾桶，用户希望自动丢弃plate；没有外置垃圾槽，也未确认人工移出方案。只核对丢弃去向及需求是否就绪，不判断签名类型是否接受TrashBin。",
+      "overrides": "无",
+      "code": "protocol.move_labware(labware=plate, new_location=trash, use_gripper=True)"
+    },
+    {
+      "id": "R177",
+      "scope": "整件孔板与枪头盒的自动丢弃",
+      "state": "Flex抓手与D3外置垃圾槽已确认，垃圾槽盖已取下且夹具正确；used_plate、empty_rack均已加载、抓手适用性已核对，来源位置可访问。只核对整件耗材的丢弃目标与抓手方式。",
+      "overrides": "无",
+      "code": "chute = protocol.load_waste_chute()\nprotocol.move_labware(labware=used_plate, new_location=chute, use_gripper=True)\nprotocol.move_labware(labware=empty_rack, new_location=chute, use_gripper=True)"
+    },
+    {
+      "id": "R178",
+      "scope": "经验建议与程序动作分工",
+      "state": "用户在试运行后反馈尖端外壁挂滴；助手本次只给优化思路，未修改协议、未执行touch_tip，后续采用时仍需核对耗材适用性。只审查建议是否按场景触发、是否越界宣称启用。",
+      "overrides": "无",
+      "code": "# 聊天建议：尖端外壁挂滴，可进一步评估该耗材是否适合碰壁去滴（touch_tip）；本次程序未加入该动作。"
+    },
+    {
+      "id": "R179",
+      "scope": "默认动作与经验功能的按需启用",
+      "state": "用户未提出touch_tip或相关优化要求，也没有残液/挂滴反馈；助手为介绍功能而在新协议普通移液后插入下述动作。只审查是否应自动启用，不核对位置/参数等其他维度。",
+      "overrides": "无",
+      "code": "pipette.touch_tip(plate[\"B1\"], speed=30, radius=0.9, v_offset=-2)"
+    },
+    {
+      "id": "R180",
+      "scope": "缺少匹配环境时的代办引导",
+      "state": "已确定目标API，助手只检测到当前可操作环境缺少匹配Opentrons SDK；用户尚未选择安装，没有既往拒绝记录。只审查安装沟通，不执行任何安装。",
+      "overrides": "无",
+      "code": "# 当前可操作环境缺少匹配SDK；安装后可增加官方模拟，不安装仍可做规则及语法检查。\n# 我可以代为安装匹配版本；是否由我安装？"
+    },
+    {
+      "id": "R181",
+      "scope": "现有SDK已支持所选目标时的升级判断",
+      "state": "Flex软件10.0.0可支持API2.30，但用户明确沿用协议API2.28；当前SDK成功读取上限2.28，模拟入口可启动，已支持本次实际接口。只核对是否必须升级，不判断其他协议内容。",
+      "overrides": "无",
+      "code": "# 机器人较新，所以必须先升级到最新SDK，否则不能继续按已选2.28编写或模拟。"
+    },
+    {
+      "id": "R182",
+      "scope": "设备连接提示的真实依据",
+      "state": "工具可用，但本次未做mDNS、probe或inspect，也没有外部提供的真实连接结果。只审查此聊天表述，不要求为普通协议编写执行网络检查。",
+      "overrides": "无",
+      "code": "# 已检测到您本地连接了一台Flex，配置已自动读取。"
+    },
+    {
+      "id": "R183",
+      "scope": "mDNS候选与已验证设备的区别",
+      "state": "discover仅发现一个HTTP服务广告，health返回401，工具将该候选标为unverified；未核对设备身份。只审查提示是否忠实反映结果，不核对当前装机就绪。",
+      "overrides": "无",
+      "code": "# 找到了一个设备候选地址，但目前还没能核实它是否为可用的Flex；可继续核对连接信息。"
+    },
+    {
+      "id": "R184",
+      "scope": "探测结果是否等于本次目标与实物确认",
+      "state": "inspect真实读取到Flex A及保存的甲板配置，但用户未指定本次使用哪台机器，也未核对该配置与实物一致。助手本次准备按其生成可上机稿；只审查配置采用依据。",
+      "overrides": "无",
+      "code": "# 已自动采用Flex A及其保存布局作为本次已确认的实物配置，无需用户核对。"
+    },
+    {
+      "id": "R185",
+      "scope": "友好设备回显与原有确认环节",
+      "state": "工具真实读取Flex A（IP 192.0.2.10）的硬件信息及已保存配置，来源已区分；用户尚未核对此设备是否用于本次任务。只核对这一轮沟通，不把尚待用户确认本身判为本轮表述错误。",
+      "overrides": "无",
+      "code": "# 已连接到Flex「Flex A」（IP：192.0.2.10），目前读取到的配置如下。您看看这是不是本次要用的设备，配置是否与实际台面一致？"
+    },
+    {
+      "id": "R186",
+      "scope": "协议上传授权",
+      "state": "用户只请求编写protocol并读取设备配置，未请求或同意上传任何文件。client已指向已确认的Flex A；只审查写入设备的授权，不核对片段外文件/依赖。",
+      "overrides": "无",
+      "code": "client.upload_protocol(\"protocol.py\", expected_name=\"Flex A\", confirmed=True)"
+    },
+    {
+      "id": "R187",
+      "scope": "复用已明确的上传授权",
+      "state": "用户明确要求把已审查的protocol.py发送到Flex A并查看设备分析；IP和名称已核对，client绑定该地址，文件及必要耗材定义已经完整内嵌。只核对本次上传是否需要再增加确认，不核对片段外文件读取。",
+      "overrides": "无",
+      "code": "uploaded = client.upload_protocol(\"protocol.py\", expected_name=\"Flex A\", confirmed=True)"
+    },
+    {
+      "id": "R188",
+      "scope": "上传与分析完成的证据边界",
+      "state": "上传已确认，工具返回protocol_id/analysis_id，analysis_summary.status=pending。尚无完成分析结果，也未创建run或开始实验。只审查交付声明。",
+      "overrides": "无",
+      "code": "# 上传成功，所以设备分析已通过，实验已开始。"
+    },
+    {
+      "id": "R189",
+      "scope": "设备端分析与本地模拟分开记录",
+      "state": "设备分析真实返回completed、result=ok、errors=[]，实际参数已记录；未运行本地SDK模拟，也未启动实验。只审查该结果声明。",
+      "overrides": "无",
+      "code": "# 文件已发送到Flex A，设备端分析通过；本地模拟未运行，实验尚未启动。"
     }
   ]
 }

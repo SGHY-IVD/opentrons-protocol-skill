@@ -1,0 +1,189 @@
+{
+  "results": [
+    {
+      "id": "R73",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "把本地opentrons 10.0.0／SDK 2.30上限当成机器人上限；已确认Flex软件9.0.0对应最高API 2.28，本次无覆盖的新建目标应采用2.28。"
+        }
+      ]
+    },
+    {
+      "id": "R74",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R75",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "已确认Flex软件9.0.0最高支持API 2.28，未指定其他目标时不应声明2.30；缺少本地模拟环境或拒绝安装不能改变机器人支持范围。"
+        }
+      ]
+    },
+    {
+      "id": "R76",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R77",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "检测只覆盖助手云端执行环境，不能据此断言用户电脑未安装opentrons；必须说明实际检测范围。"
+        }
+      ]
+    },
+    {
+      "id": "R78",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R79",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前只发现缺少opentrons，用户尚未选择安装；规则要求先说明匹配环境的用途并提出代办，取得安装授权后才执行pip安装。"
+        }
+      ]
+    },
+    {
+      "id": "R80",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R85",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "设备显示2.31上限不等于技能已维护或已实机验证2.31；当前仅维护到2.30，应说明范围差异并建议采用2.30、确认该资料范围，不能直接宣称2.31已验证。"
+        }
+      ]
+    },
+    {
+      "id": "R86",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R122",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "完整协议交付要求在实际聊天正文提供关键孔参数摘要，不能只指向附件；此处遗漏了本题源槽A1至接收板A1的体积、吸排流速、位置、移动速度、push_out和关键等待等正文摘要。"
+        }
+      ]
+    },
+    {
+      "id": "R123",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R138",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R139",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R140",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "客户已明确trash bin且已回显确认、无冲突，D3兼容另一类装置不构成重问理由；应沿用已确认的内置垃圾桶及其位置。"
+        }
+      ]
+    },
+    {
+      "id": "R141",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "明确waste chute位于C3与其固定占D3的维护安装关系冲突，应指出并核对；不能利用C3允许trash bin而擅自替换已指定类型。"
+        }
+      ]
+    },
+    {
+      "id": "R142",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R174",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "内置垃圾桶属于可人工调整安装位置的台面固定装置，不是抓手搬运耗材，不能作为move_labware的labware对象搬到D3。"
+        }
+      ]
+    },
+    {
+      "id": "R175",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R176",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "整件孔板自动丢弃需要外置垃圾槽及抓手，不能以C3内置垃圾桶作为整板丢弃目标；本题无外置垃圾槽且未确认人工移出方案，相关需求尚未就绪。"
+        }
+      ]
+    },
+    {
+      "id": "R177",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R178",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R179",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "touch_tip仅在用户本次要求时按需启用；本题没有相关要求或残液／挂滴反馈，为介绍功能自动插入动作违反默认流程边界。"
+        }
+      ]
+    },
+    {
+      "id": "R180",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R181",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "已选API 2.28，当前SDK上限及模拟入口均支持本次实际接口，不应仅因机器人较新就强制升级SDK或阻止继续编写、模拟。"
+        }
+      ]
+    }
+  ]
+}

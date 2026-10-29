@@ -12,3 +12,12 @@ API excerpts, hardware definitions, and parameter data include material extracte
 The included Apache license applies to the relevant upstream material; it does not by itself license all original content in this repository. No affiliation or endorsement by Opentrons is implied.
 
 附带的 Apache 许可证适用于相关上游材料，不自动构成本项目全部原创内容的授权。项目不暗示 Opentrons 的隶属关系或背书。
+
+## 可选mDNS依赖 / Optional mDNS dependency
+
+mDNS发现可按需安装 `zeroconf==0.151.5`，其发行包元数据声明许可证为 `LGPL-2.1-or-later`。本仓库仅提供依赖声明和调用代码，不附带该包的源码或二进制；具体许可随所安装的发行包提供。该依赖不用于普通协议编写或手动地址HTTP连接。
+
+Optional mDNS discovery uses `zeroconf==0.151.5`, whose distribution metadata declares `LGPL-2.1-or-later`. This repository includes the dependency declaration and calling code, not the package's source or binaries. Consult the installed distribution for its applicable license. It is not needed for ordinary protocol writing or HTTP connections to explicit addresses.
+
+- Project / 项目: https://github.com/python-zeroconf/python-zeroconf
+- Documentation / 文档: https://python-zeroconf.readthedocs.io

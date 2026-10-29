@@ -44,6 +44,7 @@ the user presses Confirm and resume . pick_up_offset ( Mapping [ str , float ] |
 current and new locations are accessible, i.e., open the Thermocycler lid or
 open the Heater-Shaker's labware latch.
 
+整件耗材丢弃的官方用法：已加载的WasteChute作为new_location，用move_labware(labware=plate_or_tiprack, new_location=chute, use_gripper=True)将适用孔板/枪头盒投入外置垃圾槽；不以use_gripper=False向槽内人工搬运。垃圾槽无盖及槽位/夹具条件见installation，用户沟通触发见operations。2026-10-29定向补充自官方[Moving Labware](https://docs.opentrons.com/python-api/moving-labware/#movement-into-the-waste-chute)与[Deck Slots](https://docs.opentrons.com/python-api/deck-slots/#waste-chute)；此能力自API 2.16提供，未升级维护基线或改写签名。
 
 ## ProtocolContext.move_lid
 
