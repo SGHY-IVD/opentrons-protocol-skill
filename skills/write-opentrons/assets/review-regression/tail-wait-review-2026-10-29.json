@@ -1,0 +1,123 @@
+{
+  "results": [
+    {
+      "id": "R33",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R34",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "operations.md“分段排空”要求显式液面终点路径的第一段结束在F−T。此处最终孔内F=100µL、末段T=3µL，第一段终点应按97µL计算，而非100µL；现代码还使第一段的100µL终点与第3行的97µL起点不连续。"
+        }
+      ]
+    },
+    {
+      "id": "R35",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "显式终点分段排空的第二段必须从第一段中间点连续排到最终液面，不能重返孔底。此处第一段结束在97µL对应高度，第3行location应复用该97µL位置，而不是bottom(0.8)。"
+        }
+      ]
+    },
+    {
+      "id": "R36",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本题50µL移液器配50µL头，原排液30µL严格大于10µL阈值，且排后无余液、终点为有效动态液面，原push_out=1符合资格，必须分段排空。应为主体27µL（37.75µL/s、push_out=0）、中间等待0.2s、末段3µL（28.888889µL/s、push_out=1），末段保留正常0.1s排后等待；当前仍一次排30µL，未按触发条件展开。"
+        }
+      ]
+    },
+    {
+      "id": "R37",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R38",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R122",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "operations.md“聊天交付的关键孔参数摘要”及protocol-review.md“交付记录”要求实际聊天正文列出关键孔参数，明确仅有附件链接或“详见文件”不满足。用户未要求省略，而本句把A1到A1这一步的体积、流速、吸排位置、移动速度、push_out和等待全部移至附件，正文没有所需摘要。"
+        }
+      ]
+    },
+    {
+      "id": "R123",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R190",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "operations.md“分段排空”按移液器与实际枪头组合选择末段：1000µL单通道配1000µL头，原V=100µL>50µL且原push_out=6，应取T=20µL，主体80µL，而不是当前90+10µL。修正后按各段实际体积查水相排液流速应分别为130与55µL/s；当前140与40虽然匹配90与10µL，却不能替代该组合要求的80+20µL分段。"
+        }
+      ]
+    },
+    {
+      "id": "R191",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R192",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R193",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R194",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R195",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "delays.md要求水相等待按实际枪头容量查询且无本次覆盖时采用维护值。flex_1channel_50配50µL普通头的aspirate.submerge为0.1s；第1行实际入液后的等待写为0.2s，与该阶段维护值不符。"
+        },
+        {
+          "line": 4,
+          "reason": "同一配置的aspirate.after为0.1s，吸液完成后的独立等待应为0.1s；当前0.2s无明确覆盖依据。"
+        }
+      ]
+    },
+    {
+      "id": "R196",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R197",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 10,
+          "reason": "flex_8channel_1000配1000µL普通头、水相的singleDispense.after维护值为0.3s。delays.md要求加液后原位混匀仍保留该次加液的after等待，但不能自行改值；此处0.4s与维护值不符，且题面没有覆盖。"
+        }
+      ]
+    }
+  ]
+}

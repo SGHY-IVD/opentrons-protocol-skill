@@ -232,21 +232,21 @@
       "scope": "分段排空：触发、体积、路径、速率与等待",
       "state": "P50八通道配50µL普通枪头，水相，当前位置bottom(0.8)。枪头内量等于所示总排量；最终孔内100µL，模型有效且全部位置可达。末次混匀或独立排液均适用。",
       "overrides": "无；未展示的其他动作已核对。",
-      "code": "pipette.dispense(27, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(97)), flow_rate=37.75, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(3, location=well.bottom(well.height_from_volume(97)), end_location=well.bottom(well.height_from_volume(100)), flow_rate=28.888889, push_out=1)\nprotocol.delay(seconds=0.2)"
+      "code": "pipette.dispense(27, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(97)), flow_rate=37.75, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(3, location=well.bottom(well.height_from_volume(97)), end_location=well.bottom(well.height_from_volume(100)), flow_rate=28.888889, push_out=1)\nprotocol.delay(seconds=0.1)"
     },
     {
       "id": "R34",
       "scope": "分段排空：触发、体积、路径、速率与等待",
       "state": "P50八通道配50µL普通枪头，水相，当前位置bottom(0.8)。枪头内量等于所示总排量；最终孔内100µL，模型有效且全部位置可达。末次混匀或独立排液均适用。",
       "overrides": "无；未展示的其他动作已核对。",
-      "code": "pipette.dispense(27, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(100)), flow_rate=37.75, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(3, location=well.bottom(well.height_from_volume(97)), end_location=well.bottom(well.height_from_volume(100)), flow_rate=28.888889, push_out=1)\nprotocol.delay(seconds=0.2)"
+      "code": "pipette.dispense(27, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(100)), flow_rate=37.75, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(3, location=well.bottom(well.height_from_volume(97)), end_location=well.bottom(well.height_from_volume(100)), flow_rate=28.888889, push_out=1)\nprotocol.delay(seconds=0.1)"
     },
     {
       "id": "R35",
       "scope": "分段排空：触发、体积、路径、速率与等待",
       "state": "P50八通道配50µL普通枪头，水相，当前位置bottom(0.8)。枪头内量等于所示总排量；最终孔内100µL，模型有效且全部位置可达。末次混匀或独立排液均适用。",
       "overrides": "无；未展示的其他动作已核对。",
-      "code": "pipette.dispense(27, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(97)), flow_rate=37.75, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(3, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(100)), flow_rate=28.888889, push_out=1)\nprotocol.delay(seconds=0.2)"
+      "code": "pipette.dispense(27, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(97)), flow_rate=37.75, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(3, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(100)), flow_rate=28.888889, push_out=1)\nprotocol.delay(seconds=0.1)"
     },
     {
       "id": "R36",
@@ -853,16 +853,16 @@
     {
       "id": "R122",
       "scope": "实际聊天正文中的关键孔参数摘要",
-      "state": "完整协议的实际代码、文件头和附件均正确；本题仅审聊天中源槽A1到接收板A1的100µL转移摘要，其他关键操作已在聊天正确列出。原生单通道1000µL配200µL普通枪头，源及目标为水相；吸液166.666667µL/s、排液200µL/s，吸排均bottom(0.8)，排后原位混匀所以push_out=0；入液/退出20mm/s，实际入液及吸排后0.3s；dry_run此步骤相同。用户未要求省略聊天摘要。",
+      "state": "完整协议的实际代码、文件头和附件均正确；本题仅审聊天中源槽A1到接收板A1的100µL转移摘要，其他关键操作已在聊天正确列出。原生单通道1000µL配200µL普通枪头，源及目标为水相；吸液166.666667µL/s、排液200µL/s，吸排均bottom(0.8)，排后原位混匀所以push_out=0；入液/退出20mm/s，实际入液及吸排后0.2s；dry_run此步骤相同。用户未要求省略聊天摘要。",
       "overrides": "无。",
       "code": "# 聊天：协议已完成，全部流速、高度及移动参数见附件DELIVERY.txt，正文不再列出。"
     },
     {
       "id": "R123",
       "scope": "实际聊天正文中的关键孔参数摘要",
-      "state": "完整协议的实际代码、文件头和附件均正确；本题仅审聊天中源槽A1到接收板A1的100µL转移摘要，其他关键操作已在聊天正确列出。原生单通道1000µL配200µL普通枪头，源及目标为水相；吸液166.666667µL/s、排液200µL/s，吸排均bottom(0.8)，排后原位混匀所以push_out=0；入液/退出20mm/s，实际入液及吸排后0.3s；dry_run此步骤相同。用户未要求省略聊天摘要。",
+      "state": "完整协议的实际代码、文件头和附件均正确；本题仅审聊天中源槽A1到接收板A1的100µL转移摘要，其他关键操作已在聊天正确列出。原生单通道1000µL配200µL普通枪头，源及目标为水相；吸液166.666667µL/s、排液200µL/s，吸排均bottom(0.8)，排后原位混匀所以push_out=0；入液/退出20mm/s，实际入液及吸排后0.2s；dry_run此步骤相同。用户未要求省略聊天摘要。",
       "overrides": "无。",
-      "code": "# 聊天：源槽A1→接收板A1，吸排100µL；吸166.666667、排200µL/s；吸排均孔底上0.8mm，随后原位混匀，push_out=0；入液/退出20mm/s，实际入液及吸排后0.3s，dry_run本步同值。"
+      "code": "# 聊天：源槽A1→接收板A1，吸排100µL；吸166.666667、排200µL/s；吸排均孔底上0.8mm，随后原位混匀，push_out=0；入液/退出20mm/s，实际入液及吸排后0.2s，dry_run本步同值。"
     },
     {
       "id": "R124",
@@ -1325,6 +1325,342 @@
       "state": "设备分析真实返回completed、result=ok、errors=[]，实际参数已记录；未运行本地SDK模拟，也未启动实验。只审查该结果声明。",
       "overrides": "无",
       "code": "# 文件已发送到Flex A，设备端分析通过；本地模拟未运行，实验尚未启动。"
+    },
+    {
+      "scope": "分段排空：按移液器与枪头规格选择末段体积、连续路径及实际排量流速",
+      "state": "Flex原生单通道1000µL配1000µL普通枪头，水相，枪头内100µL；原排净操作push_out=6，目标初始100µL、最终200µL，模型有效且位置可达。未展示动作均已核对。",
+      "overrides": "无。",
+      "id": "R190",
+      "code": "pipette.dispense(90, well.meniscus(z=0, target=\"dynamic\"), flow_rate=140, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(10, well.meniscus(z=0, target=\"dynamic\"), flow_rate=40, push_out=6)\nprotocol.delay(seconds=0.3)"
+    },
+    {
+      "scope": "分段排空：按移液器与枪头规格选择末段体积、连续路径及实际排量流速",
+      "state": "Flex原生单通道1000µL配1000µL普通枪头，水相，枪头内100µL；原排净操作push_out=6，目标初始100µL、最终200µL，模型有效且位置可达。未展示动作均已核对。",
+      "overrides": "无。",
+      "id": "R191",
+      "code": "pipette.dispense(80, well.meniscus(z=0, target=\"dynamic\"), flow_rate=130, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(20, well.meniscus(z=0, target=\"dynamic\"), flow_rate=55, push_out=6)\nprotocol.delay(seconds=0.3)"
+    },
+    {
+      "scope": "分段排空：按移液器与枪头规格选择末段体积、连续路径及实际排量流速",
+      "state": "Flex原生八通道1000µL配1000µL滤芯枪头，水相，枪头内100µL；原排净操作push_out=6，目标初始100µL、最终200µL，模型有效且位置可达。未展示动作均已核对。",
+      "overrides": "无。",
+      "id": "R192",
+      "code": "pipette.dispense(80, location=well.bottom(0.8), end_location=well.bottom(well.height_from_volume(180)), flow_rate=130, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(20, location=well.bottom(well.height_from_volume(180)), end_location=well.bottom(well.height_from_volume(200)), flow_rate=55, push_out=6)\nprotocol.delay(seconds=0.3)"
+    },
+    {
+      "scope": "分段排空：按移液器与枪头规格选择末段体积、连续路径及实际排量流速",
+      "state": "Flex原生96通道1000µL配1000µL普通枪头，水相，枪头内100µL；原排净操作push_out=6，目标初始100µL、最终200µL，模型有效且位置可达。未展示动作均已核对。",
+      "overrides": "无。",
+      "id": "R193",
+      "code": "pipette.dispense(90, well.meniscus(z=0, target=\"dynamic\"), flow_rate=144, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(10, well.meniscus(z=0, target=\"dynamic\"), flow_rate=44.444444, push_out=6)\nprotocol.delay(seconds=0.3)"
+    },
+    {
+      "scope": "水相实际入液后及吸液后等待",
+      "state": "Flex原生单通道50µL配50µL普通枪头，水相；枪头已在源孔top完成准备，源孔初始100µL，所示操作无其他覆盖。只核对实际入液后与吸液后的等待，其他动作已核对。",
+      "overrides": "无。",
+      "id": "R194",
+      "code": "pipette.move_to(source.bottom(0.8), speed=10)\nprotocol.delay(seconds=0.1)\npipette.aspirate(20, source.bottom(0.8), flow_rate=26.75)\nprotocol.delay(seconds=0.1)"
+    },
+    {
+      "scope": "水相实际入液后及吸液后等待",
+      "state": "Flex原生单通道50µL配50µL普通枪头，水相；枪头已在源孔top完成准备，源孔初始100µL，所示操作无其他覆盖。只核对实际入液后与吸液后的等待，其他动作已核对。",
+      "overrides": "无。",
+      "id": "R195",
+      "code": "pipette.move_to(source.bottom(0.8), speed=10)\nprotocol.delay(seconds=0.2)\npipette.aspirate(20, source.bottom(0.8), flow_rate=26.75)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "scope": "水相吸排入液、吸后与排后的独立等待阶段",
+      "state": "Flex原生八通道1000µL配1000µL普通枪头，源及目标均为水相。源量足够，枪头为空且已在源孔top完成准备；目标初始化有效，随后原位混匀，因此本次固定bottom(0.8)排液push_out=0。只核对所示三种等待阶段，其他状态/路径已核对。",
+      "overrides": "无。",
+      "id": "R196",
+      "code": "pipette.move_to(source.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.aspirate(100, source.bottom(0.8), flow_rate=166.666667)\nprotocol.delay(seconds=0.3)\npipette.move_to(source.top(), speed=40)\npipette.move_to(destination.top())\npipette.move_to(destination.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.dispense(100, destination.bottom(0.8), flow_rate=150, push_out=0)\nprotocol.delay(seconds=0.3)"
+    },
+    {
+      "scope": "水相吸排入液、吸后与排后的独立等待阶段",
+      "state": "Flex原生八通道1000µL配1000µL普通枪头，源及目标均为水相。源量足够，枪头为空且已在源孔top完成准备；目标初始化有效，随后原位混匀，因此本次固定bottom(0.8)排液push_out=0。只核对所示三种等待阶段，其他状态/路径已核对。",
+      "overrides": "无。",
+      "id": "R197",
+      "code": "pipette.move_to(source.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.aspirate(100, source.bottom(0.8), flow_rate=166.666667)\nprotocol.delay(seconds=0.3)\npipette.move_to(source.top(), speed=40)\npipette.move_to(destination.top())\npipette.move_to(destination.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.dispense(100, destination.bottom(0.8), flow_rate=150, push_out=0)\nprotocol.delay(seconds=0.4)"
+    },
+    {
+      "scope": "加液后同孔混匀的入口选择与活塞准备依据",
+      "state": "Flex八通道1000µL配1000µL普通枪头，水相；源端吸液已完成，枪头内100µL且活塞已准备，当前位置destination.top()。目标初始100µL，已初始化且模型有效；默认bottom(0.8)合法可达，低于所示加液前后液面。加液后用同一枪头、同一模式在该孔混匀，除此加液本身外没有待准备事件或必须离开液面的动作。仅审本次加液到首次混匀吸液的入口选择，其余路径/流速/等待及后续混匀另已核对。",
+      "overrides": "无。",
+      "id": "R198",
+      "code": "pipette.move_to(destination.meniscus(z=0, target=\"start\"), speed=40)\nprotocol.delay(seconds=0.3)\npipette.dispense(80, destination.meniscus(z=0, target=\"dynamic\"), flow_rate=130, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(20, destination.meniscus(z=0, target=\"dynamic\"), flow_rate=55, push_out=6)\nprotocol.delay(seconds=0.3)\npipette.move_to(destination.top(), speed=40)\npipette.prepare_to_aspirate()\npipette.move_to(destination.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.aspirate(140, destination.bottom(0.8), flow_rate=220)\nprotocol.delay(seconds=0.3)"
+    },
+    {
+      "scope": "加液后同孔混匀的入口选择与活塞准备依据",
+      "state": "Flex八通道1000µL配1000µL普通枪头，水相；源端吸液已完成，枪头内100µL且活塞已准备，当前位置destination.top()。目标初始100µL，已初始化且模型有效；默认bottom(0.8)合法可达，低于所示加液前后液面。加液后用同一枪头、同一模式在该孔混匀，除此加液本身外没有待准备事件或必须离开液面的动作。仅审本次加液到首次混匀吸液的入口选择，其余路径/流速/等待及后续混匀另已核对。",
+      "overrides": "无。",
+      "id": "R199",
+      "code": "pipette.move_to(destination.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.dispense(100, destination.bottom(0.8), flow_rate=150, push_out=0)\nprotocol.delay(seconds=0.3)\npipette.aspirate(140, destination.bottom(0.8), flow_rate=220)\nprotocol.delay(seconds=0.3)"
+    },
+    {
+      "scope": "加液后同孔混匀的入口选择与活塞准备依据",
+      "state": "Flex八通道1000µL配1000µL普通枪头，水相；源端吸液已完成，枪头内100µL且活塞已准备，当前位置destination.top()。目标初始100µL，已初始化且模型有效；默认bottom(0.8)合法可达，低于所示加液前后液面。加液后用同一枪头、同一模式在该孔混匀，除此加液本身外没有待准备事件或必须离开液面的动作。仅审本次加液到首次混匀吸液的入口选择，其余路径/流速/等待及后续混匀另已核对。",
+      "overrides": "用户明确要求本次加液采用动态液面排空并push_out=6，再到目标孔top准备后回孔底混匀；分段排空仍按维护规则。",
+      "id": "R200",
+      "code": "pipette.move_to(destination.meniscus(z=0, target=\"start\"), speed=40)\nprotocol.delay(seconds=0.3)\npipette.dispense(80, destination.meniscus(z=0, target=\"dynamic\"), flow_rate=130, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(20, destination.meniscus(z=0, target=\"dynamic\"), flow_rate=55, push_out=6)\nprotocol.delay(seconds=0.3)\npipette.move_to(destination.top(), speed=40)\npipette.prepare_to_aspirate()\npipette.move_to(destination.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.aspirate(140, destination.bottom(0.8), flow_rate=220)\nprotocol.delay(seconds=0.3)"
+    },
+    {
+      "scope": "固定默认位置恰为已知液面时的push_out与混匀前准备",
+      "state": "Flex原生单通道1000µL配1000µL普通枪头，水相；头内100µL，当前已在well.bottom(0.8)且入液等待已完成。源/目标账本与模型有效，明确核对：排完后孔内总量200µL的液面恰在bottom(0.8)，该位置及路径可达。随后需同头同模式混匀，但本片段仅审加液与混匀前液面外准备，后续混匀位置及动作另已核对、未展示。",
+      "overrides": "无。",
+      "id": "R201",
+      "code": "pipette.dispense(80, well.bottom(0.8), flow_rate=130, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(20, well.bottom(0.8), flow_rate=55, push_out=6)\nprotocol.delay(seconds=0.3)\npipette.move_to(well.top(), speed=40)\npipette.prepare_to_aspirate()"
+    },
+    {
+      "id": "R202",
+      "scope": "用户自然描述与底层关系",
+      "state": "本次已确认A4的Stacker采用flexStackerModuleV1夹具，安装cutoutA3，提供flexStackerModuleV1A4和A3；A3放普通50µL枪头盒；本题仅核对安装共存与聊天表述，不查搬运轨迹。",
+      "overrides": "无",
+      "code": "# A3放50µL枪头盒，A4安装Stacker；这组安装配置可保留。"
+    },
+    {
+      "id": "R203",
+      "scope": "共同底层配置与区域",
+      "state": "已确认cutoutC3仅安装trashBinAdapter，提供movableTrashC3；用户要求另在C4放普通暂存耗材，不更换硬件。",
+      "overrides": "无",
+      "code": "# C3和C4坐标不同，所以C4可直接放普通耗材。"
+    },
+    {
+      "id": "R204",
+      "scope": "同层竞争与不同区域",
+      "state": "已确认cutoutC3配置stagingAreaSlotWithMagneticBlockV1，提供magneticBlockV1C3和C4；C3磁力架，C4暂存板。仅查安装共存。",
+      "overrides": "无",
+      "code": "# 两件对象分别使用夹具提供的不同区域，可以共存。"
+    },
+    {
+      "id": "R205",
+      "scope": "同一承载位置排他",
+      "state": "已确认B2为普通区域；两块独立孔板都直接放B2，没有上下层关系，也无搬运或先后顺序。",
+      "overrides": "无",
+      "code": "# 两块板都直接放B2且同时使用，安装核验通过。"
+    },
+    {
+      "id": "R206",
+      "scope": "上下层适配与占位",
+      "state": "已确认B1热震荡模块、兼容的独立适配器和孔板逐层加载，各关系均有支持记录；只查占位。",
+      "overrides": "无",
+      "code": "# 模块、适配器和孔板按承载关系共享B1，无须额外占三个台面位置。"
+    },
+    {
+      "id": "R207",
+      "scope": "未知关系边界",
+      "state": "用户所选适配器P与孔板Q的关系未收录，无明确禁止信息，本次不能补查；仅核对结论。",
+      "overrides": "无",
+      "code": "# P和Q关系未收录，因此明确不兼容，必须换板。"
+    },
+    {
+      "id": "R208",
+      "scope": "未知关系边界",
+      "state": "用户所选适配器P与孔板Q的关系未收录，无明确禁止信息，本次不能补查；这是待核对方案。",
+      "overrides": "无",
+      "code": "# P与Q的适配关系尚未确认；当前不能判断该组合是否可用。"
+    },
+    {
+      "id": "R209",
+      "scope": "几何与适配证据",
+      "state": "只查到上层耗材的默认stacking offset；没有对应父对象适配依据。",
+      "overrides": "无",
+      "code": "# 有默认重叠量，证明这个耗材可以装在任意适配器上。"
+    },
+    {
+      "id": "R210",
+      "scope": "加载锚点与跨安装点关系",
+      "state": "热循环模块实际配置按fixtureGroup同时占cutoutA1和cutoutB1，API加载B1。用户又在A1直接放独立枪头盒。",
+      "overrides": "无",
+      "code": "# 热循环只加载B1，所以A1可同时直接放枪头盒。"
+    },
+    {
+      "id": "R211",
+      "scope": "搬运后的父层和占位",
+      "state": "B1模块及适配器保持安装；孔板从适配器搬到空C2，动作已确认合法；仅查动作后的占位记录。",
+      "overrides": "无",
+      "code": "# 孔板转到C2，B1的模块及适配器继续保留。"
+    },
+    {
+      "id": "R212",
+      "scope": "内部映射与用户表达",
+      "state": "用户描述C3磁力架、C4暂存板；组合夹具已核验支持；术语和位置均可唯一映射，仅审查沟通，不新增硬件确认。",
+      "overrides": "无",
+      "code": "# 必须先让用户改用cutout、cutoutFixture和addressableArea重新描述，才能继续。"
+    },
+    {
+      "id": "R213",
+      "scope": "候选与实物状态",
+      "state": "已找到某候选夹具能提供所需区域，但实物是否安装尚未知，无默认规则可用；当前只保留候选方案。",
+      "overrides": "无",
+      "code": "# 有匹配夹具候选，但本机是否采用仍待核对。"
+    },
+    {
+      "id": "R214",
+      "scope": "模块承载语义与同坐标解析",
+      "state": "Flex，A4 Stacker与配套底座已确认，托盘为空；1000µL枪头盒已确认适用于该托盘。本题只检查层级、占位及共享加载；不配置仓内库存。",
+      "overrides": "无",
+      "code": "stacker = protocol.load_module(\"flexStackerModuleV1\", \"A4\")\nrack = stacker.load_labware(\"opentrons_flex_96_tiprack_1000ul\")"
+    },
+    {
+      "id": "R215",
+      "scope": "模块承载语义与路由",
+      "state": "同R214；用户说A4装Stacker，A4放一盒枪头，指在托盘上。只审查安装结论及依据。",
+      "overrides": "无",
+      "code": "# A4已被Stacker占用，因此即使放在它的托盘上也必须移走枪头盒。"
+    },
+    {
+      "id": "R216",
+      "scope": "Stacker仓内与托盘类型边界",
+      "state": "仓内已声明2块相同PCR板；托盘上临时放50µL枪头盒，定义、尺寸及实际搬运均已确认适用；不执行存取。只核对临时承载的类型限制。",
+      "overrides": "无",
+      "code": "# 仓内是PCR板，不妨碍托盘临时承载这盒已确认适用的枪头。"
+    },
+    {
+      "id": "R217",
+      "scope": "Stacker存入整套匹配",
+      "state": "同R216；仓内有余量，shuttle枪头盒与仓内声明的PCR板类型不同。",
+      "overrides": "无",
+      "code": "stacker.store()"
+    },
+    {
+      "id": "R218",
+      "scope": "Stacker取出前置条件",
+      "state": "已配置，有2块PCR板；托盘已被同型PCR板占用；只检查retrieve条件。",
+      "overrides": "无",
+      "code": "plate = stacker.retrieve()"
+    },
+    {
+      "id": "R219",
+      "scope": "Stacker连续取出的状态更新",
+      "state": "已配置2块PCR板；初始托盘为空，B2为空；目标搬运支持、抓手及位置均已核对，只查库存/托盘变化。",
+      "overrides": "无",
+      "code": "plate = stacker.retrieve()\nprotocol.move_labware(plate, new_location=\"B2\", use_gripper=True)\nnext_plate = stacker.retrieve()"
+    },
+    {
+      "id": "R220",
+      "scope": "Stacker连续取出的状态更新",
+      "state": "已配置2块PCR板；初始托盘为空；只查库存与托盘状态，未展示其他动作。",
+      "overrides": "无",
+      "code": "plate = stacker.retrieve()\nnext_plate = stacker.retrieve()"
+    },
+    {
+      "id": "R221",
+      "scope": "Stacker盖与整套匹配",
+      "state": "仓内声明200µL Flex枪头盒带opentrons_flex_tiprack_lid；有余量。托盘上同型空枪头盒缺少盖子，只查store完整组合及带盖要求。",
+      "overrides": "无",
+      "code": "stacker.store()"
+    },
+    {
+      "id": "R222",
+      "scope": "Stacker容量条件",
+      "state": "仓内已配置且已经满；托盘有与声明完全匹配的孔板组合。只查容量。",
+      "overrides": "无",
+      "code": "stacker.store()"
+    },
+    {
+      "id": "R223",
+      "scope": "Stacker声明与实体预装",
+      "state": "API2.30；操作员已通过装料门预装3块对应PCR板，托盘为空，数量和定义匹配且有容量。只查是否需要逐件自动搬入。",
+      "overrides": "无",
+      "code": "stacker.set_stored_labware(\"opentrons_96_wellplate_200ul_pcr_full_skirt\", count=3)\n# 已人工预装，按实际初始库存声明，无需再将这3块板逐件抓入。"
+    },
+    {
+      "id": "R224",
+      "scope": "Stacker重新配置",
+      "state": "仓内仍有2块已声明PCR板；未执行任何移出或人工empty。现在改为枪头盒库存。",
+      "overrides": "无",
+      "code": "stacker.set_stored_labware(\"opentrons_flex_96_tiprack_200ul\", count=3, lid=\"opentrons_flex_tiprack_lid\")"
+    },
+    {
+      "id": "R225",
+      "scope": "Stacker托盘共享加载与未声明库存",
+      "state": "API2.30，模块已加载；仓内尚未声明；托盘为空。孔板定义和承载已确认适用。只审查临时承载，不执行store/retrieve。",
+      "overrides": "无",
+      "code": "plate = stacker.load_labware(\"corning_96_wellplate_330ul\")"
+    },
+    {
+      "id": "R226",
+      "scope": "Stacker仓内枪头盒带盖条件",
+      "state": "API2.30；拟声明3盒200µL Flex枪头作为仓内库存，托盘为空且容量足够。只核对官方带盖正确装载要求，不以是否API报错作为标准。",
+      "overrides": "无",
+      "code": "stacker.set_stored_labware(\"opentrons_flex_96_tiprack_200ul\", count=3)"
+    },
+    {
+      "id": "R227",
+      "scope": "Stacker仓内枪头盒带盖条件",
+      "state": "API2.30；已人工预装3盒200µL Flex枪头，每盒有对应兼容盖，托盘为空，容量与实物已核对。只检查声明。",
+      "overrides": "无",
+      "code": "stacker.set_stored_labware(\"opentrons_flex_96_tiprack_200ul\", count=3, lid=\"opentrons_flex_tiprack_lid\")"
+    },
+    {
+      "id": "R228",
+      "scope": "官方装载要求与API报错证据",
+      "state": "用户询问无盖是否必然API报错；本次已核对v10.0.0代码，未发现统一拒绝无盖声明的校验。只审查这一报错保证，不评可否无盖上机。",
+      "overrides": "无",
+      "code": "# 所有版本的Python API都会在无盖声明时立即报错，已经得到源码证明。"
+    },
+    {
+      "id": "R229",
+      "scope": "带盖条件的适用范围",
+      "state": "托盘上仅临时放已确认适用的无盖枪头盒；没有仓内入仓或堆叠动作。只审查带盖规则是否被泛化。",
+      "overrides": "无",
+      "code": "# 只要枪头盒放在Stacker托盘上，就必须带盖，否则无法临时承载。"
+    },
+    {
+      "id": "R230",
+      "scope": "Stacker人工补给与主动存入",
+      "state": "当前库存已配置。只核对fill/empty与store/retrieve的动作语义，不核对数量。",
+      "overrides": "无",
+      "code": "stacker.fill(count=3)\n# 上一条调用会让抓手自动把3件耗材逐件装进仓内，不需要人工。"
+    },
+    {
+      "id": "R231",
+      "scope": "声明库存与设备实物识别",
+      "state": "只检查声明是否构成实物识别依据；用户并未提供检测结果。",
+      "overrides": "无",
+      "code": "stacker.set_stored_labware(\"opentrons_96_wellplate_200ul_pcr_full_skirt\", count=3)\n# 这证明设备已自动识别仓内正好有3块该型号孔板。"
+    },
+    {
+      "id": "R232",
+      "scope": "Stacker与垃圾槽经验边界",
+      "state": "本次仅按需取用，已指定可行暂存与人工移出，无整件自动丢弃需求。只审查硬件建议是否被强制。",
+      "overrides": "无",
+      "code": "# 只要使用Stacker就必须新增外置垃圾槽，否则方案不能运行。"
+    },
+    {
+      "id": "R233",
+      "scope": "Stacker合法回收及垃圾槽可选性",
+      "state": "空枪头盒已带回匹配盖，整套与该Stacker声明一致；仓内有余量，托盘为空，搬运及抓手均确认。没有外置垃圾槽；只检查回收方案。",
+      "overrides": "无",
+      "code": "protocol.move_labware(empty_rack, new_location=stacker, use_gripper=True)\nstacker.store()"
+    },
+    {
+      "id": "R234",
+      "scope": "Stacker供料经验与双向能力",
+      "state": "用户明确需要自动存回匹配耗材；已有库存配置和余量，托盘条件已确认。只核对建议依据。",
+      "overrides": "无",
+      "code": "# 官方只允许取出，供料经验禁止所有store，所以不能存回。"
+    },
+    {
+      "id": "R235",
+      "scope": "模块统一契约与未补充经验边界",
+      "state": "Flex磁力架API/安装关系已维护且满足；只是没有额外操作经验条目。仅审查是否可以据此阻止已确认用法。",
+      "overrides": "无",
+      "code": "# 磁力架操作经验待补充，因此当前不能使用其合法共享加载接口。"
+    },
+    {
+      "id": "R236",
+      "scope": "托盘临时使用与库存配置顺序",
+      "state": "API2.30；最初空托盘；先共享加载一块板临时占用，未搬走即配置库存。只审查官方指南所要求的使用顺序，不推断所有版本必报错。",
+      "overrides": "无",
+      "code": "plate = stacker.load_labware(\"corning_96_wellplate_330ul\")\nstacker.set_stored_labware(\"opentrons_96_wellplate_200ul_pcr_full_skirt\", count=3)"
+    },
+    {
+      "id": "R237",
+      "scope": "Stacker最低API版本",
+      "state": "实际目标API2.24，未授权升级；只审查本次retrieve的版本可用性。",
+      "overrides": "无",
+      "code": "plate = stacker.retrieve()"
     }
   ]
 }

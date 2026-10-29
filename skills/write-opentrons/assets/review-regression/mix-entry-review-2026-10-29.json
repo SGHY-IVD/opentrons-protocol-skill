@@ -1,0 +1,132 @@
+{
+  "results": [
+    {
+      "id": "R03",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R12",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "后续混匀需要从低体积模式切到正常模式，不符合连续原位立即混匀条件；无位置覆盖时应先常规动态液面排空，而不是在bottom(0.8)固定加液后原位衔接。"
+        },
+        {
+          "line": 2,
+          "reason": "第1行后尖端仍在孔内bottom(0.8)。模式切换须在记录余量为0且显式移至该孔top、离开液面后执行；此处缺少退出top。"
+        },
+        {
+          "line": 3,
+          "reason": "configure_for_volume切换模式后活塞为待准备；本次aspirate前须在空枪头、该吸液孔top显式prepare_to_aspirate，再控速回到吸液位置。此处直接吸液，不能依赖API自动准备。"
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R21",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R22",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 7,
+          "reason": "take_all=False时只排出80µL，枪头仍有20µL，且push_out=0未产生新的待准备事件。合流处无条件prepare_to_aspirate违反空枪头前提；两分支须分别保留余液和活塞状态，不能用take_all=True的空头状态覆盖False分支。"
+        }
+      ]
+    },
+    {
+      "id": "R29",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 4,
+          "reason": "新取枪头的首次吸液须在source.top()、空枪头状态显式prepare_to_aspirate后再控速入液。此处从第2行source.top直接进入孔底并吸液，遗漏技能要求的显式准备，API自动准备不能替代。"
+        }
+      ]
+    },
+    {
+      "id": "R30",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R33",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R34",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "最终孔内总量F=100µL，末段T=3µL，主体27µL排完后的中间总量应为F−T=97µL；第一段却结束在100µL液面高度，且第二段起点又回到97µL高度，违反分段终点账本及两段位置连续要求。"
+        }
+      ]
+    },
+    {
+      "id": "R35",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "第一段已经从bottom(0.8)移动到孔内总量97µL的液面高度；第二段应由该中间点连续排至100µL液面，不能把location重新置为bottom(0.8)而回到底部。"
+        }
+      ]
+    },
+    {
+      "id": "R36",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "P50八通道配50µL枪头，原排量30µL严格大于10µL阈值，且排空至动态液面并使用非零push_out，必须展开27µL主体（push_out=0）与3µL末段（保留push_out=1），分别按实际排量查流速并保留中间0.2秒及末段正常排后等待；此处仍是未拆分单条dispense。"
+        }
+      ]
+    },
+    {
+      "id": "R37",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R38",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R198",
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "题设已满足同孔、同枪头、同模式，且加液前无待准备事件或必须离开液面的动作；bottom(0.8)已确认可达并低于加液前后液面。应先选择固定bottom(0.8)、push_out=0加液后直接混匀。此处先选择常规动态排空，使第5行非零push_out自行产生第7–9行退出、准备和重入需求，不能据此反过来否定原位入口资格。"
+        }
+      ]
+    },
+    {
+      "id": "R199",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R200",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "id": "R201",
+      "status": "pass",
+      "findings": []
+    }
+  ]
+}

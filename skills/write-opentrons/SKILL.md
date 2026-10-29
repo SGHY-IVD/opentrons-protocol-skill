@@ -5,7 +5,7 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 
 # Opentrons代码助手
 
-规则版本：2026-10-29.2（交付标识使用实际读取版本）。
+规则版本：2026-10-29.6（交付标识使用实际读取版本）。
 
 仅为 Opentrons Flex 设备编写、修改和审查 protocol；不提供 OT-2 协议、专属硬件/API 或操作经验。收到 OT-2 请求时说明范围；迁移需求先核对实际 Flex 配置，不只替换 robotType。将用户设计的流程和布局转换成可审阅的原子命令脚本。文档维护基线API 2.30；新建先按[版本索引](references/api-versions.md)核对机器人软件/最高API并选定目标，再检查本地模拟环境，不自动套基线；既有脚本保留原目标，不静默升降级。当前用户指令优先于经验默认；与硬件/API明确限制冲突时报告，不静默改布局。
 
@@ -19,7 +19,7 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 - 所有脚本加载液体用于可视化及液量跟踪。覆盖实际参与的源孔、样本孔、反应孔和接收孔。试剂色鲜明；空反应孔优先浅灰Liquid、volume=0，按用途命名，优先4–5字/字符内；不需颜色可load_empty。批量列表/映射初始化，禁止逐孔调用可合并的load_liquid。
 - 常规吸液默认bottom(z=0.8)，排液默认meniscus(z=0,target="dynamic")。使用end_location时location默认操作孔bottom(0.8)，用户明确起点优先；混匀末次引用此规则移动排至最终液面；小体积吸液确认、立即混匀和无模型位置按操作经验处理，实测仅明确指定时启用。
 - dispense显式push_out；基础默认0，仅满足操作经验的余液/液面条件时自动启用规格默认值，明确覆盖仍校验余液。保持受控入液/退出、top准备、delay，不作为冗余删除；吸排液等待按维护配置（用户覆盖优先）匹配型号/枪头/滤芯/液体，见等待路由。活塞准备统一归入吸液前检查：blow_out/非零push_out/模式切换只标记待准备；下一次aspirate前才在该吸液孔top、空枪头状态显式prepare_to_aspirate，再控速入液；没有下一次吸液就不触发。
-- 每次加载和搬运都查安装关系并更新占位。第4列先查同排第3列，不能直接移液；热循环占A1+B1。冲突反馈，不擅自重新设计。
+- 每次布局核对、加载和搬运统一按installation“统一安装核验”解析底层配置与实际承载关系并更新占位；用户端按最终设备、耗材和位置回显。冲突反馈，不擅自重新设计。
 - 部分喷嘴取头默认禁止返回；仅用户针对该场景明确允许才例外。dry_run/return_tips开关不构成该例外。
 - 不把单次特例自动推广成全局经验，不把用户经验说成官方保证。
 
@@ -53,7 +53,7 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 |部分取头、复用、空跑、枪头不足/同位置补给|操作规则的枪头管理、测试运行参数及移液器API|
 |参数/CSV、展示文案与参数排序|[参数API](references/api-parameters-csv.md)、操作规则的“源码说明与运行文案”；体积可变时另读[rates](references/rates.md#可变体积与运行时输入)|
 |夹爪/板盖/搬运|[搬运API](references/api-gripper.md)、安装关系；更新位置账本|
-|模块操作|[模块API索引](references/api-modules.md)、[硬性条件](references/module-conditions.md)、[使用经验](references/module-practices.md)对应章节；安装关系独立|
+|模块装载、承载位/内部状态或能力判断及操作（含仅核对布局）|[模块契约与API索引](references/api-modules.md)：按设备定位机制/条件、经验及加载示例；读取相关成员，不混同模块状态与普通台面占位；静态安装仍独立查installation|
 |从零生成后的完整审查／修改后的按需检查|[沿执行路径的状态推演](references/protocol-review.md)，引用已有规则，不另造数值或强制依赖官方模拟|
 |暂停/延时/归位/灯光|[流程API](references/api-flow.md)|
 |协议结构/导入依赖/类型/Point/枚举/入口|[结构与类型参考](references/api-types.md)；可按需参考[协议骨架](assets/protocol-skeleton.py)，仅作导航与示例，不要求逐份套用或展开全部区块|

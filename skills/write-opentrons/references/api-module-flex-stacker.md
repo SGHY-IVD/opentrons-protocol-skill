@@ -4,6 +4,8 @@
 
 官方参考：https://docs.opentrons.com/python-api/reference/flex-stacker/
 
+模块硬件/机制与必要条件见[Flex Stacker](module-conditions.md#flex-stacker)，经验与组合示例见[对应经验](module-practices.md#flex-stacker)；本文件继续唯一维护本类接口契约，共享加载签名见api-module-common。
+
 本类成员：empty, fill, fill_items, get_current_storable_labware, get_current_storable_labware_from_list, get_max_storable_labware, get_max_storable_labware_from_list, get_stored_labware, retrieve, serial_number, set_stored_labware, set_stored_labware_items, store。
 
 共享成员（签名及参数见api-module-common.md）：labware, load_adapter, load_adapter_from_definition, load_labware, load_labware_by_name, load_labware_from_definition, model, parent, type。

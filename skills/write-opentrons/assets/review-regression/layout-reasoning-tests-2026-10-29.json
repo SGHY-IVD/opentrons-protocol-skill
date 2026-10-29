@@ -1,0 +1,560 @@
+{
+  "skill_version": "2026-10-29.5",
+  "scope": "Hardware placement and supported movement identity only. No experiment design, liquid strategy, throughput, path efficiency or full collision scoring.",
+  "method": "Four additional fresh-context generation agents received only skill references and natural user prompts, no parent dialogue, expected answers, prior diagnosis or other outputs. Scenarios in a group were explicitly treated independently; this is batched prompt testing, not 12 separately hosted conversations. A separate post-hoc reviewer checked every additional response against maintained relationships and reconstructed hardware placement.",
+  "tests": [
+    {
+      "id": "A9",
+      "prompt": "Flex的C3已经装吸光度读板机，C4我还想再装一个Stacker，两个设备都想保留在这排。只核对能不能这样装。",
+      "response": "不能按这套布局同时安装。C3吸光度读板机需要将C4作为专用盖停放区；C4安装Stacker所需的配置与读板机配置冲突。目前维护资料没有支持两者同排共存的组合。若两台设备都保留，至少一台需要换排；我先保留你的原布局，不擅自调整。"
+    },
+    {
+      "id": "A10",
+      "prompt": "Flex的D3装无盖外置垃圾槽，D4是普通暂存架，配套支架已装。我用96通道1000微升移液器和抓手，这套配置先保留，帮我核对。",
+      "response": "这套配置可以保留：D3无盖外置垃圾槽与D4普通暂存区，在你已安装对应配套支架的条件下可共存；无盖配置也支持96通道移液器和抓手使用垃圾槽。D4仅供抓手暂存和搬运，96通道移液器不能在D4直接移液。本次核对的是这些位置和配置关系。"
+    },
+    {
+      "id": "A11",
+      "prompt": "Flex的B1放温控模块，上面96孔铝块和PCR板已经匹配；我还想在同一个B1直接再放一盒枪头，枪头盒不叠在模块上。能不能一起放？",
+      "response": "不能一起直接放在B1。温控模块已经占用B1，独立放置的枪头盒也要占用同一个承载位置，两者发生占位冲突。温控模块上的96孔铝块与PCR板属于合法的上下层关系，不算重复占位。枪头盒需要另一个可用位置。"
+    },
+    {
+      "id": "A12",
+      "prompt": "Flex的B1是热震荡模块、匹配适配器及孔板，C2开始为空。有抓手，夹具和耗材搬运已经确认支持。程序中先在B1处理，然后把这同一块板移到C2继续。这样算同一块板重复占位吗？只核对位置变化。",
+      "response": "不算重复占位，这是一块板在不同时刻改变位置。搬运前，板在B1热震荡模块的适配器上，C2为空；搬运后，这块板占用C2，B1保留热震荡模块和适配器，模块上的板位变为空。按你已确认的夹具和搬运支持条件，这个位置变化没有重复占位问题。"
+    },
+    {
+      "id": "A13",
+      "prompt": "Flex四个Stacker分别已装A4/B4/C4/D4，均配标准底座。A3/B3/C3/D3分别放普通枪头盒或孔板；热循环占A1和B1，C1热震荡，D1温控，B2磁力架，磁力架上的孔板型号已匹配。只有这些固定占位；只核对这些设备和耗材能否这样共存，先不讨论实验。",
+      "response": "我按 write-opentrons 技能核对了安装关系。就你描述的固定设备和普通耗材占位而言，这套布局可以共存，未发现安装占位冲突。\n\n| 左挂载移液器 | 右挂载移液器 | 抓手 |\n|---|---|---|\n| 未说明 | 未说明 | 未说明 |\n\n| 行／列 | 1 | 2 | 3 | 4：扩展区，仅夹爪可达 |\n|---|---|---|---|---|\n| A（后） | 热循环（同一台） | 空 | 普通枪头盒或孔板 | Stacker，标准底座 |\n| B | 同一热循环，加载锚点B1 | 磁力架＋已匹配孔板 | 普通枪头盒或孔板 | Stacker，标准底座 |\n| C | 热震荡 | 空 | 普通枪头盒或孔板 | Stacker，标准底座 |\n| D（前） | 温控 | 空 | 普通枪头盒或孔板 | Stacker，标准底座 |\n\n标准Stacker底座支持同排第3列的普通位置，因此A3/B3/C3/D3放普通枪头盒或孔板不会仅因同排有Stacker而冲突。热循环确实同时占A1和B1；磁力架可以装B2，不受其他通电模块仅能装第1／3列的限制。\n\n以上结论限于所列安装和静态占位，不包含具体移液、抓手路径或模块运行时的动作验证。"
+    },
+    {
+      "id": "A14",
+      "prompt": "Flex的C2放内置垃圾桶，C3放一盒枪头，我想保留，看看这两个位置行不行。",
+      "response": "我按 write-opentrons 技能核对了位置：C3的枪头盒可以保留，内置垃圾桶不能放C2。\n\n| 左挂载移液器 | 右挂载移液器 | 抓手 |\n|---|---|---|\n| 未说明 | 未说明 | 未说明 |\n\n| 行／列 | 1 | 2 | 3 | 4：扩展/暂存，仅夹爪可达 |\n|---|---|---|---|---|\n| A（后） | 未说明 | 未说明 | 未说明 | 未说明 |\n| B | 未说明 | 未说明 | 未说明 | 未说明 |\n| C | 未说明 | 内置垃圾桶：位置不合法 | 枪头盒：可保留 | 未说明 |\n| D（前） | 未说明 | 未说明 | 未说明 | 未说明 |\n\n内置垃圾桶只能安装在第1或第3列的空位置：A1/B1/C1/D1/A3/B3/C3/D3。若保留C3枪头盒，垃圾桶需要从其余这些位置中选择一个实际空位；目前没有其他占位信息，先不替你指定。"
+    },
+    {
+      "id": "A15",
+      "prompt": "Flex有96通道1000微升移液器，同时我想右边再装一支八通道50微升，桌面A3放50微升头，A4装Stacker，看看这套硬件哪里有冲突。",
+      "response": "我按 write-opentrons 技能核对后，明确的冲突在机头：96通道1000µL移液器同时占用左右两个挂载位，右边不能再加装八通道50µL。\n\n| 左挂载移液器 | 右挂载移液器 | 抓手 |\n|---|---|---|\n| 同一台96通道1000µL，占双挂载 | 同一台96通道占用；拟加八通道50µL冲突 | 未说明 |\n\n| 行／列 | 1 | 2 | 3 | 4：扩展区，仅夹爪可达 |\n|---|---|---|---|---|\n| A（后） | 未说明 | 未说明 | 50µL枪头盒 | Stacker，底座待核对 |\n| B | 未说明 | 未说明 | 未说明 | 未说明 |\n| C | 未说明 | 未说明 | 未说明 | 未说明 |\n| D（前） | 未说明 | 未说明 | 未说明 | 未说明 |\n\nA3枪头盒与A4 Stacker的位置组合有明确支持：采用标准Stacker底座时，可保留A3普通耗材位置。你没有说明实际底座，需确认A4装的是支持A3普通位置的标准底座；不能只因第3／4列相邻就认定冲突。\n\n若保留96通道，就不能同时装这支八通道；若必须同时使用独立八通道，需要调整移液器配置。这里仅核对硬件和占位，50µL枪头的具体取头方式另需按实际喷嘴布局核对。"
+    },
+    {
+      "id": "A16",
+      "prompt": "Flex的C3是磁力架，C4是装好配套支架的暂存位。有抓手，我想像搬孔板那样把磁力架本体自动抓到C4，腾出C3放孔板，可以这样安排吗？只核对这个动作方案。",
+      "response": "我按 write-opentrons 技能核对了这个动作：不能把磁力架本体当作孔板，由抓手自动从C3搬到C4。\n\n| 左挂载移液器 | 右挂载移液器 | 抓手 |\n|---|---|---|\n| 未说明 | 未说明 | 已安装 |\n\n| 行／列 | 1 | 2 | 3 | 4：扩展/暂存，仅夹爪可达 |\n|---|---|---|---|---|\n| A（后） | 未说明 | 未说明 | 未说明 | 未说明 |\n| B | 未说明 | 未说明 | 未说明 | 未说明 |\n| C | 未说明 | 未说明 | 磁力架 | 暂存位，配套支架已装 |\n| D（前） | 未说明 | 未说明 | 未说明 | 未说明 |\n\nC3磁力架与C4暂存位在对应配套支架下可以共存，但这只说明安装兼容。磁力架是模块本体，不是抓手搬运的耗材；抓手能搬移适用孔板，不代表能搬磁力架。C4暂存位也不是磁力架本体的受支持安装位置。\n\n因此这一步不会释放C3，后续不能把C3记成空位再放独立孔板。若要腾出C3，需要另行人工调整磁力架的安装位置，并重新核对目标位置及支架；当前自动搬运方案不可执行。"
+    },
+    {
+      "id": "B1",
+      "prompt": "我的Flex硬件已经核对过：左八通道50微升、右八通道1000微升，有抓手；热循环GEN2、热震荡、温控GEN2、磁力架各一台，内置垃圾桶一个。热震荡配opentrons_96_deep_well_adapter及nest_96_wellplate_2ml_deep；温控配opentrons_96_well_aluminum_block及biorad_96_wellplate_200ul_pcr；磁力架也有已核对匹配的孔板。另要50和1000微升枪头盒各一盒、一个12道分液槽、两块独立反应板。安装配件齐，位置都由你安排，请给一份能摆下的初始布局，说明哪些东西叠在一起，不写程序。",
+      "response": "可以摆下。下面是拟定初始布局，已按 write-opentrons 技能的安装关系核对；不写程序。\n\n| 左挂载移液器 | 右挂载移液器 | 抓手 |\n|---|---|---|\n| 八通道50 µL | 八通道1000 µL | 已有 |\n\n站在机器人前方俯视，A在后、D在前：\n\n| 行 | 1列 | 2列 | 3列 | 4列：扩展/暂存，仅夹爪可达 |\n|---|---|---|---|---|\n| A（后） | 热循环GEN2，占A1/B1 | 50 µL枪头盒 | 1000 µL枪头盒 | 不装扩展位 |\n| B | 同一热循环，加载锚点B1 | 磁力架＋匹配孔板 | 12道分液槽 | 不装扩展位 |\n| C | 热震荡＋深孔适配器＋深孔板 | 独立反应板1 | 独立反应板2 | 不装扩展位 |\n| D（前） | 温控GEN2＋铝块＋PCR板 | 空 | 内置垃圾桶 | 不装扩展位 |\n\n叠放关系自下而上：\n\n- C1：热震荡 → `opentrons_96_deep_well_adapter` → `nest_96_wellplate_2ml_deep`。\n- D1：温控GEN2 → `opentrons_96_well_aluminum_block` → `biorad_96_wellplate_200ul_pcr`。\n- B2：磁力架 → 你已核对匹配的孔板。\n\n以上适配器和上层孔板均与模块共用一个台面位置，不另占槽。热循环初始留空；两块独立反应板分别放C2、C3，不互相叠放，也不算作模块上的板。枪头盒和分液槽直接放工作区，无须为八通道额外增加96通道枪头适配器。\n\n所有所需对象均已安排，D2保留为空位。此结论是初始安装与占位核对；两块独立反应板、枪头盒及分液槽的具体型号尚未给出，后续若安排抓手搬运或移液，再核对相应型号和动作条件。"
+    },
+    {
+      "id": "B2",
+      "prompt": "Flex有抓手，我想同时装4个Stacker和1台吸光度读板机，另配一个内置垃圾桶，安装件都可选。位置你安排，给我一份能同时保留全部设备的布局；如果需求本身放不下就直接指出，不需要编代码。",
+      "response": "这组需求不能在同一台Flex上同时保留全部设备。按 write-opentrons 技能维护的安装关系，冲突在Stacker和读板机的安装位置。\n\n4台Stacker需要分别使用A4、B4、C4、D4，并各自使用对应行第3列的安装位置。吸光度读板机只能安装在A3、B3、C3或D3，且需要同排第4列作为专用盖停放区。因此，无论读板机放哪一行，都与该行Stacker所需的安装配置冲突；现有维护关系中没有两者共用的安装组合，不能靠选择安装件把它们同时塞入同一行。\n\n内置垃圾桶可放第1列，例如D1，但这不能解决上述冲突。若要保留读板机，至少需将Stacker减至3台；若必须保留4台Stacker，则需移出读板机。按你要求同时保留全部设备，我无法给出符合已维护安装关系的布局。"
+    },
+    {
+      "id": "B3",
+      "prompt": "我的Flex配置已核对：96通道1000微升移液器，有抓手；2个Stacker、1个读板机、热循环GEN2、热震荡、温控GEN2、磁力架各一台，无盖外置垃圾槽。各模块适配器和上层板均已匹配，Stacker与磁力架组合底座等官方配件都可选。还需要一盒正在使用的1000微升枪头（已有配套opentrons_flex_96_tiprack_adapter）、一个分液槽和两块独立反应板。这些东西的位置你来安排，给能共存的初始布局，别把备用位当移液工作位，不写程序。",
+      "response": "我按 write-opentrons 技能核对安装关系。你已核对整套硬件，下面给出拟定初始布局；新增的枪头、分液槽和两块独立反应板都放在第1–3列工作区。\n\n| 左挂载移液器 | 右挂载移液器 | 抓手 |\n|---|---|---|\n| 同一台96通道1000µL，占双挂载 | 同一台96通道1000µL，占双挂载 | 已安装 |\n\n站在机器人前方俯视，A在后、D在前：\n\n| 行／列 | 1 | 2 | 3 | 4：扩展/暂存，仅夹爪可达 |\n|---|---|---|---|---|\n| A（后） | 热循环GEN2：占A1/B1 | 独立反应板1 | 磁力架＋匹配上层板 | Stacker 1 |\n| B | 同一热循环：加载锚点B1 | 独立反应板2 | 读板机＋匹配板 | 读板机专用盖停放区 |\n| C | 热震荡＋匹配适配器/板 | 1000µL枪头盒＋96通道枪头适配器 | 空 | 本方案不使用 |\n| D（前） | 温控GEN2＋匹配适配器/板 | 分液槽 | 无盖外置垃圾槽 | Stacker 2 |\n\nA3磁力架与A4 Stacker采用官方组合底座；D3无盖垃圾槽与D4 Stacker采用官方无盖垃圾槽组合安装件。B4专供读板机停盖，不能另放备用耗材。C3保持普通空工作位，不要求新增C4暂存配置。\n\n1000µL枪头盒放在C2的 opentrons_flex_96_tiprack_adapter 上，用于正在进行的取头；两块独立反应板分别在A2、B2，与各模块已有上层板分别计数。所有新增移液耗材均可从工作区上方操作，没有用第4列凑移液位置。Stacker本体仍分别在A4、D4，磁力架在A3，不把组合底座算成合并了两个模块。\n\n该方案在所维护的安装与同时占位关系范围内可共存。分液槽和独立反应板的具体型号未给出，这里只安排位置；96通道的实际取液方式及耗材几何须在设计移液步骤时再核对。未运行模拟或操作设备，也不把这张布局表当作完整碰撞验证。"
+    },
+    {
+      "id": "B4",
+      "prompt": "Flex左八通道50微升，右八通道1000微升，有抓手。A4的Stacker和A3的50微升枪头盒保持原位，D3无盖外置垃圾槽也保持原位；配套安装件已装好。现在加一个温控模块、一块磁力架，匹配适配器及上层孔板都有，再放一盒1000微升枪头、一个12道分液槽和两块独立反应板。其余位置空着，新增这些的位置由你安排。请给初始布局，不搬动三项已有位置，不写代码。",
+      "response": "我按 write-opentrons 技能核对安装关系。以下是拟定初始布局，A4 Stacker、A3的50µL枪头盒、D3无盖外置垃圾槽都保持原位。温控模块按Flex适用的GEN2规划。\n\n| 左挂载移液器 | 右挂载移液器 | 抓手 |\n|---|---|---|\n| 八通道50µL | 八通道1000µL | 已安装 |\n\n站在机器人前方俯视，A在后、D在前：\n\n| 行／列 | 1 | 2 | 3 | 4：扩展/暂存，仅夹爪可达 |\n|---|---|---|---|---|\n| A（后） | 拟放独立反应板1 | 拟放独立反应板2 | 原50µL枪头盒 | 原Stacker |\n| B | 拟放温控GEN2＋匹配适配器/板 | 拟放磁力架＋匹配板 | 空 | 空（按默认暂存夹具） |\n| C | 拟放1000µL枪头盒 | 拟放12道分液槽 | 空 | 空（按默认暂存夹具） |\n| D（前） | 空 | 空 | 原无盖外置垃圾槽 | 空（按默认垃圾槽暂存夹具） |\n\nA4 Stacker的安装配置可同时保留A3的普通耗材位，所以原50µL枪头盒可以继续留在A3。新增温控放B1、磁力架放B2，两者不占A3；磁力架允许安装在第2列。两块独立反应板放A1/A2，另计温控和磁力架各自已有的匹配上层板。\n\n本方案全部移液和取头耗材都在第1–3列，不使用第4列补工作位。B4/C4/D4所列暂存夹具是技能的配置默认，并非认定实机已核实；本布局不依赖这些暂存位，若未装相应夹具，可保持未装。\n\n上述新增位置在所维护的安装与同时占位关系范围内可共存。这是布局回显，不额外改动已有三项；尚未核对各耗材的具体型号与移液流程，也未运行模拟或操作设备。"
+    }
+  ],
+  "independent_evidence_review": {
+    "reviewer": "independent post-hoc evidence review",
+    "skill_version": "2026-10-29.5",
+    "scope": [
+      "A9",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "B1",
+      "B2",
+      "B3",
+      "B4"
+    ],
+    "read_only_inputs": [
+      "layout-edge-dialogues-1.json",
+      "layout-edge-dialogues-2.json",
+      "layout-builder-dialogues-1.json",
+      "layout-builder-dialogues-2.json"
+    ],
+    "method": "逐题重建对象、底层配置、区域及实际父子关系；用户沟通不要求展开内部链；技术评分与格式要求分开。仅依据技能维护资料及题面明确条件。",
+    "summary": {
+      "technical_pass": 12,
+      "technical_fail": 0,
+      "formatting_only_notes": [
+        "A9–A12未提供operations默认首次布局回显双表。"
+      ],
+      "precision_notes": [
+        "B2使用第3列安装位置须理解为cutout；标准Stacker仍提供普通r3区域，不能据此推出其与普通耗材冲突。"
+      ],
+      "not_assessed": [
+        "完整碰撞验证",
+        "具体实验动作",
+        "机器人软件实物deck配置实测"
+      ],
+      "communication_burden_notes": [
+        "B4不依赖默认暂存位，可不展开其夹具默认；这是简洁性改进，不是兼容证据错误。"
+      ]
+    },
+    "tests": [
+      {
+        "id": "A9",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "正确保留本题所需未知；未把静态核验扩充为动作验证。",
+        "layout_integrity": "非主动布局题；原固定位置未擅改。",
+        "finding": "C3读板机与C4 Stacker在现有维护安装关系下不能共存。",
+        "decisive_points": [
+          "不能只以第3/4列相邻断言冲突；两者争用cutoutC3且没有提供两组所需区域的共同夹具。",
+          "至少一台换排是必要条件，不代表剩余未说明布局已获完整验证。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "absorbanceReaderV1: cutoutC3 → absorbanceReaderV1C3 + absorbanceReaderV1LidDockC4；flexStackerModuleV1: 同cutoutC3 → flexStackerModuleV1C4+C3；未列读板机+Stacker组合。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "统一安装核验步骤1–5及输出",
+            "relation": "兼容须联合匹配同cutout的mayMountTo/providesAddressableAreas，跨cutout核fixtureGroup；上下层不重复占槽；未知不等于禁止；安装和动作能力分开判断。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "简洁且技术正确；按operations首次槽位回显默认应有机头小表和甲板表，此回复未提供，属展示规范缺项，不扣安装推理。"
+        }
+      },
+      {
+        "id": "A10",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "正确保留本题所需未知；未把静态核验扩充为动作验证。",
+        "layout_integrity": "非主动布局题；原固定位置未擅改。",
+        "finding": "D3无盖垃圾槽与D4暂存位在已装匹配支架条件下明确可共存。",
+        "decisive_points": [
+          "对应组合同时提供垃圾槽各通道和D4区域。",
+          "无盖配置提供96通道及gripperWasteChute能力；D4不可直接移液。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二、条件关系；二补充夹具表",
+            "relation": "stagingAreaSlotWithWasteChuteRightAdapterNoCover mayMountTo=cutoutD3；provides 1ChannelWasteChute+8ChannelWasteChute+96ChannelWasteChute+gripperWasteChute+D4。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二、明确限制",
+            "relation": "第4列仅夹爪可达，移液器不可达。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "技术与必要条件完整；未按首次回显默认提供双表，仅记展示规范缺项。"
+        }
+      },
+      {
+        "id": "A11",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "正确保留本题所需未知；未把静态核验扩充为动作验证。",
+        "layout_integrity": "非主动布局题；原固定位置未擅改。",
+        "finding": "B1温控及其上层合法叠放不容许另一独立枪头盒直接占同一承载位置。",
+        "decisive_points": [
+          "温控承载铝块及PCR板与独立同层枪头盒区分正确。",
+          "题面确认上层匹配可复用，不必再强行追问型号。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "统一安装核验步骤2–4",
+            "relation": "同cutout须联合匹配；temperatureModuleV2夹具提供temperatureModuleV2B1，不同时提供B1普通区域；同承载位置独立同层对象竞争，上下层不重复占槽。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "技术正确且简洁；默认双表缺失为展示规范问题。"
+        }
+      },
+      {
+        "id": "A12",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "正确保留本题所需未知；未把静态核验扩充为动作验证。",
+        "layout_integrity": "非主动布局题；原固定位置未擅改。",
+        "finding": "同一块板由B1适配器移至空C2不构成同时重复占位。",
+        "decisive_points": [
+          "初态B1模块→适配器→板，C2空；末态C2→同一板，B1保留模块及适配器。",
+          "题目已确认搬运支持，仅核位置，不凭此重新证明具体抓手动作。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "统一安装核验步骤5",
+            "relation": "搬运后更新父层、位置和占用，保留未搬动的模块/夹具，不合并不同时刻占位。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/api-gripper.md",
+            "location": "ProtocolContext.move_labware",
+            "relation": "labware为已加载Labware，new_location可为DeckLocation或已加载父对象；模块出入还须可达条件，题面已确认支持。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "位置状态叙述充分；未给默认双表仅为展示缺项，不应因无需cutout详解扣分。"
+        }
+      },
+      {
+        "id": "A13",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "机头均写未说明，未擅推移液器/抓手配置；题面“只有这些固定占位”支持其余工作槽为空。模块上层除磁力架外未凭空加耗材。",
+        "layout_integrity": "原对象及所有固定位置完整保留；热循环仅同一台双格标注；四个Stacker和四个普通区域无重复遗漏。",
+        "finding": "固定布局可共存，四台标准Stacker不吞并同排第3列普通耗材区域。",
+        "decisive_points": [
+          "标准Stacker每行r3 cutout提供flexStackerModuleV1r4+r3两个分支。",
+          "热循环A1/B1为同一实体且fixtureGroup两部分完整。",
+          "磁力架B2合法；热震荡C1、温控D1合法，彼此没有底层安装点竞争。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "flexStackerModuleV1 | cutoutr3 | flexStackerModuleV1r4+r3；普通耗材走r3区域。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "thermocyclerModuleV2Rear+Front分别cutoutA1+cutoutB1，fixtureGroup要求同时存在，API锚点B1。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二硬件→位置及二补充夹具表",
+            "relation": "magneticBlockV1可cutoutrc全部工作区；heaterShakerModuleV1和temperatureModuleV2可cutoutr1或r3。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "表达清楚；不要求用户回复展开cutout链。"
+        }
+      },
+      {
+        "id": "A14",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "甲板其他格写未说明；没有替用户指定一个未经确认的空位置。",
+        "layout_integrity": "非主动布局题；原固定位置未擅改。",
+        "finding": "内置垃圾桶C2明确非法；C3枪头盒本身可保留。",
+        "decisive_points": [
+          "垃圾桶第1/3列而非第2列；合法候选必须实际空闲。",
+          "不因C3合法而默认其他未知位置为空。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "一垃圾处理；二补充夹具表",
+            "relation": "垃圾桶允许A1/B1/C1/D1/A3/B3/C3/D3；trashBinAdapter mayMountTo=cutoutr1或cutoutr3，仅提供movableTrash区域。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/api-layout.md",
+            "location": "ProtocolContext.load_trash_bin",
+            "relation": "location第2或第4列会报错。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "表达清楚；不要求用户回复展开cutout链。"
+        }
+      },
+      {
+        "id": "A15",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "A4底座待核对，抓手未说明，未推定50µL头的取头方式；未知处理恰当。",
+        "layout_integrity": "非主动布局题；原固定位置未擅改。",
+        "finding": "96通道1000µL占双挂载，与拟新增右八通道50µL冲突；A3/A4需按底座判断。",
+        "decisive_points": [
+          "机头占用与甲板安装分开，不能把另一挂载当空。",
+          "标准Stacker底座支持同排A3普通耗材区域；实际底座未说明，保留待核对而非判相邻冲突。",
+          "50µL枪头是否适用于96通道本次取头模式未被静态占位结论覆盖。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/api-layout.md",
+            "location": "ProtocolContext.load_instrument mount参数",
+            "relation": "flex_96channel_1000 always occupies both mounts；指定mount亦忽略。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "标准flexStackerModuleV1在cutoutA3提供flexStackerModuleV1A4+A3，组合型可能提供不同区域；候选存在不等于实物已安装。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "表达清楚；不要求用户回复展开cutout链。"
+        }
+      },
+      {
+        "id": "A16",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "仅保留人工调整作为待重新核验方案，未承诺人工放C4合法或路径可行。",
+        "layout_integrity": "非主动布局题；原固定位置未擅改。",
+        "finding": "不能把磁力架本体作为Labware抓到C4，C3不能因此视为空。",
+        "decisive_points": [
+          "磁力架+暂存组合兼容不赋予磁力架模块本体可搬运性。",
+          "move_labware的源类型Labware与目标可含ModuleTypes须区分。",
+          "磁力架安装位置仅工作区1–3列；C4不是其受支持模块安装位置。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "stagingAreaSlotWithMagneticBlockV1: cutoutC3 → magneticBlockV1C3+C4。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/api-gripper.md",
+            "location": "ProtocolContext.move_labware签名及说明",
+            "relation": "labware: Labware，须load_labware加载；ModuleTypes仅出现在new_location目标联合类型中。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "统一安装核验对象与关系；二候选位置",
+            "relation": "夹具组合不改变模块本体身份/搬运限制；magneticBlockV1仅A1–D3全部12工作区位置。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "表达清楚；不要求用户回复展开cutout链。"
+        }
+      },
+      {
+        "id": "B1",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "具体独立反应板、枪头盒、分液槽型号未给，明确推迟型号及动作验证；磁力架上层依据题面已核对复用。热循环留空未擅加耗材；不装扩展位为获授权的拟定初始布局。",
+        "layout_integrity": "所有已列模块、模块上层板/适配器、两盒枪头、分液槽、两独立板、垃圾桶均恰好安排一次；左右机头与抓手完整；无用户固定槽位需保持。",
+        "finding": "主动初始布局能容纳全部请求对象，无同层重复占位，叠放链有维护证据。",
+        "decisive_points": [
+          "热循环同一台跨A1/B1；C1热震荡/独立适配器/深孔板；D1温控/独立铝块/PCR板。",
+          "B2磁力架/已匹配板；A2和A3分别两盒头；B3分液槽；C2/C3两块独立板；D3垃圾桶；D2空。",
+          "10个工作区普通/模块锚点加热循环额外A1实体格，共11/12工作格占用；上层耗材不另外计格。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "热循环fixtureGroup A1+B1；heaterShakerModuleV1 cutoutC1；temperatureModuleV2 cutoutD1；magneticBlockV1 cutoutB2；trashBinAdapter cutoutD3；普通夹具提供A2/A3/B3/C2/C3。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "三模块→独立适配器",
+            "relation": "heaterShakerModuleV1→opentrons_96_deep_well_adapter；temperatureModuleV2→opentrons_96_well_aluminum_block。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "四适配器→耗材",
+            "relation": "opentrons_96_deep_well_adapter→nest_96_wellplate_2ml_deep(v5 stackingOffsetWithLabware)；opentrons_96_well_aluminum_block→biorad_96_wellplate_200ul_pcr(v5 stackingOffsetWithLabware)。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "表达清楚；不要求用户回复展开cutout链。"
+        }
+      },
+      {
+        "id": "B2",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "明确限定已维护安装关系；未将缺关系外推为所有未来/未维护硬件物理绝不可能；未声称存在可同时保留全部设备的方案。",
+        "layout_integrity": "主动布局无解时无需强行摆下全部对象；四个Stacker、读板机、垃圾桶均纳入无解论证。",
+        "finding": "全部保留的需求在维护安装库中无解，拒绝虚构布局正确。",
+        "decisive_points": [
+          "4个Stacker占满四行的cutoutr3安装配置；读板机无可选行。",
+          "关键是同cutout无法联合提供读板机/盖区与Stacker区域，不是标准Stacker吃掉r3普通耗材区域。",
+          "D1垃圾桶是合法独立候选，但不能解除上述冲突；减少至少一Stacker只是必要调整。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "flexStackerModuleV1 mayMountTo=cutoutr3，provides=flexStackerModuleV1r4+r3；absorbanceReaderV1同cutoutr3提供absorbanceReaderV1r3+absorbanceReaderV1LidDockr4；没有两者共存夹具。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "统一安装核验步骤2及输出",
+            "relation": "同一cutout全部需求联合匹配单一配置；未收录不能创造支持组合；结论限定已维护安装关系。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "一垃圾处理",
+            "relation": "D1在内置垃圾桶合法候选中。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "“各自使用对应行第3列的安装位置”可正确映射为cutoutr3，故不判原因错；但建议改为“每行Stacker底座与读板机的安装配置冲突”，避免读者误解为Stacker占掉r3普通区域。未提供无解布局表不作为技术扣分。"
+        }
+      },
+      {
+        "id": "B3",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "未指定分液槽及独立反应板型号保留；96通道实际取液方式及几何留待动作设计；不声称模拟、实操或完整碰撞验证。题面已确认模块上层匹配可复用，不需重复索要。",
+        "layout_integrity": "2个Stacker、1读板机、热循环/热震荡/温控/磁力架各1、1无盖垃圾槽、1工作头盒及1枪头适配器、1分液槽、2独立板全部各安排一次。模块已有匹配适配器及上层板作为本模块分支计入；热循环表虽短写GEN2，其题面已有上层板仍由“各模块已有上层板”正文指代，未承诺其为空。C3空，工作区11/12格占用；所有第4列均为设备/专用区。无预设固定位置。",
+        "finding": "所安排复杂初始布局在维护的安装关系及题面匹配条件下可共存。",
+        "decisive_points": [
+          "A3磁力架与A4 Stacker用同cutoutA3的专用组合，而非标准Stacker再叠一个模块。",
+          "D3无盖垃圾槽与D4 Stacker用专用无盖组合；支持96通道和gripper垃圾槽区域。",
+          "B3读板机与B4专用盖区完整保留；B4没有当普通耗材区。",
+          "A1/B1同一热循环；C1热震荡和D1温控承载已匹配上层对象；C2普通区域承载96通道枪头适配器再承载1000µL头盒。",
+          "新增两独立板A2/B2、分液槽D2均在工作区；不与模块上层板重复计数。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "flexStackerModuleV1WithMagneticBlockV1: cutoutA3 → flexStackerModuleV1A4+magneticBlockV1A3；这是一套底层配置两个独立模块分支。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "flexStackerModuleV1WithWasteChuteRightAdapterNoCover: cutoutD3 → 1ChannelWasteChute+8ChannelWasteChute+96ChannelWasteChute+gripperWasteChute+flexStackerModuleV1D4。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "absorbanceReaderV1: cutoutB3 → absorbanceReaderV1B3+absorbanceReaderV1LidDockB4；thermocyclerModuleV2Rear+Front fixtureGroup联合A1/B1。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "三、四及统一安装核验步骤3",
+            "relation": "opentrons_flex_96_tiprack_adapter可台面直接加载；其到opentrons_flex_96_tiprack_1000ul及filtertiprack_1000ul的stackingOffsetWithLabware均已记录，具体滤芯型号未给不影响该静态候选层级。模块适配器/上层板匹配由题面明确确认，不能另外推定搬运能力。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/api-layout.md",
+            "location": "load_instrument mount参数",
+            "relation": "96通道1000µL占左右两个挂载位。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "技术正确，专用组合底座说明有助解释。表中C1/D1用简写、温控和热震荡确切匹配型号未给，不构成虚构关系；按题面条件限域支持。"
+        }
+      },
+      {
+        "id": "B4",
+        "technical_verdict": "通过",
+        "conclusion_correct": true,
+        "decisive_points_complete": true,
+        "reasoning_correct": true,
+        "unknown_handling": "明确默认夹具不等于实物已核实，且不依赖暂存位；具体耗材型号、移液/搬运流程及模拟未验证仍保留。温控GEN2映射有维护依据，非猜测更新。",
+        "layout_integrity": "A3原50µL头盒、A4原Stacker、D3原无盖垃圾槽三项位置逐一原样保持；新增温控1、磁力架1及各自匹配上层、1000µL头盒1、12道分液槽1、独立反应板2都各出现一次。没有多加96通道枪头适配器。A1/A2/B1/B2/C1/C2均不同普通/模块承载区域，无同层竞争。",
+        "finding": "三项固定位置保持，新增对象全部摆下，底层安装及上下层关系无冲突。",
+        "decisive_points": [
+          "A4 Stacker和A3头盒共同底层配置须提供Stacker A4+A3普通区域；题面配套件已装且原两对象已在，标准Stacker配置能匹配。",
+          "B1温控GEN2在合法第1列；B2磁力架可第2列。模块各承载已匹配上层对象，未另占独立板槽。",
+          "A1/A2两独立反应板、C1新增1000µL头盒、C2分液槽完整分配；D3垃圾槽不移动。",
+          "B4/C4默认普通暂存夹具，D4默认无盖垃圾槽暂存组合均存在具体支持关系；本方案没有对象依赖它们。"
+        ],
+        "evidence": [
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "flexStackerModuleV1: cutoutA3 → flexStackerModuleV1A4+A3；temperatureModuleV2 cutoutB1 → temperatureModuleV2B1；magneticBlockV1 cutoutB2 → magneticBlockV1B2。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/installation.txt",
+            "location": "二补充夹具表",
+            "relation": "stagingAreaRightSlot cutoutB3/C3分别提供B3+B4/C3+C4；stagingAreaSlotWithWasteChuteRightAdapterNoCover cutoutD3提供各通道垃圾槽及gripperWasteChute+D4；不与D3无盖垃圾槽竞争为两套同时夹具。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/operations.md",
+            "location": "布局与耗材确认/用户称呼与后台身份",
+            "relation": "Flex范围仅一个已维护适用型号时可说明温控映射GEN2，不需另问代际；不可据此虚构硬件，题面已明确新增温控。"
+          },
+          {
+            "file": "/root/.codex/skills/remote-skills/skill-6acc5f631388819181fdd2c9e6c2741a/references/operations.md",
+            "location": "安装与物理边界第365行",
+            "relation": "普通耗材、磁力架或D3垃圾槽默认具备对应扩展夹具，除非用户明确没有；采用后仍须统一安装核验并保留来源。此规则支持B4/C4/D4“按默认夹具”来源标记。"
+          }
+        ],
+        "communication_review": {
+          "technical_evidence_not_required_in_user_reply": true,
+          "notes": "可简化B4/C4/D4为“本方案不用”，减少与核心摆放无关的默认夹具说明；但当前默认存在明确来源，安装可行性和来源表述均正确，不能作为技术错误扣分。"
+        }
+      }
+    ]
+  },
+  "maintainer_evidence_for_first_eight": {
+    "source": "references/installation.txt unified validation, fixture table and module/adapter/labware relations",
+    "checks": {
+      "D1": "flexStackerModuleV1：cutoutA3→flexStackerModuleV1A4+A3，两个区域可共存；不是Stacker占用A3普通区域。",
+      "D2": "stagingAreaSlotWithMagneticBlockV1：cutoutC3→magneticBlockV1C3+C4，题面已确认配套支架。",
+      "D3": "flexStackerModuleV1WithWasteChuteRightAdapterNoCover：cutoutD3同时提供96ChannelWasteChute、gripperWasteChute及flexStackerModuleV1D4等区域。",
+      "D4": "absorbanceReaderV1：cutoutC3→absorbanceReaderV1C3+absorbanceReaderV1LidDockC4；盖停放区不是普通C4。",
+      "D5": "thermocyclerModuleV2Rear/Front fixtureGroup联合cutoutA1和cutoutB1；B1加载锚点不释放A1。",
+      "D6": "heaterShakerModuleV1可cutoutB1；模块→opentrons_96_deep_well_adapter→nest_96_wellplate_2ml_deep均有关系，合法上下层不重复计格。",
+      "D7": "trashBinAdapter：cutoutC3只提供movableTrashC3，未提供普通C4；普通暂存夹具不能与已保留垃圾桶夹具同时装在同cutout。",
+      "D8": "温控可在B1，但题面P/Q身份及两段适配依据缺失，统一核验要求保留未确认，不能据未收录直接禁止。"
+    }
+  },
+  "combined_summary": {
+    "configuration_checks": 16,
+    "configuration_outcomes": {
+      "supported": 7,
+      "conflicts": 8,
+      "unconfirmed": 1
+    },
+    "planning_cases": 4,
+    "planning_outcomes": {
+      "feasible_layouts": 3,
+      "correctly_reports_no_layout": 1
+    },
+    "scope_result": "No conclusion or decisive installation-evidence errors found in this sample.",
+    "observations": [
+      "Some local-check replies omitted default layout tables.",
+      "One planning reply expanded unused staging defaults.",
+      "These are presentation/simplicity observations, not hardware-placement failures; no further rule changes made."
+    ],
+    "not_validated": [
+      "experiment flow optimisation",
+      "physical installation",
+      "full motion/collision simulation",
+      "cross-model reliability"
+    ]
+  }
+}

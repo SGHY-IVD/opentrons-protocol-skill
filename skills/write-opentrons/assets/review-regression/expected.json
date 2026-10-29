@@ -1531,6 +1531,395 @@
       "status": "pass",
       "findings": [],
       "rule": "references/flex-http.md；references/operations.md；原有证据、配置确认与交付规则"
+    },
+    "R190": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "单通道1000µL配1000µL枪头的末段应20µL，主体须由90调整为80µL并分别重查流速；不能沿用原10µL尾段"
+        }
+      ],
+      "rule": "references/operations.md；references/delays.md；references/delay-rates.json"
+    },
+    "R191": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/delays.md；references/delay-rates.json"
+    },
+    "R192": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/delays.md；references/delay-rates.json"
+    },
+    "R193": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/delays.md；references/delay-rates.json"
+    },
+    "R194": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/delays.md；references/delay-rates.json"
+    },
+    "R195": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "50µL枪头水相实际入液后等待现为0.1秒，不是0.2秒"
+        },
+        {
+          "line": 4,
+          "reason": "50µL枪头水相吸液后等待现为0.1秒，不是0.2秒"
+        }
+      ],
+      "rule": "references/operations.md；references/delays.md；references/delay-rates.json"
+    },
+    "R196": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/delays.md；references/delay-rates.json"
+    },
+    "R197": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 10,
+          "reason": "1000µL枪头水相排液后等待现为0.3秒，与吸液后同步更新，不能沿用原0.4秒"
+        }
+      ],
+      "rule": "references/operations.md；references/delays.md；references/delay-rates.json"
+    },
+    "R198": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "同孔同枪头同模式且无既有必要准备时，应先选原位加液入口；不能先套默认动态排空，再用自动push_out=6导致的准备需求反向否定原位资格。应从默认bottom(0.8)排100µL、push_out=0并在排后等待后直接混匀，去除由此默认选择制造的退出/准备/重入链。"
+        }
+      ],
+      "rule": "references/operations.md 连续原位混匀；references/patterns.md 加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
+    },
+    "R199": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 连续原位混匀；references/patterns.md 加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
+    },
+    "R200": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 连续原位混匀；references/patterns.md 加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
+    },
+    "R201": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 连续原位混匀；references/patterns.md 加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
+    },
+    "R202": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R203": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "不同坐标不证明底层配置支持；当前夹具未提供C4"
+        }
+      ],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R204": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R205": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "同一承载位置的独立同层对象竞争，不能同时占用"
+        }
+      ],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R206": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R207": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "缺关系应保持未确认，不能推成明确禁止"
+        }
+      ],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R208": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "缺少P与Q的适配关系，安装可用性仍未确认"
+        }
+      ],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R209": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "默认几何记录不证明任意父对象兼容"
+        }
+      ],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R210": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "API锚点不释放跨安装点配置占用"
+        }
+      ],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R211": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R212": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "可正确映射时无需纠正用户术语或展示内部模型"
+        }
+      ],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R213": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "本机实际夹具未知，候选存在不能作为已安装依据"
+        }
+      ],
+      "rule": "references/installation.txt；references/operations.md；references/protocol-review.md"
+    },
+    "R214": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R215": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "把模块承载耗材误判为独立同层占位，应按对应模块承载语义核验"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R216": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R217": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "托盘可临时承载异类不代表可存入；store主耗材及完整组合须匹配仓内配置"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R218": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "即使同型，托盘仍占用时也不能retrieve"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R219": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R220": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "首件取出后托盘被占用，未搬离前不能再取"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R221": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "存入组合缺盖，不匹配仓内带盖配置，也未满足枪头盒带盖装仓要求"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R222": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "仓内容量已满，不能store"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R223": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R224": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "仓内尚非已知空，不能重新配置另一类库存掩盖原有两块板"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R225": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R226": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "仓内Flex枪头盒堆叠装载需要配置并实物带上兼容盖子，不能作为可选技巧省略"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R227": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R228": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "不能把官方正确装载要求或未发现的校验写成所有API版本必然报错"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R229": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "仓内堆叠带盖要求不自动适用于所有shuttle临时承载"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R230": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "fill是暂停后人工补入，不是抓手自动store流程"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R231": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "软件库存声明不证明设备识别或核实了实际型号及数量"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R232": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "外置垃圾槽不是使用Stacker的必要条件，需按整件自动丢弃场景判断"
+        }
+      ],
+      "rule": "references/installation.txt；references/operations.md 布局与耗材确认/垃圾处理；references/api-gripper.md"
+    },
+    "R233": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/installation.txt；references/operations.md 布局与耗材确认/垃圾处理；references/api-gripper.md"
+    },
+    "R234": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "供料常用retrieve是场景经验，不取消官方store双向能力"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R235": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "经验留空不等于接口或硬件能力缺失，不应阻止合法使用"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R236": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "官方指南要求先移走原先临时占托盘的耗材，再配置并使用仓内存储"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R237": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "Stacker retrieve最低API2.25，不能在目标2.24直接使用"
+        }
+      ],
+      "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
     }
   }
 }

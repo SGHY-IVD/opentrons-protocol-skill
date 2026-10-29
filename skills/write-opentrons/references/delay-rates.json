@@ -1,5 +1,5 @@
 {
-  "revision": "2026-10-22-water-tip-capacity",
+  "revision": "2026-10-29-water-tip-capacity",
   "units": "seconds",
   "sources": [
     {
@@ -76,7 +76,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_1channel_50",
@@ -129,7 +129,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_1channel_50",
@@ -142,11 +142,11 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -156,11 +156,11 @@
         "singleDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -170,11 +170,11 @@
         "multiDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -182,7 +182,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_1channel_50",
@@ -195,11 +195,11 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -209,11 +209,11 @@
         "singleDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -223,11 +223,11 @@
         "multiDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -235,7 +235,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_8channel_50",
@@ -288,7 +288,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_8channel_50",
@@ -341,7 +341,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_8channel_50",
@@ -354,11 +354,11 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -368,11 +368,11 @@
         "singleDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -382,11 +382,11 @@
         "multiDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -394,7 +394,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_8channel_50",
@@ -407,11 +407,11 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -421,11 +421,11 @@
         "singleDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -435,11 +435,11 @@
         "multiDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -447,7 +447,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_1channel_1000",
@@ -460,11 +460,11 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -474,11 +474,11 @@
         "singleDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -488,11 +488,11 @@
         "multiDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -500,7 +500,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_1channel_1000",
@@ -513,6 +513,59 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      },
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
             "duration": 0.2
           },
           "after": {
@@ -553,11 +606,64 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_1channel_1000",
       "tip_volume": 200,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      },
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
+    },
+    {
+      "model": "flex_1channel_1000",
+      "tip_volume": 1000,
       "filtered": false,
       "liquid": "water",
       "official_name": "water",
@@ -606,11 +712,11 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_1channel_1000",
-      "tip_volume": 200,
+      "tip_volume": 1000,
       "filtered": true,
       "liquid": "water",
       "official_name": "water",
@@ -659,113 +765,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
-    },
-    {
-      "model": "flex_1channel_1000",
-      "tip_volume": 1000,
-      "filtered": false,
-      "liquid": "water",
-      "official_name": "water",
-      "version": 3,
-      "delays": {
-        "aspirate": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "singleDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "multiDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        }
-      },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
-    },
-    {
-      "model": "flex_1channel_1000",
-      "tip_volume": 1000,
-      "filtered": true,
-      "liquid": "water",
-      "official_name": "water",
-      "version": 3,
-      "delays": {
-        "aspirate": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "singleDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "multiDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        }
-      },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_8channel_1000",
@@ -778,11 +778,11 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -792,11 +792,11 @@
         "singleDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -806,11 +806,11 @@
         "multiDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "after": {
             "enabled": true,
-            "duration": 0.2
+            "duration": 0.1
           },
           "retract": {
             "enabled": false,
@@ -818,7 +818,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_8channel_1000",
@@ -831,6 +831,59 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      },
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 200,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
             "duration": 0.2
           },
           "after": {
@@ -871,11 +924,64 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_8channel_1000",
       "tip_volume": 200,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.2
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      },
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
+    },
+    {
+      "model": "flex_8channel_1000",
+      "tip_volume": 1000,
       "filtered": false,
       "liquid": "water",
       "official_name": "water",
@@ -924,11 +1030,11 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_8channel_1000",
-      "tip_volume": 200,
+      "tip_volume": 1000,
       "filtered": true,
       "liquid": "water",
       "official_name": "water",
@@ -977,113 +1083,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
-    },
-    {
-      "model": "flex_8channel_1000",
-      "tip_volume": 1000,
-      "filtered": false,
-      "liquid": "water",
-      "official_name": "water",
-      "version": 3,
-      "delays": {
-        "aspirate": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "singleDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "multiDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        }
-      },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
-    },
-    {
-      "model": "flex_8channel_1000",
-      "tip_volume": 1000,
-      "filtered": true,
-      "liquid": "water",
-      "official_name": "water",
-      "version": 3,
-      "delays": {
-        "aspirate": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "singleDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "multiDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.4
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        }
-      },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_96channel_200",
@@ -1136,7 +1136,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_96channel_200",
@@ -1189,11 +1189,117 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_96channel_200",
       "tip_volume": 50,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      },
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      },
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
+    },
+    {
+      "model": "flex_96channel_200",
+      "tip_volume": 200,
       "filtered": false,
       "liquid": "water",
       "official_name": "water",
@@ -1242,113 +1348,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
-    },
-    {
-      "model": "flex_96channel_200",
-      "tip_volume": 50,
-      "filtered": true,
-      "liquid": "water",
-      "official_name": "water",
-      "version": 3,
-      "delays": {
-        "aspirate": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.2
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.2
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "singleDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.2
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.2
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "multiDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.2
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.2
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        }
-      },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
-    },
-    {
-      "model": "flex_96channel_200",
-      "tip_volume": 200,
-      "filtered": false,
-      "liquid": "water",
-      "official_name": "water",
-      "version": 3,
-      "delays": {
-        "aspirate": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "singleDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "multiDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        }
-      },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_96channel_200",
@@ -1361,11 +1361,11 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
-            "duration": 0.3
+            "duration": 0.2
           },
           "after": {
             "enabled": true,
-            "duration": 0.3
+            "duration": 0.2
           },
           "retract": {
             "enabled": false,
@@ -1375,11 +1375,11 @@
         "singleDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.3
+            "duration": 0.2
           },
           "after": {
             "enabled": true,
-            "duration": 0.3
+            "duration": 0.2
           },
           "retract": {
             "enabled": false,
@@ -1389,11 +1389,11 @@
         "multiDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.3
+            "duration": 0.2
           },
           "after": {
             "enabled": true,
-            "duration": 0.3
+            "duration": 0.2
           },
           "retract": {
             "enabled": false,
@@ -1401,11 +1401,117 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_96channel_1000",
       "tip_volume": 50,
+      "filtered": false,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      },
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 50,
+      "filtered": true,
+      "liquid": "water",
+      "official_name": "water",
+      "version": 3,
+      "delays": {
+        "aspirate": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "singleDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        },
+        "multiDispense": {
+          "submerge": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "after": {
+            "enabled": true,
+            "duration": 0.1
+          },
+          "retract": {
+            "enabled": false,
+            "duration": 0
+          }
+        }
+      },
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
+    },
+    {
+      "model": "flex_96channel_1000",
+      "tip_volume": 200,
       "filtered": false,
       "liquid": "water",
       "official_name": "water",
@@ -1454,11 +1560,11 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_96channel_1000",
-      "tip_volume": 50,
+      "tip_volume": 200,
       "filtered": true,
       "liquid": "water",
       "official_name": "water",
@@ -1507,113 +1613,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
-    },
-    {
-      "model": "flex_96channel_1000",
-      "tip_volume": 200,
-      "filtered": false,
-      "liquid": "water",
-      "official_name": "water",
-      "version": 3,
-      "delays": {
-        "aspirate": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "singleDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "multiDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        }
-      },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
-    },
-    {
-      "model": "flex_96channel_1000",
-      "tip_volume": 200,
-      "filtered": true,
-      "liquid": "water",
-      "official_name": "water",
-      "version": 3,
-      "delays": {
-        "aspirate": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "singleDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        },
-        "multiDispense": {
-          "submerge": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "after": {
-            "enabled": true,
-            "duration": 0.3
-          },
-          "retract": {
-            "enabled": false,
-            "duration": 0
-          }
-        }
-      },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_96channel_1000",
@@ -1626,11 +1626,11 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "after": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "retract": {
             "enabled": false,
@@ -1640,11 +1640,11 @@
         "singleDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "after": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "retract": {
             "enabled": false,
@@ -1654,11 +1654,11 @@
         "multiDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "after": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "retract": {
             "enabled": false,
@@ -1666,7 +1666,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_96channel_1000",
@@ -1679,11 +1679,11 @@
         "aspirate": {
           "submerge": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "after": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "retract": {
             "enabled": false,
@@ -1693,11 +1693,11 @@
         "singleDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "after": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "retract": {
             "enabled": false,
@@ -1707,11 +1707,11 @@
         "multiDispense": {
           "submerge": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "after": {
             "enabled": true,
-            "duration": 0.4
+            "duration": 0.3
           },
           "retract": {
             "enabled": false,
@@ -1719,7 +1719,7 @@
           }
         }
       },
-      "provenance": "user override 2026-10-22: wait by actual tip capacity"
+      "provenance": "user override 2026-10-29: submerge and after waits by actual tip capacity"
     },
     {
       "model": "flex_1channel_50",
@@ -5056,6 +5056,12 @@
       "source": "user",
       "scope": "water; all maintained models and filtered/unfiltered tips; aspirate/singleDispense/multiDispense",
       "rule": "submerge and after: tip20=0.1s, tip50=0.2s, tip200=0.3s, tip1000=0.4s; retract=0s"
+    },
+    {
+      "date": "2026-10-29",
+      "source": "user",
+      "scope": "water; all maintained models and filtered/unfiltered tips; aspirate/singleDispense/multiDispense",
+      "rule": "submerge and after: tip20=0.1s, tip50=0.1s, tip200=0.2s, tip1000=0.3s; retract=0s"
     }
   ]
 }

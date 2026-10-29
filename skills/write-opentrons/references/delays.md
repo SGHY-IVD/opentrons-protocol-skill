@@ -2,9 +2,9 @@
 
 数值唯一源delay-rates.json：2026-10-16拉取官方edge分支water/ethanol_80/glycerol_50的v3定义，96组液体×型号×枪头×滤芯配置，每组含aspirate、singleDispense、multiDispense的三个等待阶段。未覆盖配置保留原始enabled/duration；禁用或有效时长0时不生成delay(0)。替代此前水相0.1/有机相0.3/甘油相1的经验默认，不混用。
 
-## 水相等待覆盖（2026-10-22）
+## 水相等待覆盖（2026-10-29更新）
 
-按实际枪头容量统一设置，不按移液器量程或本次吸排体积选择，不插值。所有已收录移液器、普通/滤芯枪头共用；aspirate、singleDispense及multiDispense的submerge和after均采用相同值，retract保持0。唯一数值源仍为delay-rates.json，查询结果明确标注用户覆盖；有机相和甘油类保持原官方配置。
+按实际枪头容量统一设置，不按移液器量程或本次吸排体积选择，不插值。所有已收录移液器、普通/滤芯枪头共用；2026-10-29更新aspirate、singleDispense及multiDispense的submerge和after，吸液与排液均采用本次按枪头容量的覆盖值，retract保持0。唯一数值源仍为delay-rates.json，查询结果明确标注用户覆盖；有机相和甘油类保持原官方配置。
 
 入液后等待仅在实际进入液体操作位置后执行一次，随后原位吸排/混匀不重复视为入液。加液后原位混匀保留加液的after等待，不再新增一次入液等待；退出后重新进入则执行新一次submerge。悬空动作不虚构入液等待。dry_run继续遵循原规则：自动切换水相流速，不自动改变实际液体类别对应的等待，除非用户明确覆盖。
 
