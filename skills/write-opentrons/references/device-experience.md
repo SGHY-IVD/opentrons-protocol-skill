@@ -17,6 +17,8 @@
 |---|---|---|
 |Flex移液器|[状态与体积核算](pipette-mechanics.md)：空气/液体占用、活塞位置、模式、排查；数值见该文引用的源码快照|已确认的默认规范仍在[操作规则](operations.md)相关章节；按需动作如touch_tip/沿壁同处维护，原子结构见patterns.md；储液槽部分喷嘴的主动确认、Y偏移与示例见[储液槽定位](reservoir-partial-nozzles.md)；不另复制一套|
 |六类已收录模块|按[模块统一入口](api-modules.md)定位各设备硬件/机制与条件；装载、承载位/库存及状态判断也按需触发，接口与安装分工不变|按[模块统一入口](api-modules.md#模块资料契约与入口)定位对应的[模块经验](module-practices.md)；只查适用设备、操作及共用条目，不跨设备套用|
+|第三方倾斜模块|[机制/条件](module-conditions.md#第三方倾斜模块)、[API/加载](api-module-tilt.md)；安装证据查installation|[案例改写与使用示例](module-practices.md#第三方倾斜模块)，不自动收录旧洗板参数|
+|第三方正压模块|[机制/条件](module-conditions.md#第三方正压模块)、[API/创建](api-module-positive-pressure.md)；安装证据查installation|[案例改写与使用示例](module-practices.md#第三方正压模块)，不自动收录DDM实验参数|
 |Flex协议等待|接口与分析期文案限制见[流程API](api-flow.md)|[操作规则](operations.md)“长孵育分段提示”为默认规范；本页只保留结构示例|
 
 ## 长孵育分段提示

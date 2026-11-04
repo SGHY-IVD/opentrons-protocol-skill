@@ -2,7 +2,7 @@
 来源：维护版API速查表 v6；文档基线 API 2.30，2026-10-12。用户最新规则见SKILL.md及operations.md。
 
 提示、暂停、延时、归位和灯光。
-ProtocolContext.home ProtocolContext.comment ProtocolContext.pause ProtocolContext.delay ProtocolContext.set_rail_lights
+ProtocolContext.home ProtocolContext.comment ProtocolContext.pause ProtocolContext.delay ProtocolContext.set_rail_lights ProtocolContext.is_simulating
 
 ## ProtocolContext.home
 
@@ -81,3 +81,12 @@ set_rail_lights(on: bool) -> None
 
 官方参数含义、返回值与使用约束（已保存在本文件） Controls the robot's ambient lighting (rail lights). Parameters: on ( bool )
           – If True , turn on the lights; otherwise, turn them off.
+
+
+## ProtocolContext.is_simulating
+
+```python
+is_simulating() -> bool
+```
+
+无参数；API 2.0起。True表示当前协议处于模拟，False表示实际硬件执行。可用于隔离外部硬件访问；不会自动模拟自写Python驱动，也不把dry_run参数变成模拟环境。2026-11-04按官方[协议参考](https://docs.opentrons.com/python-api/reference/protocols/#opentrons.protocol_api.ProtocolContext.is_simulating)定向补充此既有接口，不升级API 2.30基线。

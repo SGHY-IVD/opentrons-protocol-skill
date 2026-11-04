@@ -2626,6 +2626,251 @@
       "status": "pass",
       "findings": [],
       "rule": "references/pipette-mechanics.md；references/protocol-review.md"
+    },
+    "R326": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-module-tilt.md；references/module-conditions.md#第三方倾斜模块"
+    },
+    "R327": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前已收录工厂与配置类，但TiltFlexConfig还必须提供模块平移、轴至板底、板底至孔底与几何符号等实参；只给location无法构造。按实际校准配置创建，不能复用旧默认高度。"
+        }
+      ],
+      "rule": "references/api-module-tilt.md"
+    },
+    "R328": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "倾斜设备不是官方ModuleContext且没有该load_module名称；不能用虚构型号替代扩展类。"
+        }
+      ],
+      "rule": "references/api-module-tilt.md；references/catalog.txt"
+    },
+    "R329": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "该集合为保留路径而临时全开放，不是逐组实机验证证据；不能仅根据变量名或笛卡尔积宣称验证通过。"
+        }
+      ],
+      "rule": "references/installation.txt"
+    },
+    "R330": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "65.8mm是已明确的原案例抓手放板Z偏移；题面仍缺本次C2底层安装、板型及该偏移适用性的确认依据，故自动搬入条件未决；不再以旧注释作为数值冲突，也不判定所有C2组合禁止。"
+        }
+      ],
+      "rule": "references/installation.txt；references/module-conditions.md#第三方倾斜模块"
+    },
+    "R331": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/installation.txt；references/api-module-tilt.md"
+    },
+    "R332": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前calibrate_zero没有confirm参数；旧包装参数不能照搬到当前设备类。"
+        }
+      ],
+      "rule": "references/api-module-tilt.md"
+    },
+    "R333": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "当前类不会自动识别官方模拟环境；open会尝试真实USB访问，必须在模拟路径隔离真实调用并如实标记跳过。"
+        }
+      ],
+      "rule": "references/module-conditions.md#第三方倾斜模块；references/api-flow.md#ProtocolContext.is_simulating"
+    },
+    "R334": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "close只释放连接，不发送停止/回水平；运动超时后的角度和停止状态仍未知，不能据断连认定可立即搬板。"
+        }
+      ],
+      "rule": "references/api-module-tilt.md；references/module-conditions.md#第三方倾斜模块"
+    },
+    "R335": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-module-tilt.md"
+    },
+    "R336": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "home回硬件0后几何角为5度，不满足几何水平加载前提；应在已确认运动条件下level到几何0（对应硬件-5度），不能只用硬件零位判水平。"
+        }
+      ],
+      "rule": "references/api-module-tilt.md；references/module-conditions.md#第三方倾斜模块"
+    },
+    "R337": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前独立labware仍记录已登记的占用；几何视图失败不等于实物或SDK板已移出。应保留占用与姿态未决，核对后以显式卸载/搬出成功才清空，不直接加载另一块。"
+        }
+      ],
+      "rule": "references/api-module-tilt.md；references/module-conditions.md#第三方倾斜模块"
+    },
+    "R338": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+    },
+    "R339": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "PPMDevice使用seconds而非duration_ms，此关键字会失败；90秒用seconds=90。毫秒入口属于PPMController，不混用。"
+        }
+      ],
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+    },
+    "R340": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "PPMController不感知官方模拟，connect会尝试真实USB；本场景须隔离该路径或使用PPMDevice(protocol)的模拟分支。"
+        }
+      ],
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+    },
+    "R341": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "PPMDevice只读取is_simulating，不读取实验dry_run；真实运行仍访问USB并按传入时长加压，没有自动10秒缩时。"
+        }
+      ],
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+    },
+    "R342": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 5,
+          "reason": "应答丢失不代表加压未执行，重连不消除实际状态未知；不得自动重放C。先核实设备再安排后续，不自动复位或搬板。"
+        }
+      ],
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+    },
+    "R343": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "disconnect只释放USB，既没有停止指令也无压力回读，不能据此声称停止、泄压或立即可搬板。"
+        }
+      ],
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+    },
+    "R344": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "原程序的标准深孔板名称只是组合体代理登记，不证明真实过滤层、总高、夹持点或通用兼容；须匹配实际组合定义与安装。"
+        }
+      ],
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+    },
+    "R345": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "源码只证明发送D；方法名x_and_z与旧日志XY不能确证实际复位轴，当前应称模块复位并保留轴定义缺口。"
+        }
+      ],
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+    },
+    "R346": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+    },
+    "R347": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-riser.md；references/installation.txt"
+    },
+    "R348": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "下一板登记失败不表示实物库存空；数量仍2，源位真实堆叠仍占位，不能从代理None推断物理清空。"
+        }
+      ],
+      "rule": "references/api-riser.md；references/installation.txt"
+    },
+    "R349": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-riser.md；references/installation.txt"
+    },
+    "R350": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "Riser是普通槽位叠板辅助类，不是官方ModuleContext，也没有Riser模块加载名；应用Riser(...)创建。"
+        }
+      ],
+      "rule": "references/api-riser.md；references/installation.txt"
+    },
+    "R351": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "该维护定义v4记录stackLimit=4，原程序数量5只是源例取值，不能作为官方允许5层的证据。"
+        }
+      ],
+      "rule": "references/api-riser.md；references/installation.txt"
+    },
+    "R352": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "数量保留是最后已知账本，不证明实物完全未动；faulted会阻止继续取板，不能自动重试或假定回滚。"
+        }
+      ],
+      "rule": "references/api-riser.md；references/installation.txt"
+    },
+    "R353": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "stack_height_mm表示相同参考面之间的高度增量，不是垂直重叠量；本题应传12.32而非3.68。"
+        }
+      ],
+      "rule": "references/api-riser.md；references/installation.txt"
     }
   }
 }

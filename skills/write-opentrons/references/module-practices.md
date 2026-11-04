@@ -1,8 +1,8 @@
 # 模块操作经验与使用示例
 
-按设备定位：[热震荡](#heater-shaker) · [温控](#temperature-module) · [热循环](#thermocycler) · [磁力架](#magnetic-block) · [读板机](#absorbance-plate-reader) · [Stacker](#flex-stacker)
+按设备定位：[热震荡](#heater-shaker) · [温控](#temperature-module) · [热循环](#thermocycler) · [磁力架](#magnetic-block) · [读板机](#absorbance-plate-reader) · [Stacker](#flex-stacker) · [第三方倾斜模块](#第三方倾斜模块) · [第三方正压模块](#第三方正压模块)
 
-按[模块索引](api-modules.md)定位当前设备。官方硬条件唯一查module-conditions，API签名/参数查对应API文件，静态安装唯一查installation。经验应写明场景、来源、条件及验证程度；建议不自动升格为硬性约束，没有额外经验也不阻止合法用法。
+按[模块索引](api-modules.md)定位当前设备。机制和条件唯一查module-conditions，API签名/参数查对应API文件，静态安装唯一查installation。经验应写明场景、来源、条件及验证程度；建议不自动升格为硬性约束，没有额外经验也不阻止合法用法。
 
 ## 热震荡、温控和热循环的共用经验
 
@@ -427,3 +427,181 @@ storage_stacker.store()
 ```
 
 官方示例源：v10.0.0 docs/python-api/docs/modules/flex-stacker.md，固定身份见module-conditions的Stacker来源；相关契约见api-module-flex-stacker与共享加载API。这里保留片段，不重复复制完整官方API速查表。
+
+### 连续供料与对象引用
+
+来源：用户提供stacker_test.py的供料片段（SHA-256 db036afd6a0ee3b540664f72fa695aadd42f3cdbfe48b2b4664c4fa98b6701b5），按已有Stacker API整理。展示官方模块对象维护仓内库存、retrieve返回原生耗材，再按实验需要搬运和处理盖子的组织方式。
+
+以下为独立片段：仓内已人工预装3盒带匹配盖的50µL枪头盒、shuttle初始为空；B2/C2/D2空闲且路径、抓手及垃圾槽配置已确认。盖子在本例送到外置垃圾槽，实际去向按本次流程选择。
+
+```python
+stacker = protocol.load_module("flexStackerModuleV1", "A4")
+stacker.set_stored_labware(
+    load_name="opentrons_flex_96_tiprack_50ul", count=3,
+    lid="opentrons_flex_tiprack_lid",
+)
+chute = protocol.load_waste_chute()
+
+retrieved_labware = []
+for destination in ["B2", "C2", "D2"]:
+    labware = stacker.retrieve()
+    retrieved_labware.append(labware)
+    protocol.move_labware(labware, new_location=destination, use_gripper=True)
+    protocol.move_lid(labware, new_location=chute, use_gripper=True)
+
+# 每个元素保留一次retrieve返回的原生耗材对象，供后续实验使用。
+```
+
+仓内数量随官方retrieve更新，不另写剩余计数、不反复set_stored_labware，也不用把全部仓内状态复制进自定义类。需要查看时使用get_stored_labware；这是协议跟踪库存，不是设备实时感知盘点。retrieved_labware只是本例已成功取出的对象引用集合，不是仓内库存副本，也不证明后续搬运/移盖已完成；不需要保留全部引用的流程可直接使用当前返回对象。
+
+每次先搬离shuttle，才继续下一次retrieve；若工作位已有旧耗材，按本次确定的去向先释放工作位。异常继续上抛，保留已经完成的取出/位置事实，不自动再取一件、搬回或重新声明库存。该片段仅作组合参考，最终可按实验步骤组织或改写，不要求套用固定函数。
+
+
+## 第三方倾斜模块
+
+### 来源、经验与边界
+
+以下按用户提供的完整洗板案例改写，使用当前[接口](api-module-tilt.md)，按当前必要加载适配改写。机制和动作条件唯一见[module-conditions](module-conditions.md#第三方倾斜模块)；安装/承载和案例配置证据唯一见installation。原案例证明存在相应代码路径，不代表本项目新验证了实机效果。
+
+- 沿用案例的组织方式：先确认设备与几何基准，再登记/搬入孔板，执行已确认的倾斜步骤，正常结束按任务回水平及搬出。轻量TiltDevice不强制逐连接回零；完整加载层为本连接几何基准要求显式home。硬件home与几何水平可不同，加载前调用level按当前映射调平。
+- 优先复用当前默认通讯设置，无需向操作员询问波特率。多台USB设备时只补齐实际设备选择信息，不用芯片相同代替型号核对。
+- 当前位置与动作结果不确定时先保留状态并核对；不以finally自动归零、回水平或抓手搬板作为通用恢复。正常收尾与异常释放连接分别处理。
+- 暂不推广旧洗板工艺值、Gate路径、混匀角度、流速倍率或板型白名单。倾斜移液仍按实际任务和现有操作规则编写；独立核对枪头/喷嘴、孔壁、真实液面和动作包络，不能因坐标函数可算就认定能安全移液。
+
+### 示例前提
+
+四个片段分别展示轻量设备控制、完整加载、搬入搬出及载板坐标，不是完整洗板protocol，不增加新的模块API。完整tilt.py已内嵌或单独正确部署，含通讯/设备/加载/几何；无需再拼接兄弟源码。完整协议继续补齐本次API、液体初始化、实验步骤与审查，不在客户代码里从技能目录导入。
+
+angle、位置、板名、校准及抓手偏移由实际任务确定；这里只用函数参数表达，原案例数值及适用范围见installation。移动设备前已确认枪头和抓手退出运动包络；搬板片段的前提为模块已处于本次核对的空闲、无故障、水平状态，目标承载位与路径已确认。示例不能代替这些前提，也不据其分析通过宣称实机通过。
+
+### A. 创建、查询与显式运动
+
+官方模拟先隔离真实USB；这不是为倾斜设备提供了仿真后端。正常分支只在任务需要时调用，最后正常回0°与连接释放分开；异常不会再发一次运动。
+
+```python
+def tilt_motion_example(protocol, *, angle_deg, speed_deg_s=None):
+    if protocol.is_simulating():
+        protocol.comment("模拟：跳过倾斜设备控制")
+        return None
+    with TiltDevice() as tilt:
+        tilt.home()  # 本例显式建立基准；不写入Flash。
+        tilt.move_to(angle_deg, speed_deg_s)
+        # 在此组织已确认的实验步骤及必要等待。
+        return tilt.move_to(0.0, speed_deg_s)  # 正常结束回硬件0°。
+```
+
+创建与with进入不加载孔板；读取状态用tilt.status()，连接结果用tilt.open()，不混淆为官方模块的加载返回值。需要留在指定倾角时按任务调整正常收尾，不把本例回0°当强制默认。
+
+### B. 完整加载：板预先在模块上
+
+config为已核对的TiltFlexConfig，其中位置、几何和抓手偏移按实际确定；复用原案例配置时按installation核对适用范围。工厂只构造，with进入时选择真实/内存后端并连接；官方模拟自动走内存后端，不打开真实USB。load_labware返回TiltPlate，自带平移、旋转与绑定检查。
+
+```python
+def tilt_plate_record_example(protocol, *, config, load_name, angle_deg):
+    with load_tilt_module(protocol, config) as module:
+        module.home()
+        module.level()  # 按几何水平校准；不等同于无条件再做一次运动。
+        plate = module.load_labware(load_name, label="倾斜板")
+        module.set_angle(angle_deg)
+        # 在此按本次任务使用plate；坐标用其bottom/top/location方法。
+        module.level()
+        return plate.labware
+```
+
+返回的是原生Labware；with结束会断连并使倾斜坐标失效。此例不执行移液，原生Labware也不隐含倾斜高度或角度。完整协议通过plate.labware完成实际液体初始化，使用TiltPlate获得当前可信姿态的点。
+
+### C. 抓手搬入、倾斜、正常调平并搬出
+
+plate已在其他已确认位置加载；config中已提供对应抓手取/放Z及必要XY偏移。无需手动调用普通move_labware并维护两套绑定；加载层在成功动作后更新child和labware，搬出成功才解除绑定。动作前仍须真实工具与路径已确认。
+
+```python
+def tilt_plate_move_example(protocol, plate, *, config, end_slot, angle_deg):
+    with load_tilt_module(protocol, config) as module:
+        module.home()
+        module.level()
+        module.move_labware_onto_module(plate, use_gripper=True)
+        module.set_angle(angle_deg)
+        # 在此组织已确认的模块上操作；不默认生成洗板或移液策略。
+        module.level()
+        return module.move_labware_off_module(end_slot, use_gripper=True)
+```
+
+异常退出仅释放连接，不在finally自动回水平或搬板。若SDK已经登记/搬入、几何视图构造失败，module.labware仍记录占用，child可为None；不能当空模块继续加载。取得新的有效状态/基准并核对实物后，再显式卸载或搬出；失败状态不猜物理结果。
+
+### D. 直接读取载板补偿坐标
+
+tilt_plate由当前模块load_labware或move_labware_onto_module返回；须仍绑定、连接且有有效姿态。方法完成必要平移及旋转，调用者无需再次手算模块高度或组合Point；它只返回Location，不执行运动。
+
+```python
+def tilt_plate_locations_example(tilt_plate, *, well_name, local_z):
+    return {
+        "bottom": tilt_plate.bottom(well_name, z=local_z),
+        "center": tilt_plate.center(well_name),
+        "top": tilt_plate.top(well_name),
+    }
+```
+
+Location仍关联原始Well；没有自动写入官方引擎的倾斜姿态/液面模型。移出或姿态失效后旧TiltPlate会拒绝获取坐标。实际移液路径、液面与边界仍按本次方案核对。
+
+## 第三方正压模块
+
+### 来源、经验与边界
+
+以下按用户提供的过滤程序摘取组织方式，使用当前[API](api-module-positive-pressure.md)。机制/动作条件唯一见[module-conditions](module-conditions.md#第三方正压模块)，案例安装及偏移唯一见installation；未收录整份DDM处理流程、样本映射、震荡条件或专用移液参数。
+
+- 模块作为完整单文件使用：已包含USB通讯、命令控制和模拟处理。普通协议只创建PPMDevice(protocol)，不要求使用者选择通讯层或手动拼装类。
+- 复位是独立的准备操作，按本次初始状态与实验需要选择；不把源程序的可选复位改为每次连接或每次加压的必做动作。
+- 正常流程可按“搬入组合耗材→发送本次加压设置→确认可搬出条件后搬回”组织；异常释放连接与正常搬出分开，不在finally中补发复位或搬板。
+- 压力与时长依据实际过滤需求和已确认设备范围设定。源程序的两次处理及参数选项不是通用工艺默认；多次调用是多条独立指令，不据C帧的保留字段声称已提供双段压力API。
+
+### 示例前提
+
+完整positive_pressure.py已内嵌在协议中；下列是调用片段，不是完整实验protocol。完整协议仍需本次metadata/requirements/run、硬件与液体初始化。源码注释供编写者阅读，运行comment只描述操作进度。官方模拟自动隔离USB，不在片段中再套dry_run跳过正压。
+
+### A. 创建并执行一次定压计时
+
+```python
+def positive_pressure_example(protocol, *, pressure_kpa, seconds):
+    with PPMDevice(protocol) as ppm:
+        ppm.send_pressure_time(pressure=pressure_kpa, seconds=seconds)
+```
+
+with进入时连接、退出时释放连接，不隐含复位。压力单位为kPa，此设备入口的时间单位为秒；不与低层PPMController的毫秒参数混用。真实流程等待指令应答，模拟仅记录并等待计划时长。
+
+### B. 独立复位
+
+前提为本次已确认需要复位、模块承载位为空且工具退出动作包络；片段本身不负责检测这些实物状态。
+
+```python
+def positive_pressure_reset_example(protocol):
+    with PPMDevice(protocol) as ppm:
+        ppm.reset_x_and_z()  # 沿用方法名；当前只确认发送D指令。
+```
+
+### C. 整体搬入、加压、正常搬回
+
+assembly为已加载并核对真实几何的组合体；位置和两端抓手偏移已按本次安装确认。当前固件的ok语义及随后可搬出状态已有依据，模块交互位为空、路径和工具状态满足动作条件。未确认这些前提时先补足，不用延时或应答代替压力/机械状态证据。
+
+```python
+def positive_pressure_transfer_example(
+    protocol, assembly, *, pressure_slot, return_slot,
+    source_pick_up_offset, pressure_drop_offset,
+    pressure_pick_up_offset, destination_drop_offset,
+    pressure_kpa, seconds,
+):
+    protocol.move_labware(
+        assembly, new_location=pressure_slot, use_gripper=True,
+        pick_up_offset=source_pick_up_offset,
+        drop_offset=pressure_drop_offset,
+    )
+    with PPMDevice(protocol) as ppm:
+        ppm.send_pressure_time(pressure=pressure_kpa, seconds=seconds)
+    # 正常搬出：依赖上述已核对的固件应答及可搬出条件。
+    protocol.move_labware(
+        assembly, new_location=return_slot, use_gripper=True,
+        pick_up_offset=pressure_pick_up_offset,
+        drop_offset=destination_drop_offset,
+    )
+```
+
+加压抛异常时不会执行后面的正常搬回；连接释放也不发送停止或复位。这里不固化B4、C1或案例偏移，数值与复用范围继续查installation。

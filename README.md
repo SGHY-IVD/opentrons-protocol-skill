@@ -6,12 +6,20 @@
 
 这是一个社区维护的 AI Agent Skill，源于实际协议编写经验的持续整理。它把 API 参考、设备与耗材约束、移液规则、原子代码片段和审查流程组织成一个按需读取的知识包，让 AI 编写脚本时有明确依据。
 
-本项目不是 Opentrons 官方项目，也不是独立运行的协议生成器、机器人驱动或模拟器。
+本项目主要是供AI助手读取的技能包，不是 Opentrons 官方项目或独立运行的协议生成、设备控制及模拟应用；按需取用的第三方设备实现见扩展入口。
 
 
-## 本次发布：2026-11-04.27
+## 本次发布：2026-11-04.34
 
-累计同步公开版2026-10-29.6之后的更新；当前规则版本以[技能入口](skills/write-opentrons/SKILL.md)为准，Python协议API维护基线仍为2.30。
+本次同步公开版2026-11-04.27之后的扩展与示例更新；当前规则版本以[技能入口](skills/write-opentrons/SKILL.md)为准，Python协议API维护基线仍为2.30。
+
+- 新增[第三方扩展代码库](skills/write-opentrons/references/extensions.md)：倾斜、正压均提供包含各自USB通讯的完整单文件，接口、动作条件、安装及经验分开维护。倾斜另含Flex加载、单板绑定和几何适配；正压仅保留单段加压`C`与复位`D`，耗材仍用官方SDK加载、搬运。这些扩展不是官方硬件API。
+- 澄清倾斜源案例当前代码中的有效安装常量，失效的旧注释不再构成额外冲突；仅在匹配同一安装、板型及坐标基准时复用，不将候选槽位和板型组合称为已实机验证。
+- 新增独立[Riser叠板辅助类及API示例](skills/write-opentrons/references/api-riser.md)，从普通槽位顶部逐块供板，保留原生耗材引用并正确记录搬运与下一板登记部分完成后的状态；仅依赖现有SDK上下文，不是官方Stacker或实体增高适配器。
+- 补充[原生Stacker连续供料示例](skills/write-opentrons/references/module-practices.md#连续供料与对象引用)：由官方模块维护仓内库存，每次retrieve后搬离托盘，按本次流程处理盖子和对象引用；不新增库存管理器或换枪头策略。
+- 回归集由325题增至353题，本轮新增28题。此前325题的独立审查经选择性复核后类别325/325一致、严格类别与定位309/325，验证摘要见[维护记录](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md)；该审查数字仅对应原325题。本次仅公开验证摘要，新增的详细内部审查对话与原始结果不包含在公开包，此前已公开的历史记录保留。发布前复跑235项Python测试，233项通过、2项可选mDNS测试因缺依赖跳过；353题结构与语法检查、两个设备单文件的构建一致性检查通过。既有独立生成和动作记录验收与本次离线复跑分别记录；未运行官方SDK协议模拟、真实USB或实机验证，不代表所有模型、输入或配置均可靠。
+
+### 此前 .27 已收录的能力
 
 - 新增[参数化指引](skills/write-opentrons/references/parameter-planning.md)：按实际收益选择定值、小型映射或必要计算，支持连续体积和运行时CSV；混匀量、拆段、容量与流速保持一致，在影响样品的动作前完成相关输入的整体预检。
 - 默认采用动态混匀，明确要求时使用静态模式；完善前次加液衔接、液面终点及末段连续路径。按实际耗材定义核对体积模型，缺模型时说明影响，经确认后采用限定的固定高度方案。
@@ -20,7 +28,6 @@
 - 补充[六类模块](skills/write-opentrons/references/api-modules.md)的并发与timer、温控适配和低温、PCR程序、读板前温度平衡与等待、Stacker补给计数差异及磁力架使用经验。接口、硬件条件与经验继续分层维护。
 - 新增32项[问答](skills/write-opentrons/references/faq.md)。协议骨架移至references，作为新建完整协议必读的结构参考；完善文件头、职责区块、实际场景策略的源码说明，以及最终聊天参数摘要，示例不成为固定代码布局要求。
 - 补强共享孔多喷嘴账本、含空气排液的版本和位置核对、旧API功能门槛及Stacker托盘占用判断。可选HTTP上传加强设备序列号复核、参数与文件校验及失败状态处理。
-- 回归集由237题增至325题；已记录的独立审查经选择性复核后类别325/325一致、严格类别与定位309/325，验证摘要见[维护记录](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md)；本次新增的详细内部审查对话与原始结果不包含在公开包，此前已公开的历史记录保留。发布前复跑113项Python测试，111项通过、2项可选mDNS测试因缺依赖跳过；325题结构与语法检查通过。既有独立生成和动作记录验收与本次复跑分别记录，未运行官方SDK模拟或实机验证，不代表所有模型、输入或配置均可靠。
 
 ## 适用场景
 
@@ -48,7 +55,7 @@ git clone https://github.com/SGHY-IVD/opentrons-protocol-skill.git
 
 安装后，在对话中明确要求使用 `write-opentrons`，并提供实验流程和布局。如果客户端不支持原生 Skill，可让具备文件读取能力的助手读取 `skills/write-opentrons/SKILL.md`，再按其中路由读取资源；这不等同于完成原生安装。
 
-技能执行流速、等待和回归辅助脚本需要 Python 3；这些辅助脚本及HTTP工具使用标准库。只有按需启用mDNS发现时需要Python 3.10+及独立的可选依赖；安装方式见[设备工具说明](skills/write-opentrons/references/flex-http.md)。运行生成的 Opentrons 协议还需要匹配的 Opentrons 环境。客户端需要能读取相关文件；无法执行查询工具或读取资料时，应报告缺口，不凭记忆补值。
+技能执行流速、等待和回归辅助脚本需要 Python 3；这些辅助脚本及HTTP工具使用标准库。按需启用mDNS发现时需要Python 3.10+及独立的可选依赖；安装方式见[设备工具说明](skills/write-opentrons/references/flex-http.md)。真实控制第三方倾斜或正压设备时另需PyUSB、可用USB后端及设备访问权限，普通查询脚本不需要这些USB依赖；Riser仅使用传入的Opentrons SDK上下文。设备实现的“完整单文件”不包含运行环境依赖，详见[扩展入口](skills/write-opentrons/references/extensions.md)。运行生成的 Opentrons 协议还需要匹配的 Opentrons 环境。客户端需要能读取相关文件；无法执行查询工具或读取资料时，应报告缺口，不凭记忆补值。
 
 核心技能资料目前主要为中文，可用中文或英文提出任务。本仓库提供中英文项目说明；尚未逐一验证所有支持 Skill 的客户端。
 
@@ -98,13 +105,14 @@ git clone https://github.com/SGHY-IVD/opentrons-protocol-skill.git
 - `skills/write-opentrons/references/faq.md`：供AI按需组织解释的问答要点。
 - `skills/write-opentrons/assets/review-regression/`：题面、预期结果及已有评审记录。
 - `skills/write-opentrons/assets/labware/`：可按具体实物匹配的自定义定义及其限制。
+- `skills/write-opentrons/assets/python/`：按需内嵌的完整第三方设备实现、通讯源码及Riser耗材辅助类；能力与依赖见扩展入口。
 - `skills/write-opentrons/agents/`：客户端展示元数据。
 
 ## 当前基线与验证边界
 
 首次公开快照：**规则版本 2026-10-21.9，维护文档基线 API 2.30**。这是本项目维护的基线，不表示始终追踪官方最新版本；指定旧版时按版本索引检查，不静默升级。
 
-回归集目前包含325个案例，覆盖液体／活塞／枪头／路径状态、二段排空、一吸多分、动态与静态混匀、参数与CSV派生关系、体积模型缺失方案、磁吸去上清、共享孔与空气跟踪、模块及安装关系、旧API功能门槛，以及配置确认、交付说明和设备连接的证据边界。已有评审记录按批次保存，不代表所有版本和实验都已验证。
+回归集目前包含353个案例，覆盖液体／活塞／枪头／路径状态、二段排空、一吸多分、动态与静态混匀、参数与CSV派生关系、体积模型缺失方案、磁吸去上清、共享孔与空气跟踪、模块及安装关系、旧API功能门槛、第三方倾斜与正压、Riser叠板辅助，以及配置确认、交付说明和设备连接的证据边界。已有评审记录按批次保存，不代表所有版本和实验都已验证。
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py

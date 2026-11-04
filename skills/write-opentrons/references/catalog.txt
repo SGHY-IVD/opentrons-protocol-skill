@@ -83,6 +83,10 @@ Absorbance Plate Reader Module | absorbanceReaderV1
 Flex Stacker Module | flexStackerModuleV1
 硬件固定来源：上述commit的docs/python-api/docs/pipettes/loading.md、modules/setup.md及docs/flex/docs/modules/index.md，2026-10-28复核。源码内部名或未列公开范围的型号不自动成为可用推荐。
 
+9补充. 用户维护的第三方设备（不计入官方6类）
+倾斜模块 | 当前Python类TiltDevice；同设备源码含TiltController/TiltGeometry | 入口references/api-module-tilt.md；实现与依赖references/extensions.md；承载证据references/installation.txt的第三方倾斜条目。没有官方module_name/load name，不调用load_module虚构型号。
+正压模块 | 当前Python类PPMDevice；同设备单文件含PPMController及USB通讯 | 入口references/api-module-positive-pressure.md；实现与依赖references/extensions.md；承载证据references/installation.txt的第三方正压条目。没有官方module_name/load name，不与官方真空模块混同。
+
 10. 官方适配器相关组合耗材 / 铝块（不是独立 adapter；单独列名）
 温控24孔铝块+管的前6项是当前官方支持的组合加载方式，不因“组合”归为淘汰项：按实际管品牌/规格/盖型匹配，由温控模块load_labware一次加载整套，不再叠加load_adapter或重复加载管。该发布没有独立24孔铝块定义，不杜撰名称。客户可说“24孔温控铝块＋NEST 1.5mL翻盖管”；仅“24孔架/1.5mL管”不足以匹配时，只补问实物铝块、管品牌/型号及必要特征，不把普通管架当铝块或把不同管视为同款。通用2mL螺口组合也须核对实物匹配，不能作为任意品牌/容量管的回退。96孔旧组合另按安装关系的分体加载边界处理。
 opentrons_24_aluminumblock_generic_2ml_screwcap

@@ -17,7 +17,18 @@
 |Absorbance Plate Reader|6；[API](api-module-absorbance-plate-reader.md)|[机制/条件](module-conditions.md#absorbance-plate-reader)|[操作经验](module-practices.md#absorbance-plate-reader)|
 |Flex Stacker|13；[API](api-module-flex-stacker.md)|[机制/条件](module-conditions.md#flex-stacker)|[经验/示例](module-practices.md#flex-stacker)|
 
-## 加载示例
+## 第三方扩展模块
+
+以下为用户维护的扩展，与上方六类官方ModuleContext分别记载；沿用“API/创建、机制/条件、经验/示例、安装”的资料契约，不增加官方成员计数或load_module型号。
+
+|设备|API与创建|机制与条件|经验与示例|
+|---|---|---|---|
+|第三方倾斜模块|[当前接口与加载](api-module-tilt.md)|[机制/条件](module-conditions.md#第三方倾斜模块)|[经验/示例](module-practices.md#第三方倾斜模块)|
+|第三方正压模块|[当前接口与创建](api-module-positive-pressure.md)|[机制/条件](module-conditions.md#第三方正压模块)|[经验/示例](module-practices.md#第三方正压模块)|
+
+静态承载及证据状态继续查installation；实现与通讯依赖查[扩展入口](extensions.md)。
+
+## 官方模块加载示例
 
 以下各行是独立示例，只展示返回对应模块对象；不是默认装机、联合布局或完整协议。实际位置须由本次授权布局和installation核验，版本按目标API核对；适配器/耗材加载继续查共享API和实际安装关系。模块对象变量名可按任务调整。
 
@@ -32,7 +43,7 @@
 
 共享加载/模型/位置/耗材属性见[共享API](api-module-common.md)。`load_module`仍查api-layout.md；`Task`、等待任务与计时器见api-module-tasks.md。操作硬条件见module-conditions.md；装载/收尾及[并发方式选择经验](module-practices.md#按等待对象选择并发)见module-practices.md；安装占位继续只查installation.txt。
 
-同步范围仅含Flex六类公开模块。当前edge源码另有API 2.31 VacuumModuleContext，超出本技能2.30基线，未收录为可用接口；HEPA/UV不在此六类Python模块上下文中，不凭名称杜撰控制方法。未收录设备仍反馈缺失。
+官方API同步范围仅含Flex六类公开模块。当前edge源码另有API 2.31 VacuumModuleContext，超出本技能2.30基线，未收录为可用接口；HEPA/UV不在此六类Python模块上下文中，不凭名称杜撰控制方法。未收录设备仍反馈缺失。
 
 官方说明与源码存在差异时：热震荡set_and_wait_for_shake_speed实际返回None并阻塞，不按旧说明当Task；set_shake_speed返回Task。热震荡温度范围区分API校验与物理可达，见module-conditions.md。
 

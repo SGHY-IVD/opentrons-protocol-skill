@@ -1,5 +1,5 @@
 Opentrons Flex 安装关系库
-关系核验逻辑与夹具表更新：2026-10-29；温控上层关系补充：2026-11-04；适用主线：Flex；范围：当前官方耗材清单与6类Flex模块。
+关系核验逻辑与夹具表更新：2026-10-29；温控上层关系补充：2026-11-04；适用主线：Flex；范围：当前官方耗材清单与6类Flex模块；用户维护的第三方设备在独立条目注明来源及证据状态。
 用途：依据按operations“布局与耗材确认”确定的配置核对加载层级及官方明确约束；未经授权不替用户设计台面，不进行完整碰撞模拟。
 查询顺序：按下方“统一安装核验”解析位置、匹配夹具与区域，再沿实际承载关系核对上层对象。
 状态含义：明确支持=有官方条目；明确禁止=有显式约束；未收录/未确认=不自动判断兼容或不兼容，反馈缺失。
@@ -247,3 +247,27 @@ opentrons_universal_flat_adapter | definition version=1 | https://raw.githubuser
 opentrons_universal_flat_adapter_corning_384_wellplate_112ul_flat | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_universal_flat_adapter_corning_384_wellplate_112ul_flat/1.json
 opentrons_universal_flat_adapter_type_b | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_universal_flat_adapter_type_b/1.json
 opentrons_flex_deck_riser | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/opentrons_flex_deck_riser/1.json
+
+
+第三方扩展：倾斜模块（用户提供案例的软件承载关系）
+来源：完整洗板模板，SHA-256 3f8af32d1f0257ef7990e3d68aecb52b16b9dd08fd7a7474b89e32ed3269b193。参考范围为原始TiltFlexModule/TiltPlate的单子对象、加载/搬运及坐标实现；当前单文件加载层已提供这些必要承载包装，接口以api-module-tilt.md为准。不是官方fixture/shared-data记录。
+物理关系：用户实际安装夹具/承载区域 -> 倾斜模块 -> 案例所维护的一块孔板；父子关系与同槽位独立对象竞争分开判断，模块上的板不因同名位置而再占一个独立普通槽。单子对象是案例软件模型，不宣称模块物理上只能承载一块板，也不据此允许多板/堆叠。
+软件表达：原案例向ProtocolContext.load_labware(name, module_slot)或move_labware(new_location=module_slot)登记的是普通槽位中的Labware；实物位于倾斜模块上的父子关系由当前TiltFlexModule/TiltPlate自定义包装维护。创建TiltDevice只控制设备；load_tilt_module先构造包装，随后显式连接、home、加载或搬入，不会注册成官方ModuleContext。物理父层、官方引擎记录与自定义几何三者分别记账，不将普通槽位坐标直接当成实物高度。
+位置候选：原洗板模板开放A2/B2/C2/D2；这是模板范围，不是底层安装兼容或各槽实机验证，不据此禁止其他槽位。真实夹具/cutout适配、固定方式、朝向、占位包络、邻位及抓手路径证据仍未提供；按统一核验保留缺口，不杜撰官方fixture id/addressableArea或继承其他模块的安装表。
+案例上层板型：corning_96_wellplate_360ul_flat、corning_24_wellplate_3.4ml_flat、corning_6_wellplate_16.8ml_flat。这里只登记源案例的配置名单，不作为模块通用白名单或实物兼容认证；实际定义/几何仍须匹配，其他板型未列出不等于禁止。
+案例配置：以原模板当前实际代码为准，旧数值注释已失效，不再作为校准冲突或额外确认项。模块参考高度65.0mm，轴至板底27.0mm，几何角度符号+1、角度补偿0；模块XY偏移0，抓手取/放XY偏移0、Z偏移均为65.8mm。四个候选槽位共用此案例配置。明确复用同一安装、板型及坐标基准时可采用该配置，不因旧注释重复询问；其他安装或板型仍核对本次适用性，板底至孔底距离按匹配板型确定。代码配置不等于逐槽、逐板实机验证。
+证据边界：原VALIDATED_GRIPPER_PLATE_SLOT_PAIRS实际是三板型×四槽位的临时全开放集合，注释说仍待硬件验证，不是12组已验证兼容证据。加载/搬运成功后的父层与占位才按实际动作更新；板移出后模块本体仍占用原位置。水平/动作及模拟条件唯一查module-conditions同名节；接口与使用片段查api-module-tilt和module-practices。
+
+第三方扩展：正压模块（用户提供过滤案例）
+来源：用户提供的正压过滤程序，SHA-256 625bcbcdd06a46650d457f4eb767e0263cad52188116a63d152d5aff33cdf098；是案例安装与搬运记录，不是官方fixture/shared-data关系或厂商兼容认证。
+物理关系：实际安装支撑/扩展承载区域 -> 正压模块 -> 本次匹配的过滤/接收组合耗材。案例将“深孔板+过滤板组合体”作为一个整体搬入、搬出；真实分层、密封和夹持对象按实际装配核对，不凭一个Labware标签推导完整几何。组合体与模块是上下层承载关系，移出组合体后模块本体仍占原安装区域。
+软件表达：用PPMDevice(protocol)创建控制对象，不调用虚构的官方load_module型号；组合体以原生Labware及普通move_labware登记位置，无额外的正压模块坐标模型或官方引擎占位。实际模块本体和运动包络仍记入布局账本；官方模拟不能因此识别其完整体积。
+案例配置：正压交互位B4，组合体原位置C1；正压侧抓手取/放偏移均为x=0、y=0、z=+5mm，相对普通台面侧取/放均为0。明确复用同一安装、组合体及坐标基准时可沿用；不是全体正压设备的默认位置、模块高度或通用抓手补偿。其他安装和耗材须核对本次适用性；第4列的移液可达性按统一规则判断。
+耗材证据：案例用nest_96_wellplate_2ml_deep登记整个组合体，另加载热震荡深孔板适配器；这不能证明标准NEST定义已描述实际过滤板上层、组合体总高、夹持点或体积模型，也不能认定任意过滤板都适配。实际组合耗材定义未提供，按本次任务补齐或核对，不能把该代理名称收为通用兼容白名单。
+安装缺口：厂家型号、底层夹具/cutout适配、固定朝向、模块运动与邻位包络及真实组合耗材尺寸未从源程序确定；保留具体缺口，不推定与其他模块共享安装关系。机制/动作条件查module-conditions同名节，接口和使用片段分别查api-module-positive-pressure与module-practices。
+
+耗材辅助：普通槽位叠板（Riser，非设备模块）
+来源：用户Riser.py，SHA-256 ed4697668b4bf98b7032dc91631d1ca9fc9b3ba8ec9afaafc9fb033592628780；接口/状态和使用示例见api-riser.md。它是顶部逐板取出的软件辅助类，不是官方Flex Stacker，也不表示安装了opentrons_flex_deck_riser。
+物理关系：本次实际普通槽位夹具/支撑 -> 同类耗材的真实上下层堆叠；同层竞争与上下适配按统一核验。SDK只登记当前最上层板的普通槽位代理，其他板及整体高度仍在物理账本保留，不能因代理取走或尚未重载就将剩余堆叠区域当作实物空位。
+案例配置：原附件在C4登记opentrons_96_wellplate_200ul_pcr_full_skirt，quantity=5、层间高度增量13mm、首层额外高度0，先后搬至C2和D2。这些是原程序取值，不是通用默认或已验证组合；该板维护定义v4的stackLimit见上方官方耗材条目，原5层不能据程序可执行就视为满足该定义。实际板型/版本、堆叠数量、相邻板参考面增量、整体高度及抓手路径按本次安装核对，不把重叠量直接作为高度增量。
+占位与坐标：取完库存不表示已移走底座/夹具，真实支撑仍按其实物属性占位。取板Z补偿不改变官方耗材坐标或整叠障碍模型；底座高度也不能与已含支撑高度的定义重复叠加。目标drop_offset只处理目标侧抓手落板补偿，不建立第三方模块的完整绑定或安装关系。示例使用第4列仍按其普通暂存区域、API与deck configuration条件核对。

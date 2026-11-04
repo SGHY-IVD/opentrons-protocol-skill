@@ -2277,6 +2277,202 @@
       "state": "已核对Flex v10.0.0 / API2.30，单喷嘴先吸100µL液体再取10µL空气，向单孔排50µL。只用location=well.meniscus(target=\"end\")，不传end_location；只审本步定位与成功后的记录，不审其余动作。",
       "overrides": "无。",
       "code": "# 本次 END 位置按增加50µL预测，普通排液成功后只增加40µL；不能据后续账本正确认定本步物理液面正确。"
+    },
+    {
+      "id": "R326",
+      "scope": "当前倾斜设备接口",
+      "state": "实际设备与USB依赖已匹配，运动包络、角度与速度范围已核对。正式运行；只审当前TiltDevice接口及正常/异常收尾，不审完整协议布局、液量或其他步骤。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "tilt = TiltDevice()\ntry:\n    connection = tilt.open()\n    state = tilt.home()\n    state = tilt.move_to(10.0)\n    state = tilt.status()\n    state = tilt.move_to(0.0)\nfinally:\n    tilt.close()"
+    },
+    {
+      "id": "R327",
+      "scope": "第三方加载接口",
+      "state": "只使用当前安装的倾斜扩展源码，没有额外定义或外部兼容包装。只审创建调用，不审配置数值与布局。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "module = load_tilt_module(protocol, TiltFlexConfig(location=\"C2\"))"
+    },
+    {
+      "id": "R328",
+      "scope": "第三方官方加载名",
+      "state": "仅当前维护资料中的倾斜源码；没有已登记的额外官方模块型号。只审模块身份和加载调用。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "module = protocol.load_module(\"tiltModuleV1\", \"C2\")"
+    },
+    {
+      "id": "R329",
+      "scope": "抓手兼容依据",
+      "state": "安装依据仅来自原洗板模板的VALIDATED_GRIPPER_PLATE_SLOT_PAIRS及其全部板型×槽位开放内容；没有独立实机验证记录。只审下面的证据声明。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "# 该集合证明三种板型在四个槽位的12组抓手搬运都已通过实机验证。"
+    },
+    {
+      "id": "R330",
+      "scope": "第三方搬运校准",
+      "state": "原洗板模板的配置以实际代码为准，案例数值已明确；无本机校准或本次C2底层安装、板型及偏移适用性的确认记录。plate已在其他位置加载，本次只核对自动搬入倾斜模块所用的安装/偏移依据。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "protocol.move_labware(plate, \"C2\", use_gripper=True, drop_offset={\"z\": 65.8})"
+    },
+    {
+      "id": "R331",
+      "scope": "物理承载与官方槽位记录",
+      "state": "已确认本次C2实际支撑及模块与该板适配，一块板放在倾斜模块上；没有同层其他独立耗材。只审静态父子关系的软件表达，不审坐标与运动、完整液体初始化。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "plate = protocol.load_labware(\"corning_96_wellplate_360ul_flat\", \"C2\")\n# 官方引擎按普通槽位记录板；物理账本记倾斜模块承载plate，同用C2。"
+    },
+    {
+      "id": "R332",
+      "scope": "当前标定签名",
+      "state": "已明确授权本次零点标定，实物状态与操作条件已核对。tilt是当前TiltDevice；只审方法参数，不审校准流程。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "tilt.calibrate_zero(confirm=True)"
+    },
+    {
+      "id": "R333",
+      "scope": "模拟与真实USB隔离",
+      "state": "当前正在官方协议模拟中运行，使用当前TiltDevice，未提供替代后端。只审外接设备访问。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "tilt = TiltDevice()\ntilt.open()"
+    },
+    {
+      "id": "R334",
+      "scope": "断连后的机械状态声明",
+      "state": "一次真实运动命令发出后丢失回复并报通讯超时；没有后续可信设备状态，也没有已验证停止接口。只审下面的清理及状态结论。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "tilt.close()\n# 设备已经停止，当前角度为0°，可以立即搬板。"
+    },
+    {
+      "id": "R335",
+      "scope": "完整加载与正常收尾",
+      "state": "本次config为已独立核对安装、坐标、范围的TiltFlexConfig，运行环境匹配、工具退出与物理加载已确认。只审当前完整加载接口、绑定与正常结束，不审液量与完整实验步骤。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "with load_tilt_module(protocol, config) as module:\n    module.home()\n    module.level()\n    plate = module.load_labware(\"corning_96_wellplate_360ul_flat\")\n    module.set_angle(10.0)\n    module.level()"
+    },
+    {
+      "id": "R336",
+      "scope": "加载前几何水平",
+      "state": "当前完整加载层已连接；config.geometry_angle_sign=1，geometry_angle_offset_deg=5，其余实参有效；板未绑定，硬件回零后报告0°。只审加载前的水平条件。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "module.home()\nplate = module.load_labware(\"corning_96_wellplate_360ul_flat\")"
+    },
+    {
+      "id": "R337",
+      "scope": "几何视图失败后的承载状态",
+      "state": "当前加载层已经成功向SDK登记或搬入耗材，随后TiltPlate几何构造因耗材无孔失败；module.labware仍为该耗材，module.child为None。只审下面的占用结论。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "# child为None，因此承载位已空，可以直接加载另一块板。"
+    },
+    {
+      "id": "R338",
+      "scope": "正压设备创建及秒单位",
+      "state": "当前PPMDevice来自完整正压单文件，真实运行依赖、设备与本次工作参数已核对。只审创建、连接及加压调用，不审布局和其他实验步骤。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "with PPMDevice(protocol) as ppm:\n    ppm.send_pressure_time(pressure=80, seconds=90)"
+    },
+    {
+      "id": "R339",
+      "scope": "正压设备时间参数",
+      "state": "ppm是当前已连接PPMDevice；本次计划加压90秒。只审方法签名和时间单位。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "ppm.send_pressure_time(pressure=80, duration_ms=90000)"
+    },
+    {
+      "id": "R340",
+      "scope": "低层正压与官方模拟",
+      "state": "当前在官方协议模拟内执行，无替代传输或分支隔离。只审外接设备访问。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "ppm = PPMController()\nppm.connect()"
+    },
+    {
+      "id": "R341",
+      "scope": "用水试运行与正压",
+      "state": "真实机器人运行，protocol.params.dry_run=True，使用当前PPMDevice，没有额外跳过或缩时分支。只审下面对类行为的声明。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "# dry_run开启后PPMDevice不会访问USB，并会自动将正压缩短为10秒。"
+    },
+    {
+      "id": "R342",
+      "scope": "正压应答丢失后的重放",
+      "state": "ppm是当前PPMDevice；首条真实加压指令已经发出但丢失应答，设备实际状态未核实。只审异常分支的动作。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "try:\n    ppm.send_pressure_time(80, 90)\nexcept AckError:\n    ppm.connect()\n    ppm.send_pressure_time(80, 90)"
+    },
+    {
+      "id": "R343",
+      "scope": "正压断连后的状态声明",
+      "state": "真实加压指令已发出后超时，没有压力或机械状态回读。只审清理后结论。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "ppm.disconnect()\n# 模块已经停止并完全泄压，可以立即搬出组合板。"
+    },
+    {
+      "id": "R344",
+      "scope": "正压组合体定义证据",
+      "state": "只知道原程序用nest_96_wellplate_2ml_deep登记深孔板+过滤板组合体，实际组合体JSON、夹持高度与总高未核对。只审下面的几何能力声明。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "# 这个官方深孔板定义已经准确描述所有过滤组合体的上层孔位、总高和抓手夹持点。"
+    },
+    {
+      "id": "R345",
+      "scope": "正压复位轴依据",
+      "state": "仅有当前源码及原程序，没有厂商D指令轴定义或实机验证。只审下面的确定性声明。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "# 方法名reset_x_and_z已经证明D指令实际只复位X和Z轴。"
+    },
+    {
+      "id": "R346",
+      "scope": "正压控制器毫秒单位",
+      "state": "当前PPMController已连接，真实设备与本次工作参数已核对，不在官方模拟中；计划加压90秒。只审低层调用签名和单位。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "ppm.send_pressure_time(pressure=80, duration_ms=90000)"
+    },
+    {
+      "id": "R347",
+      "scope": "叠板供料返回引用",
+      "state": "Riser来自当前完整辅助类；普通位置、同类generic_plate数量3、层间增量13mm、实际支撑与抓手路径已确认。只审两次取板及返回对象使用，不审液体和完整实验。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "riser = Riser(protocol, \"C4\", \"generic_plate\", 3, 13)\nplate_1 = riser.move_next_to(\"C2\")\nplate_2 = riser.move_next_to(\"D2\")\n# 两次返回不同的原生Labware，源位另登记剩余顶层板。"
+    },
+    {
+      "id": "R348",
+      "scope": "叠板部分完成后的占位",
+      "state": "当前辅助类已将一板搬到C2，下一板登记失败；quantity=2、current_labware=None、last_moved_labware为已搬到C2的板，faulted=True。只审源位占用声明。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "# current_labware为空，所以源位的实物板已全部取完，可以加载其他独立耗材。"
+    },
+    {
+      "id": "R349",
+      "scope": "叠板目标偏移与官方对象",
+      "state": "当前riser可用且还有库存；adapter为已确认可承载的官方目标对象，状态、路径及本次放板z补偿2mm已核对。只审目标传递和当前辅助接口。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "plate = riser.move_next_to(adapter, drop_offset={\"z\": 2})"
+    },
+    {
+      "id": "R350",
+      "scope": "Riser设备身份",
+      "state": "仅当前维护的Riser辅助类，没有额外官方模块型号或兼容加载包装。只审身份和创建入口。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "riser = protocol.load_module(\"Riser\", \"C4\")"
+    },
+    {
+      "id": "R351",
+      "scope": "源示例数量证据",
+      "state": "原附件quantity=5；本次采用维护的opentrons_96_wellplate_200ul_pcr_full_skirt定义v4，没有额外实物验证或覆盖。只审下面的兼容依据声明。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "# 原Riser程序能填写5，已证明这个定义官方支持堆叠5层。"
+    },
+    {
+      "id": "R352",
+      "scope": "叠板搬运异常后的状态",
+      "state": "当前Riser.move_next_to调用中SDK搬运抛异常，quantity保持原值，faulted=True，没有额外实物状态确认。只审下面结论和后续建议。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "# 数量没减少证明板完全没动，可以直接再次调用move_next_to重试。"
+    },
+    {
+      "id": "R353",
+      "scope": "叠板层间增量",
+      "state": "已核对本例generic_plate总高16mm、相邻两板垂直重叠3.68mm，因而相同参考面间实际增量12.32mm；其余安装/参数有效。只审Riser所用层间参数，不审厂家适配。",
+      "overrides": "仅题述范围，无其他覆盖。",
+      "code": "riser = Riser(protocol, \"C4\", \"generic_plate\", 3, stack_height_mm=3.68)"
     }
   ]
 }

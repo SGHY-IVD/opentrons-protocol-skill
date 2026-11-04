@@ -6,12 +6,20 @@
 
 A community-maintained AI Agent Skill developed through iterative protocol-writing experience. It organizes API references, equipment and labware constraints, liquid-handling rules, atomic examples, and a review workflow into resources an assistant can read on demand.
 
-This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
+This project is primarily a skill package for AI assistants, rather than an official Opentrons project or standalone protocol-generation, device-control, or simulation application. Optional third-party device implementations are documented in the extension reference.
 
 
-## Publication: 2026-11-04.27
+## Publication: 2026-11-04.34
 
-Publishes cumulative updates since public version 2026-10-29.6. The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version; the maintained Python protocol API baseline remains 2.30.
+Publishes extension and example updates since public version 2026-11-04.27. The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version; the maintained Python protocol API baseline remains 2.30.
+
+- Adds a [third-party extension library](skills/write-opentrons/references/extensions.md): tilt and positive-pressure devices each have a self-contained implementation with their own USB communication. API contracts, action conditions, installation, and practices have separate references. Tilt includes Flex loading, single-plate binding, and geometry; pressure supports only single-stage `C` pressure and `D` reset commands, with labware loading/movement through the official SDK. These are not official hardware APIs.
+- Clarifies effective installation constants in the tilt source's current code; obsolete comments no longer create additional conflicts. Reuse is scoped to the same installation, plate, and coordinate basis, without treating candidate slot/plate combinations as physically validated.
+- Adds a standalone [Riser labware helper and API examples](skills/write-opentrons/references/api-riser.md) for supplying plates from the top of a stack in an ordinary deck slot. It preserves native labware references and records partially completed moves/reloads correctly, using only the existing SDK context. It is neither an official Stacker nor a physical riser adapter.
+- Adds a [native Stacker continuous-supply example](skills/write-opentrons/references/module-practices.md#连续供料与对象引用): the official module tracks stored inventory; each retrieved item leaves the shuttle before the next retrieve, with lids and object references handled for the workflow. This adds no inventory manager or tip-change strategy.
+- Expands the regression set from 325 to 353 cases, adding 28 cases in this update. Earlier independent reviews, after selected follow-ups, agree on 325/325 classifications, with 309/325 strict classification/location matches; see the [validation summary](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md). Those independent-review figures cover the earlier 325 cases only. This update publishes validation summaries; new detailed internal review conversations and raw results are excluded, while previously published historical records are retained. Publication checks reran 235 Python tests: 233 pass and two optional mDNS tests skip because their dependency is absent; all 353 fixture structures/snippets and both device single-file build-consistency checks pass. Earlier independent generation/action-record trials are recorded separately from this offline rerun. No official SDK protocol simulation, real USB, or physical validation was performed; these results do not establish reliability for every model, input, or configuration.
+
+### Capabilities already published in .27
 
 - Adds [parameter-planning guidance](skills/write-opentrons/references/parameter-planning.md) for constants, small mappings, or necessary computation, including continuous volumes and runtime CSV input. Derived mixing volumes, segments, capacity, and rates remain consistent; complete relevant input validation precedes actions affecting samples.
 - Makes dynamic mixing the default, with static mixing used when explicitly requested. Improves preceding-addition transitions, meniscus endpoints, and continuous final-segment paths. Volume models are checked against actual labware definitions; missing models require an explained and confirmed fixed-height alternative.
@@ -20,7 +28,6 @@ Publishes cumulative updates since public version 2026-10-29.6. The [skill entry
 - Expands practices across [all six module types](skills/write-opentrons/references/api-modules.md), including concurrent tasks and timers, temperature adapters and cooling, PCR programs, plate-reader equilibration and waits, Stacker refill-count differences, and Magnetic Block operation. API contracts, hardware conditions, and practices remain separate.
 - Adds 32 [FAQ entries](skills/write-opentrons/references/faq.md) and moves the protocol skeleton to references as required structural reading for new complete protocols. Improves file headers, responsibility sections, actual strategy comments, and final in-chat parameter summaries; examples do not impose fixed code layouts.
 - Strengthens shared-well nozzle accounting, version-specific positioning checks for air-containing dispenses, older-API feature gates, and Stacker shuttle occupancy checks. Optional HTTP uploads gain stricter serial-number matching, parameter/file validation, and failure-state handling.
-- Expands the regression set from 237 to 325 cases. Recorded independent reviews, after selected follow-ups, agree on 325/325 classifications, with 309/325 strict classification/location matches; see the [validation summary](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md). Detailed internal review conversations and raw results from this update are excluded from the public package; previously published historical records are retained. Publication checks reran 113 Python tests: 111 pass and two optional mDNS tests skip because their dependency is absent; all 325 fixture structures/snippets pass. Earlier independent generation/action-record trials are recorded separately from this rerun. No official SDK simulation or real-device validation was performed; these results do not establish reliability for every model, input, or configuration.
 
 ## What it helps with
 
@@ -48,7 +55,7 @@ git clone https://github.com/SGHY-IVD/opentrons-protocol-skill.git
 
 After installation, explicitly ask the assistant to use `write-opentrons` and supply your workflow and layout. If your client does not support native skills, a file-capable assistant can read `skills/write-opentrons/SKILL.md` and follow its resource links. This is a manual workflow, not native installation.
 
-The flow-rate, delay, and regression helper scripts require Python 3; these helpers and the HTTP tool use its standard library. Optional mDNS discovery requires Python 3.10+ and a separate dependency; see the [device-tool reference](skills/write-opentrons/references/flex-http.md). Executing generated protocols requires a matching Opentrons environment. The assistant needs access to the referenced files and tools; unavailable resources must be reported rather than replaced with guessed values.
+The flow-rate, delay, and regression helper scripts require Python 3; these helpers and the HTTP tool use its standard library. Optional mDNS discovery requires Python 3.10+ and a separate dependency; see the [device-tool reference](skills/write-opentrons/references/flex-http.md). Real control of third-party tilt or positive-pressure devices additionally requires PyUSB, an available USB backend, and device permissions; ordinary query scripts do not need these USB dependencies. Riser uses only the supplied Opentrons SDK context. A self-contained device file does not bundle its runtime dependencies; see the [extension reference](skills/write-opentrons/references/extensions.md). Executing generated protocols requires a matching Opentrons environment. The assistant needs access to the referenced files and tools; unavailable resources must be reported rather than replaced with guessed values.
 
 The core skill resources are currently primarily in Chinese. Requests may be in Chinese or English. Project documentation is bilingual; compatibility with every skill-capable client has not been individually tested.
 
@@ -98,13 +105,14 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 - `skills/write-opentrons/references/faq.md`: explanation points an assistant can organize on demand.
 - `skills/write-opentrons/assets/review-regression/`: cases, expected results, and recorded reviews.
 - `skills/write-opentrons/assets/labware/`: custom definitions and limitations, matched to the actual labware.
+- `skills/write-opentrons/assets/python/`: self-contained third-party device implementations, communication sources, and the Riser labware helper for embedding on demand; capabilities and dependencies are described in the extension reference.
 - `skills/write-opentrons/agents/`: client presentation metadata.
 
 ## Baseline and validation limits
 
 Initial public snapshot: **rule version 2026-10-21.9, maintained API documentation baseline 2.30**. This is a maintained baseline, not a promise to track the latest upstream version. Explicit older targets are checked against the version index rather than silently upgraded.
 
-The regression set currently contains 325 cases covering liquid/plunger/tip/motion state, split emptying, one-to-many dispensing, dynamic and static mixing, parameter/CSV derivation, missing-model alternatives, magnetic supernatant removal, shared wells and air tracking, modules and installation relationships, older-API feature gates, and evidence boundaries for configuration, delivery, and device connections. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
+The regression set currently contains 353 cases covering liquid/plunger/tip/motion state, split emptying, one-to-many dispensing, dynamic and static mixing, parameter/CSV derivation, missing-model alternatives, magnetic supernatant removal, shared wells and air tracking, modules and installation relationships, older-API feature gates, third-party tilt/pressure and Riser helpers, and evidence boundaries for configuration, delivery, and device connections. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py

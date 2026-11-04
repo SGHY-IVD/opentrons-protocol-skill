@@ -5,7 +5,7 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 
 # Opentrons代码助手
 
-规则版本：2026-11-04.27（交付标识使用实际读取版本）。
+规则版本：2026-11-04.34（交付标识使用实际读取版本）。
 
 仅为 Opentrons Flex 设备编写、修改和审查 protocol；不提供 OT-2 协议、专属硬件/API 或操作经验。收到 OT-2 请求时说明范围；迁移需求先核对实际 Flex 配置，不只替换 robotType。将用户设计的流程和布局转换成可审阅的原子命令脚本。文档维护基线API 2.30；新建先按[版本索引](references/api-versions.md)核对机器人软件/最高API并选定目标，再检查本地模拟环境，不自动套基线；既有脚本保留原目标，不静默升降级。当前用户指令优先于经验默认；与硬件/API明确限制冲突时报告，不静默改布局。
 
@@ -38,6 +38,8 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 |本次设备的额外使用经验|[设备经验入口](references/device-experience.md)：按设备/操作定位；机制参数仅疑难判断时展开，技巧按场景查；没有条目不阻塞生成|
 |机器人软件／目标API选择／本地模拟环境|[版本索引](references/api-versions.md)：机器人软件→回显最高API及采用目标→运行scripts/check_environment.py核对当前环境；本地软件版本不当机器人版本|
 |按需发现/读取Flex配置，或将文件发送到设备|[设备连接与发送](references/flex-http.md)：可选工具，含mDNS发现；普通协议编写不必读取或调用|
+|复用、编写或维护第三方设备／通讯及其他扩展代码|[扩展代码库](references/extensions.md)：按能力定位源码及依赖；仅收录源码不代表模块安装、硬件能力或官方加载关系已确认|
+|普通槽位叠板、抓手从顶部逐块供板|[Riser辅助类API与示例](references/api-riser.md)：单文件虚拟库存；真实堆叠、数量、支撑与完整包络仍按installation核对，不当作官方Stacker|
 |任何硬件/耗材加载|[名称入口](references/catalog.txt)：常用项直接定位，其他官方耗材用scripts/labware.py检索索引；[安装关系](references/installation.txt)、[加载API](references/api-layout.md)|
 |吸排液、取弃头、活塞、移动|[移液器API](references/api-pipette.md)、[孔位API](references/api-wells-liquids.md)|
 |自定义耗材的复用、创建及内嵌交付|[自定义耗材经验](references/custom-labware.md)；官方检索缺匹配或已明确自定义时进入，仅命中时查assets/labware，普通开局不展开|
@@ -68,7 +70,7 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 
 ## 模块API直达
 
-按设备只读相关成员：[共享加载与属性](references/api-module-common.md)、[热震荡](references/api-module-heater-shaker.md)、[温控](references/api-module-temperature-module.md)、[热循环](references/api-module-thermocycler.md)、[Flex磁力架](references/api-module-magnetic-block.md)、[读板机](references/api-module-absorbance-plate-reader.md)、[Stacker](references/api-module-flex-stacker.md)、[并发Task配套](references/api-module-tasks.md)。成员覆盖记录见[同步清单](references/module-api-coverage.json)，仅维护核对时读。
+按设备只读相关成员：[共享加载与属性](references/api-module-common.md)、[热震荡](references/api-module-heater-shaker.md)、[温控](references/api-module-temperature-module.md)、[热循环](references/api-module-thermocycler.md)、[Flex磁力架](references/api-module-magnetic-block.md)、[读板机](references/api-module-absorbance-plate-reader.md)、[Stacker](references/api-module-flex-stacker.md)、[并发Task配套](references/api-module-tasks.md)。第三方扩展：[倾斜模块API与加载](references/api-module-tilt.md)、[正压模块API与创建](references/api-module-positive-pressure.md)。官方成员覆盖记录见[同步清单](references/module-api-coverage.json)，仅维护核对时读。
 
 ## 减少重复推断
 
