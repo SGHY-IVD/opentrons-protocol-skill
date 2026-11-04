@@ -11,10 +11,10 @@
 |模块|本类条目数与API|硬件/机制及条件约束|经验入口|
 |---|---|---|---|
 |Heater-Shaker|17；[API](api-module-heater-shaker.md)|[机制/条件](module-conditions.md#heater-shaker)|[经验](module-practices.md#heater-shaker)|
-|Temperature Module|7；[API](api-module-temperature-module.md)|[机制/条件](module-conditions.md#temperature-module)|[经验](module-practices.md#temperature-module)|
-|Thermocycler|19；[API](api-module-thermocycler.md)|[机制/条件](module-conditions.md#thermocycler)|[经验](module-practices.md#thermocycler)|
-|Magnetic Block|0专属控制方法；[共享用法](api-module-magnetic-block.md)|[机制/条件](module-conditions.md#magnetic-block)|[待补充入口](module-practices.md#magnetic-block)|
-|Absorbance Plate Reader|6；[API](api-module-absorbance-plate-reader.md)|[机制/条件](module-conditions.md#absorbance-plate-reader)|[待补充入口](module-practices.md#absorbance-plate-reader)|
+|Temperature Module|7；[API](api-module-temperature-module.md)|[机制/条件](module-conditions.md#temperature-module)|[经验/操作示例](module-practices.md#temperature-module)|
+|Thermocycler|19；[API](api-module-thermocycler.md)|[机制/条件](module-conditions.md#thermocycler)|[经验/操作示例](module-practices.md#thermocycler)|
+|Magnetic Block|0专属控制方法；[共享用法](api-module-magnetic-block.md)|[机制/条件](module-conditions.md#magnetic-block)|[操作经验](module-practices.md#magnetic-block)|
+|Absorbance Plate Reader|6；[API](api-module-absorbance-plate-reader.md)|[机制/条件](module-conditions.md#absorbance-plate-reader)|[操作经验](module-practices.md#absorbance-plate-reader)|
 |Flex Stacker|13；[API](api-module-flex-stacker.md)|[机制/条件](module-conditions.md#flex-stacker)|[经验/示例](module-practices.md#flex-stacker)|
 
 ## 加载示例
@@ -30,7 +30,7 @@
 |Absorbance Plate Reader|`reader = protocol.load_module("absorbanceReaderV1", "C3")`|
 |Flex Stacker|`stacker = protocol.load_module("flexStackerModuleV1", "A4")`|
 
-共享加载/模型/位置/耗材属性见[共享API](api-module-common.md)。`load_module`仍查api-layout.md；`Task`、等待任务与计时器见api-module-tasks.md。操作硬条件见module-conditions.md；用户装载/收尾经验见module-practices.md；安装占位继续只查installation.txt。
+共享加载/模型/位置/耗材属性见[共享API](api-module-common.md)。`load_module`仍查api-layout.md；`Task`、等待任务与计时器见api-module-tasks.md。操作硬条件见module-conditions.md；装载/收尾及[并发方式选择经验](module-practices.md#按等待对象选择并发)见module-practices.md；安装占位继续只查installation.txt。
 
 同步范围仅含Flex六类公开模块。当前edge源码另有API 2.31 VacuumModuleContext，超出本技能2.30基线，未收录为可用接口；HEPA/UV不在此六类Python模块上下文中，不凭名称杜撰控制方法。未收录设备仍反馈缺失。
 

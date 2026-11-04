@@ -8,6 +8,29 @@ DATA = Path(__file__).resolve().parents[1] / 'references' / 'aspiration-rates.js
 ALIASES = {'水相': 'water', '有机相': 'organic', '甘油相': 'glycerol'}
 
 
+def interpolate_rate(volume, points, min_volume, max_volume, upper_endpoint='error'):
+    """Evaluate a maintained curve; points and limits are generation-validated data."""
+    if not math.isfinite(volume) or volume <= 0:
+        raise ValueError('体积必须为有限正数')
+    if volume < min_volume or volume > max_volume:
+        raise ValueError('体积超出已维护规则范围或枪头容量；不外推')
+    if len(points) == 1:
+        return round(points[0][1], 6)
+    if volume < points[0][0]:
+        raise ValueError('体积低于曲线覆盖范围；不外推')
+    if volume > points[-1][0]:
+        if upper_endpoint != 'hold':
+            raise ValueError('体积超过曲线覆盖范围；不外推')
+        return round(points[-1][1], 6)
+    for i, (v, rate) in enumerate(points):
+        if volume == v:
+            return round(rate, 6)
+        if volume < v:
+            v0, rate0 = points[i - 1]
+            return round(rate0 + (volume - v0) * (rate - rate0) / (v - v0), 6)
+    raise ValueError('曲线数据无有效区间')
+
+
 def query(model, tip, liquid, volume, action='aspirate', filtered=False):
     liquid = ALIASES.get(liquid, liquid)
     if not math.isfinite(volume) or volume <= 0:
@@ -30,26 +53,15 @@ def query(model, tip, liquid, volume, action='aspirate', filtered=False):
         raise ValueError('规则缺失或重复：不自动回退其他型号、枪头、液体或动作')
     rule = matches[0]
     points = rule['points']
-    if volume > rule['max_volume'] or volume < rule['min_rule_volume']:
-        raise ValueError('体积超出已维护规则范围或枪头容量；不外推')
+    rate = interpolate_rate(volume, points, rule['min_rule_volume'],
+                            rule['max_volume'], rule['upper_endpoint'])
     if len(points) == 1:
-        rate = points[0][1]
         method = 'constant'
     elif volume > points[-1][0]:
-        if rule['upper_endpoint'] != 'hold':
-            raise ValueError('体积超过曲线覆盖范围；不外推')
-        rate = points[-1][1]
         method = 'inherited_official_upper_endpoint'
     else:
-        for i, (v, q) in enumerate(points):
-            if volume == v:
-                rate, method = q, 'exact_point'
-                break
-            if volume < v:
-                v0, q0 = points[i-1]
-                rate = q0 + (volume-v0)*(q-q0)/(v-v0)
-                method = 'linear_interpolation'
-                break
+        method = ('exact_point' if any(volume == p[0] for p in points)
+                  else 'linear_interpolation')
     return dict(flow_rate=round(rate, 6), units='uL/s', method=method,
                 action=action, filtered=filtered, model=model, tip_volume=tip, liquid=liquid, volume=volume,
                 provenance=rule['provenance'], revision=data['revision'],

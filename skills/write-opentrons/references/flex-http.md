@@ -6,8 +6,8 @@
 
 - `scripts/flex_http.py`提供Python调用和命令行入口：mDNS发现或检查给定候选地址、读取Flex身份/硬件/保存的甲板配置、上传Python协议与可选耗材JSON、获取设备端分析。HTTP功能用Python标准库，只有mDNS发现需可选zeroconf依赖；不依赖本地Opentrons SDK，不写入生成的protocol。
 - `discover`按需在可访问的本地网络进行短时mDNS发现，检查官方`_http._tcp.local.`服务的31950端口，再读取候选设备health核对Flex身份；不把广播名称/TXT字段直接当成已连接Flex。默认发现5秒、最多核对8个候选地址，达到预算时标记candidate_limit_reached。未发现或核对失败不代表没有设备，可手动填写IP。`probe`只检查明确给出的地址；两者都不自动选择目标或扫描网段。不把“工具存在”当成“已发现本地设备”。工具所在环境须能访问目标网络；助手环境的连通性不能冒充用户电脑的连接状态。
-- 不创建run，不开始实验，不归零/移动、不改温控或甲板配置。向设备上传须有用户对目标设备及该文件的授权；已有授权直接复用。客户端上传前重读身份；提供上次读取的名称和可用序列号，避免地址变化后误选目标。
-- 工具返回结构化JSON；AI按现有机头/甲板表整理展示。instruments/modules来自设备报告，saved_deck_configuration来自软件保存配置，不能当作完整实物识别。缺失/失败标未知，不能当未安装；器件的ok/compatibleWithRobot等状态、配置与实物的差异仍按原规则核对。不把校准记录中的旧位置、USB端口号或分析末态当作实际初始布局。
+- 不创建run，不开始实验，不归零/移动、不改温控或甲板配置。向设备上传须有用户对目标设备及该文件的授权；已有授权直接复用。客户端上传前重读身份，名称须匹配。设备报告序列号时必须同时传入此前核对的目标序列号；漏传、变更或此前有而现在缺失均不上传。同名不能代替序列号。上次与当前设备均未报告序列号时，仍可按用户选定的明确地址和名称上传，无需发现或新增授权轮次。
+- 工具返回结构化JSON；AI按现有机头/甲板表整理展示。instruments/modules来自设备报告，saved_deck_configuration来自软件保存配置，不能当作完整实物识别。缺失/失败标未知，不能当未安装；器件的ok/compatibleWithRobot等状态、配置与实物的差异仍按原规则核对。旧版[模块响应](https://github.com/Opentrons/opentrons/blob/v7.5.0/robot-server/robot_server/modules/module_models.py)可没有compatibleWithRobot；保留已识别的模块，但此时兼容性未知。不把校准记录中的旧位置、USB端口号或分析末态当作实际初始布局。
 - HTTP结果不替代技能规则审查或本地SDK模拟。机器人返回的协议API上限仍按api-versions选择目标；HTTP接口版本与protocol的apiLevel是不同概念。
 
 ## 面向用户的提示
@@ -42,7 +42,7 @@ python3 scripts/flex_http.py analysis --host 192.0.2.10 --protocol-id "实际协
 - 使用上传结果的protocol_id和analysis_id查询；工具检查分析归属。分析仅在completed、result=ok且errors为空时给passed=true；pending、parameter-value-required和not-ok均不能当通过。查询保留设备实际run_time_parameters。返回的ok=true只表示工具取得了结果，不等于分析通过。
 - `--wait-seconds`最多30秒，未结束仍返回pending，可稍后再查；`--timeout`控制每次网络请求超时。POST不自动重试；超时/异常且upload_may_have_succeeded=true时，先核对设备记录，不能直接重复上传。已确认上传后即使分析查询失败，也保留上传得到的ID与文件SHA256，分别报告。
 - 支持明确HTTP/HTTPS地址及可选`--ca-file`。已有访问令牌由环境变量`OPENTRONS_HTTP_TOKEN`提供，仅用于HTTPS；不在命令、文案或协议中放令牌。工具不负责登录、关闭访问控制或修改账号。HTTP默认端口31950；HTTPS使用实际部署地址和端口，不猜配置。
-- stdout为JSON，操作失败退出1，参数用法错误退出2。inspect的partial只表示部分接口未读取成功，不代表台面空；读取成功也始终保留physical_layout_confirmed=false，直到用户按原流程核对。工具不保存或自动应用硬件档案。
+- stdout为JSON，操作失败退出1，参数用法错误退出2。探测时，已识别的非Flex型号标unsupported_model；型号字段缺失、格式不对或型号未知均标unverified。inspect按节检查可解读的最少字段；缺少这些字段或接口读取失败时保留其他有效节，该节值为null、整体为partial。空列表是有效响应，但不证明实物为空；读取成功也始终保留physical_layout_confirmed=false，直到用户按原流程核对。工具不保存或自动应用硬件档案。
 
 ## 契约与来源
 

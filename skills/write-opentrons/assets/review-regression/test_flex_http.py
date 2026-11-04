@@ -8,6 +8,7 @@ import asyncio
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
 import socket
 import sys
@@ -113,11 +114,63 @@ class HTTPClientChecks(unittest.TestCase):
 
     def test_other_robot_stops_after_health(self):
         with FakeRobot() as robot:
-            robot.routes[("GET", "/health")] = (200, {**HEALTH, "robot_model": "other-model"})
+            robot.routes[("GET", "/health")] = (200, {**HEALTH, "robot_model": "OT-2 Standard"})
             with self.assertRaises(tool.FlexHTTPError) as caught:
                 tool.FlexHTTPClient(robot.host).inspect()
         self.assertEqual(caught.exception.code, "not_flex")
         self.assertEqual(len(robot.calls), 1)
+
+    def test_probe_distinguishes_unreadable_identity_from_known_other_model(self):
+        with FakeRobot() as robot:
+            for fields, expected in [
+                ({}, "unverified"), ({"robot_model": []}, "unverified"),
+                ({"robot_model": "unrecognized"}, "unverified"),
+                ({"robot_model": "OT-2 Standard"}, "unsupported_model"),
+                ({"robot_model": "OT-3 Standard"}, "verified_flex"),
+            ]:
+                with self.subTest(fields=fields):
+                    robot.routes[("GET", "/health")] = (200, {"name": "R", **fields})
+                    device = tool.probe_devices([robot.host])["devices"][0]
+                    self.assertEqual(device["verification_status"], expected)
+
+    def test_malformed_sections_are_unknown_and_other_sections_survive(self):
+        with FakeRobot() as robot:
+            for key, path, values in [
+                ("instruments", "/instruments", [[None], [{}], [{"instrumentType": "pipette", "ok": True}]]),
+                ("modules", "/modules", [[None], [{"moduleType": "temperatureModuleType"}],
+                                         [{"moduleType": "temperatureModuleType", "moduleModel": "temperatureModuleV2",
+                                           "compatibleWithRobot": "false"}]]),
+                ("saved_deck_configuration", "/deck_configuration", [{}, {"cutoutFixtures": [None]},
+                                                                    {"cutoutFixtures": [{"cutoutId": "cutoutD3"}]}]),
+            ]:
+                original = robot.routes[("GET", path)]
+                for value in values:
+                    with self.subTest(key=key, value=value):
+                        robot.routes[("GET", path)] = (200, {"data": value})
+                        result = tool.FlexHTTPClient(robot.host).inspect()
+                        self.assertEqual(result["read_status"], "partial")
+                        self.assertEqual(set(result["section_errors"]), {key})
+                        self.assertIsNone(result[key])
+                robot.routes[("GET", path)] = original
+
+    def test_empty_sections_and_recognizable_hardware_do_not_require_optional_fields(self):
+        with FakeRobot() as robot:
+            for instruments, modules in [
+                ([], []),
+                # HTTP v4 on v7.5.0 did not include compatibleWithRobot. Preserve the absence.
+                ([], [{"moduleType": "temperatureModuleType", "moduleModel": "temperatureModuleV2"}]),
+                ([{"instrumentType": "gripper", "ok": False},
+                  {"instrumentType": "pipette", "mount": "left", "instrumentModel": "p50", "ok": True}],
+                 [{"moduleType": "temperatureModuleType", "moduleModel": "temperatureModuleV2",
+                   "compatibleWithRobot": False}]),
+            ]:
+                with self.subTest(instruments=instruments):
+                    robot.routes[("GET", "/instruments")] = (200, {"data": instruments})
+                    robot.routes[("GET", "/modules")] = (200, {"data": modules})
+                    robot.routes[("GET", "/deck_configuration")] = (200, {"data": {"cutoutFixtures": []}})
+                    result = tool.FlexHTTPClient(robot.host).inspect()
+                    self.assertEqual(result["read_status"], "complete")
+                    self.assertEqual((result["instruments"], result["modules"]), (instruments, modules))
 
     def test_upload_multipart_exact_files_and_runtime_values(self):
         labware = Path(self.temp.name) / "labware.json"
@@ -144,13 +197,51 @@ class HTTPClientChecks(unittest.TestCase):
         self.assertEqual(caught.exception.code, "confirmation_required")
 
     def test_changed_name_or_serial_prevents_post(self):
-        for change in [{"name": "different"}, {"robot_serial": "different"}]:
+        for change in [{"name": "different"}, {"robot_serial": "different"}, {"robot_serial": None}]:
             with self.subTest(change=change), FakeRobot() as robot:
                 robot.routes[("GET", "/health")] = (200, {**HEALTH, **change})
                 with self.assertRaises(tool.FlexHTTPError) as caught:
                     self.upload(tool.FlexHTTPClient(robot.host))
                 self.assertFalse(any(c[0] == "POST" for c in robot.calls))
                 self.assertEqual(caught.exception.code, "target_changed")
+
+    def test_same_name_cannot_upload_without_selecting_an_available_serial(self):
+        with FakeRobot() as robot:
+            robot.routes[("GET", "/health")] = (200, {**HEALTH, "robot_serial": "REPLACEMENT"})
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                status = tool.main(["upload", str(self.protocol), "--host", robot.host, "--expected-name",
+                                    HEALTH["name"], "--confirm-upload"])
+            self.assertEqual(status, 1)
+            self.assertEqual(json.loads(out.getvalue())["error"]["code"], "target_serial_required")
+            self.assertEqual([(c[0], c[1]) for c in robot.calls], [("GET", "/health")])
+
+    def test_explicit_address_with_missing_or_null_serial_can_upload_without_discovery(self):
+        with FakeRobot() as robot:
+            for value in ["omitted", None]:
+                with self.subTest(value=value):
+                    health = dict(HEALTH)
+                    if value is None:
+                        health["robot_serial"] = None
+                    else:
+                        del health["robot_serial"]
+                    robot.routes[("GET", "/health")] = (200, health)
+                    robot.calls.clear()
+                    result = tool.FlexHTTPClient(robot.host).upload_protocol(
+                        self.protocol, expected_name=HEALTH["name"], confirmed=True)
+                    self.assertTrue(result["upload_confirmed"])
+                    self.assertEqual([(c[0], c[1]) for c in robot.calls],
+                                     [("GET", "/health"), ("POST", "/protocols")])
+
+    def test_invalid_reported_serial_does_not_enable_name_only_upload(self):
+        with FakeRobot() as robot:
+            for serial in ["", " ", 123]:
+                with self.subTest(serial=serial):
+                    robot.routes[("GET", "/health")] = (200, {**HEALTH, "robot_serial": serial})
+                    with self.assertRaises(tool.FlexHTTPError) as caught:
+                        tool.FlexHTTPClient(robot.host).upload_protocol(
+                            self.protocol, expected_name=HEALTH["name"], confirmed=True)
+                    self.assertEqual(caught.exception.code, "invalid_response")
+            self.assertFalse(any(c[0] == "POST" for c in robot.calls))
 
     def test_post_server_error_is_not_retried_or_claimed_absent(self):
         with FakeRobot() as robot:
@@ -266,6 +357,45 @@ class HTTPClientChecks(unittest.TestCase):
                 tool.FlexHTTPClient(host)
         with self.assertRaises(tool.FlexHTTPError):
             tool.FlexHTTPClient("192.0.2.10", token="secret")
+
+    def test_explicit_null_parameters_do_not_select_robot_defaults(self):
+        with FakeRobot() as robot, contextlib.redirect_stdout(io.StringIO()) as out:
+            result = tool.main(["upload", str(self.protocol), "--host", robot.host,
+                                "--expected-name", HEALTH["name"], "--expected-serial", HEALTH["robot_serial"],
+                                "--confirm-upload", "--parameter-values", "null"])
+            self.assertEqual(result, 1)
+            self.assertEqual(json.loads(out.getvalue())["error"]["code"], "invalid_parameters")
+            self.assertFalse(robot.calls)
+
+    @unittest.skipUnless(hasattr(os, "mkfifo"), "FIFO is a POSIX special file")
+    def test_fifo_is_rejected_without_network_or_blocking(self):
+        fifo = Path(self.temp.name) / "pipe.py"
+        os.mkfifo(fifo)
+        with FakeRobot() as robot, self.assertRaises(tool.FlexHTTPError) as caught:
+            tool.FlexHTTPClient(robot.host).upload_protocol(fifo, expected_name=HEALTH["name"], confirmed=True)
+        self.assertEqual(caught.exception.code, "invalid_files")
+        self.assertFalse(robot.calls)
+
+    @unittest.skipUnless(Path("/proc/self/fd").is_dir(), "requires process descriptor count")
+    def test_invalid_directory_named_as_protocol_leaves_no_open_descriptors(self):
+        path = Path(self.temp.name) / "bad.py"; path.mkdir()
+        with FakeRobot() as robot:
+            before = len(list(Path("/proc/self/fd").iterdir()))
+            for _ in range(10):
+                with self.assertRaises(tool.FlexHTTPError) as caught:
+                    tool.FlexHTTPClient(robot.host).upload_protocol(path, expected_name=HEALTH["name"], confirmed=True)
+                self.assertEqual(caught.exception.code, "invalid_files")
+            self.assertEqual(len(list(Path("/proc/self/fd").iterdir())), before)
+            self.assertFalse(robot.calls)
+
+    def test_combined_files_exceed_budget_before_upload(self):
+        with patch.object(tool, "MAX_BYTES", self.protocol.stat().st_size), FakeRobot() as robot:
+            extra = Path(self.temp.name) / "extra.json"; extra.write_text("{}")
+            with self.assertRaises(tool.FlexHTTPError) as caught:
+                tool.FlexHTTPClient(robot.host).upload_protocol(self.protocol, labware=[extra],
+                                                               expected_name=HEALTH["name"], confirmed=True)
+            self.assertEqual(caught.exception.code, "files_too_large")
+            self.assertFalse(robot.calls)
 
     def test_local_file_errors_are_structured(self):
         with self.assertRaises(tool.FlexHTTPError) as caught:

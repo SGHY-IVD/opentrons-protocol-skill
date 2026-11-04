@@ -37,6 +37,9 @@ Args:
 fill(count: int | None=None, message: str | None=None) -> None
 ```
 
+版本核对提示（2026-11-04）：以下上游参数文案把count解释为补给后的总量，但官方v10.0.0（commit e8c6d0a424c25fff1604e2a02e4ccaedac95b9af）实现将显式count作为本次新增件数；例如已有1件、容量3件时，count=3会触发超容校验。此差异由api/src/opentrons/protocol_api/core/engine/module_core.py的fill、protocol_engine/commands/flex_stacker/fill.py和common.py的_count_from_lw_list_or_initial_count，以及api/tests/opentrons/protocol_engine/commands/flex_stacker/test_fill.py共同核对，不以原文定义替代目标软件实际行为，也不改写下述上游文案。
+需要非空仓补指定数量时先核对目标机器人软件；仓内耗尽后fill(count=n)在上述两种解释下结果一致。非空仓确有余量且需补满时，可省略count，按API补到该配置容量。耗尽不会清除原有类型配置，不需为普通补给重新set_stored_labware；本次仅静态源码核查，未作实机验证。
+
 Pause the protocol to add labware to the Flex Stacker.
 
 The labware must be the same type the Stacker is configured to store using

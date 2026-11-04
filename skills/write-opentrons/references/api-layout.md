@@ -16,11 +16,13 @@
 
 来源：维护版API速查表 v6；文档基线 API 2.30，2026-10-12。用户最新规则见SKILL.md及operations.md。
 
-垃圾处理与夹爪：客户称呼消歧与回显见operations的“用户称呼与后台身份/垃圾处理称呼”；不要用本段默认偏好猜实物。加载约定 默认使用 protocol.load_trash_bin(location)，location 必填，允许第1或第3列的空槽位。实际位置按operations的硬件描述/回显确认确定；未提供时保留待核对，不按实验推荐推定D3已装垃圾桶。 仅特别说明时使用 protocol.load_waste_chute()；它无参数，固定占用D3。两者是硬件加载接口，不是耗材 load name。夹爪无需独立加载。 用户经验/生成规范：协议出现 drop_tip() 时须加载垃圾桶或垃圾槽；不将此项目规范表述为API所有调用方式的绝对限制。 安装层级及明确约束另查installation.txt；不擅自重新设计用户台面。
+垃圾处理与夹爪：客户称呼消歧与回显见operations的“用户称呼与后台身份/垃圾处理称呼”；不要用本段默认偏好猜实物。Flex API 2.15使用固定A3垃圾桶，不调用下列两个加载接口；API 2.16起才显式加载垃圾处理装置。该版本分界及普通第4列暂存支持见[版本索引](api-versions.md#已核对的关键分界)。在2.16及以上，默认使用 protocol.load_trash_bin(location)，location 必填，允许第1或第3列的空槽位。实际位置按operations的硬件描述/回显确认确定；未提供时保留待核对，不按实验推荐推定D3已装垃圾桶。 仅特别说明时使用 protocol.load_waste_chute()；它无参数，固定占用D3。两者是硬件加载接口，不是耗材 load name。夹爪无需独立加载。 用户经验/生成规范（API 2.16及以上）：协议出现 drop_tip() 时须加载垃圾桶或垃圾槽；不将此项目规范表述为API所有调用方式的绝对限制。 安装层级及明确约束另查installation.txt；不擅自重新设计用户台面。
 加载移液器、模块、垃圾桶、耗材和适配器。
 ProtocolContext.load_trash_bin ProtocolContext.load_waste_chute ProtocolContext.load_labware ProtocolContext.load_instrument ProtocolContext.load_module ProtocolContext.load_adapter Labware.load_labware HeaterShakerContext.load_adapter TemperatureModuleContext.load_adapter
 
 ## ProtocolContext.load_trash_bin
+
+最低API 2.16。2.15仅支持固定A3垃圾桶；不要调用本方法。
 
 官方来源
 
@@ -37,6 +39,8 @@ location can be any unoccupied slot in column 1 or 3. If you try to load a trash
 
 
 ## ProtocolContext.load_waste_chute
+
+最低API 2.16。2.15不支持外置垃圾槽。
 
 官方来源
 

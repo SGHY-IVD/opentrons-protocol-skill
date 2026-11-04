@@ -68,9 +68,13 @@
 |接口/行为|版本分界|参考与用途|
 |---|---|---|
 |ProtocolContext内联定义加载／Labware父件内联加载|甲板耗材from_definition为2.0；甲板适配器及Labware父件方式为2.15|api-layout.md；模块对应方法另查api-module-common.md|
+|垃圾处理／普通第4列暂存|Flex API 2.15仅固定A3垃圾桶，不调用加载接口；2.16起支持显式加载垃圾桶/垃圾槽和引用A4–D4普通暂存位|[加载API](api-layout.md)、[官方Deck Slots](https://docs.opentrons.com/python-api/deck-slots/)及[官方版本历史](https://docs.opentrons.com/python-api/versioning/#version-216)；不将普通暂存位分界套到Stacker或读板机专用区域|
 |dispense(push_out=...)|2.15新增|api-pipette.md；不可在更低版本直接套参数|
 |prepare_to_aspirate()|2.16新增|api-pipette.md及固定源码requires_version|
 |dispense(0)/超当前量|2.17起0不排液、超量报错|api-pipette.md；旧版行为不同|
+|运行参数 add_parameters / ProtocolContext.params|2.18新增|[参数API](api-parameters-csv.md)、[官方版本历史](https://docs.opentrons.com/python-api/versioning/#version-218)；低于2.18不能生成默认dry_run/return_tips运行参数，按目标版本报告具体冲突|
+|运行时 CSV 文件参数 add_csv_file|2.20新增；不同于普通运行参数的2.18下限|见[参数API](api-parameters-csv.md)及[官方CSV参数说明](https://docs.opentrons.com/python-api/runtime-parameters/defining/#csv-parameters)；版本还须支持协议所用的其他动作|
+|批量液体初始化 Labware.load_liquid / load_liquid_by_well / load_empty|2.22新增|[孔位与液体API](api-wells-liquids.md)、[官方版本历史](https://docs.opentrons.com/python-api/versioning/#version-222)；不能在旧目标直接套这三个方法，也不静默改成逐孔加载|
 |air_gap液体跟踪|2.22起空气不计入目标孔液量|api-pipette.md、pipette-mechanics.md；仍占枪头容量|
 |aspirate/dispense显式flow_rate|2.24新增|api-pipette.md；旧版仅有rate不等于满足本技能显式流速规则|
 |air_gap(in_place/rate/flow_rate)、touch_tip(mm_from_edge)|2.24新增|api-pipette.md；分别核对参数互斥|

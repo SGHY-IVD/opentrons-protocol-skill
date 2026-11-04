@@ -469,12 +469,12 @@
           "reason": "166.666667仅匹配100µL，150µL应为233.333333；不能全部choices沿用默认体积速率"
         }
       ],
-      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+      "rule": "references/parameter-planning.md；references/rates.md；references/protocol-review.md"
     },
     "R60": {
       "status": "pass",
       "findings": [],
-      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+      "rule": "references/parameter-planning.md；references/rates.md；references/protocol-review.md"
     },
     "R61": {
       "status": "issues",
@@ -488,12 +488,12 @@
           "reason": "未覆盖体积被静默回退为100µL流速，应报告具体行和值及允许域，不使用默认速率代替"
         }
       ],
-      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+      "rule": "references/parameter-planning.md；references/rates.md；references/protocol-review.md"
     },
     "R62": {
       "status": "pass",
       "findings": [],
-      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+      "rule": "references/parameter-planning.md；references/rates.md；references/protocol-review.md"
     },
     "R63": {
       "status": "issues",
@@ -507,12 +507,12 @@
           "reason": "选择150时主体190µL，200µL枪头水相排速应290而非130µL的230；派生分段流速也须随方案选择"
         }
       ],
-      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+      "rule": "references/parameter-planning.md；references/operations.md；references/rates.md；references/protocol-review.md"
     },
     "R64": {
       "status": "pass",
       "findings": [],
-      "rule": "references/rates.md；references/protocol-review.md；references/patterns.md（清膜题）"
+      "rule": "references/parameter-planning.md；references/operations.md；references/rates.md；references/protocol-review.md"
     },
     "R65": {
       "status": "issues",
@@ -1596,7 +1596,7 @@
       "findings": [
         {
           "line": 1,
-          "reason": "同孔同枪头同模式且无既有必要准备时，应先选原位加液入口；不能先套默认动态排空，再用自动push_out=6导致的准备需求反向否定原位资格。应从默认bottom(0.8)排100µL、push_out=0并在排后等待后直接混匀，去除由此默认选择制造的退出/准备/重入链。"
+          "reason": "同孔同枪头同模式且无既有必要准备时，应按默认dynamic选择原位入口：先受控进入meniscus(z=-0.5,target=\"start\")，再以meniscus(z=-0.5,target=\"dynamic\")排100µL、push_out=0，保留正常排后等待后直接dynamic吸140µL。不能先套常规液面0排空，再用该选择产生的push_out=6反向否定原位资格；去除第7–10行制造的退出/准备/重入链，第11行的固定吸液也应改为动态液面下0.5mm。"
         }
       ],
       "rule": "references/operations.md 连续原位混匀；references/patterns.md 加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
@@ -1920,6 +1920,712 @@
         }
       ],
       "rule": "references/api-modules.md；references/module-conditions.md；references/module-practices.md；references/api-module-flex-stacker.md；references/api-module-common.md"
+    },
+    "R238": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "尾液选择回源时应显式push_out=0；即使本次排空且动态终点位于弯月面0处，也不自动使用200µL枪头的非零值。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R239": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R240": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R241": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "已如实反馈尾液去向缺口，没有擅自选择；该步骤所需去向仍未知，不能据此生成处理动作。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R242": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "首段默认固定在源孔吸液结束实际位置原位回排，不作为去向选择或询问项；已明确且可执行时不应再要求选择废液去向。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R243": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/parameter-planning.md；references/rates.md；references/protocol-review.md"
+    },
+    "R244": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/parameter-planning.md；references/rates.md；references/protocol-review.md"
+    },
+    "R245": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/parameter-planning.md；references/rates.md；references/protocol-review.md"
+    },
+    "R246": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "实际volume=175µL超出本协议100–150µL支持域，应在硬件动作前报告该值与范围；不能静默替换成默认100µL后继续执行。"
+        }
+      ],
+      "rule": "references/parameter-planning.md；references/rates.md；references/protocol-review.md"
+    },
+    "R247": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "用户要求保留实际125.4µL，未授权取整；round先将其改为125µL，后续边界检查和流速计算正确也不能使该替代合法。应直接预检并计算实际输入。"
+        }
+      ],
+      "rule": "references/parameter-planning.md；references/rates.md；references/protocol-review.md"
+    },
+    "R248": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/parameter-planning.md；references/operations.md；references/rates.md；references/protocol-review.md"
+    },
+    "R249": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 5,
+          "reason": "这里只在搬运前核对了原始F；CSV第3行F=15µL派生M=10.5、S=9.45µL，其水相排液低于本配置10µL曲线下限，直到搬运后才检查。整份CSV及必要派生量的支持域应在首个取头、搬运或移液动作前完成预检。"
+        }
+      ],
+      "rule": "references/parameter-planning.md；references/operations.md；references/rates.md；references/protocol-review.md"
+    },
+    "R250": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "F=15µL、M=10.5µL有效不能证明派生S=9.45µL的排液已覆盖；本配置水相排液下限为10µL且无明确覆盖。已如实保留该缺口并暂停受影响动作，但所需流速依据仍未具备；不外推、不用锚点或其他配置顶替。"
+        }
+      ],
+      "rule": "references/parameter-planning.md；references/operations.md；references/rates.md；references/protocol-review.md"
+    },
+    "R251": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "请求次数5来自CSV不构成dry_run覆盖；本次试运行仍执行5次，跳过既有减少混匀且至少一次的业务规则。应先选择本分支的实际次数，再展开相应首/末轮动作。"
+        }
+      ],
+      "rule": "references/parameter-planning.md；references/operations.md 测试运行参数；references/protocol-review.md"
+    },
+    "R252": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/parameter-planning.md；references/operations.md 测试运行参数；references/protocol-review.md"
+    },
+    "R253": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "先float将原始非整数1.0000000000000001吞成1，后续is_integer与范围校验无法识别差异并会执行。须在该转换前核对原始文本的整数性/范围或明确支持精度，不能静默取整。"
+        }
+      ],
+      "rule": "references/parameter-planning.md；references/operations.md 分段排空；references/protocol-review.md"
+    },
+    "R254": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/parameter-planning.md；references/operations.md 分段排空；references/protocol-review.md"
+    },
+    "R255": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "把支持精度内的80.000000000000000001先转float变成80，M变20导致错误不拆。原始比例对应M=20.00000000000000000025严格超过20，应拆主体M−10及10；不能在派生/阈值判定前静默丢失该精度。"
+        }
+      ],
+      "rule": "references/parameter-planning.md；references/operations.md 分段排空；references/protocol-review.md"
+    },
+    "R256": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/parameter-planning.md；references/operations.md 分段排空；references/protocol-review.md"
+    },
+    "R257": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R258": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "模式仍按默认dynamic，但适用模型已证明本次最低液量对应的液面下0.5mm位于孔底以下，受影响吸液尚未就绪；应保留并解决具体路径缺口，不声称通过或静默改static。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R259": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "没有用户明确静态/固定混匀要求，应采用默认dynamic。孔深和F/V不再用于选择模式，不能因旧浅孔装液阈值未命中而改为static；第2行的选型说明也与当前规则不符。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R260": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "默认模式已经是dynamic，容量/模型/路径也已独立核实；不得为旧孔深和装液占比选型补问无关D/V并阻止生成。只有必要容量、适用模型或实际路径核验缺失时才补所需事实，不能为选型凑数据。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R261": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "无明确静态覆盖时默认dynamic，M/F=40%不构成static条件。F/M仍用于70%推荐量、容量截断、保留液和实际动作/流速计算，不能再把该比例用于模式选择；第2行说明亦需修正。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R262": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户只覆盖首轮吸液位置，没有明确要求整段static/固定混匀；整段模式仍应默认dynamic，仅首轮应用合法bottom(0.8)覆盖。不能把单个动作的位置要求扩成整个混匀模式，第2行说明也需修正。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R263": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R264": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R265": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R266": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "无模式覆盖时默认dynamic，所需容量、模型和路径均已核实；不应额外要求用户先选固定/动态并阻止生成。"
+        },
+        {
+          "line": 2,
+          "reason": "用户未要求运行时调整模式，不应默认新增mix_mode参数或把选择转交操作者；交付简述本次采用方式即可。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R267": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R268": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R269": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "dynamic模式所有吸液都须随当次变化液面下0.5mm，包括末轮吸S；本行回到bottom(0.8)不符合模式。两模式共享的是末次dispense路径，不能据此把末轮aspirate也改为固定。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R270": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "首轮排S=180后枪头仍留R=20，孔内总量是F−R=580µL；本行用F=600得到11.5mm，而正确终点为580对应液面下0.5mm即11.1mm。默认应使用meniscus(z=-0.5,target=\"end\")按本次操作结束液量解析；明确体积换算本身不被一律禁止，但不能用错误总量替代当次结束液量。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R271": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R272": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "即使是dynamic模式，末次dispense也共用bottom(0.8)起排至最终液面0的路径；本行把普通动态排液的液面下0.5mm用于末排起终点。应改起点bottom(0.8)、终点meniscus(z=0,target=\"end\")；用户只覆盖push_out=0，并未覆盖路径。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R273": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R274": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "dynamic模式不豁免混匀末排拆段：200µL头原排量140严格大于20且原push_out非零，应拆130+10µL。主体bottom(0.8)到当次END液面0（孔内190µL）、push_out=0，尾段从该次START液面0连续到END液面0（200µL）、保留push_out=3，并分别查实际130/10µL流速与中间等待。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R275": {
+      "status": "unresolved",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "默认采用dynamic，但当前动态吸液、液面终点与共享末排缺适用体积模型，受影响动作未就绪；这里如实保留缺口，不应猜安全、声称通过或自行降级static。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R276": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "无用户静态/固定混匀要求时默认dynamic；缺少体积模型不构成static覆盖或路径安全依据，不能自行降级。"
+        },
+        {
+          "line": 2,
+          "reason": "静态混匀的共享末排仍涉及液面终点，单改模式不能消除模型缺口；不能在缺少替代定位依据时宣称全部就绪或隐去缺项。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R277": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md；references/parameter-planning.md"
+    },
+    "R278": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "本题没有用户静态模式覆盖，两行及整个支持区间都应默认dynamic。按旧阈值从首行F=500缓存static的模式已不合法，不能再把F/M变化用于选型；第9行把该static写入两行计划并传入执行。仍需逐行按实际F计算M/R/S、查流速及验证路径，但不需要为选型读取D/V。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md；references/parameter-planning.md"
+    },
+    "R279": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "location采用target=\"dynamic\"时不能同时给显式end_location；应按本次已明确的动态跟随覆盖只保留dynamic location。START/END本身可用于显式移动路径，错误是本行把dynamic location与end_location并用，不是所有Meniscus都不能作终点。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md；references/api-pipette.md；references/api-wells-liquids.md"
+    },
+    "R280": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md；references/api-layout.md；references/api-wells-liquids.md"
+    },
+    "R281": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+    },
+    "R282": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户已明确整段static静态混匀，同孔同枪头且无需模式切换/液面外准备时，前次加液应沿用该模式的bottom(0.8)。本行无单独加液位置覆盖却改成液面下0.5mm动态排液，不符合明确static要求；第3行首次固定吸液正确。"
+        }
+      ],
+      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+    },
+    "R283": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+    },
+    "R284": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "无用户模式或加液位置覆盖，应按默认dynamic混匀衔接原位加液。本次前次加液须用meniscus(z=-0.5,target=\"dynamic\")随加液前后液面联动；本行仍用bottom(0.8)，虽首次混匀吸液已为dynamic，衔接仍不符合默认模式。F/M仍用于动作体积及必要路径核验，不作为选型条件。"
+        }
+      ],
+      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+    },
+    "R285": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+    },
+    "R286": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "本次无模式覆盖，默认dynamic；前次加液在液面下0.5mm、push_out=0且无其他待准备事件，不能无故退出top后prepare并重入、再插入液等待。应保留第2行正常排后等待并在同孔直接执行dynamic首次吸液，去除第3–6行制造的退出/准备/重入链；不因已写出退出动作就把它当作必要分支。"
+        }
+      ],
+      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+    },
+    "R287": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+    },
+    "R288": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "低体积模式到正常模式的切换是本次既有必要条件，不满足原位立即混匀资格。前次加液应保留常规meniscus(z=0,target=\"dynamic\")，不能因后续混匀为dynamic就套用原位液面下0.5mm入口；本题常规排后记录液量为0且终点在液面0，按统一条件应自动push_out=1。随后top切换、准备及受控进入dynamic吸液起点的路径正确。"
+        }
+      ],
+      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+    },
+    "R289": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "当前默认仍为dynamic，已证实动态路径非法应反馈具体位置缺口；没有用户明确静态/固定混匀要求时不能静默改static，也不能把路径非法当作模式覆盖。"
+        },
+        {
+          "line": 2,
+          "reason": "尚无已核实替代路径，不能隐去孔底以下的实际路径缺口或宣称全部动作就绪；任何用户批准的替代路径也必须独立核验容量、模型和可达性。"
+        }
+      ],
+      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+    },
+    "R290": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "名称、App安装和液量初始化都不能证明实际定义、几何与适用体积模型已核对；自定义仅有名称时应先索取本次实际JSON，不能据此放行液面跟随。"
+        }
+      ],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R291": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R292": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R293": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 10,
+          "reason": "本次已确认全部末排保持bottom(0.8)，且参与孔缺体积模型；末排仍使用meniscus液面end_location，既未落实固定覆盖也缺相应模型依据。应在同一bottom(0.8)排200µL，不传该end_location。"
+        }
+      ],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R294": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 10,
+          "reason": "height_from_volume仍依赖适用体积模型，不能在已确认无模型固定方案的末排用600µL换算终点。应在同一bottom(0.8)排200µL，不传该end_location；正确初始化和F账本不补足模型。"
+        }
+      ],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R295": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 7,
+          "reason": "static要求只使吸液及非末次排液固定，原共用末排仍依赖液面模型；不能把static解释为已确认取消液面末排并自行用bottom(0.8)放行。应告知缺模型并保留末排未决，取得适用模型或明确确认可执行的固定末排方案。"
+        }
+      ],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R296": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R297": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "固定方案仅覆盖耗材A，不能扩到有有效模型且没有位置覆盖的B；B本次排后仍留20µL，继续常规meniscus(z=0,target=\"dynamic\")、push_out=0。第2行A的孔顶退出应保留。"
+        }
+      ],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R298": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "同意固定高度只解决方案选择，不建立可靠定位几何或消除深管下探风险；孔底、装载有效高度及整段可达性未核实前，不能宣称可执行。仍需解决这些具体缺口，不能仅凭同意0.8mm放行。"
+        }
+      ],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R299": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R300": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "bottom(0.8)不是已知液面0，用户未覆盖非零push_out，因此原100µL排液的push_out应为0且不触发分段排空；本题仍强拆90+10µL，应保留一次100µL固定排液、push_out=0及正常排后等待。不能沿用先前液面路径的自动拆段资格。"
+        }
+      ],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R301": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "模型引用有效且耗材名称在官方索引，也不能支持超出模型0–100µL范围的130µL换算；容量和初始化不扩大模型范围。应取得覆盖130µL的可靠模型，或告知范围缺口并明确确认适用的固定方案，不能外推。"
+        }
+      ],
+      "rule": "references/operations.md 液量模型核对与缺失处理；references/custom-labware.md 体积模型与使用边界；references/protocol-review.md"
+    },
+    "R302": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+    },
+    "R303": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+    },
+    "R304": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 2,
+          "reason": "连续吸后头内210µL超有效容量200；低位20装不下时须先排废，再低位吸，不可分别检查两个aspirate就放行。"
+        }
+      ],
+      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+    },
+    "R305": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "首批低位吸取时源孔还余220µL；将源孔最后20误作每批末20，虽然容量与总量成立仍不符合场景。"
+        }
+      ],
+      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+    },
+    "R306": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+    },
+    "R307": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "量程检查迟于首批200µL的实际执行；整计划含1µL普通段，应在首动作前拒绝该计划或另定合法分批，不应声称1µL已经执行或221µL本身必然不可处理。"
+        }
+      ],
+      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+    },
+    "R308": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "枪头内仍有180µL且无待准备事件，同批不得prepare；保持活塞状态继续低位吸液。"
+        }
+      ],
+      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+    },
+    "R309": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 8,
+          "reason": "到0.1mm后立即吸液，缺少该场景低位就位稳定等待；此前普通段吸后等待不能替代移动后的停留。"
+        }
+      ],
+      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+    },
+    "R310": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+    },
+    "R311": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 3,
+          "reason": "dry_run未按实际180µL选择水相273.333333，误把正式场景20沿用到试跑。"
+        },
+        {
+          "line": 4,
+          "reason": "dry_run未按实际20µL选择水相70，误把正式场景10沿用到试跑。"
+        }
+      ],
+      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+    },
+    "R312": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "将每喷嘴尾段10直接从整槽终量3800扣除；应扣8×10，主体后3720。"
+        }
+      ],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R313": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/operations.md；references/protocol-review.md"
+    },
+    "R314": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "无效末行应在改变样品温度前被拒绝；模块任务已启动，不能由后续拒绝撤销。"
+        }
+      ],
+      "rule": "references/parameter-planning.md；references/protocol-review.md"
+    },
+    "R315": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/parameter-planning.md；references/protocol-review.md"
+    },
+    "R316": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "2.15的A3垃圾桶固定且不能显式加载；不能套用2.16起的接口。"
+        }
+      ],
+      "rule": "references/api-layout.md；references/api-versions.md"
+    },
+    "R317": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/api-layout.md；references/api-versions.md"
+    },
+    "R318": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "该组合实际交付40µL液体；此版本跟踪排液用命令量50更新，不能将记录的增量等同于物理交付。"
+        }
+      ],
+      "rule": "references/pipette-mechanics.md；references/api-wells-liquids.md"
+    },
+    "R319": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/pipette-mechanics.md；references/api-wells-liquids.md"
+    },
+    "R320": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "适配器仍在托盘，未腾空就retrieve不成立；不能把主板离开等同托盘空。"
+        }
+      ],
+      "rule": "references/module-conditions.md；references/module-practices.md"
+    },
+    "R321": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/module-conditions.md；references/module-practices.md"
+    },
+    "R322": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "未取得真实CSV，示例不能当作客户实际行；应在支持域和分支下标为代表值。"
+        }
+      ],
+      "rule": "references/parameter-planning.md；references/protocol-review.md"
+    },
+    "R323": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/parameter-planning.md；references/protocol-review.md"
+    },
+    "R324": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "普通命令在该版本按完整命令量50预测END高度；成功后的实际液体入账40，是两件事。"
+        }
+      ],
+      "rule": "references/pipette-mechanics.md；references/protocol-review.md"
+    },
+    "R325": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/pipette-mechanics.md；references/protocol-review.md"
     }
   }
 }

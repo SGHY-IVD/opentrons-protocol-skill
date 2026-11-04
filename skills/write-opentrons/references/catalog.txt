@@ -31,6 +31,8 @@ opentrons_flex_96_filtertiprack_1000ul
 biorad_96_wellplate_200ul_pcr
 corning_384_wellplate_112ul_flat
 corning_96_wellplate_330ul
+corning_96_wellplate_360ul_flat
+nest_96_wellplate_200ul_flat
 nest_96_wellplate_2ml_deep
 opentrons_96_wellplate_200ul_pcr_full_skirt
 

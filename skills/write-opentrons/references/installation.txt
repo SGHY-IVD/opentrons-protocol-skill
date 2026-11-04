@@ -1,5 +1,5 @@
 Opentrons Flex 安装关系库
-关系核验逻辑与夹具表更新：2026-10-29；适用主线：Flex；范围：当前官方耗材清单与6类Flex模块。
+关系核验逻辑与夹具表更新：2026-10-29；温控上层关系补充：2026-11-04；适用主线：Flex；范围：当前官方耗材清单与6类Flex模块。
 用途：依据按operations“布局与耗材确认”确定的配置核对加载层级及官方明确约束；未经授权不替用户设计台面，不进行完整碰撞模拟。
 查询顺序：按下方“统一安装核验”解析位置、匹配夹具与区域，再沿实际承载关系核对上层对象。
 状态含义：明确支持=有官方条目；明确禁止=有显式约束；未收录/未确认=不自动判断兼容或不兼容，反馈缺失。
@@ -18,10 +18,11 @@ Opentrons Flex 安装关系库
 沟通：用户可按最终设备、耗材与位置自然描述；内部解析后仍按这些名称回显结果。无需纠正可正确映射的说辞，不默认展示cutout/夹具/区域推导；实际冲突只说明受影响的实物、位置及必要调整，影响结论的未知用实物名称集中确认；这些反馈也不默认展开底层夹具链或内部字段，仅用户追问原理/安装细节时再解释。
 
 一、垃圾处理与夹爪（官方接口事实 + 用户生成规范）
-官方：load_trash_bin(location: DeckLocation) -> TrashBin；location 必填。允许 A1/B1/C1/D1/A3/B3/C3/D3 的空位置；禁止第2、4列。
-官方：load_waste_chute() -> WasteChute；无参数，固定占用D3，不能与另一件占用D3的设备共占槽位。
+Flex API 2.15：仅固定A3垃圾桶，不调用垃圾桶或垃圾槽加载接口；布局按A3已占用核对。
+官方（API 2.16起）：load_trash_bin(location: DeckLocation) -> TrashBin；location 必填。允许 A1/B1/C1/D1/A3/B3/C3/D3 的空位置；禁止第2、4列。
+官方（API 2.16起）：load_waste_chute() -> WasteChute；无参数，固定占用D3，不能与另一件占用D3的设备共占槽位。
 官方：夹爪无需独立加载，move_labware/move_lid 通过 use_gripper=True 使用。
-用户规范：脚本出现 drop_tip() 时加载垃圾桶或垃圾槽；除非特别说明，默认 load_trash_bin()。垃圾桶位置按operations“布局与耗材确认”确定。该规范不是对API所有合法调用方式的穷举声明。
+用户规范（API 2.16起）：脚本出现 drop_tip() 时加载实际垃圾桶或垃圾槽；默认垃圾桶写作 load_trash_bin(location)，传入实际空槽位置。垃圾桶位置按operations“布局与耗材确认”确定。该规范不是对API所有合法调用方式的穷举声明。
 AI判断边界：内置垃圾桶是可人工调整安装位置的台面固定装置，不是抓手搬运的耗材，不作为move_labware的labware对象。此说明用于内部硬件判断，正常用户回显只需名称和位置；官方API及movableTrash等内部标识保持原名。
 
 二、硬件→API位置（候选索引；须经过统一安装核验）
@@ -29,6 +30,7 @@ AI判断边界：内置垃圾桶是可人工调整安装位置的台面固定装
 外置垃圾槽 | D3
 heaterShakerModuleV1 | A1/B1/C1/D1/A3/B3/C3/D3
 temperature module gen2（内部model temperatureModuleV2） | A1/B1/C1/D1/A3/B3/C3/D3
+温控安装朝向：排风口、电源及USB口须朝台面外侧，第1列朝左、第3列朝右，保持排风通畅，不朝台面中央。依据官方v10.0.0 commit e8c6d0a424c25fff1604e2a02e4ccaedac95b9af，docs/temperature-module/docs/pre-installation.md，blob f8abad6d4dbb5530f5699668668dfb56de5e7f54，2026-11-04核对；侧盖人工准备的场景提醒见module-practices温控节。
 thermocycler module gen2 / thermocyclerModuleV2 | 加载锚点B1；实体占用A1+B1
 magneticBlockV1 | A1–D3全部12个工作区槽位
 absorbanceReaderV1 | A3/B3/C3/D3；同排第4列为专用盖停放区，不得作为普通耗材槽使用
@@ -64,7 +66,7 @@ flexStackerModuleV1WithWasteChuteRightAdapterNoCover | cutoutD3 | 1ChannelWasteC
 thermocyclerModuleV2Rear + thermocyclerModuleV2Front | cutoutA1 + cutoutB1 | 后部不提供独立区域；前部提供thermocyclerModuleV2 | fixtureGroup要求两部分同时存在，API锚点B1不释放A1
 
 本表按官方v10.0.0的deck definition v5核对：shared-data/deck/definitions/5/ot3_standard.json，commit e8c6d0a424c25fff1604e2a02e4ccaedac95b9af，blob 82dd9a4882708dab83afbf145aa36f47d7bb8a89。仅列本技能维护的6类模块、垃圾处理和普通/扩展配置；不扩展模块/API范围，不代表其他版本及未列组合已验证。具体上层支持和动作条件继续查各自条目。
-代码生成：经核验为普通暂存区域时，使用用户指定的A4–D4作为load_labware的location或move_labware的new_location，无需另写扩展板位加载接口；模块或专用区域按实际父对象和对应API加载/搬运，不以普通第4列位置替代。引用第4列位置表达所需甲板配置，实际硬件和App/机器人上的deck configuration仍须与之匹配，代码不会自动安装扩展件。
+普通暂存区域自Flex API 2.16支持；2.15不生成以第4列为location/new_location的暂存操作。经核验为普通暂存区域且目标API支持时，使用用户指定的A4–D4作为load_labware的location或move_labware的new_location，无需另写扩展板位加载接口；模块或专用区域按实际父对象和对应API加载/搬运，不以普通第4列位置替代。引用第4列位置表达所需甲板配置，实际硬件和App/机器人上的deck configuration仍须与之匹配，代码不会自动安装扩展件。
 加载边界：夹爪无独立加载调用，通过use_gripper=True使用；垃圾槽仍必须显式load_waste_chute()，不能与“扩展夹具无需加载”混为一谈。
 夹具表依据上述固定发布快照，位置语义另核对deck-slots文档。记录内部字段用于核对关系，不凭此擅自增加执行接口；若机器人实际配置涉及未收录组合，则反馈缺失。
 
@@ -91,6 +93,13 @@ opentrons_96_deep_well_adapter -> nest_96_wellplate_2ml_deep | 子定义v5 | ove
 opentrons_96_deep_well_temp_mod_adapter -> nest_96_wellplate_2ml_deep | 子定义v5 | overlap={"x": 0, "y": 0, "z": 16.1}
 opentrons_96_pcr_adapter -> opentrons_96_wellplate_200ul_pcr_full_skirt | 子定义v4 | overlap={"x": 0, "y": 0, "z": 10.95}
 opentrons_96_well_aluminum_block -> opentrons_96_wellplate_200ul_pcr_full_skirt | 子定义v4 | overlap={"x": 0, "y": 0, "z": 11.91}
+opentrons_aluminum_flat_bottom_plate -> corning_6_wellplate_16.8ml_flat | 子定义v5 | overlap={"x": 0, "y": 0, "z": 4.5}
+opentrons_aluminum_flat_bottom_plate -> corning_12_wellplate_6.9ml_flat | 子定义v5 | overlap={"x": 0, "y": 0, "z": 4.5}
+opentrons_aluminum_flat_bottom_plate -> corning_24_wellplate_3.4ml_flat | 子定义v5 | overlap={"x": 0, "y": 0, "z": 4.15}
+opentrons_aluminum_flat_bottom_plate -> corning_48_wellplate_1.6ml_flat | 子定义v6 | overlap={"x": 0, "y": 0, "z": 4.4}
+opentrons_aluminum_flat_bottom_plate -> corning_96_wellplate_360ul_flat | 子定义v5 | overlap={"x": 0, "y": 0, "z": 5.45}
+opentrons_aluminum_flat_bottom_plate -> nest_96_wellplate_200ul_flat | 子定义v5 | overlap={"x": 0, "y": 0, "z": 5.55}
+opentrons_96_well_aluminum_block -> nest_96_wellplate_100ul_pcr_full_skirt | 子定义v5 | overlap={"x": 0, "y": 0, "z": 12.66}
 opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_filtertiprack_1000ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
 opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_filtertiprack_200ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
 opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_filtertiprack_20ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
@@ -101,6 +110,21 @@ opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_tiprack_20ul | 子定义v
 opentrons_flex_96_tiprack_adapter -> opentrons_flex_96_tiprack_50ul | 子定义v1 | overlap={"x": 0, "y": 0, "z": 121}
 opentrons_4_well_aluminumblock_tough_72ml -> opentrons_tough_4_reservoir_72ml | 子定义v2 | overlap={"x": 0, "y": 0, "z": 23.75}
 opentrons_flex_deck_riser -> opentrons_tough_universal_lid | 子定义v2 | overlap={"x": 0, "y": 0, "z": 34}
+
+温控隐藏存量关系（按catalog隐藏项调查规则查用，不混入普通推荐候选；隐藏不等于Python不兼容）：
+opentrons_96_well_aluminum_block -> armadillo_96_wellplate_200ul_pcr_full_skirt | 子定义v3 | overlap={"x": 0, "y": 0, "z": 11.91} | hidden_from_ui
+
+温控上层关系来源与边界（2026-11-04核对）：官方v10.0.0 commit e8c6d0a424c25fff1604e2a02e4ccaedac95b9af，完整definitions树878767d05ffaff87c79da80d29990297332e4e69。扫描该树全部293份schema2/3版本定义，47个历史文件命中三个温控父适配器；按同提交API2.30默认策略收敛为11条公开关系及1条隐藏存量关系，排除测试条目。12份正式上层默认定义均定向重取并核对blob；本次新增公开7条、隐藏1条，原4条保持。模块→三个适配器仍依据第五节所引温控模块文档；上层关系来自各子定义的stackingOffsetWithLabware，不作为任意热性能、多通道可达或抓手搬运已验证的证明。
+默认策略：api/src/opentrons/protocol_api/core/engine/_default_labware_versions.py，blob ca39a9f89176bdd85824ec398f35e834cad75a53；隐藏策略：shared-data/js/getLabware.ts，blob 2cb268bf4e31aac8014b05443e9febf77ae21f71。后者将Armadillo隐藏并注明由opentrons_96_wellplate_200ul_pcr_full_skirt替代，不因此替用户更换实物。
+新增子定义路径统一为shared-data/labware/definitions/2/<上层load_name>/<上述v>.json，固定提交中的blob如下；其他目标API仍核对实际默认修订：
+corning_6_wellplate_16.8ml_flat | blob b048d951efd68c5e7588d6e8b22b9e63b894a800
+corning_12_wellplate_6.9ml_flat | blob 915fa2e29c6200c488aa1486866705030f2efd9c
+corning_24_wellplate_3.4ml_flat | blob fda8ec1616990e49351f18bb81a73fce139f57c4
+corning_48_wellplate_1.6ml_flat | blob 1cdacbb0ce0bc79e3ee3c55ae1f2dbfe6753c709
+corning_96_wellplate_360ul_flat | blob d322da9c33853bd6b736c9388c12be13022ef626
+nest_96_wellplate_200ul_flat | blob 16289560820cb6507a6f8aa761b7fdab58bc9cff
+nest_96_wellplate_100ul_pcr_full_skirt | blob c26b422af66b381c7512c4687ae10fd458c644bd
+armadillo_96_wellplate_200ul_pcr_full_skirt | blob faaed462f588923da582643d60a4bbb9c816971e
 
 五、模块→耗材直接叠放
 
@@ -121,6 +145,16 @@ magneticBlockV1 -> nest_96_wellplate_2ml_deep | 子定义v5 | overlap={"x": 0, "
 magneticBlockV1 -> opentrons_96_wellplate_200ul_pcr_full_skirt | 子定义v4 | overlap={"x": 0, "y": 0, "z": 3.54}
 thermocyclerModuleV2 -> opentrons_96_wellplate_200ul_pcr_full_skirt | 子定义v4 | overlap={"x": 0, "y": 0, "z": 10.7}
 thermocyclerModuleV2 -> opentrons_calibration_adapter_thermocycler_module | 子定义v1 | overlap={"x": 0, "y": 0, "z": 11.0}
+
+读板机上层板（用户推荐及官方板型范围核对，不是逐品牌光学认证）：
+absorbanceReaderV1 -> corning_96_wellplate_360ul_flat | 推荐候选；API2.30默认定义v5
+absorbanceReaderV1 -> nest_96_wellplate_200ul_flat | 推荐候选；API2.30默认定义v5
+官方产品说明支持ANSI/SBS标准96孔平底板；固定v10.0.0引擎的板型检查要求恰为96孔、定义总高≤16mm。两款上述默认定义分别为14.22/14.3mm高，并包含抓取参数；按实际货号确认孔底透光、测定适用性与抓手结构，不把几何门槛通过等同于实测光学兼容。其他品牌可按相同条件和实际定义核对，推荐名单不是品牌白名单。
+两份板定义没有stackingOffsetWithModule字段，不补造偏移；按官方读板流程用模块对象直接承载孔板，不新增适配器。corning_96_wellplate_330ul仍为另一加载名，不自动替换为上述360ul_flat。
+来源：用户2026-11-04确认的选板经验；官方[产品规格及FAQ](https://opentrons.com/products/opentrons-flex-absorbance-plate-reader-module-gen1)于同日核对，在线页未固定修订；定义与软件校验依据官方v10.0.0 commit e8c6d0a424c25fff1604e2a02e4ccaedac95b9af：
+- shared-data/labware/definitions/2/corning_96_wellplate_360ul_flat/5.json，blob d322da9c33853bd6b736c9388c12be13022ef626。
+- shared-data/labware/definitions/2/nest_96_wellplate_200ul_flat/5.json，blob 16289560820cb6507a6f8aa761b7fdab58bc9cff。
+- api/src/opentrons/protocol_engine/state/labware.py，blob dedeee6786ddde009280527ccdc6c969bf633d16，raise_if_labware_incompatible_with_plate_reader及_PLATE_READER_MAX_LABWARE_Z_MM。
 
 六、板盖、同类堆叠及其他父层关系（保持原始字段语义）
 biorad_96_wellplate_200ul_pcr -> biorad_96_wellplate_200ul_pcr | stackingOffsetWithLabware | 子定义v5 | overlap={"x": 0, "y": 0, "z": 3.32}
@@ -145,8 +179,8 @@ default 是默认几何条目，不作为“所有耗材兼容”的证明。外
 字段解释：stackingOffsetWithLabware 的键为下层对象；记录位于上层耗材定义中。stackingOffsetWithModule 同理。compatibleParentLabware 需按其字段语义保留，不能与几何偏移简单互换。
 
 七、未收录/未确认
-仅维护Flex安装约束；不得用未收录旧代模块替代已确认型号。24孔温控组合新增关系的文档依据见第五节，其余未重新同步。
-当前52份耗材定义中，没有显式关系的组合均保持未确认；例如 corning_96_wellplate_330ul 未提取到适配器叠放记录，不因此判定不可安装。
+仅维护Flex安装约束；不得用未收录旧代模块替代已确认型号。24孔温控组合依据见第五节，三个温控独立适配器的上层扩充见第四节；其他关系未随本次批量更新。
+没有显式关系的组合均保持未确认；例如 corning_96_wellplate_330ul 未提取到适配器叠放记录，不因此判定不可安装。本次明确的corning_96_wellplate_360ul_flat是另一加载名，不据相同品牌/孔数替换330ul定义。
 EV Resin适配器、部分Tough储液槽铝块的模块安装关系尚未由本轮模块文档确认；保持名称已收录、对应安装关系未确认。
 尚未覆盖官方耗材库全部耗材；本库只涵盖当前名称清单的关系与直接引用。
 
@@ -160,7 +194,7 @@ https://docs.opentrons.com/python-api/modules/flex-stacker/
 https://docs.opentrons.com/python-api/modules/thermocycler/
 https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/deck/definitions/5/ot3_standard.json
 https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/schemas/2.json
-关系的几何条目按本次官方仓库各耗材最高可见定义版本提取；edge快照不等于全部条目已被当前机器人软件发布。模块位置优先采用在线API文档，并与deck的mayMountTo/providesAddressableAreas/fixtureGroup核对。
+既有关系的几何条目按当时官方仓库各耗材最高可见定义版本提取；本次温控上层关系改按第四节注明的固定发布及API2.30默认修订核对。edge快照不等于全部条目已被当前机器人软件发布。模块位置优先采用在线API文档，并与deck的mayMountTo/providesAddressableAreas/fixtureGroup核对。
 biorad_96_wellplate_200ul_pcr | definition version=5 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/biorad_96_wellplate_200ul_pcr/5.json
 corning_384_wellplate_112ul_flat | definition version=5 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/corning_384_wellplate_112ul_flat/5.json
 corning_96_wellplate_330ul | definition version=1 | https://raw.githubusercontent.com/Opentrons/opentrons/edge/shared-data/labware/definitions/2/corning_96_wellplate_330ul/1.json

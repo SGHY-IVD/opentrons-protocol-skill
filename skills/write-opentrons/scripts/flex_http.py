@@ -15,6 +15,7 @@ import os
 import re
 import secrets
 import ssl
+import stat
 import threading
 import time
 from datetime import datetime, timezone
@@ -86,6 +87,35 @@ def _data(body, expected_type, label):
     return body["data"]
 
 
+def _text(value):
+    return isinstance(value, str) and bool(value.strip())
+
+
+def _configuration_section(body, key):
+    """Check only the fields needed to interpret a section, not a full SDK schema."""
+    if key == "saved_deck_configuration":
+        data = _data(body, dict, key)
+        fixtures = data.get("cutoutFixtures")
+        valid = isinstance(fixtures, list) and all(
+            isinstance(item, dict) and _text(item.get("cutoutId")) and _text(item.get("cutoutFixtureId"))
+            for item in fixtures)
+    else:
+        data = _data(body, list, key)
+        if key == "instruments":
+            # Bad instruments report their type and ok=False, but need not report a mount or model.
+            valid = all(isinstance(item, dict) and item.get("instrumentType") in ("pipette", "gripper")
+                        and type(item.get("ok")) is bool
+                        and (not item["ok"] or (_text(item.get("mount")) and _text(item.get("instrumentModel"))))
+                        for item in data)
+        else:
+            valid = all(isinstance(item, dict) and _text(item.get("moduleType")) and _text(item.get("moduleModel"))
+                        and ("compatibleWithRobot" not in item or type(item["compatibleWithRobot"]) is bool)
+                        for item in data)
+    if not valid:
+        raise FlexHTTPError("invalid_response", f"设备返回的{key}缺少可识别的配置字段或字段格式无效。")
+    return data
+
+
 class FlexHTTPClient:
     def __init__(self, host, *, timeout=10, token=None, ca_file=None):
         self.base_url = _base_url(host)
@@ -146,10 +176,14 @@ class FlexHTTPClient:
 
     def device(self):
         health = self._request("GET", "/health")
+        if health.get("robot_model") == "OT-2 Standard":
+            raise FlexHTTPError("not_flex", "设备报告为非Flex型号，停止本工具的后续操作。")
         if health.get("robot_model") != "OT-3 Standard":
-            raise FlexHTTPError("not_flex", "设备没有报告为已维护的Flex型号，停止本工具的后续操作。")
+            raise FlexHTTPError("invalid_response", "设备未返回可识别的型号，无法核实Flex身份。")
         if not isinstance(health.get("name"), str) or not health["name"].strip():
             raise FlexHTTPError("invalid_response", "设备没有返回有效的设备名称。")
+        if health.get("robot_serial") is not None and not _text(health["robot_serial"]):
+            raise FlexHTTPError("invalid_response", "设备返回的序列号格式无效。")
         for key in ("maximum_protocol_api_version", "minimum_protocol_api_version"):
             value = health.get(key)
             if value is not None and (not isinstance(value, list) or len(value) != 2 or not all(type(n) is int and n >= 0 for n in value)):
@@ -169,9 +203,9 @@ class FlexHTTPClient:
     def inspect(self):
         device = self.device()
         sections, errors = {}, {}
-        for key, path, expected in [("instruments", "/instruments", list), ("modules", "/modules", list), ("saved_deck_configuration", "/deck_configuration", dict)]:
+        for key, path in [("instruments", "/instruments"), ("modules", "/modules"), ("saved_deck_configuration", "/deck_configuration")]:
             try:
-                sections[key] = _data(self._request("GET", path), expected, key)
+                sections[key] = _configuration_section(self._request("GET", path), key)
             except FlexHTTPError as exc:
                 sections[key] = None  # Unavailable is different from an empty list.
                 errors[key] = exc.as_dict()
@@ -197,23 +231,36 @@ class FlexHTTPClient:
         paths = [Path(protocol), *(Path(p) for p in labware)]
         if paths[0].suffix.lower() != ".py" or any(p.suffix.lower() != ".json" for p in paths[1:]):
             raise FlexHTTPError("invalid_files", "本版支持一个Python协议及可选的自定义耗材JSON。")
-        files, seen = [], set()
+        files, seen, remaining = [], set(), MAX_BYTES
         for path in paths:
             if path.name in seen or any(c in path.name for c in '\r\n"\\'):
                 raise FlexHTTPError("invalid_files", "上传文件名重复或包含不支持的字符。")
             seen.add(path.name)
             try:
-                if path.stat().st_size > MAX_BYTES:
-                    raise FlexHTTPError("files_too_large", "上传文件超出本工具的大小上限。")
-                content = path.read_bytes()
+                # A FIFO cannot be an upload file. Open nonblocking and check
+                # the descriptor as well so a path replacement cannot hang us.
+                fd = os.open(path, os.O_RDONLY | getattr(os, "O_NONBLOCK", 0) | getattr(os, "O_BINARY", 0))
+                try:
+                    info = os.fstat(fd)
+                    if not stat.S_ISREG(info.st_mode):
+                        raise FlexHTTPError("invalid_files", "待上传的协议与耗材定义必须是普通文件。")
+                    if info.st_size > remaining:
+                        raise FlexHTTPError("files_too_large", "上传文件合计超出本工具的大小上限。")
+                    with os.fdopen(fd, "rb", closefd=False) as stream:
+                        content = stream.read(remaining + 1)
+                finally:
+                    os.close(fd)
+                if len(content) > remaining:
+                    raise FlexHTTPError("files_too_large", "上传文件合计超出本工具的大小上限。")
+                remaining -= len(content)
             except OSError:
                 raise FlexHTTPError("invalid_files", "无法读取待上传的本地文件。") from None
             files.append((path.name, content))
-        if sum(len(b) for _, b in files) > MAX_BYTES:
-            raise FlexHTTPError("files_too_large", "上传文件合计超出本工具的大小上限。")
         device = self.device()
         if device["name"] != expected_name or (expected_serial is not None and device["serial"] != expected_serial):
             raise FlexHTTPError("target_changed", "当前设备与选定的设备身份不一致，请重新核对上传目标。")
+        if device["serial"] is not None and expected_serial is None:
+            raise FlexHTTPError("target_serial_required", "目标设备报告了序列号；请使用已核对的目标序列号后再上传。")
         boundary = "flex-" + secrets.token_hex(24)
         chunks = []
         for name, content in files:
@@ -375,7 +422,7 @@ def main(argv=None):
         if name == "upload":
             command.add_argument("protocol")
             command.add_argument("--expected-name", required=True)
-            command.add_argument("--expected-serial")
+            command.add_argument("--expected-serial", help="已核对的目标序列号；设备报告序列号时必填")
             command.add_argument("--labware", action="append", default=[])
             command.add_argument("--parameter-values", help="实际运行参数的JSON对象；省略则由设备采用默认值")
             command.add_argument("--confirm-upload", action="store_true")
@@ -395,6 +442,8 @@ def main(argv=None):
                 result = client.inspect()
             elif args.command == "upload":
                 values = json.loads(args.parameter_values) if args.parameter_values is not None else None
+                if args.parameter_values is not None and not isinstance(values, dict):
+                    raise FlexHTTPError("invalid_parameters", "--parameter-values 必须是 JSON 对象；省略该选项才使用默认值。")
                 result = client.upload_protocol(args.protocol, expected_name=args.expected_name,
                     expected_serial=args.expected_serial, labware=args.labware,
                     parameter_values=values, confirmed=args.confirm_upload)

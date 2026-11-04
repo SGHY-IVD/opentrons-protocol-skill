@@ -9,15 +9,18 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This is not an official Opentrons project, standalone protocol generator, robot driver, or simulator.
 
 
-## Publication: 2026-10-29.6
+## Publication: 2026-11-04.27
 
-- Publishes cumulative updates 2026-10-29.3–.6. The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version; the maintained Python protocol API baseline remains 2.30.
-- Adjusts pipetting parameters: single- and eight-channel 1000µL pipettes with 1000µL tips use a 20µL final segment when existing two-stage emptying conditions apply; the corresponding 96-channel setting remains 10µL. Aqueous post-immersion and post-action waits for aspiration and dispensing are 0.1/0.1/0.2/0.3 seconds for 20/50/200/1000µL tips. Other liquids and inter-segment waits are unchanged.
-- Strengthens immediate same-well mixing entry selection: decide the addition location and push_out from the actual conditions before applying emptying defaults, avoiding unnecessary exit/re-entry caused by those defaults. Genuine preparation requirements remain.
-- [Unified installation checks](skills/write-opentrons/references/installation.txt) use actual installation, carrier, and occupancy relationships. Independent objects competing for the same carrier position are distinguished from parent-child compatibility, with state updated after moves. User communication still uses final equipment, labware, and positions. This layer checks hardware placement feasibility; experimental workflow and layout optimization are separate.
-- [All six module types](skills/write-opentrons/references/api-modules.md) share routes for hardware/mechanisms, conditions, practices, API quick references, and independent loading examples. Stacker guidance separates warehouse inventory from the shuttle, manual preloading from inventory declarations, and retrieval/storage prerequisites from complete labware matching. Lidded warehouse loading is distinguished from temporary shuttle use; an external waste chute is not a Stacker prerequisite. Verified fixed sources are recorded without raising the API baseline.
-- The suite grows from 189 to 237 cases; fixture/snippet and skill-format checks pass. After follow-up review, all 237 classifications agree, with 235 strict classification/location matches and two equivalent locations accepted on reasoning. Initial differences and raw outputs remain in the [maintenance record](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md). Additional checks cover 16 supplied layouts, four hardware-placement planning tasks, and three fresh-context Stacker usage scenarios. These results do not establish reliability for every model or configuration.
-- This update includes no official SDK protocol simulation, real-device execution, or complete physical collision validation. Existing protocol skeleton, incubation progress guidance, optional HTTP/mDNS tools, and installation-time update choices remain available.
+Publishes cumulative updates since public version 2026-10-29.6. The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version; the maintained Python protocol API baseline remains 2.30.
+
+- Adds [parameter-planning guidance](skills/write-opentrons/references/parameter-planning.md) for constants, small mappings, or necessary computation, including continuous volumes and runtime CSV input. Derived mixing volumes, segments, capacity, and rates remain consistent; complete relevant input validation precedes actions affecting samples.
+- Makes dynamic mixing the default, with static mixing used when explicitly requested. Improves preceding-addition transitions, meniscus endpoints, and continuous final-segment paths. Volume models are checked against actual labware definitions; missing models require an explained and confirmed fixed-height alternative.
+- Updates aqueous aspiration/dispense curves for maintained 20µL-tip configurations and the 96-channel 200µL pipette with 200µL tips. The initial segment of one-to-many dispensing returns in place to the source; returning tail liquid explicitly uses push_out=0, with rates based on each actual action volume.
+- Adds magnetic supernatant-removal rules and examples: bulk aspiration uses 20µL/s in normal operation, while the source well's final 20µL uses low-position aspiration at 10µL/s. Batches follow remaining volume and effective capacity, preserving the complete final segment. A zero ledger balance does not establish physical removal; low-position access and bead location still require checks.
+- Expands practices across [all six module types](skills/write-opentrons/references/api-modules.md), including concurrent tasks and timers, temperature adapters and cooling, PCR programs, plate-reader equilibration and waits, Stacker refill-count differences, and Magnetic Block operation. API contracts, hardware conditions, and practices remain separate.
+- Adds 32 [FAQ entries](skills/write-opentrons/references/faq.md) and moves the protocol skeleton to references as required structural reading for new complete protocols. Improves file headers, responsibility sections, actual strategy comments, and final in-chat parameter summaries; examples do not impose fixed code layouts.
+- Strengthens shared-well nozzle accounting, version-specific positioning checks for air-containing dispenses, older-API feature gates, and Stacker shuttle occupancy checks. Optional HTTP uploads gain stricter serial-number matching, parameter/file validation, and failure-state handling.
+- Expands the regression set from 237 to 325 cases. Recorded independent reviews, after selected follow-ups, agree on 325/325 classifications, with 309/325 strict classification/location matches; see the [validation summary](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md). Detailed internal review conversations and raw results from this update are excluded from the public package; previously published historical records are retained. Publication checks reran 113 Python tests: 111 pass and two optional mDNS tests skip because their dependency is absent; all 325 fixture structures/snippets pass. Earlier independent generation/action-record trials are recorded separately from this rerun. No official SDK simulation or real-device validation was performed; these results do not establish reliability for every model, input, or configuration.
 
 ## What it helps with
 
@@ -26,6 +29,7 @@ Provide the experimental goal, existing workflow, and actual equipment. The firs
 - Convert an SOP and established layout into a complete Flex protocol.
 - Compose transfers, handwritten mixing, one-to-many dispensing, and serial dilution.
 - Add liquid visualization, module operations, gripper moves, dry-run and tip-reuse parameters.
+- Handle continuous volumes or CSV input, dynamic mixing, and complete magnetic supernatant removal.
 - Review capacity, residual liquid, plunger preparation, motion paths, occupancy, and module states.
 - Choose a targeted or full review based on the impact of a modification.
 - Optionally discover reachable Flex devices, read configuration, and send scripts or inspect device-side analysis with user authorization.
@@ -79,8 +83,8 @@ Delivery should include the protocol, the rule version actually used, key operat
 | Entry and routing | Read relevant resources on demand |
 | API and installation relationships | Maintained version baseline, parameters, load names, stacking and deck constraints |
 | Independent state dimensions | Liquid accounting, tips, spatial paths, plunger and module states |
-| Parameter data | Flow rates and delays, distinguishing experiential overrides from maintained official data |
-| Atomic and workflow references | Composable commands, retained-liquid mixing, mode changes, serial dilution |
+| Parameter data and planning | Flow rates and waits; constants, mappings, or necessary computation chosen for actual inputs, distinguishing experiential overrides from maintained official data |
+| Atomic and workflow references | Default dynamic or explicitly requested static mixing, mode changes, serial dilution, and magnetic supernatant removal; liquid-relative actions require valid models |
 | Review and regression | Trace execution state and maintain review behavior with fixed cases |
 
 Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoiding high-level transfer commands and excessive abstraction. Examples cannot override core rules. Missing API or installation information is reported. Missing geometry for an already identified labware may be retrieved from official GitHub definitions under the skill's lookup rules.
@@ -90,7 +94,8 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 - [`skills/write-opentrons/SKILL.md`](skills/write-opentrons/SKILL.md): skill entry point.
 - `skills/write-opentrons/references/`: APIs, parameter tables, rules, and examples.
 - `skills/write-opentrons/scripts/`: flow-rate, delay, regression, and optional device-connection tools.
-- `skills/write-opentrons/assets/protocol-skeleton.py`: optional protocol-structure guide.
+- `skills/write-opentrons/references/protocol-skeleton.py`: required structural reading for new complete protocols, adapted to actual tasks without mandatory section layouts.
+- `skills/write-opentrons/references/faq.md`: explanation points an assistant can organize on demand.
 - `skills/write-opentrons/assets/review-regression/`: cases, expected results, and recorded reviews.
 - `skills/write-opentrons/assets/labware/`: custom definitions and limitations, matched to the actual labware.
 - `skills/write-opentrons/agents/`: client presentation metadata.
@@ -99,7 +104,7 @@ Protocols default to explicit `aspirate`, `dispense`, `move_to`, and loops, avoi
 
 Initial public snapshot: **rule version 2026-10-21.9, maintained API documentation baseline 2.30**. This is a maintained baseline, not a promise to track the latest upstream version. Explicit older targets are checked against the version index rather than silently upgraded.
 
-The regression set currently contains 237 cases covering push-out, plunger preparation, retained-liquid mixing, mode changes, cross-well motion, module states, partial-nozzle reservoir alignment, evidence, delivery consistency, validation claims, configuration delegation, cleaning constants, variable-volume/CSV domains, user-input verification, the two-stage intake boundaries, robot/API and local-environment separation, historical hardware confirmation, custom-labware and official-index boundaries, confirmation evidence, in-chat parameter summaries, Flex scope, 24-well temperature combinations, terminology resolution, text layout echoes, protocol structure and comment audiences, normal/dry-run incubation timing, contextual advice, and evidence/authorization boundaries for device discovery, reads, uploads, and analysis, plus split emptying/aqueous waits, immediate mixing entry, unified installation relationships, and Stacker inventory operations. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
+The regression set currently contains 325 cases covering liquid/plunger/tip/motion state, split emptying, one-to-many dispensing, dynamic and static mixing, parameter/CSV derivation, missing-model alternatives, magnetic supernatant removal, shared wells and air tracking, modules and installation relationships, older-API feature gates, and evidence boundaries for configuration, delivery, and device connections. Recorded reviews were performed in batches; they do not establish validation of every release or experiment.
 
 ```bash
 python3 skills/write-opentrons/scripts/review_regression.py

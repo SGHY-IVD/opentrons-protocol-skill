@@ -56,14 +56,14 @@
       "id": "R08",
       "scope": "保留液与活塞",
       "state": "混匀普通轮次末，枪头留14µL且无待准备事件；当前位于well.bottom(0.8)。",
-      "overrides": "无",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "code": "pipette.prepare_to_aspirate()\npipette.aspirate(126, well.bottom(0.8), flow_rate=100)"
     },
     {
       "id": "R09",
       "scope": "保留液与容量",
       "state": "当前well.bottom(0.8)，保留液14µL；有效容量200µL，无待准备。",
-      "overrides": "无",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "code": "pipette.aspirate(126, well.bottom(0.8), flow_rate=100)\npipette.dispense(126, well.bottom(0.8), flow_rate=100, push_out=0)"
     },
     {
@@ -76,22 +76,22 @@
     {
       "id": "R11",
       "scope": "混匀截断与保留液",
-      "state": "孔内400µL，200µL枪头/有效容量200µL；N=2，起始空头且已准备；已向用户说明70%为280µL截断至200µL；模型有效。",
-      "overrides": "无",
+      "state": "孔内400µL，200µL枪头/有效容量200µL；N=2，起始空头且已准备；已向用户说明70%为280µL截断至200µL；模型有效。well.depth=40mm、well.max_volume=2000µL，二者来自实际孔定义。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "code": "pipette.aspirate(200, well.bottom(0.8), flow_rate=100)\npipette.dispense(180, well.bottom(0.8), flow_rate=100, push_out=0)\npipette.aspirate(180, well.bottom(0.8), flow_rate=100)\npipette.dispense(200, well.bottom(0.8), end_location=well.bottom(z=well.height_from_volume(400)), flow_rate=100, push_out=3)"
     },
     {
       "id": "R12",
       "scope": "模式切换与立即混匀",
       "state": "Flex50、50µL枪头，当前低体积模式，头内3µL；在目标孔内加液后需要正常模式混匀。",
-      "overrides": "无",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "code": "pipette.dispense(3, well.bottom(0.8), flow_rate=10, push_out=0)\npipette.configure_for_volume(35)\npipette.aspirate(35, well.bottom(0.8), flow_rate=30)"
     },
     {
       "id": "R13",
       "scope": "模式切换与准备",
       "state": "Flex50、50µL枪头，当前低体积模式；空头刚完成动态排液且在液面0；水相。",
-      "overrides": "无",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "code": "pipette.move_to(well.top(), speed=10)\npipette.configure_for_volume(35)\npipette.prepare_to_aspirate()\npipette.move_to(well.bottom(0.8), speed=10)\npipette.aspirate(35, well.bottom(0.8), flow_rate=30)"
     },
     {
@@ -146,8 +146,8 @@
     {
       "id": "R21",
       "scope": "组合：模式/路径/混匀/容量/push_out/准备",
-      "state": "Flex50、50µL枪头低体积模式，头内3µL，当前well内；排完后孔内总量50µL，模型有效；混匀2次M35/R3.5/S31.5；水相，最终弃头。",
-      "overrides": "无",
+      "state": "Flex50、50µL枪头低体积模式，头内3µL，当前well内；排完后孔内总量50µL，模型有效；混匀2次M35/R3.5/S31.5；水相，最终弃头。well.depth=10mm、well.max_volume=200µL，二者来自实际孔定义。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "code": "pipette.dispense(3, well.meniscus(z=0, target=\"dynamic\"), flow_rate=10, push_out=1)\npipette.move_to(well.top(), speed=10)\npipette.configure_for_volume(35)\npipette.prepare_to_aspirate()\npipette.move_to(well.bottom(0.8), speed=10)\npipette.aspirate(35, well.bottom(0.8), flow_rate=30)\npipette.dispense(31.5, well.bottom(0.8), flow_rate=30, push_out=0)\npipette.aspirate(31.5, well.bottom(0.8), flow_rate=30)\npipette.dispense(35, well.bottom(0.8), end_location=well.bottom(z=well.height_from_volume(50)), flow_rate=30, push_out=1)\npipette.drop_tip()"
     },
     {
@@ -411,14 +411,14 @@
     },
     {
       "id": "R59",
-      "scope": "有限体积参数的预计算覆盖",
+      "scope": "有限体积参数与实际吸液速率的联动",
       "state": "Flex8通道1000µL，200µL普通枪头、水相；volume参数的choices只有100和150µL，默认100。当前源量与容量、路径/活塞等已核对；用户未覆盖流速。仅审查体积选择与吸液流速的联动。",
       "overrides": "无。",
       "code": "volume = protocol.params.volume\npipette.aspirate(volume, location=source.bottom(0.8), flow_rate=166.666667)"
     },
     {
       "id": "R60",
-      "scope": "有限体积参数的预计算覆盖",
+      "scope": "有限体积参数与实际吸液速率的联动",
       "state": "Flex8通道1000µL，200µL普通枪头、水相；volume参数的choices只有100和150µL，默认100。当前源量与容量、路径/活塞等已核对；用户未覆盖流速。仅审查体积选择与吸液流速的联动。",
       "overrides": "无。",
       "code": "rates = {100: 166.666667, 150: 233.333333}\nvolume = protocol.params.volume\npipette.aspirate(volume, location=source.bottom(0.8), flow_rate=rates[volume])"
@@ -440,15 +440,15 @@
     {
       "id": "R63",
       "scope": "派生体积与容量截断的速率联动",
-      "state": "Flex8通道1000µL、200µL普通枪头、水相。转移参数100或150µL，目标预有等量稀释液，混匀前F分别200/300µL；M为70%后按200µL容量截断，即140/200。末次排净分段尾10µL，主体130/190，中间孔内总量190/290。仅审查预计算方案中M及主体排量对应流速；其余分段、等待及活塞状态不审。",
-      "overrides": "无。",
+      "state": "Flex8通道1000µL、200µL普通枪头、水相。转移参数100或150µL，目标预有等量稀释液，混匀前F分别200/300µL；M为70%后按200µL容量截断，即140/200。末次排净分段尾10µL，主体130/190，中间孔内总量190/290。仅审查所选方案中M及主体排量对应流速；其余分段、等待及活塞状态不审。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "code": "plans = {100: (140, 130, 190), 150: (200, 190, 290)}\nM, body, mid = plans[protocol.params.transfer_volume]\npipette.aspirate(M, location=well.bottom(0.8), flow_rate=220)\npipette.dispense(body, location=well.bottom(0.8), end_location=well.bottom(z=well.height_from_volume(mid)), flow_rate=230, push_out=0)"
     },
     {
       "id": "R64",
       "scope": "派生体积与容量截断的速率联动",
-      "state": "Flex8通道1000µL、200µL普通枪头、水相。转移参数100或150µL，目标预有等量稀释液，混匀前F分别200/300µL；M为70%后按200µL容量截断，即140/200。末次排净分段尾10µL，主体130/190，中间孔内总量190/290。仅审查预计算方案中M及主体排量对应流速；其余分段、等待及活塞状态不审。",
-      "overrides": "无。",
+      "state": "Flex8通道1000µL、200µL普通枪头、水相。转移参数100或150µL，目标预有等量稀释液，混匀前F分别200/300µL；M为70%后按200µL容量截断，即140/200。末次排净分段尾10µL，主体130/190，中间孔内总量190/290。仅审查所选方案中M及主体排量对应流速；其余分段、等待及活塞状态不审。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "code": "plans = {100: (140, 130, 190, 220, 230), 150: (200, 190, 290, 300, 290)}\nM, body, mid, asp_rate, body_rate = plans[protocol.params.transfer_volume]\npipette.aspirate(M, location=well.bottom(0.8), flow_rate=asp_rate)\npipette.dispense(body, location=well.bottom(0.8), end_location=well.bottom(z=well.height_from_volume(mid)), flow_rate=body_rate, push_out=0)"
     },
     {
@@ -853,15 +853,15 @@
     {
       "id": "R122",
       "scope": "实际聊天正文中的关键孔参数摘要",
-      "state": "完整协议的实际代码、文件头和附件均正确；本题仅审聊天中源槽A1到接收板A1的100µL转移摘要，其他关键操作已在聊天正确列出。原生单通道1000µL配200µL普通枪头，源及目标为水相；吸液166.666667µL/s、排液200µL/s，吸排均bottom(0.8)，排后原位混匀所以push_out=0；入液/退出20mm/s，实际入液及吸排后0.2s；dry_run此步骤相同。用户未要求省略聊天摘要。",
-      "overrides": "无。",
+      "state": "完整协议的实际代码、文件头和附件均正确；本题仅审聊天中源槽A1到接收板A1的100µL转移摘要，其他关键操作已在聊天正确列出。原生单通道1000µL配200µL普通枪头，源及目标为水相；吸液166.666667µL/s、排液200µL/s，吸排均bottom(0.8)，排后按用户明确的static模式原位混匀，已核对排液终点低于液面，因此push_out=0；入液/退出20mm/s，实际入液及吸排后0.2s；dry_run此步骤相同。用户未要求省略聊天摘要。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "code": "# 聊天：协议已完成，全部流速、高度及移动参数见附件DELIVERY.txt，正文不再列出。"
     },
     {
       "id": "R123",
       "scope": "实际聊天正文中的关键孔参数摘要",
-      "state": "完整协议的实际代码、文件头和附件均正确；本题仅审聊天中源槽A1到接收板A1的100µL转移摘要，其他关键操作已在聊天正确列出。原生单通道1000µL配200µL普通枪头，源及目标为水相；吸液166.666667µL/s、排液200µL/s，吸排均bottom(0.8)，排后原位混匀所以push_out=0；入液/退出20mm/s，实际入液及吸排后0.2s；dry_run此步骤相同。用户未要求省略聊天摘要。",
-      "overrides": "无。",
+      "state": "完整协议的实际代码、文件头和附件均正确；本题仅审聊天中源槽A1到接收板A1的100µL转移摘要，其他关键操作已在聊天正确列出。原生单通道1000µL配200µL普通枪头，源及目标为水相；吸液166.666667µL/s、排液200µL/s，吸排均bottom(0.8)，排后按用户明确的static模式原位混匀，已核对排液终点低于液面，因此push_out=0；入液/退出20mm/s，实际入液及吸排后0.2s；dry_run此步骤相同。用户未要求省略聊天摘要。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "code": "# 聊天：源槽A1→接收板A1，吸排100µL；吸166.666667、排200µL/s；吸排均孔底上0.8mm，随后原位混匀，push_out=0；入液/退出20mm/s，实际入液及吸排后0.2s，dry_run本步同值。"
     },
     {
@@ -1370,31 +1370,31 @@
     },
     {
       "scope": "水相吸排入液、吸后与排后的独立等待阶段",
-      "state": "Flex原生八通道1000µL配1000µL普通枪头，源及目标均为水相。源量足够，枪头为空且已在源孔top完成准备；目标初始化有效，随后原位混匀，因此本次固定bottom(0.8)排液push_out=0。只核对所示三种等待阶段，其他状态/路径已核对。",
-      "overrides": "无。",
+      "state": "Flex原生八通道1000µL配1000µL普通枪头，源及目标均为水相。源量足够，枪头为空且已在源孔top完成准备；目标初始化有效，随后按用户明确的static模式原位混匀，因此本次加液采用bottom(0.8)，已核对终点低于液面、push_out=0。只核对所示三种等待阶段，其他状态/路径已核对。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "id": "R196",
       "code": "pipette.move_to(source.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.aspirate(100, source.bottom(0.8), flow_rate=166.666667)\nprotocol.delay(seconds=0.3)\npipette.move_to(source.top(), speed=40)\npipette.move_to(destination.top())\npipette.move_to(destination.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.dispense(100, destination.bottom(0.8), flow_rate=150, push_out=0)\nprotocol.delay(seconds=0.3)"
     },
     {
       "scope": "水相吸排入液、吸后与排后的独立等待阶段",
-      "state": "Flex原生八通道1000µL配1000µL普通枪头，源及目标均为水相。源量足够，枪头为空且已在源孔top完成准备；目标初始化有效，随后原位混匀，因此本次固定bottom(0.8)排液push_out=0。只核对所示三种等待阶段，其他状态/路径已核对。",
-      "overrides": "无。",
+      "state": "Flex原生八通道1000µL配1000µL普通枪头，源及目标均为水相。源量足够，枪头为空且已在源孔top完成准备；目标初始化有效，随后按用户明确的static模式原位混匀，因此本次加液采用bottom(0.8)，已核对终点低于液面、push_out=0。只核对所示三种等待阶段，其他状态/路径已核对。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "id": "R197",
       "code": "pipette.move_to(source.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.aspirate(100, source.bottom(0.8), flow_rate=166.666667)\nprotocol.delay(seconds=0.3)\npipette.move_to(source.top(), speed=40)\npipette.move_to(destination.top())\npipette.move_to(destination.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.dispense(100, destination.bottom(0.8), flow_rate=150, push_out=0)\nprotocol.delay(seconds=0.4)"
     },
     {
       "scope": "加液后同孔混匀的入口选择与活塞准备依据",
-      "state": "Flex八通道1000µL配1000µL普通枪头，水相；源端吸液已完成，枪头内100µL且活塞已准备，当前位置destination.top()。目标初始100µL，已初始化且模型有效；默认bottom(0.8)合法可达，低于所示加液前后液面。加液后用同一枪头、同一模式在该孔混匀，除此加液本身外没有待准备事件或必须离开液面的动作。仅审本次加液到首次混匀吸液的入口选择，其余路径/流速/等待及后续混匀另已核对。",
+      "state": "Flex八通道1000µL配1000µL普通枪头，水相；源端吸液已完成，枪头内100µL且活塞已准备，当前位置destination.top()。目标初始100µL，已初始化且模型有效；本次无混匀模式/位置覆盖，默认dynamic。加液前后及各次吸液路径的液面下0.5mm均合法可达；容量核对后的F=200µL、M=140µL。加液后用同一枪头、同一模式在该孔混匀，除此加液本身外没有待准备事件或必须离开液面的动作。仅审本次加液到首次混匀吸液的入口选择，其余路径/流速/等待及后续混匀另已核对。实际孔容量、模型适用范围与完整路径已核对，不依靠D/V补数据选择模式。",
       "overrides": "无。",
       "id": "R198",
       "code": "pipette.move_to(destination.meniscus(z=0, target=\"start\"), speed=40)\nprotocol.delay(seconds=0.3)\npipette.dispense(80, destination.meniscus(z=0, target=\"dynamic\"), flow_rate=130, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(20, destination.meniscus(z=0, target=\"dynamic\"), flow_rate=55, push_out=6)\nprotocol.delay(seconds=0.3)\npipette.move_to(destination.top(), speed=40)\npipette.prepare_to_aspirate()\npipette.move_to(destination.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.aspirate(140, destination.bottom(0.8), flow_rate=220)\nprotocol.delay(seconds=0.3)"
     },
     {
       "scope": "加液后同孔混匀的入口选择与活塞准备依据",
-      "state": "Flex八通道1000µL配1000µL普通枪头，水相；源端吸液已完成，枪头内100µL且活塞已准备，当前位置destination.top()。目标初始100µL，已初始化且模型有效；默认bottom(0.8)合法可达，低于所示加液前后液面。加液后用同一枪头、同一模式在该孔混匀，除此加液本身外没有待准备事件或必须离开液面的动作。仅审本次加液到首次混匀吸液的入口选择，其余路径/流速/等待及后续混匀另已核对。",
+      "state": "Flex八通道1000µL配1000µL普通枪头，水相；源端吸液已完成，枪头内100µL且活塞已准备，当前位置destination.top()。目标初始100µL，已初始化且模型有效；本次无混匀模式/位置覆盖，默认dynamic。加液前后及各次吸液路径的液面下0.5mm均合法可达；容量核对后的F=200µL、M=140µL。加液后用同一枪头、同一模式在该孔混匀，除此加液本身外没有待准备事件或必须离开液面的动作。仅审本次加液到首次混匀吸液的入口选择，其余路径/流速/等待及后续混匀另已核对。实际孔容量、模型适用范围与完整路径已核对，不依靠D/V补数据选择模式。",
       "overrides": "无。",
       "id": "R199",
-      "code": "pipette.move_to(destination.bottom(0.8), speed=40)\nprotocol.delay(seconds=0.3)\npipette.dispense(100, destination.bottom(0.8), flow_rate=150, push_out=0)\nprotocol.delay(seconds=0.3)\npipette.aspirate(140, destination.bottom(0.8), flow_rate=220)\nprotocol.delay(seconds=0.3)"
+      "code": "pipette.move_to(destination.meniscus(z=-0.5, target=\"start\"), speed=40)\nprotocol.delay(seconds=0.3)\npipette.dispense(100, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=150, push_out=0)\nprotocol.delay(seconds=0.3)\npipette.aspirate(140, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=220)\nprotocol.delay(seconds=0.3)"
     },
     {
       "scope": "加液后同孔混匀的入口选择与活塞准备依据",
@@ -1405,8 +1405,8 @@
     },
     {
       "scope": "固定默认位置恰为已知液面时的push_out与混匀前准备",
-      "state": "Flex原生单通道1000µL配1000µL普通枪头，水相；头内100µL，当前已在well.bottom(0.8)且入液等待已完成。源/目标账本与模型有效，明确核对：排完后孔内总量200µL的液面恰在bottom(0.8)，该位置及路径可达。随后需同头同模式混匀，但本片段仅审加液与混匀前液面外准备，后续混匀位置及动作另已核对、未展示。",
-      "overrides": "无。",
+      "state": "Flex原生单通道1000µL配1000µL普通枪头，水相；头内100µL，当前已在well.bottom(0.8)且入液等待已完成。源/目标账本与模型有效，明确核对：排完后孔内总量200µL的液面恰在bottom(0.8)，该位置及路径可达。随后需同头同模式混匀，但本片段仅审加液与混匀前液面外准备，后续混匀位置及动作另已核对、未展示。 混匀采用容量核对后的M=140µL，static模式来自用户明确要求；不依靠D/V或M/F选择模式，不改变已核对的固定位置与液面重合条件。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
       "id": "R201",
       "code": "pipette.dispense(80, well.bottom(0.8), flow_rate=130, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(20, well.bottom(0.8), flow_rate=55, push_out=6)\nprotocol.delay(seconds=0.3)\npipette.move_to(well.top(), speed=40)\npipette.prepare_to_aspirate()"
     },
@@ -1661,6 +1661,622 @@
       "state": "实际目标API2.24，未授权升级；只审查本次retrieve的版本可用性。",
       "overrides": "无",
       "code": "plate = stacker.retrieve()"
+    },
+    {
+      "id": "R238",
+      "scope": "一吸多分尾液去向与push_out",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相；一吸多分的首段10µL已原位回排，各目标分液已完成，枪头仅剩尾液10µL。源孔和接收孔有适用模型且初始化，排液后枪头记录余量为0，动态终点确认位于弯月面0处；当前无其他待准备事件。只核对本次尾液去向及push_out，流速、等待、路径和其他状态已另核对。用户已明确选择尾液回源。",
+      "overrides": "无。",
+      "code": "pipette.dispense(10, source.meniscus(z=0, target=\"dynamic\"), flow_rate=40, push_out=3)"
+    },
+    {
+      "id": "R239",
+      "scope": "一吸多分尾液去向与push_out",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相；一吸多分的首段10µL已原位回排，各目标分液已完成，枪头仅剩尾液10µL。源孔和接收孔有适用模型且初始化，排液后枪头记录余量为0，动态终点确认位于弯月面0处；当前无其他待准备事件。只核对本次尾液去向及push_out，流速、等待、路径和其他状态已另核对。用户已明确选择尾液回源。",
+      "overrides": "无。",
+      "code": "pipette.dispense(10, source.meniscus(z=0, target=\"dynamic\"), flow_rate=40, push_out=0)"
+    },
+    {
+      "id": "R240",
+      "scope": "一吸多分尾液去向与push_out",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相；一吸多分的首段10µL已原位回排，各目标分液已完成，枪头仅剩尾液10µL。源孔和接收孔有适用模型且初始化，排液后枪头记录余量为0，动态终点确认位于弯月面0处；当前无其他待准备事件。只核对本次尾液去向及push_out，流速、等待、路径和其他状态已另核对。用户已明确选择尾液排入waste_well，不回源。",
+      "overrides": "无。",
+      "code": "pipette.dispense(10, waste_well.meniscus(z=0, target=\"dynamic\"), flow_rate=40, push_out=3)"
+    },
+    {
+      "id": "R241",
+      "scope": "尾液归宿声明及该步骤就绪状态",
+      "state": "一吸多分目标分液已完成，枪头剩余尾液10µL。用户尚未指定尾液去向及跨批处理策略；其他状态已核对。只核对当前声明及尾液步骤能否据此生成，不审查未展示动作。",
+      "overrides": "无。",
+      "code": "# 尾液去向尚未明确，请确认回源还是排入指定废液位置。\n# 在明确前，不生成尾液处理动作。"
+    },
+    {
+      "id": "R242",
+      "scope": "首段去向的用户询问是否必要",
+      "state": "用户已明确采用一吸多分；源孔及吸液结束实际位置均已明确、可执行，使用默认首段回排策略。尾液已指定排入废液孔，其他执行条件已确认。仅审查下面的询问内容，不要求展示完整协议。",
+      "overrides": "无。",
+      "code": "# 请确认首段排回源孔，还是排到废液孔。"
+    },
+    {
+      "id": "R243",
+      "scope": "定量动作的次数参数与实际流速",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相；每轮在同一孔内往返100µL。唯一运行参数repeats为1–5的整数，已完成类型及范围校验，不改变任一吸排体积；枪头、液量、路径、位置、等待及活塞状态均另已核对。只核对流速是否对应实际动作及参数选择是否需要额外方案。",
+      "overrides": "无。",
+      "code": "for _ in range(protocol.params.repeats):\n    pipette.aspirate(100, well.bottom(0.8), flow_rate=166.666667)\n    pipette.dispense(100, well.bottom(0.8), flow_rate=200, push_out=0)"
+    },
+    {
+      "id": "R244",
+      "scope": "连续体积输入的吸液速率与动作前预检",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相；volume是运行时才确定的浮点数，要求原值支持100–150µL连续区间，越界应拒绝。该配置水相吸液维护曲线在50–200µL间为(50,100)、(200,300)分段中的线性区间。源量/容量、API及后续动作已核对；此前未取头、搬运或移液，取头后的准备与路径省略内容已另核对。只审查实际输入、吸液速率与预检顺序。",
+      "overrides": "无。",
+      "code": "import math\nvolume = protocol.params.volume\nif not math.isfinite(volume) or not 100 <= volume <= 150:\n    raise ValueError(f\"volume={volume}不支持；允许100–150µL\")\nasp_rate = round(100 + (volume - 50) * (300 - 100) / (200 - 50), 6)\npipette.pick_up_tip()\npipette.aspirate(volume, source.bottom(0.8), flow_rate=asp_rate)"
+    },
+    {
+      "id": "R245",
+      "scope": "体积与dry_run选择下的吸排液速率",
+      "state": "Flex八通道1000µL配200µL普通枪头，正常运行液体为甘油类；dry_run为已定义的合法布尔参数，True时用水。volume的choices为100、150µL，定义已限制类型及允许值。枪头已准备，容量/路径/固定位置及push_out状态均另已核对。只核对两种体积和正常/dry_run下每次实际吸排流速。",
+      "overrides": "无。",
+      "code": "volume = protocol.params.volume\nrates = {(False, 100): (100, 50), (False, 150): (150, 50),\n         (True, 100): (166.666667, 200), (True, 150): (233.333333, 250)}\nasp_rate, disp_rate = rates[(protocol.params.dry_run, volume)]\npipette.aspirate(volume, well.bottom(0.8), flow_rate=asp_rate)\npipette.dispense(volume, well.bottom(0.8), flow_rate=disp_rate, push_out=0)"
+    },
+    {
+      "id": "R246",
+      "scope": "连续体积输入的支持域与实际值处理",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相；本协议要求原值支持100–150µL连续区间，其他值在硬件动作前报告，不修改用户输入。参数界面暂允许100–200µL有限浮点数，默认100，本次实际volume=175。容量、源量、API及省略的取头后准备/路径等已核对；此前未取头、搬运或移液。只审查运行输入的处理及其吸液速率。",
+      "overrides": "用户没有授权越域时替换成默认值。",
+      "code": "volume = protocol.params.volume\nif not 100 <= volume <= 150:\n    volume = 100\nasp_rate = round(100 + (volume - 50) * (300 - 100) / (200 - 50), 6)\npipette.pick_up_tip()\npipette.aspirate(volume, source.bottom(0.8), flow_rate=asp_rate)"
+    },
+    {
+      "id": "R247",
+      "scope": "连续体积输入的精度与实际值处理",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相；本协议支持100–150µL连续区间，本次实际volume=125.4µL且要求按该原值吸液。容量、源量、API及省略的取头后准备/路径等已核对；此前未取头、搬运或移液。只审查输入精度及与实际体积对应的吸液流速。",
+      "overrides": "用户未授权四舍五入、离散化或修改输入体积。",
+      "code": "import math\nvolume = round(protocol.params.volume)\nif not math.isfinite(volume) or not 100 <= volume <= 150:\n    raise ValueError(f\"volume={volume}不支持；允许100–150µL\")\nasp_rate = round(100 + (volume - 50) * (300 - 100) / (200 - 50), 6)\npipette.pick_up_tip()\npipette.aspirate(volume, source.bottom(0.8), flow_rate=asp_rate)"
+    },
+    {
+      "id": "R248",
+      "scope": "全CSV的派生方案与首个硬件动作前预检",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相；运行时CSV逐行给转移量v，原值支持100–150µL连续区间，本次csv_volumes=[100.0,125.5,150.0]且已解析为浮点数。目标预有等量稀释液，混匀前F=2v；混匀N=1、无保留液，M取70%后按200µL容量截断。末次原排净满足非零push_out及分段条件，末段T=10、主体M−T，中间孔内总量F−T。源量、目标容量330µL、模型及搬运可行性另已核对；此前无取头、搬运、移液。只审查派生计划中的体积、流速及全CSV预检在首次动作前是否完成；此处未展开的计划执行不审。",
+      "overrides": "无。",
+      "code": "import math\nplans = []\nfor row_number, volume in enumerate(csv_volumes, start=2):\n    if not math.isfinite(volume) or not 100 <= volume <= 150:\n        raise ValueError(f\"CSV第{row_number}行体积{volume}不支持；允许100–150µL\")\n    F = 2 * volume\n    M = min(0.7 * F, 200)\n    tail = 10\n    body = M - tail\n    mid = F - tail\n    if not (50 <= M <= 200 and 100 <= body <= 200 and F <= 330):\n        raise ValueError(f\"CSV第{row_number}行派生量不在已核对的容量/曲线范围\")\n    asp_rate = round(100 + (M - 50) * (300 - 100) / (200 - 50), 6)\n    body_rate = 200 + (body - 100)\n    plans.append((volume, M, body, tail, mid, F, asp_rate, body_rate, 40))\nprotocol.move_labware(plate, new_location=\"C2\", use_gripper=True)"
+    },
+    {
+      "id": "R249",
+      "scope": "全CSV必要派生量的预检时机",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相；运行时CSV给混匀前孔内总液量F，csv_final_volumes=[200.0,15.0]。原始输入范围15–200µL，混匀N=2、无保留液，M=0.7F且不触及200µL容量，R=0.1M、S=0.9M。该配置水相排液曲线下限10µL，不外推，且本次无覆盖；吸液下限5µL。API、搬运与其他硬件状态已核对；此前无取头、搬运、移液。只审查完整CSV及必要派生量是否在首个硬件动作前完成预检，不要求展示完整混匀执行。",
+      "overrides": "无。",
+      "code": "import math\nfor row_number, F in enumerate(csv_final_volumes, start=2):\n    if not math.isfinite(F) or not 15 <= F <= 200:\n        raise ValueError(f\"CSV第{row_number}行总液量{F}不支持；允许15–200µL\")\nprotocol.move_labware(plate, new_location=\"C2\", use_gripper=True)\nplans = []\nfor row_number, F in enumerate(csv_final_volumes, start=2):\n    M = 0.7 * F\n    R = 0.1 * M\n    S = 0.9 * M\n    if S < 10:\n        raise ValueError(f\"CSV第{row_number}行派生S={S}低于本配置排液曲线下限10µL\")\n    plans.append((F, M, R, S))"
+    },
+    {
+      "id": "R250",
+      "scope": "派生体积缺少速率数据时的声明与就绪状态",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相；运行时实际F=15µL，用户采用默认70%混匀、N=2，M=10.5、R=1.05、S=9.45µL。吸液曲线下限5µL，但本配置水相排液维护曲线仅覆盖10–200µL、禁止外推；未取得S排液的明确覆盖。容量、模式和其他状态已核对；尚未取头、搬运或移液。只核对缺口声明及受影响动作当前是否具备所需依据，不审查未生成的执行步骤。",
+      "overrides": "用户未授权改混匀比例或用其他体积/型号的速率替代。",
+      "code": "# 本次S=9.45µL的水相排液低于该配置10µL维护曲线下限，仍缺对应速率依据。\n# 未外推或改写比例；在取得适用覆盖前，不生成该受影响混匀动作。"
+    },
+    {
+      "id": "R251",
+      "scope": "参数输入与dry_run业务分支的实际混匀次数",
+      "state": "局部次数绑定测试，不是完整protocol；正式混匀次数来自CSV且本行已校验为5，dry_run=True。没有用户覆盖试运行策略；依既有规则，用水试运行应减少混匀且至少一次。M/R/S、动作体积/流速、路径、容量和预检均已另核对，consume_mix_plan接收本次实际次数并按手写混匀规则展开；只审查次数参数是否经过适用业务分支，不要求固定变量名或函数结构。",
+      "overrides": "无；提供CSV次数字段不表示要求dry_run保留该次数。",
+      "code": "requested_cycles = csv_row.cycles\nactual_cycles = requested_cycles\nconsume_mix_plan(cycles=actual_cycles)"
+    },
+    {
+      "id": "R252",
+      "scope": "参数输入与dry_run业务分支的实际混匀次数",
+      "state": "局部次数绑定测试，不是完整protocol；正式混匀次数来自CSV且本行已校验为5，dry_run=True。没有用户覆盖试运行策略；依既有规则，用水试运行应减少混匀且至少一次。M/R/S、动作体积/流速、路径、容量和预检均已另核对，consume_mix_plan接收本次实际次数并按手写混匀规则展开；只审查次数参数是否经过适用业务分支，不要求固定变量名或函数结构。",
+      "overrides": "无；提供CSV次数字段不表示要求dry_run保留该次数。",
+      "code": "requested_cycles = csv_row.cycles\nactual_cycles = max(1, requested_cycles // 2) if dry_run else requested_cycles\nconsume_mix_plan(cycles=actual_cycles)"
+    },
+    {
+      "id": "R253",
+      "scope": "CSV原始次数的整数性与转换顺序",
+      "state": "局部CSV解析片段；本行cycles原始文本为1.0000000000000001，支持1–5整数，非整数必须在动作前报告。此前无取头、搬运或移液；consume_mix_plan会执行实际混匀，但容量、速度及其他状态另已核对。本题只审整数性校验和实际输入是否被静默改变，不要求执行被拒绝的数据。",
+      "code": "import math\ncount = float(csv_row[\"cycles\"])\nif not math.isfinite(count) or not count.is_integer() or not 1 <= count <= 5:\n    raise ValueError(\"cycles必须为1–5整数\")\nconsume_mix_plan(cycles=int(count))",
+      "overrides": "无；未授权取整、改变体积或弱化严格阈值。"
+    },
+    {
+      "id": "R254",
+      "scope": "CSV原始次数的整数性与转换顺序",
+      "state": "局部CSV解析片段；本行cycles原始文本为1.0000000000000001，支持1–5整数，非整数必须在动作前报告。此前无取头、搬运或移液；consume_mix_plan会执行实际混匀，但容量、速度及其他状态另已核对。本题只审整数性校验和实际输入是否被静默改变，不要求执行被拒绝的数据。",
+      "code": "from decimal import Decimal\ncount = Decimal(csv_row[\"cycles\"])\nif not count.is_finite() or count != count.to_integral_value() or not 1 <= count <= 5:\n    raise ValueError(\"cycles必须为1–5整数\")\nconsume_mix_plan(cycles=int(count))",
+      "overrides": "无；未授权取整、改变体积或弱化严格阈值。"
+    },
+    {
+      "id": "R255",
+      "scope": "CSV精度与派生量的严格拆段阈值",
+      "state": "Flex96通道200µL配200µL滤芯头，水相，混匀N=1，末排满足非零push_out条件。CSV本行F=\"25\"、mix_percent=\"80.000000000000000001\"；原始数值、范围及本脚本宣告精度均已核对支持，M取用户比例且上限200，阈值严格M>20才拆M−10/10。精确M=20.00000000000000000025；consume_mix_plan按参数展开末排。容量/模型/等待/实际分段流速等另已核对，本题只审精度对派生量和拆段选择的影响。",
+      "code": "F = float(csv_row[\"F\"])\npercent = float(csv_row[\"mix_percent\"])\nM = min(F * percent / 100, 200)\nconsume_mix_plan(M=M, split=M > 20)",
+      "overrides": "无；未授权取整、改变体积或弱化严格阈值。"
+    },
+    {
+      "id": "R256",
+      "scope": "CSV精度与派生量的严格拆段阈值",
+      "state": "Flex96通道200µL配200µL滤芯头，水相，混匀N=1，末排满足非零push_out条件。CSV本行F=\"25\"、mix_percent=\"80.000000000000000001\"；原始数值、范围及本脚本宣告精度均已核对支持，M取用户比例且上限200，阈值严格M>20才拆M−10/10。精确M=20.00000000000000000025；consume_mix_plan按参数展开末排。容量/模型/等待/实际分段流速等另已核对，本题只审精度对派生量和拆段选择的影响，不要求使用Decimal或本片段写法。",
+      "code": "from decimal import Decimal, localcontext\nwith localcontext() as context:\n    context.prec = 80\n    F = Decimal(csv_row[\"F\"])\n    percent = Decimal(csv_row[\"mix_percent\"])\n    M = min(F * percent / 100, Decimal(\"200\"))\n    consume_mix_plan(M=M, split=M > 20)",
+      "overrides": "无；未授权取整、改变体积或弱化严格阈值。"
+    },
+    {
+      "id": "R257",
+      "scope": "默认dynamic不按孔深或装液占比选择",
+      "state": "局部混匀模式选择与交付说明；不展示执行动作。容量已按选定移液器模式及枪头核对，体积模型、初始化及所需路径均有效且可达。没有用户模式覆盖或其他待确认项。实际well.depth=10mm、well.max_volume=1000µL，F=200µL、有效容量200µL、M=140µL；这些实际值仅用于必要容量/模型/路径核验。",
+      "overrides": "无。",
+      "code": "selected_mode = \"dynamic\"\n# 交付：本次按技能默认采用动态混匀。"
+    },
+    {
+      "id": "R258",
+      "scope": "默认dynamic但实际动态路径非法时如实保留缺口",
+      "state": "局部模式与路径就绪状态。Flex八通道1000µL配200µL普通枪头，F=100µL、实际M=70µL；孔容量和初始化已核对，适用体积模型已明确给出最低孔内量30µL时液面为bottom(0.3mm)，因而吸液结束所需液面下0.5mm落到bottom(-0.2mm)，本次路径明确非法。没有用户模式/位置覆盖，也没有已核实的替代路径。其余状态已核对。",
+      "overrides": "无。",
+      "code": "# 默认采用dynamic；当前吸液末端液面下0.5mm为bottom(-0.2mm)，路径非法。\n# 受影响动作尚未就绪，需解决该具体路径缺口；未自动改为静态。"
+    },
+    {
+      "id": "R259",
+      "scope": "无用户模式覆盖却按浅孔装液比例回退static",
+      "state": "局部混匀模式选择与交付说明；不展示执行动作。容量已按选定移液器模式及枪头核对，体积模型、初始化及所需路径均有效且可达。没有用户模式覆盖或其他待确认项。实际well.depth=19.9mm、well.max_volume=100µL、F=79µL，有效容量200µL、M=55.3µL。",
+      "overrides": "无。",
+      "code": "selected_mode = \"static\"\n# 交付：浅孔装液比例未达80%，所以采用固定混匀。"
+    },
+    {
+      "id": "R260",
+      "scope": "默认dynamic不为模式选择补问无关D/V",
+      "state": "局部模式选择与引导表达。F=200µL、容量后的M=140µL；当前孔可容纳该液量，适用体积模型、初始化及所需动态路径均已独立核实有效且可达。未列出D/V具体数值，但它们不是本题模式选择所缺的容量/模型/路径事实。用户要求按默认生成，没有其他待确认项。",
+      "overrides": "无。",
+      "code": "# 请先提供孔内深度D和最大容积V，计算装液占比后才能决定固定还是动态混匀。\n# 在这些选型数据补齐前停止生成。"
+    },
+    {
+      "id": "R261",
+      "scope": "容量截断和M/F等号不改变默认dynamic",
+      "state": "局部混匀模式选择与交付说明；不展示执行动作。容量已按选定移液器模式及枪头核对，体积模型、初始化及所需路径均有效且可达。没有用户模式覆盖或其他待确认项。F=500µL、有效容量200µL；70%推荐量350µL截断为M=200µL，R=20µL、S=180µL。截断依据已说明。",
+      "overrides": "无。",
+      "code": "selected_mode = \"static\"\n# 交付：容量后的M/F=40%，所以采用固定混匀。"
+    },
+    {
+      "id": "R262",
+      "scope": "单次吸液位置覆盖被错误扩成整段static",
+      "state": "局部模式选择与位置覆盖范围。Flex八通道1000µL配200µL普通枪头，F=200µL、M=140µL、N=2；容量、适用模型、初始化及全部默认动态路径已核实，用户指定的首轮bottom(0.8)吸液也合法可达。仅本次首轮吸液位置被明确覆盖，用户未要求static或整段固定混匀。其他状态已核对。",
+      "overrides": "用户仅明确首轮吸液使用bottom(0.8)，其余混匀按技能默认；不是整段静态模式覆盖。",
+      "code": "selected_mode = \"static\"\n# 用户仅指定首轮吸液bottom(0.8)，所以整段混匀都改用固定模式。"
+    },
+    {
+      "id": "R263",
+      "scope": "缺无关D/V数值时仍可默认dynamic并计算实际M",
+      "state": "局部模式选择与交付说明。本题未提供D/V具体数值，实际孔容量可容纳600µL，适用体积模型/初始化、所需位置与下探范围均已独立核实，有效容量200µL；F=600µL，默认比例70%。没有用户模式覆盖或其他待确认项。",
+      "overrides": "无。",
+      "code": "M = min(0.7 * 600, 200)\nselected_mode = \"dynamic\"\n# 交付：420µL受有效容量200µL限制，实际混匀200µL；模式按默认采用动态混匀。"
+    },
+    {
+      "id": "R264",
+      "scope": "明确static覆盖默认dynamic并保留共用末排",
+      "state": "局部混匀模式选择与交付说明；不展示执行动作。容量已按选定移液器模式及枪头核对，体积模型、初始化及所需路径均有效且可达。本次用户明确static，其他无待确认项。F=600µL、M=200µL，用户指定孔底路径及共享末排均已核实可达，未与硬件/API约束冲突。",
+      "overrides": "用户明确要求本次用static固定混匀；未改变末次排液、比例或push_out规则。",
+      "code": "selected_mode = \"static\"\n# 交付：按用户明确要求采用固定普通轮；末次排液仍从孔底0.8mm移动到最终液面0。"
+    },
+    {
+      "id": "R265",
+      "scope": "单次吸液位置覆盖不改变整段默认dynamic",
+      "state": "局部模式选择与位置覆盖范围。Flex八通道1000µL配200µL普通枪头，F=200µL、M=140µL、N=2；容量、适用模型、初始化及全部默认动态路径已核实，用户指定的首轮bottom(0.8)吸液也合法可达。仅本次首轮吸液位置被明确覆盖，用户未要求static或整段固定混匀。其他状态已核对。",
+      "overrides": "用户仅明确首轮吸液使用bottom(0.8)，其余混匀按技能默认；不是整段静态模式覆盖。",
+      "code": "selected_mode = \"dynamic\"\n# 仅首轮吸液采用用户指定bottom(0.8)；其余吸液仍动态跟随，普通排液与共用末排按默认路径。"
+    },
+    {
+      "id": "R266",
+      "scope": "混匀模式选择：有默认依据时的询问与运行参数边界",
+      "state": "局部模式选择与交付说明；不展示执行动作。D取实际well.depth，V取well.max_volume；容量已按选定移液器模式及枪头核对，体积模型、初始化及所需路径均有效且可达。无其他待确认项。D=40mm、V=2000µL、F=600µL、M=200µL，已明确要求按默认生成；用户未请求运行时调整混匀模式。",
+      "overrides": "无。",
+      "code": "# 请先确认选择固定还是动态混匀，回复前不能生成。\n# 已默认新增mix_mode运行参数，要求操作者每次选择混匀模式。"
+    },
+    {
+      "id": "R267",
+      "scope": "static混匀普通轮的吸排位置及保留液",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相，选定模式有效容量200µL；进入时枪头为空且已准备，N=2。实际well.depth=40mm、well.max_volume=2000µL，模型及初始化有效。模型在本题涉及液量范围的合法换算结果为h(v)=v/50mm，所有位置、浸入深度和下探范围已核实可达；该题内模型用于核对结果，不要求协议自行编写几何公式。省略的受控进入、等待及后续末排另已核对。F=200µL、M=140µL、R=14µL、S=126µL；本片段为第1轮，尚未进入末轮。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
+      "code": "pipette.aspirate(140, well.bottom(0.8), flow_rate=220)\npipette.dispense(126, well.bottom(0.8), flow_rate=226, push_out=0)"
+    },
+    {
+      "id": "R268",
+      "scope": "dynamic混匀全部吸液及普通排液的变化液面",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相，选定模式有效容量200µL；进入时枪头为空且已准备，N=2。实际well.depth=40mm、well.max_volume=2000µL，模型及初始化有效。模型在本题涉及液量范围的合法换算结果为h(v)=v/50mm，所有位置、浸入深度和下探范围已核实可达；该题内模型用于核对结果，不要求协议自行编写几何公式。省略的受控进入、等待及后续末排另已核对。F=600µL、M=200µL、R=20µL、S=180µL；本片段覆盖首轮吸排及末轮吸液，末排尚未展示。无用户模式覆盖；本次按默认采用dynamic，F/M仅用于动作体积、账本和必要路径核验。",
+      "overrides": "无。",
+      "code": "pipette.aspirate(200, well.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=300)\npipette.dispense(180, location=well.bottom(0.8), end_location=well.meniscus(z=-0.5, target=\"end\"), flow_rate=280, push_out=0)\npipette.aspirate(180, well.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=273.333333)"
+    },
+    {
+      "id": "R269",
+      "scope": "dynamic混匀末轮吸液的实际位置",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相，选定模式有效容量200µL；进入时枪头为空且已准备，N=2。实际well.depth=40mm、well.max_volume=2000µL，模型及初始化有效。模型在本题涉及液量范围的合法换算结果为h(v)=v/50mm，所有位置、浸入深度和下探范围已核实可达；该题内模型用于核对结果，不要求协议自行编写几何公式。省略的受控进入、等待及后续末排另已核对。F=600µL、M=200µL、R=20µL、S=180µL；本片段覆盖首轮吸排及末轮吸液，末排尚未展示。无用户模式覆盖；本次按默认采用dynamic，F/M仅用于动作体积、账本和必要路径核验。",
+      "overrides": "无。",
+      "code": "pipette.aspirate(200, well.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=300)\npipette.dispense(180, location=well.bottom(0.8), end_location=well.meniscus(z=-0.5, target=\"end\"), flow_rate=280, push_out=0)\npipette.aspirate(180, well.bottom(0.8), flow_rate=273.333333)"
+    },
+    {
+      "id": "R270",
+      "scope": "dynamic普通轮排后液量与液面终点",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相，选定模式有效容量200µL；进入时枪头为空且已准备，N=2。实际well.depth=40mm、well.max_volume=2000µL，模型及初始化有效。模型在本题涉及液量范围的合法换算结果为h(v)=v/50mm，所有位置、浸入深度和下探范围已核实可达；该题内模型用于核对结果，不要求协议自行编写几何公式。省略的受控进入、等待及后续末排另已核对。F=600µL、M=200µL、R=20µL、S=180µL；本片段覆盖首轮吸排及末轮吸液，末排尚未展示。无用户模式覆盖；本次按默认采用dynamic，F/M仅用于动作体积、账本和必要路径核验。",
+      "overrides": "无。",
+      "code": "pipette.aspirate(200, well.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=300)\npipette.dispense(180, location=well.bottom(0.8), end_location=well.bottom(z=well.height_from_volume(600) - 0.5), flow_rate=280, push_out=0)\npipette.aspirate(180, well.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=273.333333)"
+    },
+    {
+      "id": "R271",
+      "scope": "两种混匀共用末排、逐段meniscus终点与路径连续",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相，有效容量200µL；N=2末轮吸液已完成，枪头内M=200µL，孔内400µL，排回后F=600µL。体积模型、初始化与账本有效；普通轮或末轮吸液所需位置已另核对。该末排片段供本次已合法确定的static/dynamic两种入口共用，mode不改变本片段。全部位置可达，默认push_out=3，200µL头严格拆段阈值20µL、尾段10µL，水相实际排量190/10µL分别查得290/40µL/s。SDK的END按每个原子排液的结束孔内总量解析，START按该次操作开始时孔内总量解析。",
+      "overrides": "无。",
+      "code": "pipette.dispense(190, location=well.bottom(0.8), end_location=well.meniscus(z=0, target=\"end\"), flow_rate=290, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(10, location=well.meniscus(z=0, target=\"start\"), end_location=well.meniscus(z=0, target=\"end\"), flow_rate=40, push_out=3)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R272",
+      "scope": "dynamic末次排液与普通轮排液的路径区别",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相；用户明确采用dynamic混匀并仅覆盖本次末排push_out=0。末轮吸液已结束，枪头内M=20µL、孔内30µL，排回后F=50µL。模型、初始化及全部位置有效可达；本次原量20µL不满足200µL头严格大于20的拆段条件。仅核对本行末排路径，其他动作另已核对。",
+      "overrides": "用户要求dynamic混匀，并明确本次末排push_out=0；未改变末排起点或终点。",
+      "code": "pipette.dispense(20, location=well.meniscus(z=-0.5, target=\"start\"), end_location=well.meniscus(z=-0.5, target=\"end\"), flow_rate=50, push_out=0)"
+    },
+    {
+      "id": "R273",
+      "scope": "dynamic混匀N=1的实际执行量、共享末排及未执行S的边界",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相；有效容量200µL，well.depth=20mm、well.max_volume=25µL、F=20µL，用户明确M=10µL、N=1。模型及初始化有效，模型在10–20µL的合法换算为h(v)=0.8v毫米，全部位置可达；进入时空头已准备，所需等待另已核对。asp10是本配置10µL已核对的合法吸液流速，非未知占位，10µL排液流速40µL/s已查。该配置水相排液曲线下限10µL；形式上R=1µL、S=9µL，但N=1没有实际S吸排动作。只核体积、模式轨迹和push_out，不核未展示的其他动作。",
+      "overrides": "用户明确本次混匀量10µL（F的50%）、N=1；未改变模式、末排或拆段规则。",
+      "code": "pipette.aspirate(10, well.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=asp10)\npipette.dispense(10, location=well.bottom(0.8), end_location=well.meniscus(z=0, target=\"end\"), flow_rate=40, push_out=3)"
+    },
+    {
+      "id": "R274",
+      "scope": "dynamic混匀末排的拆段条件",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相；well.depth=20mm、well.max_volume=250µL、F=200µL、M=140µL、N=2，本次按默认采用dynamic；末轮吸液已结束，头内140µL、孔内60µL。模型与初始化有效，全部点可达；末排后头内为0且终点为最终液面0，原push_out=3。只核对本次末排的拆段与连续路径，其他动作另已核对。",
+      "overrides": "无。",
+      "code": "pipette.dispense(140, location=well.bottom(0.8), end_location=well.meniscus(z=0, target=\"end\"), flow_rate=240, push_out=3)"
+    },
+    {
+      "id": "R275",
+      "scope": "默认dynamic缺体积模型时如实保留缺口",
+      "state": "局部模式选择、关键数据及受影响动作就绪状态。Flex八通道1000µL配200µL普通枪头，选定模式有效容量200µL；实际well.depth=40mm、well.max_volume=2000µL、F=600µL、M=200µL，初始化账本有效，但参与孔实际定义明确没有适用体积模型，尚无替代定位依据。没有用户固定路径覆盖；其他无关状态已核对。",
+      "overrides": "无。",
+      "code": "# 本次默认dynamic混匀，但当前孔缺少适用体积模型。\n# 受影响吸液、普通排液和末排尚不能生成；需取得适用模型或明确可执行的定位方案。"
+    },
+    {
+      "id": "R276",
+      "scope": "缺模型时静默切换为固定混匀及虚假就绪",
+      "state": "局部模式选择、关键数据及受影响动作就绪状态。Flex八通道1000µL配200µL普通枪头，选定模式有效容量200µL；实际well.depth=40mm、well.max_volume=2000µL、F=600µL、M=200µL，初始化账本有效，但参与孔实际定义明确没有适用体积模型，尚无替代定位依据。没有用户固定路径覆盖；其他无关状态已核对。",
+      "overrides": "无。",
+      "code": "selected_mode = \"static\"\n# 没有体积模型，已自动改为固定混匀；全部动作已就绪，无需告知用户。"
+    },
+    {
+      "id": "R277",
+      "scope": "CSV逐行计算实际体积但模式统一采用默认dynamic",
+      "state": "局部CSV派生计划测试；同型孔的容量、模型及路径已核实，有效容量200µL、默认70%、N=2；本次csv_final_volumes=[500.0,600.0]，要求按原值支持500–600µL连续区间。所有必要M/R/S、末排拆段流速及各派生动作涉及的体积模型范围支持已核对；初始化会按各行实际F执行，路径均可达。此前无取头、搬运或移液。consume_plans已核实按每项实际mode执行对应轨迹，不能静默覆盖该字段；仅审本段CSV原值、容量后M、默认模式及首个动作前的计划，不要求展示后续执行。",
+      "overrides": "无。",
+      "code": "import math\nplans = []\nfor row_number, F in enumerate(csv_final_volumes, start=2):\n    if not math.isfinite(F) or not 500 <= F <= 600:\n        raise ValueError(f\"CSV第{row_number}行F={F}不支持；允许500–600µL\")\n    M = min(0.7 * F, 200)\n    R, S = 0.1 * M, 0.9 * M\n    mode = \"dynamic\"\n    plans.append((F, M, R, S, mode))\nprotocol.move_labware(plate, new_location=\"C2\", use_gripper=True)\nconsume_plans(plans)"
+    },
+    {
+      "id": "R278",
+      "scope": "CSV沿用旧首行static结果而覆盖当前默认模式",
+      "state": "局部CSV派生计划测试；同型孔的容量、模型及路径已核实，有效容量200µL、默认70%、N=2；本次csv_final_volumes=[500.0,600.0]，要求按原值支持500–600µL连续区间。所有必要M/R/S、末排拆段流速及各派生动作涉及的体积模型范围支持已核对；初始化会按各行实际F执行，路径均可达。此前无取头、搬运或移液。consume_plans已核实按每项实际mode执行对应轨迹，不能静默覆盖该字段；仅审本段CSV原值、容量后M、默认模式及首个动作前的计划，不要求展示后续执行。",
+      "overrides": "无。",
+      "code": "import math\nmode = \"static\"  # 沿用旧阈值选型，按首行F=500缓存\nplans = []\nfor row_number, F in enumerate(csv_final_volumes, start=2):\n    if not math.isfinite(F) or not 500 <= F <= 600:\n        raise ValueError(f\"CSV第{row_number}行F={F}不支持；允许500–600µL\")\n    M = min(0.7 * F, 200)\n    R, S = 0.1 * M, 0.9 * M\n    plans.append((F, M, R, S, mode))\nprotocol.move_labware(plate, new_location=\"C2\", use_gripper=True)\nconsume_plans(plans)"
+    },
+    {
+      "id": "R279",
+      "scope": "Meniscus动态location与显式end_location的组合约束",
+      "state": "Flex八通道1000µL配200µL普通枪头、水相；普通轮吸液已完成，头内200µL、孔内400µL，本次排180µL后保留20µL。体积模型、初始化与路径可达性均已核对，只有本次API参数组合需审查。用户明确覆盖此普通排液为全程跟随当次变化液面下0.5mm；使用该动态location本身已合法，不因默认普通排液起点另判错。",
+      "overrides": "仅本次普通轮排液全程动态跟随液面下0.5mm；没有要求显式给end_location。",
+      "code": "pipette.dispense(180, location=well.meniscus(z=-0.5, target=\"dynamic\"), end_location=well.meniscus(z=-0.5, target=\"end\"), flow_rate=280, push_out=0)"
+    },
+    {
+      "id": "R280",
+      "scope": "明确指定某一孔内总液量对应高度的合法定位",
+      "state": "Flex/API2.30；well有已核实适用模型，125µL在支持范围内，height_from_volume(125)结果合法可达；当前位于同孔液面外，实际移动速度20mm/s已核对。只审用户明确体积定位是否可以用height_from_volume；无移液、混匀或默认终点生成，不涉及液体增减。",
+      "overrides": "用户明确要求定位到“孔内总量125µL对应的高度”，不是要求当前或当次操作结束的液面。",
+      "code": "pipette.move_to(well.bottom(z=well.height_from_volume(125)), speed=20)"
+    },
+    {
+      "id": "R281",
+      "scope": "明确static原位立即混匀的前次加液及首次吸液",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相，有效容量200µL；枪头内100µL且活塞已准备，目标孔初始100µL，全部加完后开始混匀时F=200µL，实际M=140µL。实际destination.depth=40mm、destination.max_volume=2000µL；体积模型、初始化和液量账本有效，模型在本题涉及范围的合法结果为h(v)=v/50mm。当前位置destination.bottom(0.8)，受控入液及首次入液等待已完成；孔底0.8mm低于加液前后液面。加液后同孔、同一枪头和同一移液器体积模式立即混匀，无既有待准备事件或必须离开液面的动作；全部起终点和同孔移动均已核实可达。只展示加液到首次混匀吸液，其他轮次及收尾另已核对。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
+      "code": "pipette.dispense(100, destination.bottom(0.8), flow_rate=200, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(140, destination.bottom(0.8), flow_rate=220)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R282",
+      "scope": "明确static原位立即混匀的前次加液及首次吸液",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相，有效容量200µL；枪头内100µL且活塞已准备，目标孔初始100µL，全部加完后开始混匀时F=200µL，实际M=140µL。实际destination.depth=40mm、destination.max_volume=2000µL；体积模型、初始化和液量账本有效，模型在本题涉及范围的合法结果为h(v)=v/50mm。当前位置destination.bottom(0.8)，受控入液及首次入液等待已完成；孔底0.8mm低于加液前后液面。加液后同孔、同一枪头和同一移液器体积模式立即混匀，无既有待准备事件或必须离开液面的动作；全部起终点和同孔移动均已核实可达。只展示加液到首次混匀吸液，其他轮次及收尾另已核对。",
+      "overrides": "用户明确要求本题后续或正在执行的混匀采用static静态（固定）模式；未覆盖其他规则。",
+      "code": "pipette.dispense(100, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=200, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(140, destination.bottom(0.8), flow_rate=220)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R283",
+      "scope": "默认dynamic绑定原位前次加液及首次吸液",
+      "state": "Flex八通道1000µL配1000µL普通枪头，水相，有效容量1000µL；枪头内100µL且活塞已准备，目标孔初始500µL，全部加完后开始混匀时F=600µL，实际M=420µL。实际destination.depth=20mm、destination.max_volume=1000µL；体积模型、初始化和液量账本有效，模型在本题涉及范围的合法结果为h(v)=v/50mm。当前位置为加液前液面下0.5mm，受控入液及首次入液等待已完成；加液前500µL及加液后600µL对应的液面下0.5mm、随后吸液全部起终点，以及bottom(0.8)均已核实合法可达。加液后同孔、同一枪头和同一移液器体积模式立即混匀，无既有待准备事件或必须离开液面的动作；只展示加液到首次混匀吸液，其他轮次及收尾另已核对。",
+      "overrides": "无。",
+      "code": "pipette.dispense(100, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=150, push_out=0)\nprotocol.delay(seconds=0.3)\npipette.aspirate(420, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=410)\nprotocol.delay(seconds=0.3)"
+    },
+    {
+      "id": "R284",
+      "scope": "默认dynamic绑定原位前次加液及首次吸液",
+      "state": "Flex八通道1000µL配1000µL普通枪头，水相，有效容量1000µL；枪头内100µL且活塞已准备，目标孔初始500µL，全部加完后开始混匀时F=600µL，实际M=420µL。实际destination.depth=20mm、destination.max_volume=1000µL；体积模型、初始化和液量账本有效，模型在本题涉及范围的合法结果为h(v)=v/50mm。当前位置为加液前液面下0.5mm，受控入液及首次入液等待已完成；加液前500µL及加液后600µL对应的液面下0.5mm、随后吸液全部起终点，以及bottom(0.8)均已核实合法可达。加液后同孔、同一枪头和同一移液器体积模式立即混匀，无既有待准备事件或必须离开液面的动作；只展示加液到首次混匀吸液，其他轮次及收尾另已核对。",
+      "overrides": "无。",
+      "code": "pipette.dispense(100, destination.bottom(0.8), flow_rate=150, push_out=0)\nprotocol.delay(seconds=0.3)\npipette.aspirate(420, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=410)\nprotocol.delay(seconds=0.3)"
+    },
+    {
+      "id": "R285",
+      "scope": "默认dynamic保留容量截断、原位前次加液与共用末排",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相，有效容量200µL；枪头内100µL且活塞已准备，目标孔初始500µL，全部加完后开始混匀时F=600µL。70%推荐量420µL已因有效容量截断为实际M=200µL，并已向用户说明；R=20µL、S=180µL，N=2。实际destination.depth=40mm、destination.max_volume=2000µL；体积模型、初始化和液量账本有效，模型在本题涉及范围的合法结果为h(v)=v/50mm。当前位置为加液前液面下0.5mm，受控入液及首次入液等待已完成；加液前500µL和加液后600µL对应的液面下0.5mm，以及各次混匀所需起终点、bottom(0.8)与同孔局部移动均已核实合法可达。加液后同孔、同一枪头和同一移液器体积模式立即混匀，无既有待准备事件或必须离开液面的动作。 本片段覆盖前次加液、N=2的完整混匀及末排拆段；未展示最终退出和枪头去向。",
+      "overrides": "无。",
+      "code": "pipette.dispense(100, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=200, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(200, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=300)\nprotocol.delay(seconds=0.2)\npipette.move_to(destination.bottom(0.8), speed=20)\npipette.dispense(180, location=destination.bottom(0.8), end_location=destination.meniscus(z=-0.5, target=\"end\"), flow_rate=280, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(180, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=273.333333)\nprotocol.delay(seconds=0.2)\npipette.move_to(destination.bottom(0.8), speed=20)\npipette.dispense(190, location=destination.bottom(0.8), end_location=destination.meniscus(z=0, target=\"end\"), flow_rate=290, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(10, location=destination.meniscus(z=0, target=\"start\"), end_location=destination.meniscus(z=0, target=\"end\"), flow_rate=40, push_out=3)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R286",
+      "scope": "dynamic原位加液后退出准备及重复入液等待的依据",
+      "state": "Flex八通道1000µL配200µL普通枪头，水相，有效容量200µL；枪头内100µL且活塞已准备，目标孔初始500µL，全部加完后开始混匀时F=600µL。70%推荐量420µL已因有效容量截断为实际M=200µL，并已向用户说明；R=20µL、S=180µL，N=2。实际destination.depth=40mm、destination.max_volume=2000µL；体积模型、初始化和液量账本有效，模型在本题涉及范围的合法结果为h(v)=v/50mm。当前位置为加液前液面下0.5mm，受控入液及首次入液等待已完成；加液前500µL和加液后600µL对应的液面下0.5mm，以及各次混匀所需起终点、bottom(0.8)与同孔局部移动均已核实合法可达。加液后同孔、同一枪头和同一移液器体积模式立即混匀，无既有待准备事件或必须离开液面的动作。 只展示前次加液到首次混匀吸液；其余混匀另已核对。",
+      "overrides": "无。",
+      "code": "pipette.dispense(100, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=200, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.move_to(destination.top(), speed=20)\npipette.prepare_to_aspirate()\npipette.move_to(destination.meniscus(z=-0.5, target=\"start\"), speed=20)\nprotocol.delay(seconds=0.2)\npipette.aspirate(200, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=300)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R287",
+      "scope": "需要模式切换时前次加液与后续dynamic混匀的衔接",
+      "state": "Flex八通道50µL配50µL普通枪头，水相；当前低体积模式，枪头内3µL且活塞已准备，目标孔初始47µL，排完后F=50µL。后续混匀需切换到正常体积模式，正常模式有效容量50µL、实际M=35µL；实际destination.depth=20mm、destination.max_volume=60µL。体积模型、初始化和液量账本有效，模型在本题涉及范围的合法结果为h(v)=v/3mm；加液前47µL的受控进入和入液等待已完成，当前位置在加液前液面0。加液前后各液面、混匀吸液全路径及孔顶均已核实合法可达。只审前次加液是否符合立即混匀资格、排液定位与切换准备衔接；后续混匀普通轮和末排另已核对。",
+      "overrides": "无。",
+      "code": "pipette.dispense(3, destination.meniscus(z=0, target=\"dynamic\"), flow_rate=28.888889, push_out=1)\nprotocol.delay(seconds=0.1)\npipette.move_to(destination.top(), speed=10)\npipette.configure_for_volume(35)\npipette.prepare_to_aspirate()\npipette.move_to(destination.meniscus(z=-0.5, target=\"start\"), speed=10)\nprotocol.delay(seconds=0.1)\npipette.aspirate(35, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=30.875)\nprotocol.delay(seconds=0.1)"
+    },
+    {
+      "id": "R288",
+      "scope": "需要模式切换时前次加液与后续dynamic混匀的衔接",
+      "state": "Flex八通道50µL配50µL普通枪头，水相；当前低体积模式，枪头内3µL且活塞已准备，目标孔初始47µL，排完后F=50µL。后续混匀需切换到正常体积模式，正常模式有效容量50µL、实际M=35µL；实际destination.depth=20mm、destination.max_volume=60µL。体积模型、初始化和液量账本有效，模型在本题涉及范围的合法结果为h(v)=v/3mm；加液前47µL的受控进入和入液等待已完成，当前位置在加液前液面0。加液前后各液面、混匀吸液全路径及孔顶均已核实合法可达。只审前次加液是否符合立即混匀资格、排液定位与切换准备衔接；后续混匀普通轮和末排另已核对。",
+      "overrides": "无。",
+      "code": "pipette.dispense(3, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=28.888889, push_out=0)\nprotocol.delay(seconds=0.1)\npipette.move_to(destination.top(), speed=10)\npipette.configure_for_volume(35)\npipette.prepare_to_aspirate()\npipette.move_to(destination.meniscus(z=-0.5, target=\"start\"), speed=10)\nprotocol.delay(seconds=0.1)\npipette.aspirate(35, destination.meniscus(z=-0.5, target=\"dynamic\"), flow_rate=30.875)\nprotocol.delay(seconds=0.1)"
+    },
+    {
+      "id": "R289",
+      "scope": "动态路径非法时静默改static并声称就绪",
+      "state": "局部模式与路径就绪状态。Flex八通道1000µL配200µL普通枪头，F=100µL、实际M=70µL；孔容量和初始化已核对，适用体积模型已明确给出最低孔内量30µL时液面为bottom(0.3mm)，因而吸液结束所需液面下0.5mm落到bottom(-0.2mm)，本次路径明确非法。没有用户模式/位置覆盖，也没有已核实的替代路径。其余状态已核对。",
+      "overrides": "无。",
+      "code": "selected_mode = \"static\"\n# dynamic末端低于孔底，已自动改为固定混匀；全部动作已就绪，无需告知用户。"
+    },
+    {
+      "id": "R290",
+      "scope": "自定义仅名称和初始化不能替代实际定义核对",
+      "state": "仅审下一步核对引导与模型依据声明。用户仅给自定义耗材名称custom_96_deepplate，表示已在App安装并初始化500µL；本次实际JSON未提供，也没有可复用的匹配定义或核对记录。几何、逐孔模型引用、模型内容和范围均未取得；未要求立即生成协议。",
+      "overrides": "无。",
+      "code": "# 已在App安装并初始化500µL，证明该耗材的几何和体积模型已核对；无需提供JSON即可液面跟随。"
+    },
+    {
+      "id": "R291",
+      "scope": "自定义仅名称时索取JSON及说明后续选路",
+      "state": "仅审下一步核对引导与模型依据声明。用户仅给自定义耗材名称custom_96_deepplate，表示已在App安装并初始化500µL；本次实际JSON未提供，也没有可复用的匹配定义或核对记录。几何、逐孔模型引用、模型内容和范围均未取得；未要求立即生成协议。",
+      "overrides": "无。",
+      "code": "# 请提供本次实际使用的自定义耗材JSON，以核对孔底/深度、逐孔模型引用、模型内容及本次体积范围。\n# 若实际定义缺模型，会说明不能进行相应液面跟随/换算，可补模型，或由你确认本次固定孔底0.8mm方案；固定方案也须先核实几何和整段可达性。"
+    },
+    {
+      "id": "R292",
+      "scope": "确认无模型固定方案覆盖加液、普通轮及末排，默认push_out=0不拆段",
+      "state": "Flex/API2.30，八通道1000µL配200µL普通枪头，水相，有效容量200µL；枪头内100µL且已准备，目标孔初始500µL，加液后F=600µL，容量截断后的实际M=200µL、R=20µL、S=180µL、N=2，已说明截断。实际JSON已取得；参与孔缺少体积模型，但孔底基准、40mm孔深、2000µL容量、装载高度和整段bottom(0.8)可达性已有可靠核对。当前位置为该孔bottom(0.8)，本次受控进入及入液等待已完成；同孔同枪头同模式立即混匀，无待准备事件。不能把0.8mm认定为液面0；无非零push_out覆盖。所列实际排量/吸量的速率与0.2秒吸排后等待已核对，dry_run同值；其他状态已核对。",
+      "overrides": "已告知无法液面跟随/换算；用户明确确认：本次该孔前次加液、全部混匀吸排及最后排液均使用bottom(0.8)固定高度，无模型调用；这是本次局部固定方案，不称动态混匀、不改变全局默认。",
+      "code": "# 本次采用已确认的局部固定高度方案。\npipette.dispense(100, well.bottom(0.8), flow_rate=200, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(200, well.bottom(0.8), flow_rate=300)\nprotocol.delay(seconds=0.2)\npipette.dispense(180, well.bottom(0.8), flow_rate=280, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(180, well.bottom(0.8), flow_rate=273.333333)\nprotocol.delay(seconds=0.2)\npipette.dispense(200, well.bottom(0.8), flow_rate=300, push_out=0)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R293",
+      "scope": "确认无模型固定方案的末排不得残留meniscus",
+      "state": "Flex/API2.30，八通道1000µL配200µL普通枪头，水相，有效容量200µL；枪头内100µL且已准备，目标孔初始500µL，加液后F=600µL，容量截断后的实际M=200µL、R=20µL、S=180µL、N=2，已说明截断。实际JSON已取得；参与孔缺少体积模型，但孔底基准、40mm孔深、2000µL容量、装载高度和整段bottom(0.8)可达性已有可靠核对。当前位置为该孔bottom(0.8)，本次受控进入及入液等待已完成；同孔同枪头同模式立即混匀，无待准备事件。不能把0.8mm认定为液面0；无非零push_out覆盖。所列实际排量/吸量的速率与0.2秒吸排后等待已核对，dry_run同值；其他状态已核对。",
+      "overrides": "已告知无法液面跟随/换算；用户明确确认：本次该孔前次加液、全部混匀吸排及最后排液均使用bottom(0.8)固定高度，无模型调用；这是本次局部固定方案，不称动态混匀、不改变全局默认。",
+      "code": "# 本次采用已确认的局部固定高度方案。\npipette.dispense(100, well.bottom(0.8), flow_rate=200, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(200, well.bottom(0.8), flow_rate=300)\nprotocol.delay(seconds=0.2)\npipette.dispense(180, well.bottom(0.8), flow_rate=280, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(180, well.bottom(0.8), flow_rate=273.333333)\nprotocol.delay(seconds=0.2)\npipette.dispense(200, location=well.bottom(0.8), end_location=well.meniscus(z=0, target=\"end\"), flow_rate=300, push_out=0)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R294",
+      "scope": "确认无模型固定方案的末排不得残留height_from_volume",
+      "state": "Flex/API2.30，八通道1000µL配200µL普通枪头，水相，有效容量200µL；枪头内100µL且已准备，目标孔初始500µL，加液后F=600µL，容量截断后的实际M=200µL、R=20µL、S=180µL、N=2，已说明截断。实际JSON已取得；参与孔缺少体积模型，但孔底基准、40mm孔深、2000µL容量、装载高度和整段bottom(0.8)可达性已有可靠核对。当前位置为该孔bottom(0.8)，本次受控进入及入液等待已完成；同孔同枪头同模式立即混匀，无待准备事件。不能把0.8mm认定为液面0；无非零push_out覆盖。所列实际排量/吸量的速率与0.2秒吸排后等待已核对，dry_run同值；其他状态已核对。",
+      "overrides": "已告知无法液面跟随/换算；用户明确确认：本次该孔前次加液、全部混匀吸排及最后排液均使用bottom(0.8)固定高度，无模型调用；这是本次局部固定方案，不称动态混匀、不改变全局默认。",
+      "code": "# 本次采用已确认的局部固定高度方案。\npipette.dispense(100, well.bottom(0.8), flow_rate=200, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(200, well.bottom(0.8), flow_rate=300)\nprotocol.delay(seconds=0.2)\npipette.dispense(180, well.bottom(0.8), flow_rate=280, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(180, well.bottom(0.8), flow_rate=273.333333)\nprotocol.delay(seconds=0.2)\npipette.dispense(200, location=well.bottom(0.8), end_location=well.bottom(z=well.height_from_volume(600)), flow_rate=300, push_out=0)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R295",
+      "scope": "仅要求static不等于确认取消液面末排",
+      "state": "Flex/API2.30，八通道1000µL配200µL普通枪头，水相；进入混匀时头内无液、活塞已准备，F=600µL、实际M=200µL、R=20µL、S=180µL、N=2，截断已说明。实际定义、容量、孔底/深度及bottom(0.8)可达性可靠；参与孔明确无体积模型，初始化与逐步液量账本有效。当前位置bottom(0.8)，入液等待已完成。仅核对末排位置的缺模型处理和确认范围；其他数值、等待、容量与普通轮动作均已核对。",
+      "overrides": "用户只明确要求static静态混匀；尚未告知模型缺口，也未确认无模型固定末排方案。",
+      "code": "pipette.aspirate(200, well.bottom(0.8), flow_rate=300)\nprotocol.delay(seconds=0.2)\npipette.dispense(180, well.bottom(0.8), flow_rate=280, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.aspirate(180, well.bottom(0.8), flow_rate=273.333333)\nprotocol.delay(seconds=0.2)\npipette.dispense(200, well.bottom(0.8), flow_rate=300, push_out=0)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R296",
+      "scope": "无模型固定覆盖仅限约定耗材且保留孔顶退出",
+      "state": "局部双耗材/双移液器片段。两支均为Flex1000µL配200µL普通枪头、水相、各头内100µL且已准备。a所在耗材A的实际定义已核对，缺模型但可靠几何和bottom(0.8)及top可达性均已核实；b所在耗材B有实际逐孔有效模型，覆盖其初始200µL至排后280µL的全范围，初始化、账本和动态路径可达性已核对。两支的受控进入及入液等待已完成。p_fixed排100µL后无余液，0.8mm不是已知液面；p_other仅排80µL后仍留20µL。速率和其他状态已核对；只审局部固定覆盖是否越界及孔顶退出是否保留。",
+      "overrides": "用户只确认本次耗材A约定的吸排及混匀使用bottom(0.8)无模型固定方案；未覆盖B，亦未覆盖孔顶退出/准备或跨孔移动。",
+      "code": "p_fixed.dispense(100, a.bottom(0.8), flow_rate=200, push_out=0)\np_fixed.move_to(a.top(), speed=20)\np_other.dispense(80, b.meniscus(z=0, target=\"dynamic\"), flow_rate=180, push_out=0)"
+    },
+    {
+      "id": "R297",
+      "scope": "不得将局部无模型固定方案扩到另一有模型耗材",
+      "state": "局部双耗材/双移液器片段。两支均为Flex1000µL配200µL普通枪头、水相、各头内100µL且已准备。a所在耗材A的实际定义已核对，缺模型但可靠几何和bottom(0.8)及top可达性均已核实；b所在耗材B有实际逐孔有效模型，覆盖其初始200µL至排后280µL的全范围，初始化、账本和动态路径可达性已核对。两支的受控进入及入液等待已完成。p_fixed排100µL后无余液，0.8mm不是已知液面；p_other仅排80µL后仍留20µL。速率和其他状态已核对；只审局部固定覆盖是否越界及孔顶退出是否保留。",
+      "overrides": "用户只确认本次耗材A约定的吸排及混匀使用bottom(0.8)无模型固定方案；未覆盖B，亦未覆盖孔顶退出/准备或跨孔移动。",
+      "code": "p_fixed.dispense(100, a.bottom(0.8), flow_rate=200, push_out=0)\np_fixed.move_to(a.top(), speed=20)\np_other.dispense(80, b.bottom(0.8), flow_rate=180, push_out=0)"
+    },
+    {
+      "id": "R298",
+      "scope": "用户同意0.8mm不能代替深管几何与下探核对",
+      "state": "只审固定方案可执行声明。深管的实际JSON已取得且缺体积模型；原定义孔底基准及管架装载有效高度尚未可靠核实，深管下探与机身间隙风险未解决，整段bottom(0.8)可达性未知。液量和初始化明确，其余无关状态已核对。",
+      "overrides": "已告知缺模型；用户回复同意本次全部动作固定孔底0.8mm。",
+      "code": "# 已同意0.8mm，因此无需再核实深管孔底、装载高度和下探间隙；整段动作均可执行。"
+    },
+    {
+      "id": "R299",
+      "scope": "明确非零push_out触发拆段时两段均保持确认的固定位置",
+      "state": "Flex/API2.30，八通道1000µL配200µL普通枪头，水相，枪头内100µL且已准备；目标初始500µL，排净后600µL。实际定义缺模型，但可靠孔底/深度、装载高度及bottom(0.8)全程可达性已核对；当前位置bottom(0.8)，入液等待已完成，0.8mm不能认作液面0。200µL头的分段阈值20µL、末段10µL适用，90µL/10µL实际排液速率分别190/40µL/s，正常排后等待0.2秒均已核对；后面无下一次吸液。只审固定位置下的push_out资格、拆段与两段位置，不审未展示收尾。",
+      "overrides": "用户已确认本次该孔无模型固定bottom(0.8)方案，并明确本次排净push_out=3；排后记录无余液，其他条件无冲突。",
+      "code": "pipette.dispense(90, well.bottom(0.8), flow_rate=190, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(10, well.bottom(0.8), flow_rate=40, push_out=3)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R300",
+      "scope": "无模型固定位置默认push_out=0不得强拆段",
+      "state": "Flex/API2.30，八通道1000µL配200µL普通枪头，水相，枪头内100µL且已准备；目标初始500µL，排净后600µL。实际定义缺模型，但可靠孔底/深度、装载高度及bottom(0.8)全程可达性已核对；当前位置bottom(0.8)，入液等待已完成，0.8mm不能认作液面0。200µL头的分段阈值20µL、末段10µL适用，90µL/10µL实际排液速率分别190/40µL/s，正常排后等待0.2秒均已核对；后面无下一次吸液。只审固定位置下的push_out资格、拆段与两段位置，不审未展示收尾。",
+      "overrides": "用户只确认本次该孔无模型固定bottom(0.8)方案；未明确要求非零push_out，也未要求拆段。",
+      "code": "pipette.dispense(90, well.bottom(0.8), flow_rate=190, push_out=0)\nprotocol.delay(seconds=0.2)\npipette.dispense(10, well.bottom(0.8), flow_rate=40, push_out=0)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R301",
+      "scope": "官方名称和有效模型引用不豁免调用体积范围",
+      "state": "Flex/API2.30；名称在官方索引，已取得本次实际定义。A1.geometryDefinitionId=g1，innerLabwareGeometry.g1存在且内容已核对，但明确只支持0–100µL；本次要求按孔内总量130µL定位。容量200µL、初始化和账本均无误；模型未提供100µL以上的有效范围，不允许外推。只审130µL模型调用范围，其他定义字段不审。",
+      "overrides": "用户明确要求按130µL体积定位；没有固定位置替代要求。",
+      "code": "point = well.bottom(z=well.height_from_volume(130))"
+    },
+    {
+      "id": "R302",
+      "scope": "磁吸后去上清的正常单批连续动作与等待",
+      "state": "Flex/API2.30，正常运行，已明确磁吸后将当前上清全部排入指定废液槽；源孔已在磁力架并完成本次磁分离。单通道1000µL配200µL普通头，当前有效容量200µL，非零分段最小量5µL。0.8/0.1mm及实际路径、第一段浸没和磁珠位置已核对可用。废液槽容量足够，top(-3)在最高液面上方；其他加载、液量标签、枪头和上下文已核对。源孔初始200µL，枪头刚取好且为空；本题审本片段吸液、准备及等待阶段，其他排液后退出/弃头等省略不审。",
+      "overrides": "无；场景正式运行默认有效。",
+      "code": "pipette.move_to(source.top())\npipette.prepare_to_aspirate()\npipette.move_to(source.bottom(z=0.8), speed=20)\nprotocol.delay(seconds=0.2)\npipette.aspirate(180, source.bottom(z=0.8), flow_rate=20)\nprotocol.delay(seconds=0.2)\npipette.move_to(source.bottom(z=0.1), speed=2)\nprotocol.delay(seconds=0.2)\npipette.aspirate(20, source.bottom(z=0.1), flow_rate=10)\nprotocol.delay(seconds=0.2)\npipette.move_to(source.bottom(z=0.8), speed=2)\npipette.move_to(source.top(), speed=20)\npipette.move_to(waste.top())\npipette.dispense(200, waste.top(z=-3), flow_rate=300, push_out=0)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R303",
+      "scope": "磁吸后去上清的跨批体积及实际排空",
+      "state": "Flex/API2.30，正常运行，已明确磁吸后将当前上清全部排入指定废液槽；源孔已在磁力架并完成本次磁分离。单通道1000µL配200µL普通头，当前有效容量200µL，非零分段最小量5µL。0.8/0.1mm及实际路径、第一段浸没和磁珠位置已核对可用。废液槽容量足够，top(-3)在最高液面上方；其他加载、液量标签、枪头和上下文已核对。源孔初始410µL，各批前枪头为空。只审分批液量、低位预算及每批实际排空；省略的移动、等待和准备另已核对，不审本题流速取值。",
+      "overrides": "本题明确将废液排液流速覆盖为150µL/s；其余按场景。",
+      "code": "for body, tail in [(200, 0), (190, 0), (0, 20)]:\n    if body > 0:\n        pipette.aspirate(body, source.bottom(z=0.8), flow_rate=20)\n    if tail > 0:\n        pipette.aspirate(tail, source.bottom(z=0.1), flow_rate=10)\n    pipette.dispense(body + tail, waste.top(z=-3), flow_rate=150, push_out=0)"
+    },
+    {
+      "id": "R304",
+      "scope": "磁吸后去上清的同批累计容量",
+      "state": "Flex/API2.30，正常运行，已明确磁吸后将当前上清全部排入指定废液槽；源孔已在磁力架并完成本次磁分离。单通道1000µL配200µL普通头，当前有效容量200µL，非零分段最小量5µL。0.8/0.1mm及实际路径、第一段浸没和磁珠位置已核对可用。废液槽容量足够，top(-3)在最高液面上方；其他加载、液量标签、枪头和上下文已核对。初始410µL的第一批200已排废完成，现源孔210µL、枪头为空。只审下列两次连续吸液的容量，其他省略动作不审。",
+      "overrides": "无；场景正式运行默认有效。",
+      "code": "pipette.aspirate(190, source.bottom(z=0.8), flow_rate=20)\npipette.aspirate(20, source.bottom(z=0.1), flow_rate=10)"
+    },
+    {
+      "id": "R305",
+      "scope": "磁吸后去上清的源孔末段预算",
+      "state": "Flex/API2.30，正常运行，已明确磁吸后将当前上清全部排入指定废液槽；源孔已在磁力架并完成本次磁分离。单通道1000µL配200µL普通头，当前有效容量200µL，非零分段最小量5µL。0.8/0.1mm及实际路径、第一段浸没和磁珠位置已核对可用。废液槽容量足够，top(-3)在最高液面上方；其他加载、液量标签、枪头和上下文已核对。源孔初始400µL，枪头初始为空。只审低位段发生时的源孔剩余量、分批及总体积；其他路径等待已另核对。本题废液流速明确覆盖150µL/s。",
+      "overrides": "无；场景正式运行默认有效。",
+      "code": "for _ in range(2):\n    pipette.aspirate(180, source.bottom(z=0.8), flow_rate=20)\n    pipette.aspirate(20, source.bottom(z=0.1), flow_rate=10)\n    pipette.dispense(200, waste.top(z=-3), flow_rate=150, push_out=0)"
+    },
+    {
+      "id": "R306",
+      "scope": "磁吸后去上清的不足及等于末段量边界",
+      "state": "Flex/API2.30，正常运行，已明确磁吸后将当前上清全部排入指定废液槽；源孔已在磁力架并完成本次磁分离。单通道1000µL配200µL普通头，当前有效容量200µL，非零分段最小量5µL。0.8/0.1mm及实际路径、第一段浸没和磁珠位置已核对可用。废液槽容量足够，top(-3)在最高液面上方；其他加载、液量标签、枪头和上下文已核对。两个独立源孔分别初始10和20µL，范围与量程均有效。每孔已有适用的空头及初始化，省略的受控进入、等待、退出、准备和换头不审；只核对每孔吸液量/位置和实际排出。",
+      "overrides": "废液排速本题明确覆盖40µL/s。",
+      "code": "for source, volume in [(source_a, 10), (source_b, 20)]:\n    pipette.aspirate(volume, source.bottom(z=0.1), flow_rate=10)\n    pipette.dispense(volume, waste.top(z=-3), flow_rate=40, push_out=0)"
+    },
+    {
+      "id": "R307",
+      "scope": "磁吸后去上清的整计划量程预检时机",
+      "state": "Flex/API2.30，正常运行，已明确磁吸后将当前上清全部排入指定废液槽；源孔已在磁力架并完成本次磁分离。单通道1000µL配200µL普通头，当前有效容量200µL，非零分段最小量5µL。0.8/0.1mm及实际路径、第一段浸没和磁珠位置已核对可用。废液槽容量足够，top(-3)在最高液面上方；其他加载、液量标签、枪头和上下文已核对。源孔初始221µL，计划在首个移液动作前已完整取得。只审最小量程及检查发生时机；省略的其他动作不审，排液流速本题明确覆盖150µL/s。",
+      "overrides": "无；场景正式运行默认有效。",
+      "code": "for body, tail in [(200, 0), (1, 20)]:\n    if 0 < body < 5:\n        raise ValueError(\"本批普通段低于最小操作量\")\n    if body > 0:\n        pipette.aspirate(body, source.bottom(z=0.8), flow_rate=20)\n    if tail > 0:\n        pipette.aspirate(tail, source.bottom(z=0.1), flow_rate=10)\n    pipette.dispense(body + tail, waste.top(z=-3), flow_rate=150, push_out=0)"
+    },
+    {
+      "id": "R308",
+      "scope": "磁吸后去上清的同批活塞状态",
+      "state": "Flex/API2.30，正常运行，已明确磁吸后将当前上清全部排入指定废液槽；源孔已在磁力架并完成本次磁分离。单通道1000µL配200µL普通头，当前有效容量200µL，非零分段最小量5µL。0.8/0.1mm及实际路径、第一段浸没和磁珠位置已核对可用。废液槽容量足够，top(-3)在最高液面上方；其他加载、液量标签、枪头和上下文已核对。本批普通段180µL刚吸完，头内180µL、源孔20µL，已执行普通吸后等待，无待准备事件。仅审下段准备动作，不审省略路径和等待。",
+      "overrides": "无；场景正式运行默认有效。",
+      "code": "pipette.prepare_to_aspirate()\npipette.move_to(source.bottom(z=0.1), speed=2)\npipette.aspirate(20, source.bottom(z=0.1), flow_rate=10)"
+    },
+    {
+      "id": "R309",
+      "scope": "磁吸后去上清的低位就位等待",
+      "state": "Flex/API2.30，正常运行，已明确磁吸后将当前上清全部排入指定废液槽；源孔已在磁力架并完成本次磁分离。单通道1000µL配200µL普通头，当前有效容量200µL，非零分段最小量5µL。0.8/0.1mm及实际路径、第一段浸没和磁珠位置已核对可用。废液槽容量足够，top(-3)在最高液面上方；其他加载、液量标签、枪头和上下文已核对。源孔初始200µL，空头首次吸液。只审低位就位等待，其他阶段及省略收尾不审。",
+      "overrides": "无；场景正式运行默认有效。",
+      "code": "pipette.move_to(source.top())\npipette.prepare_to_aspirate()\npipette.move_to(source.bottom(z=0.8), speed=20)\nprotocol.delay(seconds=0.2)\npipette.aspirate(180, source.bottom(z=0.8), flow_rate=20)\nprotocol.delay(seconds=0.2)\npipette.move_to(source.bottom(z=0.1), speed=2)\npipette.aspirate(20, source.bottom(z=0.1), flow_rate=10)\nprotocol.delay(seconds=0.2)\npipette.move_to(source.bottom(z=0.8), speed=2)\npipette.move_to(source.top(), speed=20)\npipette.move_to(waste.top())\npipette.dispense(200, waste.top(z=-3), flow_rate=300, push_out=0)\nprotocol.delay(seconds=0.2)"
+    },
+    {
+      "id": "R310",
+      "scope": "常规移液不自动采用磁珠场景",
+      "state": "Flex/API2.30；单通道1000µL配200µL普通头，正常水相从普通储液孔向样品孔转移50µL，无磁吸后去上清或排废意图。空头/液量/定位已核对，其他步骤不审。维护曲线该配置吸50µL为100µL/s；仅审该次吸液是否需强套磁珠分段。",
+      "overrides": "无",
+      "code": "pipette.aspirate(50, source.bottom(z=0.8), flow_rate=100)"
+    },
+    {
+      "id": "R311",
+      "scope": "磁吸后去上清的用水试跑流速分支",
+      "state": "Flex/API2.30，用水试运行，已明确磁吸后将当前上清全部排入指定废液槽；源孔已在磁力架并完成本次磁分离。单通道1000µL配200µL普通头，当前有效容量200µL，非零分段最小量5µL。0.8/0.1mm及实际路径、第一段浸没和磁珠位置已核对可用。废液槽容量足够，top(-3)在最高液面上方；其他加载、液量标签、枪头和上下文已核对。本次实际dry_run=True，没有试跑共用20/10的明确覆盖。维护水相按实际180/20µL分别查得273.333333/70µL/s。源孔初始200µL，空头、其他路径等待不审，只审试跑流速选择。",
+      "overrides": "无；场景正式运行默认有效。",
+      "code": "body_flow = 20\ntail_flow = 10\npipette.aspirate(180, source.bottom(z=0.8), flow_rate=body_flow)\npipette.aspirate(20, source.bottom(z=0.1), flow_rate=tail_flow)"
+    },
+    {
+      "id": "R312",
+      "scope": "共享接收孔分段账本",
+      "state": "Flex v10.0.0/API2.30，八个有效喷嘴都向同一槽道排纯液；每喷嘴排100µL，主体90、尾段10。槽内起始3000µL，模型与路径可达，用户明确要求按体积换算该槽中间高度。只核对该高度输入。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "middle = trough.bottom(trough.height_from_volume(3790))"
+    },
+    {
+      "id": "R313",
+      "scope": "共享接收孔分段账本",
+      "state": "Flex v10.0.0/API2.30，八个有效喷嘴都向同一槽道排纯液；每喷嘴排100µL，主体90、尾段10。槽内起始3000µL，模型与路径可达，用户明确要求按体积换算该槽中间高度。只核对该高度输入。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "middle = trough.bottom(trough.height_from_volume(3720))"
+    },
+    {
+      "id": "R314",
+      "scope": "CSV预检与样品状态",
+      "state": "目标是实际运行时提供的CSV；末行体积超过允许上限，首行合法。模块内已有待处理样品，启动温控会改变这些样品，不是纯加载空模块。仅审首个影响样品的动作与全表预检的先后。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "task = temp.start_set_temperature(50)\nvalidate_all_rows(csv_rows)"
+    },
+    {
+      "id": "R315",
+      "scope": "CSV预检与样品状态",
+      "state": "目标是实际运行时提供的CSV；末行体积超过允许上限，首行合法。模块内已有待处理样品，启动温控会改变这些样品，不是纯加载空模块。仅审首个影响样品的动作与全表预检的先后。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "module_identity = temp.model\nvalidate_all_rows(csv_rows)\ntask = temp.start_set_temperature(50)"
+    },
+    {
+      "id": "R316",
+      "scope": "Flex旧API垃圾处理",
+      "state": "明确保留 Flex API 2.15；实物 A3 固定垃圾桶。仅审垃圾定位/加载，不审其他功能。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "trash = protocol.load_trash_bin(location=\"A3\")"
+    },
+    {
+      "id": "R317",
+      "scope": "Flex旧API垃圾处理",
+      "state": "保留 Flex API 2.15；A3固定垃圾桶，已有枪头，其他条件已核对。只审弃头所需的垃圾加载。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "pipette.drop_tip()"
+    },
+    {
+      "id": "R318",
+      "scope": "跟踪排液含空气时的双账本",
+      "state": "Flex软件10.0.0/API2.30：每喷嘴先吸100µL液体，再加10µL空气；下一步向单孔用含液面跟踪的移动排液排50µL。仅审引擎跟踪量与实际液量的声明；不评价后续替代方案。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "# 跟踪记录的孔内增量50µL都是真实交付液体，可以继续依赖它算物理液面。"
+    },
+    {
+      "id": "R319",
+      "scope": "跟踪排液含空气时的双账本",
+      "state": "Flex软件10.0.0/API2.30：每喷嘴先吸100µL液体，再加10µL空气；下一步向单孔用含液面跟踪的移动排液排50µL。仅审引擎跟踪量与实际液量的声明；不评价后续替代方案。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "# 物理交付40µL，引擎跟踪按50µL更新；须处理这个差异才可继续依赖记录定位。"
+    },
+    {
+      "id": "R320",
+      "scope": "Stacker托盘的剩余父层",
+      "state": "Flex Stacker已取出适配器+主板组合到托盘。仅移走返回的主板，尚未移走其底下的适配器。只核对下一件retrieve的前置条件。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "next_plate = stacker.retrieve()"
+    },
+    {
+      "id": "R321",
+      "scope": "Stacker托盘的剩余父层",
+      "state": "Flex Stacker已取出适配器+主板组合到托盘。仅移走返回的主板，尚未移走其底下的适配器。只核对下一件retrieve的前置条件。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "# 托盘仍有适配器；核实并移走实际剩余父层后再retrieve。"
+    },
+    {
+      "id": "R322",
+      "scope": "未来CSV聊天交付数值",
+      "state": "交付自包含参数化完整协议；运行时才提供真实CSV，已核实连续支持域及全部派生路径。示例输入50µL水相在此配置吸液100µL/s。其他关键参数摘要与检验结果已陈述。只审数值来源和声明。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "# 客户实际CSV第一行是50µL，实际吸液速率100µL/s。"
+    },
+    {
+      "id": "R323",
+      "scope": "未来CSV聊天交付数值",
+      "state": "交付自包含参数化完整协议；运行时才提供真实CSV，已核实连续支持域及全部派生路径。示例输入50µL水相在此配置吸液100µL/s。其他关键参数摘要与检验结果已陈述。只审数值来源和声明。",
+      "overrides": "只审题内给定条件；其余内容另已核对。",
+      "code": "# 运行时CSV支持20–100µL；各行按实际体积查水相曲线。例如50µL对应100µL/s，本例不是用户已提交的行。"
+    },
+    {
+      "id": "R324",
+      "scope": "普通排液的END定位与孔账本",
+      "state": "已核对Flex v10.0.0 / API2.30，单喷嘴先吸100µL液体再取10µL空气，向单孔排50µL。只用location=well.meniscus(target=\"end\")，不传end_location；只审本步定位与成功后的记录，不审其余动作。",
+      "overrides": "无。",
+      "code": "# 普通排液成功只记入40µL，所以本次 END 位置也是按增加40µL预测。"
+    },
+    {
+      "id": "R325",
+      "scope": "普通排液的END定位与孔账本",
+      "state": "已核对Flex v10.0.0 / API2.30，单喷嘴先吸100µL液体再取10µL空气，向单孔排50µL。只用location=well.meniscus(target=\"end\")，不传end_location；只审本步定位与成功后的记录，不审其余动作。",
+      "overrides": "无。",
+      "code": "# 本次 END 位置按增加50µL预测，普通排液成功后只增加40µL；不能据后续账本正确认定本步物理液面正确。"
     }
   ]
 }

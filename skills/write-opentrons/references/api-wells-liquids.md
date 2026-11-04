@@ -255,7 +255,8 @@ absolute position of the bottom-center of the well, plus the z offset (if specif
 
 ## Well.meniscus
 
-官方来源
+官方来源：https://docs.opentrons.com/python-api/robot-position/#meniscus
+固定源码核对：v10.0.0，api/src/opentrons/protocol_api/labware.py（返回Location）及instrument_context.py（解析起终点标记）。
 
 
 ```python
@@ -272,6 +273,9 @@ negative offsets are lower. target ( str , default: 'end' )
           – The relative position of the liquid meniscus inside the well
 to target when performing a liquid handling operation. Returns: Location ( Location )          – A Location corresponding to the
 liquid meniscus, plus a target position and z offset as specified.
+
+返回值为带液面标记的Location，可用于已维护aspirate/dispense的location或end_location；显式终点使用target="end"，衔接当前液面使用"start"。location使用target="dynamic"时由API展开为两端，不可同时另传end_location；显式起终点运动按对应接口核对API版本。标记随每次命令的实际液量解析；不是持续实测，也不表示曲底非线性区间全过程精确恒浸深。官方 Flex 软件 v10.0.0（API 2.30）对纯液体移动吸排，按单喷嘴命令量 × 实际作用于该孔的喷嘴数求终点，对应引擎安排见[geometry.py](https://github.com/Opentrons/opentrons/blob/e8c6d0a424c25fff1604e2a02e4ccaedac95b9af/api/src/opentrons/protocol_engine/state/geometry.py#L2174-L2205)及[喷嘴映射](https://github.com/Opentrons/opentrons/blob/e8c6d0a424c25fff1604e2a02e4ccaedac95b9af/api/src/opentrons/protocol_engine/state/_well_math.py#L214-L235)。不要再次把命令量乘通道数。映射使用喷嘴布局与定义 ordering；特殊耗材/偏移须核对映射与实际覆盖一致，未核对版本或配置不据此保证动态路径可用。排出含空气时，普通 END 定位与移动排液的记录边界另见[pipette-mechanics](pipette-mechanics.md#分开记账)。用户默认路径与偏移只见operations。
+
 
 
 ## Well.load_liquid

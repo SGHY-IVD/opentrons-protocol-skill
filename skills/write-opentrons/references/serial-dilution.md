@@ -1,17 +1,18 @@
 # 梯度稀释流程参考
 
 ## 定位与适用范围
-本文件仅是快速查用法的完整组合示例，核心规则与原子模板优先；可以不参考本文件重新生成。实际脚本只保留所需阶段，运行时确需切换的才保留为参数。不建立大函数/通用实验框架，不从本文件复制流速默认。
-等倍、各级等体积转移；首孔原液均匀；同一移液器模式下完成加液和混匀；完整通道取头。至少2个梯度孔。四个独立选择：stock_preloaded、diluent_preloaded、change_tips_between_steps、remove_final_excess。末孔另有final_disposal="trash"或"waste_well"，必须明确。末孔移除统一为吸液→排入指定废液位置→处理枪头；垃圾桶与废液孔只区别排液目标，不设带液直接弃头分支。
+本文件仅是快速查用法的完整组合示例；以规则为准，原子片段及本流程示例按需参考，可以依规则自行组织实现。实际脚本只保留所需阶段，运行时确需切换的才保留为参数。不建立大函数/通用实验框架，不从本文件复制流速默认。
+等倍、各级等体积转移；首孔原液均匀；同一移液器模式下完成加液和混匀；完整通道取头。至少2个梯度孔。四个独立选择：stock_preloaded、diluent_preloaded、change_tips_between_steps、remove_final_excess。仅当remove_final_excess=True时须明确末孔去向final_disposal="trash"或"waste_well"；保留末孔余量时不询问去向。末孔移除统一为吸液→排入指定废液位置→处理枪头；垃圾桶与废液孔只区别排液目标，不设带液直接弃头分支。
 
 ## 输入与预检查
-所有下列变量先按当前流程赋值，禁止未定义占位交付。体积/流速按规则生成阶段计算；等待查询delays.md的维护阶段配置，明确指定优先；有模型且初始化为0的空孔首次加液同样采用常规动态液面排液，不需要另给固定起点。source/destination为真实孔，完整八通道时为列主孔；初始化须覆盖所有通道实际参与孔。
+所有下列变量先按当前流程赋值，禁止未定义占位交付。本页按定值方案示范，参数化数值表达按[参数化指引](parameter-planning.md)选择；体积/流速仍遵循原规则；等待查询delays.md的维护阶段配置，明确指定优先；有模型且初始化为0的空孔首次加液同样采用常规动态液面排液，不需要另给固定起点。source/destination为真实孔，完整八通道时为列主孔；初始化须覆盖所有通道实际参与孔。
 - dilution_wells按梯度顺序；first_column_wells、target_column_wells为用于批量初始化的全部实际孔，勿只标主孔。stock_source_wells、diluent_source_wells及其labware指向实际源孔/耗材。共享槽声明的是多通道总供液量。
 - first_well_initial_volume（已就位量）、stock_load_volume（未就位加样量）、diluent_volume、transfer_volume、mixed_well_volume、mix_volume、stroke_volume、final_remove_volume分别核算；两种首孔路径应满足实验所需起始量。末孔移除量不超可吸量。
 - 移动速度按各阶段源液/目标接触液分别确定，使用下列分阶段变量；级间类别改变时在对应迭代赋值，不把原液、稀释液与混合液共用一套速度。数值一致时最终脚本可合并变量。
 - 本页为流程骨架：符合operations“分段排空”的dispense在生成时展开为patterns对应两段，涵盖预铺、原液就位和混匀末次；两段分别查速率与连续路径，不照抄未展开命令。
+- 混匀模式按operations的默认及本次明确要求确定，dynamic_mix在本次加液前赋值，用于确定原位加液与随后混匀的路径；F/M仍按本次实际液量及容量核算，不用于模式阈值选择。若用户明确要求不同孔/步骤采用不同模式，按其范围处理，不把局部覆盖沿用到其他孔，不默认要求用户选模式。
 - 每步实际体积查询对应flow_rate；全部push_out依operations判定。原位立即混匀的addition_push_out应符合不需退出准备的条件；若不符则替换入口，不强套本例。
-- tip位置按阶段分配且不重叠；return_tips不意味着跨浓度随意复用。移液器tip_racks和trash_container已加载。dry_run按rates.md统一切换水相吸排速率，并改变确认过的等待/混匀次数，不自行取消末孔液体去向。所有流速变量按patterns.md先完成正常/水相定值选择，覆盖原液、稀释液、级间转移、混匀及末孔移除。
+- tip位置按阶段分配且不重叠；return_tips不意味着跨浓度随意复用。移液器tip_racks和trash_container已加载。dry_run按rates.md统一切换水相吸排速率，并改变确认过的等待/混匀次数，不自行取消末孔液体去向。所有流速变量按patterns.md及rates完成正常/水相分支取值，覆盖原液、稀释液、级间转移、混匀及末孔移除。
 - 本例stock_source为均匀原液，首孔不另加稀释液，首次加样后不额外混匀。小体积定位、容量分批、模式切换或无模型等不满足本例条件时，从原子模板替换相应部分。
 
 ## 完整参考片段
@@ -128,23 +129,32 @@ for index in range(len(dilution_wells) - 1):
     protocol.delay(seconds=transfer_aspirate_delay)
     pipette.move_to(source.top(), speed=transfer_source_exit_speed)
     protocol.delay(seconds=transfer_aspirate_retract_delay)
+    addition_start = (destination.meniscus(z=-0.5, target="start")
+                      if dynamic_mix else destination.bottom(z=0.8))
+    addition_location = (destination.meniscus(z=-0.5, target="dynamic")
+                         if dynamic_mix else destination.bottom(z=0.8))
     pipette.move_to(destination.top())
-    pipette.move_to(destination.bottom(z=0.8), speed=transfer_destination_entry_speed)
+    pipette.move_to(addition_start, speed=transfer_destination_entry_speed)
     protocol.delay(seconds=transfer_dispense_submerge_delay)
-    pipette.dispense(transfer_volume, location=destination.bottom(z=0.8),
+    pipette.dispense(transfer_volume, location=addition_location,
                     flow_rate=transfer_dispense_rate, push_out=addition_push_out)
     protocol.delay(seconds=transfer_dispense_delay)
     for cycle in range(mix_cycles):
         first_cycle = cycle == 0
         last_cycle = cycle == mix_cycles - 1
         pipette.aspirate(mix_volume if first_cycle else stroke_volume,
-            location=destination.bottom(z=0.8),
+            location=(destination.meniscus(z=-0.5, target="dynamic")
+                      if dynamic_mix else destination.bottom(z=0.8)),
             flow_rate=mix_full_aspirate_rate if first_cycle else mix_stroke_aspirate_rate)
         protocol.delay(seconds=mix_aspirate_delay)
         if last_cycle:
             pipette.dispense(mix_volume, location=destination.bottom(z=0.8),
-                end_location=destination.bottom(z=destination.height_from_volume(mixed_well_volume)),
+                end_location=destination.meniscus(z=0, target="end"),
                 flow_rate=mix_full_dispense_rate, push_out=final_mix_push_out)
+        elif dynamic_mix:
+            pipette.dispense(stroke_volume, location=destination.bottom(z=0.8),
+                end_location=destination.meniscus(z=-0.5, target="end"),
+                flow_rate=mix_stroke_dispense_rate, push_out=ordinary_mix_push_out)
         else:
             pipette.dispense(stroke_volume, location=destination.bottom(z=0.8),
                 flow_rate=mix_stroke_dispense_rate, push_out=ordinary_mix_push_out)

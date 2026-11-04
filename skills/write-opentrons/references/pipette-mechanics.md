@@ -13,7 +13,7 @@
 
 |遇到的问题|判定依据|结论/边界|证据类别|
 |---|---|---|---|
-|空气是否占容量？|枪头工作容量与已吸入液体+空气|占容量；目标孔只增加实际排出的液体|官方源码机制|
+|空气是否占容量？|枪头工作容量与已吸入液体+空气|占容量；物理目标只收到实际排出的液体，跟踪排液的软件记录有版本差异（见下）|官方源码机制|
 |current_volume>0是否有液体？|检查液体/空气段组成|可能只有空气，不能仅凭总数判断|官方源码机制|
 |current_volume=0能否立即吸液？|枪头状态、活塞准备状态及上一动作|零值不等于准备完成，也不证明实际无残留|官方源码机制|
 |dispense(V)是否给孔加了V液体？|从枪尖端逐段扣除空气/液体|只有液体部分计入目标孔|官方源码机制|
@@ -38,7 +38,13 @@
 
 核对源码：InstrumentContext.current_volume经engine.get_current_volume读取get_aspirated_volume，它返回fluid stack总量，包含空气。公开文档把它简称液量，排查时以此源码链辨别；不能写current_volume>0就断言一定还有液体。反之current_volume=0也不证明已准备、已装枪头或实物无残液：底层None/未装头也可能在公共属性映射为0。
 
-API 2.22起air_gap以AIR段进入账本；排入孔时只增加实际弹出的LIQUID段体积。它依旧占容量，不能误解为“新版air_gap不占体积”。用普通aspirate在空气中吸入不会因此自动得到正确AIR标签，不能混同air_gap。更早API语义不同，本技能基线2.30不沿用旧算式。
+API 2.22起air_gap以AIR段进入枪头账本；物理接收孔只应计入实际弹出的LIQUID段体积。它依旧占容量，不能误解为“新版air_gap不占体积”。用普通aspirate在空气中吸入不会因此自动得到正确AIR标签，不能混同air_gap。更早API语义不同，本技能基线2.30不沿用旧算式。
+
+**Flex 软件 v10.0.0 / API 2.30，已核对的命令差异。** [引擎入口](https://github.com/Opentrons/opentrons/blob/e8c6d0a424c25fff1604e2a02e4ccaedac95b9af/api/src/opentrons/protocol_api/core/engine/instrument.py#L431-L472)将移动排液（含 dynamic 或显式 end_location）交给 DispenseWhileTracking。[普通孔内 Dispense](https://github.com/Opentrons/opentrons/blob/e8c6d0a424c25fff1604e2a02e4ccaedac95b9af/api/src/opentrons/protocol_engine/commands/dispense.py#L145-L160)按枪头内实际排出的液体记账；[跟踪排液](https://github.com/Opentrons/opentrons/blob/e8c6d0a424c25fff1604e2a02e4ccaedac95b9af/api/src/opentrons/protocol_engine/commands/dispense_while_tracking.py#L102-L111)用完整命令量推算液面终点，[成功更新](https://github.com/Opentrons/opentrons/blob/e8c6d0a424c25fff1604e2a02e4ccaedac95b9af/api/src/opentrons/protocol_engine/commands/dispense_while_tracking.py#L191-L205)也将完整排量计入孔内；两者均按实际作用于该孔的喷嘴数折算。每喷嘴先吸100µL液体、再取10µL空气、随后向孔排50µL，弹出的液体是40µL。若每孔一喷嘴，普通孔内排液记录+40µL，移动排液记录+50µL；八喷嘴共一槽则分别为+320和+400µL。含空气但本步排出的全是液体时，没有此项差值。
+
+普通孔内排液也要分别核对**本步定位**与**执行后的孔账本**。即使不传 end_location，单独用 location=well.meniscus(target="end") 时，[普通定位](https://github.com/Opentrons/opentrons/blob/e8c6d0a424c25fff1604e2a02e4ccaedac95b9af/api/src/opentrons/protocol_engine/commands/dispense.py#L97-L105)仍按[命令总量求 END 高度](https://github.com/Opentrons/opentrons/blob/e8c6d0a424c25fff1604e2a02e4ccaedac95b9af/api/src/opentrons/protocol_engine/state/geometry.py#L1993-L2012)。在上述单喷嘴例子，本步按 +50µL 定位，但普通排液成功后的孔账本只增加 +40µL；后者正确不证明本步位置正确。
+
+命中上述差异时，不能把引擎液量或下游 meniscus 当作真实液面。优先按已确认流程将空气单独处置，或在已核实的固定位置或实际起始液面用普通无移动排液（不以含空气的整段命令量推算 END），并复核其后逐孔账本及位置；用户指定的路径不可静默改写。无法使位置与实际交付量一致时，阻塞受影响的液面动作。此结论限上述版本及命令源码，其他版本按实际软件核对，不由此改变无空气时的默认行为。
 
 ## 状态演算
 

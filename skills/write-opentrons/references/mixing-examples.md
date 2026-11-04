@@ -1,116 +1,99 @@
-# 混匀组合实例
+# 静态与动态混匀实例
 
 ## 目录
-- 适用边界
-- A：容量截断与保留液
-- B：低体积模式切回后混匀
-- C：混匀收尾后的下一次吸液
+- 查用与共同前提
+- A：静态混匀示例
+- B：动态混匀示例
+- 其他衔接
 
-## 适用边界
-这是局部原子代码实例，不是可直接上机的完整协议。protocol、pipette、well及dry_run须由完整协议定义；实际使用先查operations、API和流速工具，实例数值不替代规则。完整协议仍含液体初始化、独立且默认False的dry_run/return_tips与真实技能版本标识。
-本页水相实例在正常/dry_run下流速相同，无需增加选择分支。实例用于非水相时，按patterns.md的dry_run赋值结构分别选择M/S吸排速率，覆盖N=1与N>=2全部分支，不直接保留本页流速。
-两个实例明确假设：水相；无滤芯枪头；源/目标有模型、已初始化；bottom(0.8)可达；每次吸后/排后等待0.2秒，进入/退出速度按operations：A的200µL枪头为20mm/s，B的50µL枪头为10mm/s。本历史示例显式演示覆盖为入液等待0、吸后/排后0.2秒，不代表当前水相默认；实例化新协议须重查delays.md并在实际进入段补适用入液等待。无模型时不能照搬动态终点。以下混匀均为每通道体积，普通轮次不退出液面。
+## 查用与共同前提
+模式、体积与轮次依据[operations“手写混匀”](operations.md#手写混匀)；加液衔接按[组合校验](operations.md#组合校验)，原子结构见[patterns](patterns.md)。A以用户明确要求静态为前提，B展示默认动态；这里只组合两个具体算例，不另设选择条件或默认，实际协议不要求保留函数名或组织形式。
 
-## A：容量截断与保留液
-Flex八通道1000配200µL枪头；加液后孔内300µL；当前枪头为空、活塞已准备、尖端在bottom(0.8)，无需模式切换。原算210µL，受枪头容量限制采用M=200µL；保留R=20µL，往返S=180µL。交付必须说明截断。
+两个主例均为Flex八通道1000配200µL普通枪头、水相，每通道枪头已吸入100µL且源孔退出已完成；目标是八个独立板孔，每孔只接一个喷嘴（n=1），以下总量均指其中一个孔。共享槽另按operations的逐孔账本。没有待准备事件，无需切换移液器体积模式，使用同一枪头加液后立即混匀。目标孔的示例前提为深40mm、容量2000µL，具备有效液量模型并按下表加液前体积初始化；全部实际位置和路径可达。这是局部算例，不指代具体装机耗材，也不是可直接上机的完整protocol。
 
-```python
-mix_cycles = 1 if dry_run else 3
-if mix_cycles == 1:
-    pipette.aspirate(200, well.bottom(z=0.8), flow_rate=300)
-    protocol.delay(seconds=0.2)
-    pipette.dispense(190, location=well.bottom(z=0.8),
-        end_location=well.bottom(well.height_from_volume(290)),
-        flow_rate=290, push_out=0)
-    protocol.delay(seconds=0.2)
-    pipette.dispense(10, location=well.bottom(well.height_from_volume(290)),
-        end_location=well.bottom(well.height_from_volume(300)),
-        flow_rate=40, push_out=3)
-    protocol.delay(seconds=0.2)
-else:
-    pipette.aspirate(200, well.bottom(z=0.8), flow_rate=300)
-    protocol.delay(seconds=0.2)
-    pipette.dispense(180, well.bottom(z=0.8), flow_rate=280.0, push_out=0)
-    protocol.delay(seconds=0.2)
-    for _ in range(mix_cycles - 2):
-        pipette.aspirate(180, well.bottom(z=0.8), flow_rate=273.333333)
-        protocol.delay(seconds=0.2)
-        pipette.dispense(180, well.bottom(z=0.8), flow_rate=280.0, push_out=0)
-        protocol.delay(seconds=0.2)
-    pipette.aspirate(180, well.bottom(z=0.8), flow_rate=273.333333)
-    protocol.delay(seconds=0.2)
-    pipette.dispense(190, location=well.bottom(z=0.8),
-        end_location=well.bottom(well.height_from_volume(290)),
-        flow_rate=290, push_out=0)
-    protocol.delay(seconds=0.2)
-    pipette.dispense(10, location=well.bottom(well.height_from_volume(290)),
-        end_location=well.bottom(well.height_from_volume(300)),
-        flow_rate=40, push_out=3)
-    protocol.delay(seconds=0.2)
-```
+dry_run已由完整协议解析为bool；本例取正式3轮、用水试运行1轮，只示范两种轮次，实际次数按本次方案及operations确定。水相两分支流速相同，只有轮次变化。入液/退出20mm/s，入液、吸后及排后等待0.2秒，撤离后无有效等待。流速已按实际动作量查询flow_rate.py；实际换量、枪头或液体时重新查rates/delays，不把示例定值当成另一套参数表。
 
-三轮枪头状态：200→20→200→20→200→0，孔内最终恢复300µL。容量上限200µL，不是先吸200再额外加20。N=1仅200吸/排一次；不预吸保留量。
+|主例|加液前→加液后F|70%推荐量→容量后M|多轮时R / S|模式依据|
+|---|---|---|---|---|
+|A|100→200µL|140→140µL|14 / 126µL|用户明确静态|
+|B|500→600µL|420→200µL，需说明容量截断|20 / 180µL|默认动态|
 
-## B：低体积模式切回后混匀
-Flex八通道50配50µL枪头，目前低体积模式，已吸入2µL水相准备加入已有98µL的反应孔。该2µL吸液定位已由用户明确；此片段从加液开始，不省略小体积吸液确认要求。
-加液后总量100µL，70%原算70µL；规划切回常规模式后容量50µL，采用M=50µL，R=5µL，S=45µL。不能直接按旧低体积模式容量截断并原位混匀。先动态排空、退出、切模式、准备，再入液。
+两例择一用于符合各自前提的孔。N=1仅吸M再排M，不预吸保留液；多轮的M已包含R，不能额外加R超过容量。所有液面标记依赖当前有效模型及逐步液量账本，不是持续实测；位置边界与明确覆盖继续按原规则核对。
+
+## A：静态混匀示例
+本例用户明确要求静态混匀。前次加液及普通吸排保持bottom(0.8)。首轮吸140µL，非末轮排126µL、保留14µL；后续吸126µL恢复枪头内140µL。末次排净按130+10µL展开，最终孔内恢复200µL。
 
 ```python
-pipette.move_to(well.top())
-pipette.move_to(well.meniscus(z=0, target="start"), speed=10)
-pipette.dispense(2, well.meniscus(z=0, target="dynamic"),
-                 flow_rate=29.444444, push_out=1)
-protocol.delay(seconds=0.2)
-pipette.move_to(well.top(), speed=10)
-pipette.configure_for_volume(50)
-pipette.prepare_to_aspirate()
-pipette.move_to(well.bottom(z=0.8), speed=10)
-mix_cycles = 1 if dry_run else 3
-if mix_cycles == 1:
-    pipette.aspirate(50, well.bottom(z=0.8), flow_rate=35)
+def add_then_fixed_mix(protocol, pipette, well, dry_run):
+    # 前次加液：目标孔原有100µL，枪头已有100µL。
+    pipette.move_to(well.top())
+    pipette.move_to(well.bottom(z=0.8), speed=20)
     protocol.delay(seconds=0.2)
-    pipette.dispense(47, location=well.bottom(z=0.8),
-        end_location=well.bottom(well.height_from_volume(97)),
-        flow_rate=48.5, push_out=0)
+    pipette.dispense(100, location=well.bottom(z=0.8),
+        flow_rate=200, push_out=0)
     protocol.delay(seconds=0.2)
-    pipette.dispense(3, location=well.bottom(well.height_from_volume(97)),
-        end_location=well.bottom(well.height_from_volume(100)),
-        flow_rate=28.888889, push_out=1)
-    protocol.delay(seconds=0.2)
-else:
-    pipette.aspirate(50, well.bottom(z=0.8), flow_rate=35)
-    protocol.delay(seconds=0.2)
-    pipette.dispense(45, well.bottom(z=0.8), flow_rate=47.5, push_out=0)
-    protocol.delay(seconds=0.2)
-    for _ in range(mix_cycles - 2):
-        pipette.aspirate(45, well.bottom(z=0.8), flow_rate=33.625)
+
+    # 示例轮次：正式3轮，用水试运行1轮。
+    mix_cycles = 1 if dry_run else 3
+    for cycle in range(mix_cycles):
+        pipette.aspirate(140 if cycle == 0 else 126,
+            location=well.bottom(z=0.8),
+            flow_rate=220 if cycle == 0 else 201.333333)
         protocol.delay(seconds=0.2)
-        pipette.dispense(45, well.bottom(z=0.8), flow_rate=47.5, push_out=0)
+        if cycle == mix_cycles - 1:
+            pipette.dispense(130, location=well.bottom(z=0.8),
+                end_location=well.meniscus(z=0, target="end"),
+                flow_rate=230, push_out=0)
+            protocol.delay(seconds=0.2)
+            pipette.dispense(10, location=well.meniscus(z=0, target="start"),
+                end_location=well.meniscus(z=0, target="end"),
+                flow_rate=40, push_out=3)
+        else:
+            pipette.dispense(126, location=well.bottom(z=0.8),
+                flow_rate=226, push_out=0)
         protocol.delay(seconds=0.2)
-    pipette.aspirate(45, well.bottom(z=0.8), flow_rate=33.625)
-    protocol.delay(seconds=0.2)
-    pipette.dispense(47, location=well.bottom(z=0.8),
-        end_location=well.bottom(well.height_from_volume(97)),
-        flow_rate=48.5, push_out=0)
-    protocol.delay(seconds=0.2)
-    pipette.dispense(3, location=well.bottom(well.height_from_volume(97)),
-        end_location=well.bottom(well.height_from_volume(100)),
-        flow_rate=28.888889, push_out=1)
-    protocol.delay(seconds=0.2)
+    pipette.move_to(well.top(), speed=20)
 ```
 
-三轮枪头状态：50→5→50→5→50→0，孔内最终恢复100µL。模式切换在无液体/液面外进行；准备只在进入前执行，留液循环内不调用。N=1仅50吸/排一次，仍需前面的模式切换与准备。流速全部逐步显式传入，不依赖模式切换后的全局默认。
+## B：动态混匀示例
+前次加液及每次吸液使用液面下0.5mm动态定位；普通排180µL从bottom(0.8)移至该次排完后的液面下0.5mm，孔内量为F−R=580µL。最后一次吸液仍动态，末次排净才共用底部起排至液面0的路径，分为190+10µL，分别对应孔内590/600µL；末段从中间液面连续排，不回底部。
 
-最后一次（包括N=1）都从bottom(0.8)开始边排边移动，终点分别按300/100µL总液量换算，不是按200/50µL混匀量换算。微量加液的普通动态排液不受此混匀专用规则影响。
-
-## C：混匀收尾后的下一次吸液
-A/B收尾非零push_out只把活塞标为待准备。下一次aspirate的前置检查才触发下面衔接；同孔就在well.top执行，换孔则到下一吸液孔top。没有下一次吸液就无准备动作。弃头/取新头不触发准备，若换头后继续吸液，此检查自然发生在取新头之后。blow_out和模式切换同样归入这一个检查入口。
 ```python
-pipette.move_to(well.top(), speed=exit_speed)
-pipette.prepare_to_aspirate()
-pipette.move_to(well.bottom(z=0.8), speed=entry_speed)
+def add_then_dynamic_mix(protocol, pipette, well, dry_run):
+    # 前次加液：目标孔原有500µL，枪头已有100µL。
+    pipette.move_to(well.top())
+    pipette.move_to(well.meniscus(z=-0.5, target="start"), speed=20)
+    protocol.delay(seconds=0.2)
+    pipette.dispense(100, location=well.meniscus(z=-0.5, target="dynamic"),
+        flow_rate=200, push_out=0)
+    protocol.delay(seconds=0.2)
+
+    # 示例轮次：正式3轮，用水试运行1轮。
+    mix_cycles = 1 if dry_run else 3
+    for cycle in range(mix_cycles):
+        pipette.aspirate(200 if cycle == 0 else 180,
+            location=well.meniscus(z=-0.5, target="dynamic"),
+            flow_rate=300 if cycle == 0 else 273.333333)
+        protocol.delay(seconds=0.2)
+        if cycle == mix_cycles - 1:
+            pipette.dispense(190, location=well.bottom(z=0.8),
+                end_location=well.meniscus(z=0, target="end"),
+                flow_rate=290, push_out=0)
+            protocol.delay(seconds=0.2)
+            pipette.dispense(10, location=well.meniscus(z=0, target="start"),
+                end_location=well.meniscus(z=0, target="end"),
+                flow_rate=40, push_out=3)
+        else:
+            pipette.dispense(180, location=well.bottom(z=0.8),
+                end_location=well.meniscus(z=-0.5, target="end"),
+                flow_rate=280, push_out=0)
+        protocol.delay(seconds=0.2)
+    pipette.move_to(well.top(), speed=20)
 ```
 
-entry_speed/exit_speed按operations中液体类别及实际枪头规格赋值。然后接按流程确认的吸液前等待和显式flow_rate吸液。下一次为20/50µL枪头且<=10µL时，仍需满足小体积定位确认；此处bottom(0.8)不覆盖该规则。若换孔，先退出当前孔，再移动至下一孔top准备/控速进入。
+两例加液后均保留该次排后等待，直接接首次混匀吸液；普通轮次之间不退出、不准备或重复入液等待。结束时枪头记账归零并退出至top，非零push_out只留下待准备状态，不在收尾提前准备。
 
-A/B最后一次排液按分段排空展开；中间孔内体积分别290/97µL，最终300/100µL。分段不增加混匀次数；普通保留液轮次不拆。
+## 其他衔接
+- 只需混匀、没有前次加液时：以空枪头按patterns完成所需准备与受控进入，再复用相应混匀段；根据本次实际F实例化体积/速率，不保留本例的100µL加液。
+- 必须切换移液器体积模式时：不满足原位立即混匀资格，直接查[patterns“需要切换模式后混匀”](patterns.md#需要切换模式后混匀)。例如50µL枪头在低体积模式持2µL加入已有98µL的孔后，先常规排空、退出top、切回正常模式并准备，再进入所选混匀起点；推荐70µL受正常模式/枪头容量限制取M=50µL。不能按旧低体积模式容量截断后直接混匀。
+- 后续还要吸液时：按[patterns“活塞状态跨步骤衔接”](patterns.md#活塞状态跨步骤衔接)在下一吸液孔top、空枪头状态准备，再控速进入本次实际吸液位置。没有下一次吸液就不触发；取弃/返回枪头由实际流程另行处理。

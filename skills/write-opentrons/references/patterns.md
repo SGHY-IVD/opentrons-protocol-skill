@@ -1,13 +1,13 @@
 # 原子片段
 
-片段不是完整协议。先读operations.md确定位置、模式、体积、流速、push_out及等待；以下按单一体积方案示范，变量采用生成阶段预计算的定值；可变体积先按rates.md选择对应方案，不交付未定义占位。数值默认只维护在规则/速率JSON，不从旧片段继承。move_to速度按既有规则或明确指定填入；等待查询delays.md的维护阶段配置，用户明确指定优先。模板不封装为通用移液函数。所有prepare_to_aspirate行都由吸液前待准备检查实例化：新头首次或存在待准备事件时保留，已准备且无新事件时省略，不因复用片段重复准备。入液/退出速度按每个实际动作所在液体分别赋值，源端与目标端不默认共用。以下delay占位仅在对应阶段启用且非零时生成；相邻片段连接时同一实际撤离的等待只执行一次。
+片段不是完整协议。先读operations.md确定位置、模式、体积、流速、push_out及等待；以下按单一体积的定值方案示范；参数化任务按[参数化指引](parameter-planning.md)选择数值表达，流速语义仍查rates.md，不交付未定义占位。数值默认只维护在规则/速率JSON，不从旧片段继承。move_to速度按既有规则或明确指定填入；等待查询delays.md的维护阶段配置，用户明确指定优先。模板不封装为通用移液函数。所有prepare_to_aspirate行都由吸液前待准备检查实例化：新头首次或存在待准备事件时保留，已准备且无新事件时省略，不因复用片段重复准备。入液/退出速度按每个实际动作所在液体分别赋值，源端与目标端不默认共用。以下delay占位仅在对应阶段启用且非零时生成；相邻片段连接时同一实际撤离的等待只执行一次。
 
 
 生成时所有符合operations“分段排空”的单条dispense均展开为下面两段，包括本页混匀N=1/N>=2收尾；普通留液轮次不拆。下列未展开结构仅表示流程骨架，不能直接跳过该生成步骤。
 
 ## dry_run流速赋值
 
-按rates.md先在生成阶段查询两套定值；以下为结构占位，不得原样交付，最终用数值或已赋定值变量替换右侧来源变量。只需选择速率，不复制整段移液流程。
+按rates.md确定两分支的维护配置；下方仅展示定值方案的结构占位，不得原样交付，最终用数值或已赋值变量替换右侧来源变量。参数化计算按参数化指引处理。只需选择速率，不复制整段移液流程。
 
 ```python
 aspirate_flow_rate = water_aspirate_rate if dry_run else normal_aspirate_rate
@@ -24,10 +24,10 @@ pipette.move_to(current_well.top(), speed=exit_speed)
 protocol.delay(seconds=previous_retract_delay)
 pipette.move_to(next_source.top())
 pipette.prepare_to_aspirate()
-pipette.move_to(next_source.bottom(z=0.8), speed=entry_speed)
+pipette.move_to(next_aspirate_location, speed=entry_speed)
 ```
 
-current_well与next_source相同时合并重复top；已经退出孔内或刚取新头时省略旧孔退液步骤。next_source的吸液位置若有明确覆盖，替换最后一行；跨孔时先从当前孔控速退到top，再跨孔到next_source.top，勿将入液/退液速度机械用于全部跨孔行程。
+current_well与next_source相同时合并重复top；已经退出孔内或刚取新头时省略旧孔退液步骤。next_aspirate_location按下一实际吸液策略赋值：常规默认next_source.bottom(0.8)，本次采用动态混匀时取next_source.meniscus(z=-0.5,target="start")，明确位置覆盖优先；跨孔时先从当前孔控速退到top，再跨孔到next_source.top，勿将入液/退液速度机械用于全部跨孔行程。
 
 ## 跨孔移动分段
 
@@ -88,15 +88,57 @@ pipette.dispense(volume, location=destination.meniscus(z=0, target="dynamic"),
 protocol.delay(seconds=after_dispense_delay)
 ```
 
-## 加液后原位立即混匀
+## 磁吸后去上清单批吸液
 
-仅当同孔同枪头且无模式切换/需退出的准备动作。使用常规片段的吸液段，替换目标进入和排液段如下，随后直接接混匀片段，不插入top或prepare_to_aspirate。initial_push_out由统一规则判定，不硬编码为“混匀专用”值。
+场景、分批公式与默认参数唯一见[operations](operations.md#磁吸后去上清)。本片段只处理已经预检的一批(body_volume, tail_volume)，两者为每通道量；空头、配置/路径/液量已核对。高度、局部速度与稳定等待按场景及本次覆盖赋值，入退速度和其余等待按原规则取值；body_flow/tail_flow已按正式或dry_run分支解析。变量需在实际协议中赋值，不能原样交付。prepare_needed来自原有待准备状态，不因批次变化机械置真。
 
 ```python
+if body_volume + tail_volume > 0:
+    pipette.move_to(source.top())
+    if prepare_needed:
+        pipette.prepare_to_aspirate()
+    pipette.move_to(source.bottom(z=body_height), speed=source_entry_speed)
+
+    if body_volume > 0:
+        if before_aspirate_delay > 0:
+            protocol.delay(seconds=before_aspirate_delay)
+        pipette.aspirate(body_volume, source.bottom(z=body_height),
+                         flow_rate=body_flow)
+        if after_aspirate_delay > 0:
+            protocol.delay(seconds=after_aspirate_delay)
+
+    if tail_volume > 0:
+        pipette.move_to(source.bottom(z=tail_height), speed=low_move_speed)
+        low_wait = max(before_aspirate_delay if body_volume == 0 else 0,
+                       low_settle_delay)
+        if low_wait > 0:
+            protocol.delay(seconds=low_wait)
+        pipette.aspirate(tail_volume, source.bottom(z=tail_height),
+                         flow_rate=tail_flow)
+        if after_aspirate_delay > 0:
+            protocol.delay(seconds=after_aspirate_delay)
+        pipette.move_to(source.bottom(z=body_height), speed=low_move_speed)
+
+    pipette.move_to(source.top(), speed=source_exit_speed)
+    if after_aspirate_retract_delay > 0:
+        protocol.delay(seconds=after_aspirate_retract_delay)
+```
+
+终态为本批液体仍在枪头内；外层必须按已确认废液流程实际排出，再开始下一批。本片段不包含磁吸计时、排液、弃头或批间循环，不把省略部分视为已执行；不因本场景而调用分段排空的排液参数。
+
+## 加液后原位立即混匀
+
+仅当同孔同枪头且无模式切换/需退出的准备动作。按operations“连续原位混匀”在本次加液前选定dynamic_mix，使用常规片段的吸液段，替换目标进入和排液段如下，随后直接接混匀片段，不插入top或prepare_to_aspirate。initial_push_out仍由统一规则判定；明确的位置覆盖、起终点可达性及等待均按原规则，不在此另立数值或选型条件。
+
+```python
+addition_start = (destination.meniscus(z=-0.5, target="start")
+                  if dynamic_mix else destination.bottom(z=0.8))
+addition_location = (destination.meniscus(z=-0.5, target="dynamic")
+                     if dynamic_mix else destination.bottom(z=0.8))
 pipette.move_to(destination.top())
-pipette.move_to(destination.bottom(z=0.8), speed=entry_speed)
+pipette.move_to(addition_start, speed=entry_speed)
 protocol.delay(seconds=before_dispense_delay)
-pipette.dispense(volume, location=destination.bottom(z=0.8),
+pipette.dispense(volume, location=addition_location,
                  flow_rate=dispense_flow_rate, push_out=initial_push_out)
 protocol.delay(seconds=after_dispense_delay)
 ```
@@ -105,56 +147,50 @@ protocol.delay(seconds=after_dispense_delay)
 
 ## 需要切换模式后混匀
 
-先完成常规动态排液并校验空枪头，再执行下段，接混匀片段。configure_for_volume仅适用于需切换模式的Flex50µL单/八通道；无模式切换但需液面外准备时省略该行。configure_volume依据已查API及计划模式确定。
+先完成常规动态排液并校验空枪头，再执行下段，接所选模式的混匀片段。configure_for_volume仅适用于需切换模式的Flex50µL单/八通道；无模式切换但需液面外准备时省略该行。configure_volume依据已查API及计划模式确定。
 
 ```python
 pipette.move_to(destination.top(), speed=exit_speed)
 protocol.delay(seconds=after_dispense_retract_delay)
 pipette.configure_for_volume(configure_volume)
 pipette.prepare_to_aspirate()
-pipette.move_to(destination.bottom(z=0.8), speed=entry_speed)
+mix_entry = (destination.meniscus(z=-0.5, target="start")
+             if dynamic_mix else destination.bottom(z=0.8))
+pipette.move_to(mix_entry, speed=entry_speed)
 protocol.delay(seconds=mix_submerge_delay)
 ```
 
 ## N次手写混匀，保留液与末次排净
 
-进入时空枪头、模式已匹配、位于bottom(0.8)，液面外准备已完成或无需额外准备。mix_volume=M、stroke_volume=S由operations生成阶段确定并写定值。N>=1。首次实际入液后的submerge等待由进入段执行一次；原位立即混匀不重复添加，普通轮次也不添加。aspirate_full_rate/aspirate_stroke_rate分别查询M/S；dispense_stroke_rate/dispense_full_rate分别查询S/M。ordinary_push_out、final_push_out各按统一规则确定。等待变量按维护阶段配置或用户明确覆盖赋值。
+进入时空枪头、模式已匹配、已到本次吸液起点，液面外准备已完成或无需额外准备。dynamic_mix是按operations“模式选择”确定的内部布尔值，不是默认新增的运行参数；模式依据与以下执行片段分开。mix_volume=M、stroke_volume=S及N>=1依据operations确定，数值表达按参数化指引选择。aspirate_full_rate/aspirate_stroke_rate分别按实际M/S查询，排液同理。首次实际入液后的等待由进入段执行一次；普通轮次不重复添加。以下未拆分末排须在生成时按“分段排空”展开。
 
 ```python
-if mix_cycles == 1:
-    pipette.aspirate(mix_volume, location=well.bottom(z=0.8),
-                    flow_rate=aspirate_full_rate)
+mix_aspirate_location = (well.meniscus(z=-0.5, target="dynamic")
+                         if dynamic_mix else well.bottom(z=0.8))
+for cycle in range(mix_cycles):
+    first_cycle = cycle == 0
+    last_cycle = cycle == mix_cycles - 1
+    pipette.aspirate(mix_volume if first_cycle else stroke_volume,
+                    location=mix_aspirate_location,
+                    flow_rate=aspirate_full_rate if first_cycle else aspirate_stroke_rate)
     protocol.delay(seconds=aspirate_delay)
-    pipette.dispense(mix_volume,
-        location=well.bottom(z=0.8),
-        end_location=well.bottom(z=well.height_from_volume(final_well_volume)),
-        flow_rate=dispense_full_rate, push_out=final_push_out)
-    protocol.delay(seconds=dispense_delay)
-else:
-    pipette.aspirate(mix_volume, location=well.bottom(z=0.8),
-                    flow_rate=aspirate_full_rate)
-    protocol.delay(seconds=aspirate_delay)
-    pipette.dispense(stroke_volume, location=well.bottom(z=0.8),
-                    flow_rate=dispense_stroke_rate, push_out=ordinary_push_out)
-    protocol.delay(seconds=dispense_delay)
-    for cycle in range(mix_cycles - 2):
-        pipette.aspirate(stroke_volume, location=well.bottom(z=0.8),
-                        flow_rate=aspirate_stroke_rate)
-        protocol.delay(seconds=aspirate_delay)
+    if last_cycle:
+        pipette.dispense(mix_volume,
+            location=well.bottom(z=0.8),
+            end_location=well.meniscus(z=0, target="end"),
+            flow_rate=dispense_full_rate, push_out=final_push_out)
+    elif dynamic_mix:
+        pipette.dispense(stroke_volume,
+            location=well.bottom(z=0.8),
+            end_location=well.meniscus(z=-0.5, target="end"),
+            flow_rate=dispense_stroke_rate, push_out=ordinary_push_out)
+    else:
         pipette.dispense(stroke_volume, location=well.bottom(z=0.8),
-                        flow_rate=dispense_stroke_rate, push_out=ordinary_push_out)
-        protocol.delay(seconds=dispense_delay)
-    pipette.aspirate(stroke_volume, location=well.bottom(z=0.8),
-                    flow_rate=aspirate_stroke_rate)
-    protocol.delay(seconds=aspirate_delay)
-    pipette.dispense(mix_volume,
-        location=well.bottom(z=0.8),
-        end_location=well.bottom(z=well.height_from_volume(final_well_volume)),
-        flow_rate=dispense_full_rate, push_out=final_push_out)
+            flow_rate=dispense_stroke_rate, push_out=ordinary_push_out)
     protocol.delay(seconds=dispense_delay)
 ```
 
-最后一次排液固定从bottom(0.8)起步，使用Location类型的end_location边排边移动到排完后液面，不能提前移到液面再排。final_well_volume为排完后孔内总液量，含返回的保留液；不是mix_volume。纯混匀最终总量等于混匀开始总量。模型缺失时由用户明确终点后替换，不能使用height_from_volume。统一push_out规则适用于经模型核对的最终液面终点。弃头/返回由后续流程决定，不在混匀片段固定drop_tip。dry_run可减少N但至少1，仍走正确收尾分支。
+N=1只执行一次吸M及共用末排，不预吸保留量。动态最后一次吸液仍跟随液面；末次排液两模式都从bottom(0.8)边排边移至本次排完后液面0，不能提前到液面再排。普通动态排液终点按当前动作结束后的实际孔内量解析（标准留液轮按该孔实际喷嘴数，为 F−n×R），最后回到F；不把每轮终点都当作完整F。meniscus标记按每次命令的状态解析，不是预先冻结的高度。明确体积位置可采用下段height_from_volume示例。无模型不直接使用本片段的液面路径，按operations“液量模型核对与缺失处理”确认并替换对应位置；弃头/返回由后续流程决定。等待、push_out、准备及拆段仍只查operations/delays，不在此另设数值规则。
 
 ## 按体积确定排液终点
 
@@ -165,11 +201,11 @@ pipette.dispense(volume, location=well.bottom(z=0.8),
 protocol.delay(seconds=after_dispense_delay)
 ```
 
-使用end_location时，未另行指定的location统一为操作孔well.bottom(z=0.8)；明确指定起点时替换。final_well_volume为目标时刻孔内总液量；不自写几何公式，不要求预算高度数值。是否确认液面终点、是否排空仍查统一push_out规则。无模型不能使用此换算，由用户指定固定end_location。
+使用end_location时，未另行指定的location统一为操作孔well.bottom(z=0.8)；明确指定起点时替换。final_well_volume为目标时刻孔内总液量；不自写几何公式，不要求预算高度数值。是否确认液面终点、是否排空仍查统一push_out规则。无模型不能使用此换算，位置替代按operations“液量模型核对与缺失处理”，不默认另造end_location。
 
 ## 分段排空：两种路径
 
-按operations确定body_volume、tail_volume及原push_out；分别查询body_rate、tail_rate并写入定值，示例不另建数值表。两个示例择一展开，不定义通用封装函数。mid_volume为生成阶段算好的F−T，final_well_volume为F。中间等待示例0.2秒，明确覆盖时替换。
+按operations确定body_volume、tail_volume及原push_out；分别确定body_rate、tail_rate，数值表达按参数化指引选择，示例不另建数值表。两个默认路径按原操作择一展开，不定义通用封装函数；纯液分段的中间/最终孔内量按该孔实际喷嘴数核对 F−n×T / F，单个喷嘴作用于每个孔时退化为 F−T / F。明确按体积定位时，才使用上一节height_from_volume构造相应点。中间等待示例0.2秒，明确覆盖时替换。
 
 常规动态液面：
 ```python
@@ -184,12 +220,12 @@ protocol.delay(seconds=dispense_delay)
 显式终点（包括混匀末次）：
 ```python
 pipette.dispense(body_volume, location=well.bottom(0.8),
-    end_location=well.bottom(well.height_from_volume(mid_volume)),
+    end_location=well.meniscus(z=0, target="end"),
     flow_rate=body_rate, push_out=0)
 protocol.delay(seconds=0.2)
 pipette.dispense(tail_volume,
-    location=well.bottom(well.height_from_volume(mid_volume)),
-    end_location=well.bottom(well.height_from_volume(final_well_volume)),
+    location=well.meniscus(z=0, target="start"),
+    end_location=well.meniscus(z=0, target="end"),
     flow_rate=tail_rate, push_out=final_push_out)
 protocol.delay(seconds=dispense_delay)
 ```
@@ -198,7 +234,7 @@ protocol.delay(seconds=dispense_delay)
 
 ## 实例路由
 
-完整组合演示见mixing-examples.md：容量截断与10%保留、低体积模式切回后混匀，以及末次push_out后的下一次吸液准备。实例的等待/移动速度只是明确设定的演示输入，不升格为全局默认。实际应用重新运行流速查询，不能把实例数字变成另一套速查表。
+组合演示见mixing-examples.md的静态、动态两个主例，覆盖前次加液、N=1/多轮、容量截断、保留液及末排分段；模式切换和后续吸液准备以本页原子片段为准。实例的数值与轮次只适用于其前提，不升格为全局默认；实际应用重新查询流速和等待，不把实例定值变成另一套参数表。
 
 ## 交付标识与参数
 

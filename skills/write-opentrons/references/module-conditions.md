@@ -4,7 +4,7 @@
 
 按[模块索引](api-modules.md)只读本次设备的“硬件与机制”和“条件约束”；即使只核对布局，涉及模块承载位、内部库存或状态含义时也适用。各模块使用相同分类；没有额外条目时保留明确入口，不推断设备缺少能力。名称/型号查catalog，台面安装及已收录适配关系唯一查installation；API签名/版本查对应api-module文件，操作经验查module-practices。本文件不另建槽位或夹具表。
 
-既有非Stacker条目保持API 2.30范围，来源为2026-10-16核对的官方公开API及固定源码05b494ba81636978fb79f08bbc20468f94464d5c；本次只重新分类。Stacker增补依据见该节，未升级API基线。
+既有条目保持API 2.30范围，来源为2026-10-16核对的官方公开API及固定源码05b494ba81636978fb79f08bbc20468f94464d5c；各模块后续增补依据在对应节注明，未升级API基线。
 
 ## Heater-Shaker
 
@@ -25,31 +25,43 @@
 
 ### 硬件与机制
 
-具有加热/制冷功能及风扇；没有模块盖或耗材锁扣API，不套用热循环或热震荡的开关流程。
+具有加热/制冷功能及风扇，制冷时需要向外排热；没有模块盖或耗材锁扣API，不套用热循环或热震荡的开关流程。目标与API当前温度对应模块平台，铝块、耗材和液量会影响实际样品温度，不能把模块到温等同于液体实测到温。
+低于环境温度的冷表面可能出现冷凝，是否发生与室温、相对湿度及露点有关，不设一个统一的必然冷凝温度或时长。
 
 ### 条件约束
 
 目标4–95℃；set_temperature阻塞到目标；start_set_temperature在2.27+返回Task并发运行。deactivate停止加热/制冷并关闭风扇，但实际温度不会瞬时回室温。
+保持排风通畅；安装位置与朝向唯一查installation的温控条目，制冷前侧盖准备及低温暂存建议见module-practices温控节。
+安装和运行环境保持低振动及温湿度稳定，避开直射阳光，以及可能造成显著温度或湿度变化的空调气流。
+
+温控补充来源：2026-11-04查证官方[温度特性](https://docs.opentrons.com/temperature-module/product-specs/#temperature-profile)及[低温冷凝说明](https://docs.opentrons.com/temperature-module/compliance/#environmental-conditions)；在线手册未固定发布修订，仅补上述硬件机制，不据其改变API基线。安装朝向的固定v10.0.0来源在installation维护。
 
 ## Thermocycler
 
 ### 硬件与机制
 
-块和盖温控分别管理；模块盖与耗材自带板盖是两个对象，不混用open_lid与move_lid。
+块和盖温控分别管理；profile只控制块温，不代替热盖温度设置。热盖没有主动制冷，仅被动降温。模块盖与耗材自带板盖是两个对象，不混用open_lid与move_lid。
 
 ### 条件约束
 
 - 模块盖打开后才能装卸板或从上方操作。关闭前确认无枪头/抓手留在盖的运动区域，不把开盖后的未知枪尖位置仍记为原孔。
 - 块温4–99℃；盖温37–110℃。升降温速率、hold及block_max_volume见对应API条目；block_max_volume是单孔最大液量，不是整板总量。API2.27+部分温度方法可从液量跟踪取值，缺失回退25µL；诊断时核对具体方法，不将回退25视为实际样品量。
 - deactivate_block只停块，deactivate_lid只停盖，deactivate同时停二者。开盖不等于停温控，停温控不等于温度已降到可接触范围。
+- 官方要求样品块回到idle temperature后再开盖取样；须按本次实验安排冷却并确认取板条件，不能只凭deactivate或温控状态idle判定已经冷却。官方未给统一的安全触摸温度或等待时长，热盖密封处打开后仍可能有余热。
+- 板温低于当前环境温度时不得持续超过2小时，以免冷凝影响性能或损坏模块。此限制同样适用于PCR后保持及pause等待用户的方案；pause本身不提供自动超时或停用保证。
+- GEN2密封方案须与实物匹配：Opentrons Tough PCR Auto-sealing Lid与模块热盖上的可重复橡胶密封垫不得同时使用，采用一次性盖前取下该橡胶垫。可重复密封垫装在模块盖上而非孔板上，每次使用前按官方说明清洁消毒；不能仅设置热盖温度就当作已完成实物密封。
 - 同步方法等待目标/程序完成；start_*返回Task，在依赖其结果或收尾前处理完成条件，不以发出任务当完成循环。
 - 固定源码thermocycler/open_lid.py执行开盖前先home X/Y及挂载轴，不归位活塞轴，并清除移液器位置缓存。重复open_lid因此可能反复引发实际运动；不能删除必要的避碰步骤，而应避免没有状态变化需求的重复开盖命令。
+
+热循环增补来源：2026-11-04在线核对官方[Python用法](https://docs.opentrons.com/python-api/modules/thermocycler/#thermocycler-profiles)、[低温与取板条件](https://docs.opentrons.com/thermocycler/compliance/)、[GEN2密封方案](https://docs.opentrons.com/thermocycler/lid-seals/)及[Flex密封垫使用要求](https://docs.opentrons.com/flex/modules/thermocycler/#thermocycler-lids-and-seals)。在线内容未固定修订，仅补上述机制与使用条件，不升级API、添加耗材加载名或自动搬运方案。
 
 ## Magnetic Block
 
 ### 硬件与机制
 
 Flex MagneticBlock为被动磁体，无engage/disengage；本类没有专属控制方法，仍可使用共享加载及属性接口。
+
+磁体固定于弹簧支撑底座（spring-loaded bed），官方说明其用于帮助保持磁力架与移液器之间的公差配合。来源：2026-11-04核对官方[磁体结构说明](https://docs.opentrons.com/flex/modules/magnetic-block/#magnetic-components)；仅记录硬件机制，不据此给出允许下压量或最低吸液高度。
 
 ### 条件约束
 
@@ -59,11 +71,13 @@ Flex MagneticBlock为被动磁体，无engage/disengage；本类没有专属控�
 
 ### 硬件与机制
 
-用于吸光度读取，模块盖由抓手开关；模拟读数为0且不写CSV，不能当实测结果。
+用于吸光度读取，模块盖由Flex抓手开关，使用模块须有抓手；不在协议中或协议外手动搬动模块盖。模拟读数为0且不写CSV，不能当实测结果。
 
 ### 条件约束
 
-初始化前要求在协议中显式close_lid，即使开局外观已闭合也不能当冗余删除。initialize区分single/multi和波长列表；参考波长仅single，常规LED波长/定制硬件范围见API。读取前满足初始化和闭盖条件。
+初始化时模块内须无孔板，并在协议中显式close_lid，即使开局外观已闭合也不能当冗余删除；先空腔闭盖→initialize→开盖搬入孔板→闭盖→read。初始化后按此顺序开盖装板不需要重新初始化；初始化配置用于后续read。initialize区分single/multi，参考波长仅single；本业务标准波长范围唯一见API。读取前满足初始化和闭盖条件，板型及安装高度边界查installation，选板建议见module-practices。
+
+读板流程增补来源：官方v10.0.0 commit e8c6d0a424c25fff1604e2a02e4ccaedac95b9af，docs/python-api/docs/modules/absorbance-plate-reader.md；2026-11-04核对空腔初始化、盖控制及装板读数示例。未新增API。
 
 ## Flex Stacker
 
@@ -77,7 +91,7 @@ Flex MagneticBlock为被动磁体，无engage/disengage；本类没有专属控�
 
 - 本节仓内存取/库存专属接口最低API2.25；模块加载及继承的共享成员按各自契约核对，不将2.25概括成全部加载能力的统一下限。库存声明的型号、数量、盖/适配器组合必须与实物一致。实际同质性按定义身份及完整组合核对，不能只凭“都是枪头盒/孔板”视为同类。
 - 配置仓内库存前移走原先当普通承载位加载在托盘上的耗材，按官方指南组织顺序；重新配置类型前，仓内须已知为空，不能用重新声明掩盖原有库存。未配置库存不妨碍按共享API使用适用的托盘承载能力，但不能retrieve/store。
-- retrieve前须已配置、有至少一件仓内库存且托盘为空；取出后仓内减一、托盘被占用，搬离后才清空托盘。即使托盘上的耗材与库存同型，也不能在仍占用时继续取出。
+- retrieve前须已配置、有至少一件仓内库存且托盘为空；取出后仓内减一、托盘被占用。retrieve返回主耗材；若带适配器，用返回对象的parent识别适配器。只搬走主耗材、底层适配器仍在托盘时，托盘仍被占用；仅在所有占用对象均搬离后才记为空。即使托盘上的耗材与库存同型，也不能在仍占用时继续取出。
 - store前须已配置、有剩余仓内容量，且托盘上的主耗材、盖/适配器整套组合与声明一致；缺盖、缺适配器或类型/定义不匹配均不能按该配置存入。存入成功后仓内加一、托盘清空；仅把物品移到托盘不代表已经存入。
 - Flex枪头盒进入仓内堆叠存储时，按官方正确装载要求配置并实物带上兼容盖子，包括拟存回的空盒；交互时可简短提醒备盖、带盖装仓，后续取头前按搬运/板盖API处理。此条件不泛化为“所有临时放在shuttle的耗材必须带盖”。官方指南要求带盖；本次核对v10.0.0源码未发现一律拒绝无盖声明的校验，不将该要求表述为所有API版本必报错。
 - 容量按实际主耗材/盖/适配器高度与堆叠重叠量核对，不统一写死最大件数。fill/empty是暂停后的人工补入/移出，不是store/retrieve的自动动作替代；变更后按实际结果更新库存，已有无关状态不凭空清除。具体参数与count含义继续查API。

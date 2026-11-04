@@ -4,6 +4,8 @@
 
 官方参考：https://docs.opentrons.com/python-api/reference/absorbance-plate-reader/
 
+本业务支持范围（用户2026-11-04确认）：仅标准450、562、600、650nm四波长，不支持波长定制；测量和参考波长均从这四项选择。签名及最低API版本保持固定源码，下面的波长说明按本业务范围裁剪，不将上游通用参数范围作为业务承诺。
+
 本类成员：close_lid, initialize, is_lid_on, open_lid, read, serial_number。
 
 共享成员（签名及参数见api-module-common.md）：labware, load_labware, load_labware_by_name, load_labware_from_definition, model, parent, type。
@@ -44,12 +46,11 @@ Args:
         uses a list of up to six sample wavelengths.
     wavelengths: A list of wavelengths, in nm, to measure.
 
-        - In the default hardware configuration, each wavelength must be one of
-        `450` (blue), `562` (green), `600` (orange), or `650` (red). In custom
-        hardware configurations, the module may accept other integers between
-        `350` and `1000`.
+        - Supported wavelengths in this workflow are `450` (blue), `562` (green),
+        `600` (orange), or `650` (red).
         - The list must contain only one item when initializing a single measurement.
         - The list can contain one to six items when initializing a multiple measurement.
+          This API list limit does not add wavelengths beyond the four supported above.
     reference_wavelength: An optional reference wavelength, in nm. If provided,
         [`read()`][opentrons.protocol_api.AbsorbanceReaderContext.read] will read at the
         reference wavelength and then subtract the reference wavelength values from the

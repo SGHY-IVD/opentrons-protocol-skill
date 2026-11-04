@@ -1,5 +1,5 @@
 {
-  "revision": "2026-10-28-v1",
+  "revision": "2026-10-30-v1",
   "units": {
     "volume": "uL",
     "flow_rate": "uL/s"
@@ -32,25 +32,21 @@
       "points": [
         [
           1,
-          10
-        ],
-        [
-          9.999,
-          10
+          20
         ],
         [
           10,
-          10
+          20
         ],
         [
           20,
-          20
+          30
         ]
       ],
       "max_volume": 20,
       "min_rule_volume": 1,
-      "upper_endpoint": "hold",
-      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-30水相20µL枪头流速覆盖；所有已收录型号及普通/滤芯共用；分段线性插值，不外推"
     },
     {
       "model": "flex_1channel_50",
@@ -62,25 +58,21 @@
       "points": [
         [
           1,
-          10
-        ],
-        [
-          9.999,
-          10
+          20
         ],
         [
           10,
-          10
+          20
         ],
         [
           20,
-          20
+          30
         ]
       ],
       "max_volume": 20,
       "min_rule_volume": 1,
-      "upper_endpoint": "hold",
-      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-30水相20µL枪头流速覆盖；所有已收录型号及普通/滤芯共用；分段线性插值，不外推"
     },
     {
       "model": "flex_1channel_50",
@@ -152,25 +144,21 @@
       "points": [
         [
           1,
-          10
-        ],
-        [
-          9.999,
-          10
+          20
         ],
         [
           10,
-          10
+          20
         ],
         [
           20,
-          20
+          30
         ]
       ],
       "max_volume": 20,
       "min_rule_volume": 1,
       "upper_endpoint": "error",
-      "provenance": "用户2026-10-22排液流速覆盖；普通/滤芯一致；多点分段线性插值，不外推"
+      "provenance": "用户2026-10-30水相20µL枪头流速覆盖；所有已收录型号及普通/滤芯共用；分段线性插值，不外推"
     },
     {
       "model": "flex_8channel_50",
@@ -182,25 +170,21 @@
       "points": [
         [
           1,
-          10
-        ],
-        [
-          9.999,
-          10
+          20
         ],
         [
           10,
-          10
+          20
         ],
         [
           20,
-          20
+          30
         ]
       ],
       "max_volume": 20,
       "min_rule_volume": 1,
       "upper_endpoint": "error",
-      "provenance": "用户2026-10-22排液流速覆盖；普通/滤芯一致；多点分段线性插值，不外推"
+      "provenance": "用户2026-10-30水相20µL枪头流速覆盖；所有已收录型号及普通/滤芯共用；分段线性插值，不外推"
     },
     {
       "model": "flex_8channel_50",
@@ -664,25 +648,21 @@
       "points": [
         [
           1,
-          10
-        ],
-        [
-          9.999,
-          10
+          20
         ],
         [
           10,
-          10
+          20
         ],
         [
           20,
-          22
+          30
         ]
       ],
       "max_volume": 20,
       "min_rule_volume": 1,
-      "upper_endpoint": "hold",
-      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-30水相20µL枪头流速覆盖；所有已收录型号及普通/滤芯共用；分段线性插值，不外推"
     },
     {
       "model": "flex_96channel_200",
@@ -694,25 +674,21 @@
       "points": [
         [
           1,
-          10
-        ],
-        [
-          9.999,
-          10
+          20
         ],
         [
           10,
-          10
+          20
         ],
         [
           20,
-          22
+          30
         ]
       ],
       "max_volume": 20,
       "min_rule_volume": 1,
-      "upper_endpoint": "hold",
-      "provenance": "用户授权采用官方v3 water.singleDispense.flowRateByVolume；仅继承流速"
+      "upper_endpoint": "error",
+      "provenance": "用户2026-10-30水相20µL枪头流速覆盖；所有已收录型号及普通/滤芯共用；分段线性插值，不外推"
     },
     {
       "model": "flex_96channel_200",
@@ -783,12 +759,12 @@
       "action": "dispense",
       "points": [
         [
-          1,
+          5,
           40
         ],
         [
           10,
-          30
+          40
         ],
         [
           50,
@@ -796,17 +772,17 @@
         ],
         [
           100,
-          80
+          100
         ],
         [
           200,
-          80
+          100
         ]
       ],
       "max_volume": 200,
-      "min_rule_volume": 1,
+      "min_rule_volume": 5,
       "upper_endpoint": "error",
-      "provenance": "用户2026-10-22排液流速覆盖；普通/滤芯一致；多点分段线性插值，不外推"
+      "provenance": "用户2026-10-30水相96通道200µL配200µL枪头流速覆盖；普通/滤芯共用；分段线性插值，不外推"
     },
     {
       "model": "flex_96channel_200",
@@ -817,12 +793,12 @@
       "action": "dispense",
       "points": [
         [
-          1,
+          5,
           40
         ],
         [
           10,
-          30
+          40
         ],
         [
           50,
@@ -830,17 +806,17 @@
         ],
         [
           100,
-          80
+          100
         ],
         [
           200,
-          80
+          100
         ]
       ],
       "max_volume": 200,
-      "min_rule_volume": 1,
+      "min_rule_volume": 5,
       "upper_endpoint": "error",
-      "provenance": "用户2026-10-22排液流速覆盖；普通/滤芯一致；多点分段线性插值，不外推"
+      "provenance": "用户2026-10-30水相96通道200µL配200µL枪头流速覆盖；普通/滤芯共用；分段线性插值，不外推"
     },
     {
       "model": "flex_96channel_1000",
