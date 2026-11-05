@@ -9,9 +9,16 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This project is primarily a skill package for AI assistants, rather than an official Opentrons project or standalone protocol-generation, device-control, or simulation application. Optional third-party device implementations are documented in the extension reference.
 
 
-## Publication 2026-11-05.2
+## Publication 2026-11-06.3
 
 The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version. The maintained Python protocol API baseline remains 2.30.
+
+- [Summarize the plan before writing](skills/write-opentrons/references/protocol-interaction.md#编写前回显), including equipment, deck layout, labware, and the experimental workflow. Show the updated plan after any change and wait for confirmation of the latest version before writing. Base the delivery summary on the finished script.
+- Clarify [when to consult additional sources](skills/write-opentrons/references/upstream-maintenance.md#日常查证边界). Use applicable local rules first, retrieve explicitly permitted data on demand, and investigate specific gaps or observed conflicts as needed.
+- Clarify the first liquid entry for [standalone dynamic mixing](skills/write-opentrons/references/operation-mixing.md). Move at controlled speed to the first aspiration start relative to the meniscus and wait there before aspirating.
+- Publication checks covered 834 local references, the structure and snippet syntax of 357 regression cases, and both standalone third-party device builds. Of 235 Python tests, 233 passed and two optional mDNS tests were skipped because their dependency was unavailable. These checks cover offline rules, tools, and examples.
+
+### Capabilities already published in 2026-11-05.2
 
 - Streamlines the entry point and routes each task to the relevant API members, [workflow rules](skills/write-opentrons/references/operation-scenarios.md), and examples. Installation checks, module conditions, and practices have separate references so routine tasks can read a smaller set of files.
 - Separates [interaction and confirmation](skills/write-opentrons/references/protocol-interaction.md) from delivery and protocol review. Confirm missing information in the conversation by default, with room for users to add or revise details freely. Use interactive choice controls only when users request them.
@@ -39,7 +46,7 @@ Version .34 published extension and example updates since public version 2026-11
 
 ## What it helps with
 
-Provide the experimental goal, existing workflow, and actual equipment. The first stage guides a complete hardware description including robot software, then reflects the configuration, supported API range, and target for confirmation. The second explains and iterates the workflow, labware layout, and actions within that configuration. Complete input goes directly to a consolidated restatement, without repeated questions. The skill supports writing, modifying, and reviewing protocols:
+Provide the experimental goal, existing workflow, and actual equipment. The assistant checks the hardware and robot software, then summarizes the configuration, target API, labware layout, and robot workflow. Complete input can be summarized together. After changes, the assistant presents the updated plan and waits for confirmation before writing. The skill supports writing, modifying, and reviewing protocols:
 
 - Convert an SOP and established layout into a complete Flex protocol.
 - Compose transfers, handwritten mixing, one-to-many dispensing, and serial dilution.

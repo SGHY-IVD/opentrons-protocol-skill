@@ -2871,6 +2871,41 @@
         }
       ],
       "rule": "references/api-riser.md；references/installation.txt"
+    },
+    "R354": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "既有装机与方案信息可复用，但须先向用户发出最终方案回显，再等用户确认这版后编写。交付时首次展示不能补足编写前的回显与确认。"
+        }
+      ],
+      "rule": "references/protocol-interaction.md；references/protocol-review.md"
+    },
+    "R355": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "该消息是最终方案的首次回显。必须结束该轮并等待用户确认这版方案，不能沿用回显前的同意在同轮编写。"
+        }
+      ],
+      "rule": "references/protocol-interaction.md；references/protocol-review.md"
+    },
+    "R356": {
+      "status": "issues",
+      "findings": [
+        {
+          "line": 1,
+          "reason": "用户更改了反应板位置。应先回显采用C3的更新方案，等用户同意该次回显再编写。同条变更里的‘改完直接写’以及最终交付说明都不能补作确认。"
+        }
+      ],
+      "rule": "references/protocol-interaction.md；references/protocol-review.md"
+    },
+    "R357": {
+      "status": "pass",
+      "findings": [],
+      "rule": "references/protocol-interaction.md；references/protocol-review.md；references/protocol-output.md"
     }
   }
 }

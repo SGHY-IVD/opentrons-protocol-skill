@@ -5,20 +5,20 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 
 # Opentrons代码助手
 
-规则版本：2026-11-05.2（交付标识使用实际读取版本）。
+规则版本：2026-11-06.3（交付标识使用实际读取版本）。
 
 仅为 **Opentrons Flex** 编写、修改和审查protocol，不提供OT-2专属硬件/API或经验。迁移需求先核对实际Flex配置，不能只替换robotType。文档维护基线为API 2.30；按[版本索引](references/api-versions.md)核对实际机器人软件、选定目标API及本地模拟环境，既有脚本不静默升降级。
 
 ## 判断原则
 
 - 当前明确需求可覆盖技能默认，不能绕过硬件/API限制。区分官方契约、技能默认、本次覆盖与示例；示例供理解和实现参考，不新增规则，也不要求照搬结构。
-- API、参数、硬件与安装依据来自维护资料；缺口不凭记忆补齐。官方耗材检索、自定义定义、版本映射和具体报错的定向查证各按下方入口处理；查询不等于自动升级维护基线。
+- 先查本地维护资料。已维护且适用于本次配置的API、参数、硬件、安装关系及实现策略，直接作为回答、编写和审查的依据。开放数据按需查，其他关键缺口或实际冲突按[日常查证边界](references/upstream-maintenance.md#日常查证边界)处理。
 - 规则各归唯一职责：操作控制状态，场景组合动作，API定义调用，安装判断承载与占位，参数表维护数值，交互组织确认，交付组织说明，审查核验结果。相互引用复用结论，不复制另一套规则。
 
 ## 一次任务如何推进
 
 1. 识别新建、局部修改、问答、设备辅助或项目维护。先复用当前需求、已有效确认的硬件、布局及已有检查记录，按变更影响继续，不重问未改变的信息。相对路径均以本SKILL.md所在目录为根，工具使用解析后的绝对路径或先进入该目录。
-2. **新建完整协议**读取[交互与确认](references/protocol-interaction.md)、[核心操作规则](references/operations.md)、[结构与类型](references/api-types.md)、[协议骨架](references/protocol-skeleton.py)、[交付规范](references/protocol-output.md)及[审查方法](references/protocol-review.md)。骨架用于熟悉协议组成，其余可选区块按实际需要组织。实际硬件须核对并回显确认，再迭代实验方案；具体条件只在交互规则维护。
+2. **新建完整协议**读取[交互与确认](references/protocol-interaction.md)、[核心操作规则](references/operations.md)、[结构与类型](references/api-types.md)、[协议骨架](references/protocol-skeleton.py)、[交付规范](references/protocol-output.md)及[审查方法](references/protocol-review.md)。骨架用于熟悉协议组成，其余可选区块按实际需要组织。先核对实际硬件，按[编写前回显](references/protocol-interaction.md#编写前回显)展示方案，收到用户对最新回显的确认后再编写。
 3. 按下表直达实际命中的章节、成员和数据，不通读全部参考。新建移液协议覆盖核心四个控制维度及适用组合条件；局改只读变更及下游依赖。先确定动作和状态，再查询所需接口、流速与等待，组装、检查并交付。
 4. 依[审查方法](references/protocol-review.md)选择完整或局部检查，区分语法、技能审查、官方模拟与实机结果；依[交付规范](references/protocol-output.md)给出与最终代码一致的标识、参数摘要及真实验证范围。可独立完成的先完成，只集中处理剩余阻塞项。
 
@@ -43,10 +43,10 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 |沿壁或touch_tip特殊路径|[特殊运动路径](references/operation-motion-special.md)|
 |8通道部分喷嘴在储液槽吸排|[储液槽定位](references/reservoir-partial-nozzles.md)|
 |第三方设备、通讯、辅助类复用或DIY|[扩展代码库](references/extensions.md)；普通槽位叠板另查[Riser](references/api-riser.md)，不当作官方Stacker|
-|解释机制、规则原因或排查疑难|[问答](references/faq.md)、[设备经验入口](references/device-experience.md)；仅空气/容量/活塞跟踪疑难查[核算参考](references/pipette-mechanics.md)。问答未命中时，项目策略回查本地规则，官方机制查官方资料|
+|解释机制、规则原因或排查疑难|[问答](references/faq.md)、[设备经验入口](references/device-experience.md)；仅空气/容量/活塞跟踪疑难查[核算参考](references/pipette-mechanics.md)。问答未命中时先查对应本地规则|
 |发现设备、读配置、发送文件|[连接与发送](references/flex-http.md)，可选辅助分支，普通协议编写不必读取或调用|
 |暂停、延时、归位、灯光、并发计时|[流程API](references/api-flow.md)、[模块Task](references/api-module-tasks.md)|
-|具体报错或关键行为不明，定向官方查证|[官方仓库导航](references/upstream-maintenance.md)，不擅自采用未维护API/关系或写回资料|
+|本地核对后仍有影响结论的缺口、实测冲突或明确查证需求|[日常查证边界](references/upstream-maintenance.md#日常查证边界)及[特殊问题导航](references/upstream-maintenance.md#特殊问题查找导航)|
 
 ## 复用已有判断
 
