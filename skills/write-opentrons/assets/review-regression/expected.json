@@ -1066,7 +1066,7 @@
     "R132": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R133": {
       "status": "issues",
@@ -1080,7 +1080,7 @@
           "reason": "组合耗材已包含铝块，不得在另一个adapter上重复加载"
         }
       ],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R134": {
       "status": "issues",
@@ -1090,12 +1090,12 @@
           "reason": "普通管架定义不等于温控铝块+管组合，不能仅因孔数和容量相同替换"
         }
       ],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R135": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R136": {
       "status": "issues",
@@ -1105,7 +1105,7 @@
           "reason": "唯一已维护适用型号可在回显中说明映射，不应把GEN问答设为额外门槛"
         }
       ],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R137": {
       "status": "issues",
@@ -1115,7 +1115,7 @@
           "reason": "明确的代际冲突须核对，不能静默换新或虚称装机核验通过"
         }
       ],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R138": {
       "status": "unresolved",
@@ -1125,12 +1125,12 @@
           "reason": "准确保留歧义但装机类型仍未知，相关加载未就绪"
         }
       ],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R139": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R140": {
       "status": "issues",
@@ -1140,7 +1140,7 @@
           "reason": "已有明确且一致的实物和英文类型，不需再次二选一"
         }
       ],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R141": {
       "status": "issues",
@@ -1150,12 +1150,12 @@
           "reason": "waste chute位置冲突不应靠替换类型消除，应指出D3限制并核对"
         }
       ],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R142": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R143": {
       "status": "issues",
@@ -1165,12 +1165,12 @@
           "reason": "容量不能证明管型同款，须补充实际品牌/型号及必要特征，不能默认NEST"
         }
       ],
-      "rule": "references/operations.md 布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局与耗材确认；references/catalog.txt；references/installation.txt；references/protocol-review.md"
     },
     "R144": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/installation.txt；references/protocol-review.md"
     },
     "R145": {
       "status": "issues",
@@ -1180,7 +1180,7 @@
           "reason": "前后方向反了；默认A后D前、表中A在上D在下"
         }
       ],
-      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/installation.txt；references/protocol-review.md"
     },
     "R146": {
       "status": "issues",
@@ -1190,12 +1190,12 @@
           "reason": "未说明不能变成已知空位或可直接使用的位置"
         }
       ],
-      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/installation.txt；references/protocol-review.md"
     },
     "R147": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/installation.txt；references/protocol-review.md"
     },
     "R148": {
       "status": "issues",
@@ -1205,7 +1205,7 @@
           "reason": "把加载锚点当全部实体占位，A1已被同一热循环占用"
         }
       ],
-      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/installation.txt；references/protocol-review.md"
     },
     "R149": {
       "status": "issues",
@@ -1215,12 +1215,12 @@
           "reason": "未装夹具不能显示成已确认可用位置，且第4列不能直接移液"
         }
       ],
-      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/installation.txt；references/protocol-review.md"
     },
     "R150": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/installation.txt；references/protocol-review.md"
     },
     "R151": {
       "status": "issues",
@@ -1230,7 +1230,7 @@
           "reason": "未采用的建议须标拟放，图表不能制造客户已确认依据"
         }
       ],
-      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/installation.txt；references/protocol-review.md"
     },
     "R152": {
       "status": "issues",
@@ -1240,7 +1240,7 @@
           "reason": "图表不证明夹具兼容，必须按实际安装关系保留冲突"
         }
       ],
-      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/installation.txt；references/protocol-review.md"
     },
     "R153": {
       "status": "issues",
@@ -1250,12 +1250,12 @@
           "reason": "布局未变不应机械重印或新增整套确认门槛"
         }
       ],
-      "rule": "references/operations.md 布局回显的文字示意；references/installation.txt；references/protocol-review.md"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/installation.txt；references/protocol-review.md"
     },
     "R154": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 布局回显的文字示意；references/api-layout.md load_instrument"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/api-layout.md load_instrument"
     },
     "R155": {
       "status": "issues",
@@ -1265,7 +1265,7 @@
           "reason": "96通道占双挂载，不能将另一侧当空位再装一台移液器"
         }
       ],
-      "rule": "references/operations.md 布局回显的文字示意；references/api-layout.md load_instrument"
+      "rule": "references/protocol-interaction.md#布局回显的文字示意；references/api-layout.md load_instrument"
     },
     "R156": {
       "status": "issues",
@@ -1370,7 +1370,7 @@
     "R168": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+      "rule": "references/operation-incubation.md#长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
     },
     "R169": {
       "status": "issues",
@@ -1380,7 +1380,7 @@
           "reason": "当前dry_run应选20秒，本行仍用正式720秒；分段本身不自动缩短总时长"
         }
       ],
-      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+      "rule": "references/operation-incubation.md#长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
     },
     "R170": {
       "status": "issues",
@@ -1390,12 +1390,12 @@
           "reason": "末段仍等300秒，累计900秒超过所选720秒；末段应只等120秒，提示封顶不能修复多等的时间"
         }
       ],
-      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+      "rule": "references/operation-incubation.md#长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
     },
     "R171": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+      "rule": "references/operation-incubation.md#长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
     },
     "R172": {
       "status": "issues",
@@ -1405,12 +1405,12 @@
           "reason": "实际试运行只等20秒，提示总时长仍用正式720秒；分母须与所选incubation_seconds一致"
         }
       ],
-      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+      "rule": "references/operation-incubation.md#长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
     },
     "R173": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
+      "rule": "references/operation-incubation.md#长孵育分段提示；references/protocol-review.md 沿路径逐步审阅"
     },
     "R174": {
       "status": "issues",
@@ -1420,12 +1420,12 @@
           "reason": "TrashBin是台面固定装置，不是move_labware的Labware搬运对象；人工可调安装位置不构成抓手搬运能力"
         }
       ],
-      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+      "rule": "references/protocol-interaction.md#实际硬件描述核对回显确认；references/protocol-output.md；references/installation.txt；references/api-gripper.md；references/api-versions.md"
     },
     "R175": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+      "rule": "references/protocol-interaction.md#实际硬件描述核对回显确认；references/protocol-output.md；references/installation.txt；references/api-gripper.md；references/api-versions.md"
     },
     "R176": {
       "status": "issues",
@@ -1435,17 +1435,17 @@
           "reason": "本技能整块孔板自动丢弃采用外置垃圾槽及抓手；不能用内置垃圾桶替代，应核对所需配置或讨论人工移出"
         }
       ],
-      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+      "rule": "references/protocol-interaction.md#实际硬件描述核对回显确认；references/protocol-output.md；references/installation.txt；references/api-gripper.md；references/api-versions.md"
     },
     "R177": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+      "rule": "references/protocol-interaction.md#实际硬件描述核对回显确认；references/protocol-output.md；references/installation.txt；references/api-gripper.md；references/api-versions.md"
     },
     "R178": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+      "rule": "references/protocol-interaction.md#实际硬件描述核对回显确认；references/protocol-output.md；references/installation.txt；references/api-gripper.md；references/api-versions.md"
     },
     "R179": {
       "status": "issues",
@@ -1455,12 +1455,12 @@
           "reason": "仅为介绍功能而自动加入touch_tip，违背按需启用；经验建议不构成采用授权"
         }
       ],
-      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+      "rule": "references/protocol-interaction.md#实际硬件描述核对回显确认；references/protocol-output.md；references/installation.txt；references/api-gripper.md；references/api-versions.md"
     },
     "R180": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+      "rule": "references/protocol-interaction.md#实际硬件描述核对回显确认；references/protocol-output.md；references/installation.txt；references/api-gripper.md；references/api-versions.md"
     },
     "R181": {
       "status": "issues",
@@ -1470,7 +1470,7 @@
           "reason": "当前SDK已支持所选API2.28，不能仅因机器人较新或SDK非最新强制升级并阻塞；机器人上限与所选目标仍分别判断"
         }
       ],
-      "rule": "references/operations.md 垃圾处理称呼/聊天交付；references/installation.txt；references/api-gripper.md；references/api-versions.md"
+      "rule": "references/protocol-interaction.md#实际硬件描述核对回显确认；references/protocol-output.md；references/installation.txt；references/api-gripper.md；references/api-versions.md"
     },
     "R182": {
       "status": "issues",
@@ -1599,22 +1599,22 @@
           "reason": "同孔同枪头同模式且无既有必要准备时，应按默认dynamic选择原位入口：先受控进入meniscus(z=-0.5,target=\"start\")，再以meniscus(z=-0.5,target=\"dynamic\")排100µL、push_out=0，保留正常排后等待后直接dynamic吸140µL。不能先套常规液面0排空，再用该选择产生的push_out=6反向否定原位资格；去除第7–10行制造的退出/准备/重入链，第11行的固定吸液也应改为动态液面下0.5mm。"
         }
       ],
-      "rule": "references/operations.md 连续原位混匀；references/patterns.md 加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
+      "rule": "references/operations.md 连续原位混匀；references/patterns-mixing.md#加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
     },
     "R199": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 连续原位混匀；references/patterns.md 加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
+      "rule": "references/operations.md 连续原位混匀；references/patterns-mixing.md#加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
     },
     "R200": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 连续原位混匀；references/patterns.md 加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
+      "rule": "references/operations.md 连续原位混匀；references/patterns-mixing.md#加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
     },
     "R201": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 连续原位混匀；references/patterns.md 加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
+      "rule": "references/operations.md 连续原位混匀；references/patterns-mixing.md#加液后原位立即混匀；references/protocol-review.md 无意义动作审查"
     },
     "R202": {
       "status": "pass",
@@ -1874,12 +1874,12 @@
           "reason": "外置垃圾槽不是使用Stacker的必要条件，需按整件自动丢弃场景判断"
         }
       ],
-      "rule": "references/installation.txt；references/operations.md 布局与耗材确认/垃圾处理；references/api-gripper.md"
+      "rule": "references/installation.txt；references/protocol-interaction.md#布局与耗材确认/垃圾处理；references/api-gripper.md"
     },
     "R233": {
       "status": "pass",
       "findings": [],
-      "rule": "references/installation.txt；references/operations.md 布局与耗材确认/垃圾处理；references/api-gripper.md"
+      "rule": "references/installation.txt；references/protocol-interaction.md#布局与耗材确认/垃圾处理；references/api-gripper.md"
     },
     "R234": {
       "status": "issues",
@@ -2029,12 +2029,12 @@
           "reason": "请求次数5来自CSV不构成dry_run覆盖；本次试运行仍执行5次，跳过既有减少混匀且至少一次的业务规则。应先选择本分支的实际次数，再展开相应首/末轮动作。"
         }
       ],
-      "rule": "references/parameter-planning.md；references/operations.md 测试运行参数；references/protocol-review.md"
+      "rule": "references/parameter-planning.md；references/protocol-output.md#测试运行参数；references/protocol-review.md"
     },
     "R252": {
       "status": "pass",
       "findings": [],
-      "rule": "references/parameter-planning.md；references/operations.md 测试运行参数；references/protocol-review.md"
+      "rule": "references/parameter-planning.md；references/protocol-output.md#测试运行参数；references/protocol-review.md"
     },
     "R253": {
       "status": "issues",
@@ -2044,12 +2044,12 @@
           "reason": "先float将原始非整数1.0000000000000001吞成1，后续is_integer与范围校验无法识别差异并会执行。须在该转换前核对原始文本的整数性/范围或明确支持精度，不能静默取整。"
         }
       ],
-      "rule": "references/parameter-planning.md；references/operations.md 分段排空；references/protocol-review.md"
+      "rule": "references/parameter-planning.md；references/operation-dispense.md#分段排空；references/protocol-review.md"
     },
     "R254": {
       "status": "pass",
       "findings": [],
-      "rule": "references/parameter-planning.md；references/operations.md 分段排空；references/protocol-review.md"
+      "rule": "references/parameter-planning.md；references/operation-dispense.md#分段排空；references/protocol-review.md"
     },
     "R255": {
       "status": "issues",
@@ -2059,17 +2059,17 @@
           "reason": "把支持精度内的80.000000000000000001先转float变成80，M变20导致错误不拆。原始比例对应M=20.00000000000000000025严格超过20，应拆主体M−10及10；不能在派生/阈值判定前静默丢失该精度。"
         }
       ],
-      "rule": "references/parameter-planning.md；references/operations.md 分段排空；references/protocol-review.md"
+      "rule": "references/parameter-planning.md；references/operation-dispense.md#分段排空；references/protocol-review.md"
     },
     "R256": {
       "status": "pass",
       "findings": [],
-      "rule": "references/parameter-planning.md；references/operations.md 分段排空；references/protocol-review.md"
+      "rule": "references/parameter-planning.md；references/operation-dispense.md#分段排空；references/protocol-review.md"
     },
     "R257": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R258": {
       "status": "unresolved",
@@ -2079,7 +2079,7 @@
           "reason": "模式仍按默认dynamic，但适用模型已证明本次最低液量对应的液面下0.5mm位于孔底以下，受影响吸液尚未就绪；应保留并解决具体路径缺口，不声称通过或静默改static。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R259": {
       "status": "issues",
@@ -2089,7 +2089,7 @@
           "reason": "没有用户明确静态/固定混匀要求，应采用默认dynamic。孔深和F/V不再用于选择模式，不能因旧浅孔装液阈值未命中而改为static；第2行的选型说明也与当前规则不符。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R260": {
       "status": "issues",
@@ -2099,7 +2099,7 @@
           "reason": "默认模式已经是dynamic，容量/模型/路径也已独立核实；不得为旧孔深和装液占比选型补问无关D/V并阻止生成。只有必要容量、适用模型或实际路径核验缺失时才补所需事实，不能为选型凑数据。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R261": {
       "status": "issues",
@@ -2109,7 +2109,7 @@
           "reason": "无明确静态覆盖时默认dynamic，M/F=40%不构成static条件。F/M仍用于70%推荐量、容量截断、保留液和实际动作/流速计算，不能再把该比例用于模式选择；第2行说明亦需修正。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R262": {
       "status": "issues",
@@ -2119,22 +2119,22 @@
           "reason": "用户只覆盖首轮吸液位置，没有明确要求整段static/固定混匀；整段模式仍应默认dynamic，仅首轮应用合法bottom(0.8)覆盖。不能把单个动作的位置要求扩成整个混匀模式，第2行说明也需修正。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R263": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R264": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R265": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R266": {
       "status": "issues",
@@ -2148,17 +2148,17 @@
           "reason": "用户未要求运行时调整模式，不应默认新增mix_mode参数或把选择转交操作者；交付简述本次采用方式即可。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R267": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R268": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R269": {
       "status": "issues",
@@ -2168,7 +2168,7 @@
           "reason": "dynamic模式所有吸液都须随当次变化液面下0.5mm，包括末轮吸S；本行回到bottom(0.8)不符合模式。两模式共享的是末次dispense路径，不能据此把末轮aspirate也改为固定。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R270": {
       "status": "issues",
@@ -2178,12 +2178,12 @@
           "reason": "首轮排S=180后枪头仍留R=20，孔内总量是F−R=580µL；本行用F=600得到11.5mm，而正确终点为580对应液面下0.5mm即11.1mm。默认应使用meniscus(z=-0.5,target=\"end\")按本次操作结束液量解析；明确体积换算本身不被一律禁止，但不能用错误总量替代当次结束液量。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R271": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R272": {
       "status": "issues",
@@ -2193,12 +2193,12 @@
           "reason": "即使是dynamic模式，末次dispense也共用bottom(0.8)起排至最终液面0的路径；本行把普通动态排液的液面下0.5mm用于末排起终点。应改起点bottom(0.8)、终点meniscus(z=0,target=\"end\")；用户只覆盖push_out=0，并未覆盖路径。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R273": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R274": {
       "status": "issues",
@@ -2208,7 +2208,7 @@
           "reason": "dynamic模式不豁免混匀末排拆段：200µL头原排量140严格大于20且原push_out非零，应拆130+10µL。主体bottom(0.8)到当次END液面0（孔内190µL）、push_out=0，尾段从该次START液面0连续到END液面0（200µL）、保留push_out=3，并分别查实际130/10µL流速与中间等待。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R275": {
       "status": "unresolved",
@@ -2218,7 +2218,7 @@
           "reason": "默认采用dynamic，但当前动态吸液、液面终点与共享末排缺适用体积模型，受影响动作未就绪；这里如实保留缺口，不应猜安全、声称通过或自行降级static。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R276": {
       "status": "issues",
@@ -2232,12 +2232,12 @@
           "reason": "静态混匀的共享末排仍涉及液面终点，单改模式不能消除模型缺口；不能在缺少替代定位依据时宣称全部就绪或隐去缺项。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R277": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md；references/parameter-planning.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md；references/parameter-planning.md"
     },
     "R278": {
       "status": "issues",
@@ -2247,7 +2247,7 @@
           "reason": "本题没有用户静态模式覆盖，两行及整个支持区间都应默认dynamic。按旧阈值从首行F=500缓存static的模式已不合法，不能再把F/M变化用于选型；第9行把该static写入两行计划并传入执行。仍需逐行按实际F计算M/R/S、查流速及验证路径，但不需要为选型读取D/V。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md；references/parameter-planning.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md；references/parameter-planning.md"
     },
     "R279": {
       "status": "issues",
@@ -2257,17 +2257,17 @@
           "reason": "location采用target=\"dynamic\"时不能同时给显式end_location；应按本次已明确的动态跟随覆盖只保留dynamic location。START/END本身可用于显式移动路径，错误是本行把dynamic location与end_location并用，不是所有Meniscus都不能作终点。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md；references/api-pipette.md；references/api-wells-liquids.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md；references/api-pipette.md；references/api-wells-liquids.md"
     },
     "R280": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md；references/api-layout.md；references/api-wells-liquids.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md；references/api-layout.md；references/api-wells-liquids.md"
     },
     "R281": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+      "rule": "references/operations.md#连续原位混匀枪头连续性--位置--模式准备需求；references/operation-mixing.md；references/operations.md#非零push_out活塞液量--排液终点；references/patterns.md；references/protocol-review.md"
     },
     "R282": {
       "status": "issues",
@@ -2277,12 +2277,12 @@
           "reason": "用户已明确整段static静态混匀，同孔同枪头且无需模式切换/液面外准备时，前次加液应沿用该模式的bottom(0.8)。本行无单独加液位置覆盖却改成液面下0.5mm动态排液，不符合明确static要求；第3行首次固定吸液正确。"
         }
       ],
-      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+      "rule": "references/operations.md#连续原位混匀枪头连续性--位置--模式准备需求；references/operation-mixing.md；references/operations.md#非零push_out活塞液量--排液终点；references/patterns.md；references/protocol-review.md"
     },
     "R283": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+      "rule": "references/operations.md#连续原位混匀枪头连续性--位置--模式准备需求；references/operation-mixing.md；references/operations.md#非零push_out活塞液量--排液终点；references/patterns.md；references/protocol-review.md"
     },
     "R284": {
       "status": "issues",
@@ -2292,12 +2292,12 @@
           "reason": "无用户模式或加液位置覆盖，应按默认dynamic混匀衔接原位加液。本次前次加液须用meniscus(z=-0.5,target=\"dynamic\")随加液前后液面联动；本行仍用bottom(0.8)，虽首次混匀吸液已为dynamic，衔接仍不符合默认模式。F/M仍用于动作体积及必要路径核验，不作为选型条件。"
         }
       ],
-      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+      "rule": "references/operations.md#连续原位混匀枪头连续性--位置--模式准备需求；references/operation-mixing.md；references/operations.md#非零push_out活塞液量--排液终点；references/patterns.md；references/protocol-review.md"
     },
     "R285": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+      "rule": "references/operations.md#连续原位混匀枪头连续性--位置--模式准备需求；references/operation-mixing.md；references/operations.md#非零push_out活塞液量--排液终点；references/patterns.md；references/protocol-review.md"
     },
     "R286": {
       "status": "issues",
@@ -2307,12 +2307,12 @@
           "reason": "本次无模式覆盖，默认dynamic；前次加液在液面下0.5mm、push_out=0且无其他待准备事件，不能无故退出top后prepare并重入、再插入液等待。应保留第2行正常排后等待并在同孔直接执行dynamic首次吸液，去除第3–6行制造的退出/准备/重入链；不因已写出退出动作就把它当作必要分支。"
         }
       ],
-      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+      "rule": "references/operations.md#连续原位混匀枪头连续性--位置--模式准备需求；references/operation-mixing.md；references/operations.md#非零push_out活塞液量--排液终点；references/patterns.md；references/protocol-review.md"
     },
     "R287": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+      "rule": "references/operations.md#连续原位混匀枪头连续性--位置--模式准备需求；references/operation-mixing.md；references/operations.md#非零push_out活塞液量--排液终点；references/patterns.md；references/protocol-review.md"
     },
     "R288": {
       "status": "issues",
@@ -2322,7 +2322,7 @@
           "reason": "低体积模式到正常模式的切换是本次既有必要条件，不满足原位立即混匀资格。前次加液应保留常规meniscus(z=0,target=\"dynamic\")，不能因后续混匀为dynamic就套用原位液面下0.5mm入口；本题常规排后记录液量为0且终点在液面0，按统一条件应自动push_out=1。随后top切换、准备及受控进入dynamic吸液起点的路径正确。"
         }
       ],
-      "rule": "references/operations.md 连续原位混匀、手写混匀及非零push_out；references/patterns.md；references/protocol-review.md"
+      "rule": "references/operations.md#连续原位混匀枪头连续性--位置--模式准备需求；references/operation-mixing.md；references/operations.md#非零push_out活塞液量--排液终点；references/patterns.md；references/protocol-review.md"
     },
     "R289": {
       "status": "issues",
@@ -2336,7 +2336,7 @@
           "reason": "尚无已核实替代路径，不能隐去孔底以下的实际路径缺口或宣称全部动作就绪；任何用户批准的替代路径也必须独立核验容量、模型和可达性。"
         }
       ],
-      "rule": "references/operations.md 手写混匀；references/protocol-review.md"
+      "rule": "references/operation-mixing.md#手写混匀；references/protocol-review.md"
     },
     "R290": {
       "status": "issues",
@@ -2441,12 +2441,12 @@
     "R302": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+      "rule": "references/operation-magnetic-supernatant.md#磁吸后去上清；references/protocol-review.md；references/rates.md"
     },
     "R303": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+      "rule": "references/operation-magnetic-supernatant.md#磁吸后去上清；references/protocol-review.md；references/rates.md"
     },
     "R304": {
       "status": "issues",
@@ -2456,7 +2456,7 @@
           "reason": "连续吸后头内210µL超有效容量200；低位20装不下时须先排废，再低位吸，不可分别检查两个aspirate就放行。"
         }
       ],
-      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+      "rule": "references/operation-magnetic-supernatant.md#磁吸后去上清；references/protocol-review.md；references/rates.md"
     },
     "R305": {
       "status": "issues",
@@ -2466,12 +2466,12 @@
           "reason": "首批低位吸取时源孔还余220µL；将源孔最后20误作每批末20，虽然容量与总量成立仍不符合场景。"
         }
       ],
-      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+      "rule": "references/operation-magnetic-supernatant.md#磁吸后去上清；references/protocol-review.md；references/rates.md"
     },
     "R306": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+      "rule": "references/operation-magnetic-supernatant.md#磁吸后去上清；references/protocol-review.md；references/rates.md"
     },
     "R307": {
       "status": "issues",
@@ -2481,7 +2481,7 @@
           "reason": "量程检查迟于首批200µL的实际执行；整计划含1µL普通段，应在首动作前拒绝该计划或另定合法分批，不应声称1µL已经执行或221µL本身必然不可处理。"
         }
       ],
-      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+      "rule": "references/operation-magnetic-supernatant.md#磁吸后去上清；references/protocol-review.md；references/rates.md"
     },
     "R308": {
       "status": "issues",
@@ -2491,7 +2491,7 @@
           "reason": "枪头内仍有180µL且无待准备事件，同批不得prepare；保持活塞状态继续低位吸液。"
         }
       ],
-      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+      "rule": "references/operation-magnetic-supernatant.md#磁吸后去上清；references/protocol-review.md；references/rates.md"
     },
     "R309": {
       "status": "issues",
@@ -2501,12 +2501,12 @@
           "reason": "到0.1mm后立即吸液，缺少该场景低位就位稳定等待；此前普通段吸后等待不能替代移动后的停留。"
         }
       ],
-      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+      "rule": "references/operation-magnetic-supernatant.md#磁吸后去上清；references/protocol-review.md；references/rates.md"
     },
     "R310": {
       "status": "pass",
       "findings": [],
-      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+      "rule": "references/operation-magnetic-supernatant.md#磁吸后去上清；references/protocol-review.md；references/rates.md"
     },
     "R311": {
       "status": "issues",
@@ -2520,7 +2520,7 @@
           "reason": "dry_run未按实际20µL选择水相70，误把正式场景10沿用到试跑。"
         }
       ],
-      "rule": "references/operations.md 磁吸后去上清；references/protocol-review.md；references/rates.md"
+      "rule": "references/operation-magnetic-supernatant.md#磁吸后去上清；references/protocol-review.md；references/rates.md"
     },
     "R312": {
       "status": "issues",
@@ -2630,7 +2630,7 @@
     "R326": {
       "status": "pass",
       "findings": [],
-      "rule": "references/api-module-tilt.md；references/module-conditions.md#第三方倾斜模块"
+      "rule": "references/api-module-tilt.md；references/module-conditions-tilt.md#第三方倾斜模块"
     },
     "R327": {
       "status": "issues",
@@ -2670,7 +2670,7 @@
           "reason": "65.8mm是已明确的原案例抓手放板Z偏移；题面仍缺本次C2底层安装、板型及该偏移适用性的确认依据，故自动搬入条件未决；不再以旧注释作为数值冲突，也不判定所有C2组合禁止。"
         }
       ],
-      "rule": "references/installation.txt；references/module-conditions.md#第三方倾斜模块"
+      "rule": "references/installation.txt；references/module-conditions-tilt.md#第三方倾斜模块"
     },
     "R331": {
       "status": "pass",
@@ -2695,7 +2695,7 @@
           "reason": "当前类不会自动识别官方模拟环境；open会尝试真实USB访问，必须在模拟路径隔离真实调用并如实标记跳过。"
         }
       ],
-      "rule": "references/module-conditions.md#第三方倾斜模块；references/api-flow.md#ProtocolContext.is_simulating"
+      "rule": "references/module-conditions-tilt.md#第三方倾斜模块；references/api-flow.md#ProtocolContext.is_simulating"
     },
     "R334": {
       "status": "issues",
@@ -2705,7 +2705,7 @@
           "reason": "close只释放连接，不发送停止/回水平；运动超时后的角度和停止状态仍未知，不能据断连认定可立即搬板。"
         }
       ],
-      "rule": "references/api-module-tilt.md；references/module-conditions.md#第三方倾斜模块"
+      "rule": "references/api-module-tilt.md；references/module-conditions-tilt.md#第三方倾斜模块"
     },
     "R335": {
       "status": "pass",
@@ -2720,7 +2720,7 @@
           "reason": "home回硬件0后几何角为5度，不满足几何水平加载前提；应在已确认运动条件下level到几何0（对应硬件-5度），不能只用硬件零位判水平。"
         }
       ],
-      "rule": "references/api-module-tilt.md；references/module-conditions.md#第三方倾斜模块"
+      "rule": "references/api-module-tilt.md；references/module-conditions-tilt.md#第三方倾斜模块"
     },
     "R337": {
       "status": "issues",
@@ -2730,12 +2730,12 @@
           "reason": "当前独立labware仍记录已登记的占用；几何视图失败不等于实物或SDK板已移出。应保留占用与姿态未决，核对后以显式卸载/搬出成功才清空，不直接加载另一块。"
         }
       ],
-      "rule": "references/api-module-tilt.md；references/module-conditions.md#第三方倾斜模块"
+      "rule": "references/api-module-tilt.md；references/module-conditions-tilt.md#第三方倾斜模块"
     },
     "R338": {
       "status": "pass",
       "findings": [],
-      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions-positive-pressure.md#第三方正压模块；references/installation.txt"
     },
     "R339": {
       "status": "issues",
@@ -2745,7 +2745,7 @@
           "reason": "PPMDevice使用seconds而非duration_ms，此关键字会失败；90秒用seconds=90。毫秒入口属于PPMController，不混用。"
         }
       ],
-      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions-positive-pressure.md#第三方正压模块；references/installation.txt"
     },
     "R340": {
       "status": "issues",
@@ -2755,7 +2755,7 @@
           "reason": "PPMController不感知官方模拟，connect会尝试真实USB；本场景须隔离该路径或使用PPMDevice(protocol)的模拟分支。"
         }
       ],
-      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions-positive-pressure.md#第三方正压模块；references/installation.txt"
     },
     "R341": {
       "status": "issues",
@@ -2765,7 +2765,7 @@
           "reason": "PPMDevice只读取is_simulating，不读取实验dry_run；真实运行仍访问USB并按传入时长加压，没有自动10秒缩时。"
         }
       ],
-      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions-positive-pressure.md#第三方正压模块；references/installation.txt"
     },
     "R342": {
       "status": "issues",
@@ -2775,7 +2775,7 @@
           "reason": "应答丢失不代表加压未执行，重连不消除实际状态未知；不得自动重放C。先核实设备再安排后续，不自动复位或搬板。"
         }
       ],
-      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions-positive-pressure.md#第三方正压模块；references/installation.txt"
     },
     "R343": {
       "status": "issues",
@@ -2785,7 +2785,7 @@
           "reason": "disconnect只释放USB，既没有停止指令也无压力回读，不能据此声称停止、泄压或立即可搬板。"
         }
       ],
-      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions-positive-pressure.md#第三方正压模块；references/installation.txt"
     },
     "R344": {
       "status": "issues",
@@ -2795,7 +2795,7 @@
           "reason": "原程序的标准深孔板名称只是组合体代理登记，不证明真实过滤层、总高、夹持点或通用兼容；须匹配实际组合定义与安装。"
         }
       ],
-      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions-positive-pressure.md#第三方正压模块；references/installation.txt"
     },
     "R345": {
       "status": "issues",
@@ -2805,12 +2805,12 @@
           "reason": "源码只证明发送D；方法名x_and_z与旧日志XY不能确证实际复位轴，当前应称模块复位并保留轴定义缺口。"
         }
       ],
-      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions-positive-pressure.md#第三方正压模块；references/installation.txt"
     },
     "R346": {
       "status": "pass",
       "findings": [],
-      "rule": "references/api-module-positive-pressure.md；references/module-conditions.md#第三方正压模块；references/installation.txt"
+      "rule": "references/api-module-positive-pressure.md；references/module-conditions-positive-pressure.md#第三方正压模块；references/installation.txt"
     },
     "R347": {
       "status": "pass",

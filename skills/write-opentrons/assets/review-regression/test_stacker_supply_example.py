@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[2]
-REFERENCE = ROOT / "references/module-practices.md"
+REFERENCE = ROOT / "references/module-practices-flex-stacker.md"
 OFF_DECK = object()
 
 

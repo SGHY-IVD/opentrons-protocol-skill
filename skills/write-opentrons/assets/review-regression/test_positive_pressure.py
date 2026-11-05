@@ -23,7 +23,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[2]
 TARGET = ROOT / "assets/python/devices/positive_pressure.py"
 TILT_TARGET = ROOT / "assets/python/devices/tilt.py"
-PRACTICES = ROOT / "references/module-practices.md"
+PRACTICES = ROOT / "references/module-practices-positive-pressure.md"
 
 
 class ImportGuard:
@@ -258,10 +258,10 @@ class PositivePressureTests(unittest.TestCase):
 
     def practice_examples(self, peer):
         """Execute the current fenced examples, never a copied test version."""
-        heading = "## 第三方正压模块"
+        heading = "# 第三方正压模块"
         text = PRACTICES.read_text()
         self.assertEqual(text.count(heading), 1)
-        section = text.split(heading, 1)[1].split("\n## ", 1)[0]
+        section = text.split(heading, 1)[1]
         snippets = re.findall(r"```python\s*\n(.*?)```", section, flags=re.S)
         self.assertEqual(len(snippets), 3, "positive-pressure examples changed; review their coverage")
         devices = []

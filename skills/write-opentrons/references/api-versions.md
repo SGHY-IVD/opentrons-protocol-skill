@@ -79,7 +79,7 @@
 |aspirate/dispense显式flow_rate|2.24新增|api-pipette.md；旧版仅有rate不等于满足本技能显式流速规则|
 |air_gap(in_place/rate/flow_rate)、touch_tip(mm_from_edge)|2.24新增|api-pipette.md；分别核对参数互斥|
 |well.height_from_volume|2.24新增|api-wells-liquids.md|
-|热震荡温度旧37℃下限|2.25起取消旧下限|module-conditions.md；区分API校验与环境温度可达性|
+|热震荡温度旧37℃下限|2.25起取消旧下限|[热震荡条件](module-conditions-heater-shaker.md#条件约束)；区分API校验与环境温度可达性|
 |模块加载的adapter_namespace/version、lid_namespace/version|2.26新增|api-module-common.md|
 |aspirate/dispense(end_location, movement_delay)|2.27新增|api-pipette.md；Flex移动吸排液参数|
 |模块并发Task、start_*、set_shake_speed、wait_for_tasks/create_timer|关键并发扩展在2.27|按api-module-*.md具体成员核对；不能把所有模块方法统一判为2.27新增|

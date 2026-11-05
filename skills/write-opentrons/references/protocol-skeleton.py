@@ -1,5 +1,5 @@
 # 技能：write-opentrons
-# 规则版本：2026-11-04.26（模板依据；正式稿按实际读取版本改写）
+# 规则版本：2026-11-05.1（模板依据；正式稿按实际读取版本改写）
 # 用户覆盖项：按本次任务填写；审查范围/结论：按实际检查填写。
 # 官方模拟：未运行；实机验证：未进行；未决项：实际配置与实验尚未填入。
 # 本文件仅作结构导航与示例；分隔注释、可选区块、位置和顺序均非硬要求。
@@ -30,10 +30,10 @@ requirements = {"robotType": "Flex", "apiLevel": "<按实际软件填写目标AP
 
 
 # ==================== 运行参数定义（按需） ====================
-# 接口见api-parameters-csv.md；具体字段/默认/排序见operations.md。
+# 接口见api-parameters-csv.md；具体字段/默认/排序见protocol-output.md。
 # 有运行参数时使用；无参数可删去整个函数。
 def add_parameters(parameters: protocol_api.ParameterContext):
-    # 参数/CSV接口见api-parameters-csv.md；技能默认参数见operations.md。
+    # 参数/CSV接口见api-parameters-csv.md；技能默认参数见protocol-output.md“测试运行参数”。
     pass
 
 

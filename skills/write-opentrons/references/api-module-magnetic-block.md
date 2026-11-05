@@ -9,4 +9,3 @@
 共享成员（签名及参数见api-module-common.md）：labware, load_adapter, load_adapter_from_definition, load_labware, load_labware_by_name, load_labware_from_definition, model, parent, type。
 
 Flex磁力架为被动磁体，无engage/disengage/停止磁力命令；效果由耗材搬入/搬出决定。
-

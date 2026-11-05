@@ -86,4 +86,4 @@ pipette.move_to(source_top, speed=entry_speed)
 - https://docs.opentrons.com/python-api/pipettes/partial-tip-pickup/ ：SINGLE A1/H1，PARTIAL_COLUMN H1起与end映射。
 - https://docs.opentrons.com/python-api/robot-position/ ：Point与坐标方向。
 
-偏移公式是由上述坐标关系推导出的用户策略实现，不称为官方推荐经验。源码核对不等于全部历史版本适用，目标版本行为不同须先核对；日常机制规则只查此维护资料，不自动联网猜补；具体耗材定义缺失时按operations“耗材几何按需查询”获取官方JSON。
+偏移公式是由上述坐标关系推导出的用户策略实现，不称为官方推荐经验。源码核对不等于全部历史版本适用，目标版本行为不同须先核对；日常机制规则只查此维护资料，不自动联网猜补；具体耗材定义缺失时按[耗材几何按需查询](labware-geometry.md#耗材几何按需查询)获取官方JSON。

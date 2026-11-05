@@ -9,14 +9,22 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This project is primarily a skill package for AI assistants, rather than an official Opentrons project or standalone protocol-generation, device-control, or simulation application. Optional third-party device implementations are documented in the extension reference.
 
 
-## Publication: 2026-11-04.34
+## Publication 2026-11-05.2
 
-Publishes extension and example updates since public version 2026-11-04.27. The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version; the maintained Python protocol API baseline remains 2.30.
+The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version. The maintained Python protocol API baseline remains 2.30.
+
+- Streamlines the entry point and routes each task to the relevant API members, [workflow rules](skills/write-opentrons/references/operation-scenarios.md), and examples. Installation checks, module conditions, and practices have separate references so routine tasks can read a smaller set of files.
+- Separates [interaction and confirmation](skills/write-opentrons/references/protocol-interaction.md) from delivery and protocol review. Confirm missing information in the conversation by default, with room for users to add or revise details freely. Use interactive choice controls only when users request them.
+- Adds an offline route checker. Publication checks covered 824 local references, the structure and snippet syntax of 353 regression cases, and the build consistency of the standalone tilt and positive-pressure modules. Of 235 Python tests, 233 passed and two optional mDNS tests were skipped because their dependency was unavailable. These checks cover offline rules, tools, and examples. Physical validation is a separate step.
+
+### Capabilities already published in .34
+
+Version .34 published extension and example updates since public version 2026-11-04.27.
 
 - Adds a [third-party extension library](skills/write-opentrons/references/extensions.md): tilt and positive-pressure devices each have a self-contained implementation with their own USB communication. API contracts, action conditions, installation, and practices have separate references. Tilt includes Flex loading, single-plate binding, and geometry; pressure supports only single-stage `C` pressure and `D` reset commands, with labware loading/movement through the official SDK. These are not official hardware APIs.
 - Clarifies effective installation constants in the tilt source's current code; obsolete comments no longer create additional conflicts. Reuse is scoped to the same installation, plate, and coordinate basis, without treating candidate slot/plate combinations as physically validated.
 - Adds a standalone [Riser labware helper and API examples](skills/write-opentrons/references/api-riser.md) for supplying plates from the top of a stack in an ordinary deck slot. It preserves native labware references and records partially completed moves/reloads correctly, using only the existing SDK context. It is neither an official Stacker nor a physical riser adapter.
-- Adds a [native Stacker continuous-supply example](skills/write-opentrons/references/module-practices.md#连续供料与对象引用): the official module tracks stored inventory; each retrieved item leaves the shuttle before the next retrieve, with lids and object references handled for the workflow. This adds no inventory manager or tip-change strategy.
+- Adds a [native Stacker continuous-supply example](skills/write-opentrons/references/module-practices-flex-stacker.md#连续供料与对象引用). The official module tracks stored inventory. Each retrieved item leaves the shuttle before the next retrieve, with lids and object references handled for the workflow.
 - Expands the regression set from 325 to 353 cases, adding 28 cases in this update. Earlier independent reviews, after selected follow-ups, agree on 325/325 classifications, with 309/325 strict classification/location matches; see the [validation summary](skills/write-opentrons/assets/review-regression/release-report-2026-10-22.md). Those independent-review figures cover the earlier 325 cases only. This update publishes validation summaries; new detailed internal review conversations and raw results are excluded, while previously published historical records are retained. Publication checks reran 235 Python tests: 233 pass and two optional mDNS tests skip because their dependency is absent; all 353 fixture structures/snippets and both device single-file build-consistency checks pass. Earlier independent generation/action-record trials are recorded separately from this offline rerun. No official SDK protocol simulation, real USB, or physical validation was performed; these results do not establish reliability for every model, input, or configuration.
 
 ### Capabilities already published in .27

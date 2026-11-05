@@ -561,10 +561,10 @@ def example_ast(letter):
 
 def pattern_ast(heading):
     """Extract the current atomic example instead of copying its actions."""
-    document = (ROOT / 'references' / 'patterns.md').read_text()
+    document = (ROOT / 'references' / 'patterns-mixing.md').read_text()
     section = document.split(f'\n## {heading}\n', 1)[1].split('\n## ', 1)[0]
     source = section.split('```python\n', 1)[1].split('\n```', 1)[0]
-    return ast.parse(source, filename=f'patterns.md:{heading}')
+    return ast.parse(source, filename=f'patterns-mixing.md:{heading}')
 
 
 def execute_example(letter, data, dry_run, *, initial_held=0, context=None):

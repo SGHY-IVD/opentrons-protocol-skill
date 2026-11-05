@@ -87,4 +87,3 @@ The timestamp of the when the task finished.
 Returns `None` if the task hasn't finished yet.
 
 源码：tasks.py L45–L50（固定提交）。
-

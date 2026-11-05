@@ -6,7 +6,7 @@
 
 接口以当前[倾斜模块源码](../assets/python/devices/tilt.py)为准，通讯依赖见[扩展入口](extensions.md)。这是用户维护的第三方 Python 类，不是官方 ModuleContext，也没有官方 load_module 名称或官方 Task。Flex 协议仍按本次机器人软件选择目标 API；源码可导入不证明机器人具备 PyUSB、USB后端或设备权限。
 
-原始依据为用户提供的完整洗板模板（源码指纹见扩展文件头）；当前单文件包含通讯、设备控制、必要的Flex加载/承载及几何；完整洗板与自动移液/路径策略没有整体并入。当前硬件/动作条件见[module-conditions](module-conditions.md#第三方倾斜模块)，安装及承载唯一见[installation](installation.txt)，[示例](module-practices.md#第三方倾斜模块)提供当前接口的改写参考。
+原始依据为用户提供的完整洗板模板（源码指纹见扩展文件头）；当前单文件包含通讯、设备控制、必要的Flex加载/承载及几何；完整洗板与自动移液/路径策略没有整体并入。当前硬件/动作条件见[module-conditions](module-conditions-tilt.md#第三方倾斜模块)，安装及承载唯一见[installation](installation.txt)，[示例](module-practices-tilt.md#第三方倾斜模块)提供当前接口的改写参考。
 
 ## 单文件与Flex加载
 

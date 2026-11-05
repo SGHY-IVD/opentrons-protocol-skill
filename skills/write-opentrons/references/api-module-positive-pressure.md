@@ -6,7 +6,7 @@
 
 接口以当前[完整正压模块源码](../assets/python/devices/positive_pressure.py)为准。这是用户维护的第三方 Python 类，不是官方 ModuleContext，没有官方 `load_module` 名称或官方 Task。当前仅实现原案例的单段正压 `C` 和复位 `D`；不提供压力实测反馈、状态查询、停止、双段正压或自动搬板接口。
 
-原始依据是用户提供的 `DDM血浆过滤正压_API_2.22.py`，SHA-256 为 `625bcbcdd06a46650d457f4eb767e0263cad52188116a63d152d5aff33cdf098`。原协议的 API 2.22 是该案例的目标，不是扩展要求所有新协议固定采用的版本。安装及承载唯一见[installation](installation.txt)，动作条件见[module-conditions](module-conditions.md#第三方正压模块)，操作经验与官方搬运调用示例见[module-practices](module-practices.md#第三方正压模块)。
+原始依据是用户提供的 `DDM血浆过滤正压_API_2.22.py`，SHA-256 为 `625bcbcdd06a46650d457f4eb767e0263cad52188116a63d152d5aff33cdf098`。原协议的 API 2.22 是该案例的目标，不是扩展要求所有新协议固定采用的版本。安装及承载唯一见[installation](installation.txt)，动作条件见[module-conditions](module-conditions-positive-pressure.md#第三方正压模块)，操作经验与官方搬运调用示例见[module-practices](module-practices-positive-pressure.md#第三方正压模块)。
 
 ## 完整单文件与创建
 

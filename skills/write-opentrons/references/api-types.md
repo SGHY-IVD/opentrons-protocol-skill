@@ -12,12 +12,12 @@
 |import|使用实际需要的公开接口；注解所用名称须可解析|库、导入数量；类型注解本身可选|
 |metadata|协议展示信息；本骨架展示，实际按需要填写|名称、作者、描述等按实际写，不固定示例内容|
 |requirements|Flex的requirements声明robotType="Flex"；apiLevel在metadata或requirements择一声明|新建建议统一把apiLevel写入requirements；合法既有写法不因位置不同误报，目标按api-versions核对；不是pip依赖清单|
-|add_parameters|有参数时使用此单参数入口，定义在run前；定义上下文为ParameterContext|函数可省略、参数名/注解和具体参数；技能默认见operations|
+|add_parameters|有参数时使用此单参数入口，定义在run前；定义上下文为ParameterContext|函数可省略、参数名/注解和具体参数；技能默认见[输出规范](protocol-output.md#测试运行参数)|
 |run|正常协议的单参数入口；App/触摸屏流程由机器人软件调用|形参名、注解、内部组织与合法辅助函数|
 
-常量/完整内嵌JSON通常置于导入和声明后，辅助函数/类通常在run前定义；依赖参数/CSV的实例在run获得输入后创建，设备连接/调用/释放按实际生命周期安排。这些是组织建议，不禁止其他合法且符合现有规则的Python写法。内嵌与JSON加载细节只见custom-labware和api-layout，数据预检只见参数资料与operations；骨架不新增一套七步固定流程。
+常量/完整内嵌JSON通常置于导入和声明后，辅助函数/类通常在run前定义；依赖参数/CSV的实例在run获得输入后创建，设备连接/调用/释放按实际生命周期安排。这些是组织建议，不禁止其他合法且符合现有规则的Python写法。内嵌与JSON加载细节只见custom-labware和api-layout，数据预检见[参数化指引](parameter-planning.md)；骨架不新增一套七步固定流程。
 
-可选源码分隔与区块说明见operations“源码说明与运行文案”；不要求套用分区或模板外观，不能替代实际规则判断。
+可选源码分隔与区块说明见[源码说明与运行文案](protocol-output.md#源码说明与运行文案)；不要求套用分区或模板外观，不能替代实际规则判断。
 
 模板版本、API和状态注释均为示例依据，生成时改成本次实际读取版本、用户覆盖、实际审查/模拟/实机范围和未决项；不照抄通过结论，也不把空容器/注释当完整内嵌。API占位须先替换为真实目标，不能当有效apiLevel；模板NotImplementedError只标记尚未实现，补齐真实流程后移除；删掉标记不证明实验已完成。
 

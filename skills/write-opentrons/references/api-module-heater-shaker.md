@@ -311,4 +311,3 @@ temperature.
 Raises an error if no target temperature was previously set.
 
 源码：module_contexts.py L1179–L1185（固定提交）。
-

@@ -216,8 +216,8 @@ class MagneticSupernatantTests(unittest.TestCase):
         self.assertEqual(batches(25), [(5, 20)])
 
     def test_actual_pattern_normal_and_water_branches(self):
-        block, = code_blocks('patterns.md', '## 磁吸后去上清单批吸液',
-                             '## 加液后原位立即混匀')
+        block, = code_blocks('patterns-magnetic-supernatant.md',
+                             '## 磁吸后去上清单批吸液', '\n## ')
         for volume in (0, 5, 10, 20, 25, 200, 201, 210, 220, 400, 410, 450, 600):
             for dry_run in (False, True):
                 with self.subTest(volume=volume, dry_run=dry_run):
@@ -266,8 +266,8 @@ class MagneticSupernatantTests(unittest.TestCase):
                     self.assertEqual(sum(e[0] == 'prepare' for e in protocol.events), bool(plan))
 
     def test_zero_stage_and_overlapping_wait_requirements(self):
-        block, = code_blocks('patterns.md', '## 磁吸后去上清单批吸液',
-                             '## 加液后原位立即混匀')
+        block, = code_blocks('patterns-magnetic-supernatant.md',
+                             '## 磁吸后去上清单批吸液', '\n## ')
         for body, tail, before, after, retract, expected in [
                 (0, 0, 0.2, 0.2, 0, []),
                 (0, 10, 0.5, 0.1, 0.4, [0.5, 0.1, 0.4]),
@@ -288,8 +288,8 @@ class MagneticSupernatantTests(unittest.TestCase):
                 self.assertEqual(protocol.events, [])
 
     def test_actual_module_examples(self):
-        blocks = code_blocks('module-practices.md', '### 磁吸后去上清操作示例',
-                             '## Absorbance Plate Reader')
+        blocks = code_blocks('module-practices-magnetic-block.md',
+                             '### 磁吸后去上清操作示例', '\n### ')
         self.assertEqual(len(blocks), 4)
         for input_index, total, heads in [(1, 200, 1), (2, 460, 2)]:
             protocol = Protocol()

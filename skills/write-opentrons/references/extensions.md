@@ -25,9 +25,9 @@
 
 ## 当前收录状态
 
-本次从用户提供的洗板模板抽取源码；各文件头记录源文件SHA-256。本次收录必要加载/承载适配，未收录完整洗板流程、TiltPipette自动吸排液、固定布局、板型白名单或未经核对的安装标定参数。倾斜模块的[API与加载](api-module-tilt.md)、[机制/条件](module-conditions.md#第三方倾斜模块)、[经验/示例](module-practices.md#第三方倾斜模块)及installation中的源码承载条目已分别维护；其中未确认的实物安装/校准关系仍保留未决，不扩充官方六类模块或load_module支持范围。
+本次从用户提供的洗板模板抽取源码；各文件头记录源文件SHA-256。本次收录必要加载/承载适配，未收录完整洗板流程、TiltPipette自动吸排液、固定布局、板型白名单或未经核对的安装标定参数。倾斜模块的[API与加载](api-module-tilt.md)、[机制/条件](module-conditions-tilt.md#第三方倾斜模块)、[经验/示例](module-practices-tilt.md#第三方倾斜模块)及installation中的源码承载条目已分别维护；其中未确认的实物安装/校准关系仍保留未决，不扩充官方六类模块或load_module支持范围。
 
-正压实现从用户提供的过滤程序抽取，来源指纹见设备文件头；[机制/条件](module-conditions.md#第三方正压模块)、[经验/示例](module-practices.md#第三方正压模块)和installation中的案例安装条目分别维护。没有增加官方模块或将源程序工作参数当作厂家规格。
+正压实现从用户提供的过滤程序抽取，来源指纹见设备文件头；[机制/条件](module-conditions-positive-pressure.md#第三方正压模块)、[经验/示例](module-practices-positive-pressure.md#第三方正压模块)和installation中的案例安装条目分别维护。没有增加官方模块或将源程序工作参数当作厂家规格。
 
 Riser从用户提供的叠板示例抽取，保留顶层取板与下一块登记，补齐参数和部分完成后的状态处理；接口及两组示例在api-riser，实物支撑/堆叠证据在installation。不把源示例数量或高差推广成所有耗材默认。
 

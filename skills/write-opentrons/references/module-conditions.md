@@ -1,157 +1,16 @@
 # 模块机制与条件约束
 
-按设备定位：[热震荡](#heater-shaker) · [温控](#temperature-module) · [热循环](#thermocycler) · [磁力架](#magnetic-block) · [读板机](#absorbance-plate-reader) · [Stacker](#flex-stacker) · [第三方倾斜模块](#第三方倾斜模块) · [第三方正压模块](#第三方正压模块)
-
 按[模块索引](api-modules.md)只读本次设备的“硬件与机制”和“条件约束”；即使只核对布局，涉及模块承载位、内部库存或状态含义时也适用。各模块使用相同分类；没有额外条目时保留明确入口，不推断设备缺少能力。名称/型号查catalog，台面安装及已收录适配关系唯一查installation；API签名/版本查对应api-module文件，操作经验查module-practices。本文件不另建槽位或夹具表。
 
-既有官方条目保持API 2.30范围，来源为2026-10-16核对的官方公开API及固定源码05b494ba81636978fb79f08bbc20468f94464d5c；各模块后续增补依据在对应节注明，未升级API基线。
+|本次设备|硬件与机制、条件约束|
+|---|---|
+|热震荡|[Heater-Shaker](module-conditions-heater-shaker.md)|
+|温控|[Temperature Module](module-conditions-temperature-module.md)|
+|热循环|[Thermocycler](module-conditions-thermocycler.md)|
+|磁力架|[Magnetic Block](module-conditions-magnetic-block.md)|
+|读板机|[Absorbance Plate Reader](module-conditions-absorbance-plate-reader.md)|
+|Stacker|[Flex Stacker](module-conditions-flex-stacker.md)|
+|第三方倾斜模块|[第三方倾斜模块](module-conditions-tilt.md)|
+|第三方正压模块|[第三方正压模块](module-conditions-positive-pressure.md)|
 
-## Heater-Shaker
-
-### 硬件与机制
-
-具有加热、震荡和耗材锁扣；加热与震荡独立，停一个不自动停另一个。没有主动制冷能力，低于环境温度不可达。
-
-### 条件约束
-
-- 搬入/移出耗材须锁扣打开且停止震荡；上方移液前锁扣关闭、震荡停止。启动震荡前必须由close_labware_latch完成已知关闭，不以人工关闭的外观代替API确认。
-- 开锁扣时不能正在震荡。idle_unknown是复位后的未知状态，不等于已知关闭；opening/closing为过渡状态，不等于完成。邻近移液/开锁扣避碰按API和安装关系核对，仅采用已核对的Flex邻位限制。
-- 速度API范围200–3000rpm（含边界）；停止用deactivate_shaker，不用set_shake_speed(0)。
-- 温度：官方产品额定37–95℃；API<2.25校验37≤T≤95；API≥2.25的现有校验代码接受0≤T≤95。25℃不是统一API下限，室温也不是固定25℃。请求低于环境或无法确认能否达到时说明边界，不改写为能制冷的模块、不等待一个已知不可达目标。
-- set_and_wait_for_temperature、set_and_wait_for_shake_speed阻塞到目标，随后仍维持温控/震荡；set_target_temperature和set_shake_speed在2.27+返回Task，需在依赖目标到达的步骤前等待。到速不等于已完成所需振荡时长，到温不等于已完成孵育。
-- 源码open_labware_latch在需要避碰时会归位相关轴；不得假定重复调用没有运动代价。停温控仅停止加热，不能当作已冷却到室温。
-
-## Temperature Module
-
-### 硬件与机制
-
-具有加热/制冷功能及风扇，制冷时需要向外排热；没有模块盖或耗材锁扣API，不套用热循环或热震荡的开关流程。目标与API当前温度对应模块平台，铝块、耗材和液量会影响实际样品温度，不能把模块到温等同于液体实测到温。
-低于环境温度的冷表面可能出现冷凝，是否发生与室温、相对湿度及露点有关，不设一个统一的必然冷凝温度或时长。
-
-### 条件约束
-
-目标4–95℃；set_temperature阻塞到目标；start_set_temperature在2.27+返回Task并发运行。deactivate停止加热/制冷并关闭风扇，但实际温度不会瞬时回室温。
-保持排风通畅；安装位置与朝向唯一查installation的温控条目，制冷前侧盖准备及低温暂存建议见module-practices温控节。
-安装和运行环境保持低振动及温湿度稳定，避开直射阳光，以及可能造成显著温度或湿度变化的空调气流。
-
-温控补充来源：2026-11-04查证官方[温度特性](https://docs.opentrons.com/temperature-module/product-specs/#temperature-profile)及[低温冷凝说明](https://docs.opentrons.com/temperature-module/compliance/#environmental-conditions)；在线手册未固定发布修订，仅补上述硬件机制，不据其改变API基线。安装朝向的固定v10.0.0来源在installation维护。
-
-## Thermocycler
-
-### 硬件与机制
-
-块和盖温控分别管理；profile只控制块温，不代替热盖温度设置。热盖没有主动制冷，仅被动降温。模块盖与耗材自带板盖是两个对象，不混用open_lid与move_lid。
-
-### 条件约束
-
-- 模块盖打开后才能装卸板或从上方操作。关闭前确认无枪头/抓手留在盖的运动区域，不把开盖后的未知枪尖位置仍记为原孔。
-- 块温4–99℃；盖温37–110℃。升降温速率、hold及block_max_volume见对应API条目；block_max_volume是单孔最大液量，不是整板总量。API2.27+部分温度方法可从液量跟踪取值，缺失回退25µL；诊断时核对具体方法，不将回退25视为实际样品量。
-- deactivate_block只停块，deactivate_lid只停盖，deactivate同时停二者。开盖不等于停温控，停温控不等于温度已降到可接触范围。
-- 官方要求样品块回到idle temperature后再开盖取样；须按本次实验安排冷却并确认取板条件，不能只凭deactivate或温控状态idle判定已经冷却。官方未给统一的安全触摸温度或等待时长，热盖密封处打开后仍可能有余热。
-- 板温低于当前环境温度时不得持续超过2小时，以免冷凝影响性能或损坏模块。此限制同样适用于PCR后保持及pause等待用户的方案；pause本身不提供自动超时或停用保证。
-- GEN2密封方案须与实物匹配：Opentrons Tough PCR Auto-sealing Lid与模块热盖上的可重复橡胶密封垫不得同时使用，采用一次性盖前取下该橡胶垫。可重复密封垫装在模块盖上而非孔板上，每次使用前按官方说明清洁消毒；不能仅设置热盖温度就当作已完成实物密封。
-- 同步方法等待目标/程序完成；start_*返回Task，在依赖其结果或收尾前处理完成条件，不以发出任务当完成循环。
-- 固定源码thermocycler/open_lid.py执行开盖前先home X/Y及挂载轴，不归位活塞轴，并清除移液器位置缓存。重复open_lid因此可能反复引发实际运动；不能删除必要的避碰步骤，而应避免没有状态变化需求的重复开盖命令。
-
-热循环增补来源：2026-11-04在线核对官方[Python用法](https://docs.opentrons.com/python-api/modules/thermocycler/#thermocycler-profiles)、[低温与取板条件](https://docs.opentrons.com/thermocycler/compliance/)、[GEN2密封方案](https://docs.opentrons.com/thermocycler/lid-seals/)及[Flex密封垫使用要求](https://docs.opentrons.com/flex/modules/thermocycler/#thermocycler-lids-and-seals)。在线内容未固定修订，仅补上述机制与使用条件，不升级API、添加耗材加载名或自动搬运方案。
-
-## Magnetic Block
-
-### 硬件与机制
-
-Flex MagneticBlock为被动磁体，无engage/disengage；本类没有专属控制方法，仍可使用共享加载及属性接口。
-
-磁体固定于弹簧支撑底座（spring-loaded bed），官方说明其用于帮助保持磁力架与移液器之间的公差配合。来源：2026-11-04核对官方[磁体结构说明](https://docs.opentrons.com/flex/modules/magnetic-block/#magnetic-components)；仅记录硬件机制，不据此给出允许下压量或最低吸液高度。
-
-### 条件约束
-
-不得生成主动磁力模块控制API；磁吸时间按实验条件核对，不猜补。模块本体与适用孔板的搬运身份按installation及搬运API区分。
-
-## Absorbance Plate Reader
-
-### 硬件与机制
-
-用于吸光度读取，模块盖由Flex抓手开关，使用模块须有抓手；不在协议中或协议外手动搬动模块盖。模拟读数为0且不写CSV，不能当实测结果。
-
-### 条件约束
-
-初始化时模块内须无孔板，并在协议中显式close_lid，即使开局外观已闭合也不能当冗余删除；先空腔闭盖→initialize→开盖搬入孔板→闭盖→read。初始化后按此顺序开盖装板不需要重新初始化；初始化配置用于后续read。initialize区分single/multi，参考波长仅single；本业务标准波长范围唯一见API。读取前满足初始化和闭盖条件，板型及安装高度边界查installation，选板建议见module-practices。
-
-读板流程增补来源：官方v10.0.0 commit e8c6d0a424c25fff1604e2a02e4ccaedac95b9af，docs/python-api/docs/modules/absorbance-plate-reader.md；2026-11-04核对空腔初始化、盖控制及装板读数示例。未新增API。
-
-## Flex Stacker
-
-### 硬件与机制
-
-- 分别记录仓内（hopper）的同质库存与shuttle穿梭托盘上的当前耗材；声明仓内类型不等于托盘上已经有该耗材，托盘占用也不自动计入仓内库存。用户说“A4装Stacker，A4放枪头盒”时，按该模块托盘承载枪头盒理解并核对，而非两个独立台面对象争位；明确说“仓内”时按库存理解。此语义属于模块，台面安装仍查installation。
-- 仓内一次配置一种主耗材及相应盖/适配器组合。shuttle可临时承载与仓内不同类型的适用labware；“同质库存”限制不能直接套到临时承载，但这不表示任意尺寸、定义或抓手组合均兼容，也不表示它可存入当前仓内。使用模块对象表达其承载位置，不新建一个普通A4槽位或虚构shuttle加载API。
-- 装料门允许人工直接预装仓内耗材。set_stored_labware/set_stored_labware_items声明初始库存；这些调用不等于抓手已逐件搬入或设备已识别实物。retrieve把仓内最底层一件移到托盘；store把托盘上的匹配组合存到仓内底部。库存列表首项为下一次取出对象。
-
-### 条件约束
-
-- 本节仓内存取/库存专属接口最低API2.25；模块加载及继承的共享成员按各自契约核对，不将2.25概括成全部加载能力的统一下限。库存声明的型号、数量、盖/适配器组合必须与实物一致。实际同质性按定义身份及完整组合核对，不能只凭“都是枪头盒/孔板”视为同类。
-- 配置仓内库存前移走原先当普通承载位加载在托盘上的耗材，按官方指南组织顺序；重新配置类型前，仓内须已知为空，不能用重新声明掩盖原有库存。未配置库存不妨碍按共享API使用适用的托盘承载能力，但不能retrieve/store。
-- retrieve前须已配置、有至少一件仓内库存且托盘为空；取出后仓内减一、托盘被占用。retrieve返回主耗材；若带适配器，用返回对象的parent识别适配器。只搬走主耗材、底层适配器仍在托盘时，托盘仍被占用；仅在所有占用对象均搬离后才记为空。即使托盘上的耗材与库存同型，也不能在仍占用时继续取出。
-- store前须已配置、有剩余仓内容量，且托盘上的主耗材、盖/适配器整套组合与声明一致；缺盖、缺适配器或类型/定义不匹配均不能按该配置存入。存入成功后仓内加一、托盘清空；仅把物品移到托盘不代表已经存入。
-- Flex枪头盒进入仓内堆叠存储时，按官方正确装载要求配置并实物带上兼容盖子，包括拟存回的空盒；交互时可简短提醒备盖、带盖装仓，后续取头前按搬运/板盖API处理。此条件不泛化为“所有临时放在shuttle的耗材必须带盖”。官方指南要求带盖；本次核对v10.0.0源码未发现一律拒绝无盖声明的校验，不将该要求表述为所有API版本必报错。
-- 容量按实际主耗材/盖/适配器高度与堆叠重叠量核对，不统一写死最大件数。fill/empty是暂停后的人工补入/移出，不是store/retrieve的自动动作替代；变更后按实际结果更新库存，已有无关状态不凭空清除。具体参数与count含义继续查API。
-- 仓内可双向存取；不得将“供料常用取出”推成只能取不能存。完整搬运、抓手/盖、当前托盘占用和后续动作仍按各自条件核对，不把安装可放等同于立即可执行存取。
-
-Stacker增补来源（2026-10-29核对；API范围≤2.30）：官方v10.0.0，commit e8c6d0a424c25fff1604e2a02e4ccaedac95b9af：
-- docs/python-api/docs/modules/flex-stacker.md，blob 17608d7e6128ce5c2d9dc8d351f22daef801742a：结构、声明、托盘临时使用、带盖及示例。
-- api/src/opentrons/protocol_api/module_contexts.py，blob 62aa59d03ad57ab9fb7b71a47cd15e0608b21b0f：共享继承、set/store/retrieve/get_stored_labware契约；接口签名仍唯一维护于api-module-flex-stacker/common。
-- api/src/opentrons/protocol_engine/commands/flex_stacker/retrieve.py（2cb205d984955b720fd76fddd5dfb634337f58b8）、store.py（69092dc839aac9f2ad2f22dd247547096fb44cc7）、set_stored_labware.py（229b5b6d682b038e1a907b6b028d7157175318ff）：取出为空托盘、存入整套匹配及重新声明前仓内为空。
-- api/src/opentrons/protocol_engine/commands/load_labware.py（c580faffadc5e6adafe6bf92401c9e9eb7905d7c）、move_labware.py（cbbe632ccca1e6ef7eff6f4a7bb586d4ac8af27d）、state/geometry.py（68357e61b45daf79d956d0c13f41ea7bea0584bc）：模块承载与占用校验不等同于仓内存入校验；异类临时承载仍查实际定义及动作条件。
-- api/src/opentrons/protocol_engine/state/labware.py（dedeee6786ddde009280527ccdc6c969bf633d16）raise_if_stacker_labware_pool_is_not_valid与commands/flex_stacker/common.py（c2cdd567e5445cc002ac225f9bfa35698fb0304b）：未发现无盖一律报错校验，不据此取消官方带盖装仓要求。
-- 官方装载说明 https://docs.opentrons.com/stacker/loading-labware/ （在线核对，未固定内容版本）：装料门人工装入、堆叠与人工取出；不固定门的方向。不将源码阅读当SDK模拟或实机验证。
-
-## 第三方倾斜模块
-
-### 硬件与机制
-
-来源：用户提供的完整洗板案例及当前抽取源码（指纹见源码文件头），不是官方产品规格。设备连接与指令契约见[API](api-module-tilt.md)；静态承载和案例配置的证据边界唯一见installation。
-
-- 模块改变承载平面的倾角；当前代码提供设备控制和绕台面平行Y轴的刚体坐标旋转。硬件角度转为几何角度的方向、补偿及坐标原点须按实际安装确定，不能从类名或默认值推断。
-- TiltDevice只管理设备；当前TiltFlexModule/TiltPlate另管理单板绑定、有效姿态及坐标。TiltGeometry只返回坐标，不管理真实液面、倾斜液量模型或空间路径。官方引擎中的普通Well不会因连接设备或计算Point自动获得倾斜认知；不能声称其meniscus/体积模型或隐式移动已由该类补偿。
-- 坐标基准：原案例先按普通槽位板坐标加模块XYZ平移，再围绕与台面Y轴平行的轴旋转；轴X来自孔中心范围中点加X偏移，轴Z来自参考孔底加模块高度、减轴至板底及板底至孔底距离。此为案例推导模型，不是当前TiltGeometry自动推断能力。若改用已包含承载高度的适配器/耗材定义，不能重复加模块高度；本次采用的基准和几何须明确。 安装校准数值及其证据状态只见installation的第三方条目。
-
-### 条件约束
-
-- 初始状态由本次有效证据或status读取确定。设备状态及可调用性按API检查；设备核心homed标记与needs_home分开；Flex加载层为几何有效性保留本连接显式home前提，不能据此修改设备核心的语义。涉及确实需要归一几何基准的流程时，按该流程显式安排回零或核对实际基准，不在open中隐藏运动。
-- 任何倾角变化、回零或标定前，须按实际布局确认移液器和抓手退出模块运动包络；当前模块没有真实工具位置感知或避碰互锁，不能把前次函数成功、未绑定移液器或模拟跳过当作已确认退出。搬板时还需模块空闲、无故障且几何角在本次校准的水平容差内；home回硬件0不必然已水平，level根据当前角度映射求几何零位；原包装有该前置条件，当前加载层检查连接/几何基准/水平及承载占用，但不会检测真实工具是否退出。
-- 只采用已匹配的板型、姿态、轴心、平移与完整运动路径。普通槽位基准与已经含模块高度的承载定义不能重复叠加补偿；点变换正确不代表枪头、板壁、喷嘴组或相邻设备的整段路径可达。
-- 原案例的Gate、低侧吸液、沿壁排液、移液限角、混匀与等待是其场景实现，不直接推广为通用移液规则；需要倾斜移液时仍核对实际孔几何、液量/液面、路径及现有操作规则。当前加载和坐标层不提供这些策略的自动适配。SDK已成功登记耗材但几何视图失败时，独立labware占用记录保留；只有成功移除才清空，不能看child为空就继续加载。
-- 正常结束按实际目标安排回水平/留倾角及耗材去向。通讯/动作失败时保留最后已知事实及不确定状态；不能因close或断连就认定停止，不自动在finally重发回零、移动或搬板。
-- 标定写Flash与普通home/move_to(0)分开；仅在明确的校准任务和已核对的实物条件下调用，不混入常规初始化。
-- 完整加载层按[is_simulating](api-flow.md#protocolcontextis_simulating)选择内存后端；直接调用TiltDevice仍须自行隔离模拟路径的真实USB。内存后端不验证实机；hardware_enabled=False也仅关闭倾斜硬件，不关闭真实SDK的其他动作。dry_run用水运行可能仍在真实设备上，不等同于模拟。跳过真实动作不等于验证设备、时长、倾角或碰撞。
-
-## 第三方正压模块
-
-### 硬件与机制
-
-来源：用户提供的正压过滤程序及当前抽取源码，指纹见设备文件头；不是官方模块规格。完整设备单文件、接口及单位见[API](api-module-positive-pressure.md)，安装/组合耗材及案例偏移唯一见installation。
-
-- 当前实现通过USB发送定压计时指令和复位指令；没有实时压力、动作状态、停止、泄压查询或官方Task接口。连接成功只代表USB传输已打开，不是型号或压力状态验证。
-- 程序等待完整ok应答；源码没有独立设备状态或压力回读，不能把这个应答额外解释为已验证压力达到、泄压完成或机械可搬运。源程序收到应答后搬出是案例顺序，复用时须对应实际固件的应答语义与可搬出条件。
-- 复位方法沿用源代码名称reset_x_and_z，但旧运行文案写XY轴；目前只确认发送D，不据方法名或文案判定实际复位哪些轴，操作员文案统一称模块复位。
-
-### 条件约束
-
-- 复位前按源程序要求确认模块承载位为空，并确认移液器、抓手与其他物件退出模块动作包络；连接或释放连接不自动执行复位。加压前确认组合耗材、安装及本次工作参数适用于实际设备。
-- 模块本体、内部运动和承载实物不由官方SDK建模；普通槽位登记、抓手偏移及板标签不证明组合体几何或碰撞路径正确。整体搬运按实际承载层级判断，不能仅因用了标准深孔板名称就认定其代表任意过滤组合体。
-- 命令失败或应答丢失时，设备可能已执行；当前实现关闭连接且不自动重放。保留实际压力、机械状态及耗材去向的不确定性，不能因disconnect就认定停止、泄压或允许立即搬板，不在异常收尾中自动复位或搬出。
-- PPMDevice按官方is_simulating隔离USB；PPMController不识别协议模拟。dry_run仍由实验定义，不能推断它会停用正压硬件或缩短正压时长；官方模拟、用水试运行及真实加压分别核对。
-
-## 来源与边界
-
-接口及原始说明：各api-module-*.md固定源码与官方参考链接。
-- https://docs.opentrons.com/heater-shaker/product-specs/
-- https://docs.opentrons.com/python-api/reference/heater-shaker/
-- https://docs.opentrons.com/python-api/reference/temperature-module/
-- https://docs.opentrons.com/python-api/reference/thermocycler/
-- https://docs.opentrons.com/python-api/modules/thermocycler/
-- https://docs.opentrons.com/python-api/reference/absorbance-plate-reader/
-- 固定源码api/src/opentrons/protocol_api/module_validation_and_errors.py：热震荡温度及转速边界。
-- 固定源码api/src/opentrons/protocol_engine/commands/thermocycler/open_lid.py、heater_shaker/open_labware_latch.py：避碰归位及位置缓存。
-
-这不是对所有固件互锁的穷尽清单；缺少条件或设备版本不符时报告具体缺口，不声称框架覆盖了官方全部底层校验。
+[既有API基线、来源与边界](module-conditions-common.md)仅按需查证；设备专属增补依据保留在各设备文件中。

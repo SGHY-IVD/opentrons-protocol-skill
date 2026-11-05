@@ -21,9 +21,9 @@ with patch("builtins.__import__", loader_doubles.ImportGuard()):
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SECTION = (ROOT / "references/module-practices.md").read_text().split(
-    "## 第三方倾斜模块\n", 1
-)[1].split("\n## ", 1)[0]
+SECTION = (ROOT / "references/module-practices-tilt.md").read_text().split(
+    "# 第三方倾斜模块\n", 1
+)[1]
 BLOCKS = re.findall(r"```python\n(.*?)\n```", SECTION, flags=re.S)
 
 
@@ -97,7 +97,7 @@ class TiltModuleExampleTests(unittest.TestCase):
             "TiltDevice": device_factory, "load_tilt_module": loader_factory,
         }
         for block in BLOCKS:
-            exec(compile(block, "module-practices:tilt", "exec"), self.namespace)
+            exec(compile(block, "module-practices-tilt.md", "exec"), self.namespace)
 
     def config(self, **overrides):
         return self.fixture.config(**overrides)

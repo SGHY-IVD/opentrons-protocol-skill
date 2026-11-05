@@ -15,15 +15,15 @@
 
 |设备|机制与参数参考|操作经验与技巧|
 |---|---|---|
-|Flex移液器|[状态与体积核算](pipette-mechanics.md)：空气/液体占用、活塞位置、模式、排查；数值见该文引用的源码快照|已确认的默认规范仍在[操作规则](operations.md)相关章节；按需动作如touch_tip/沿壁同处维护，原子结构见patterns.md；储液槽部分喷嘴的主动确认、Y偏移与示例见[储液槽定位](reservoir-partial-nozzles.md)；不另复制一套|
+|Flex移液器|[状态与体积核算](pipette-mechanics.md)：空气/液体占用、活塞位置、模式、排查；数值见该文引用的源码快照|已确认的默认规范仍在[操作规则](operations.md)相关章节；按需动作如touch_tip/沿壁归[特殊运动路径](operation-motion-special.md)，原子结构见对应示例；储液槽部分喷嘴的主动确认、Y偏移与示例见[储液槽定位](reservoir-partial-nozzles.md)；不另复制一套|
 |六类已收录模块|按[模块统一入口](api-modules.md)定位各设备硬件/机制与条件；装载、承载位/库存及状态判断也按需触发，接口与安装分工不变|按[模块统一入口](api-modules.md#模块资料契约与入口)定位对应的[模块经验](module-practices.md)；只查适用设备、操作及共用条目，不跨设备套用|
-|第三方倾斜模块|[机制/条件](module-conditions.md#第三方倾斜模块)、[API/加载](api-module-tilt.md)；安装证据查installation|[案例改写与使用示例](module-practices.md#第三方倾斜模块)，不自动收录旧洗板参数|
-|第三方正压模块|[机制/条件](module-conditions.md#第三方正压模块)、[API/创建](api-module-positive-pressure.md)；安装证据查installation|[案例改写与使用示例](module-practices.md#第三方正压模块)，不自动收录DDM实验参数|
-|Flex协议等待|接口与分析期文案限制见[流程API](api-flow.md)|[操作规则](operations.md)“长孵育分段提示”为默认规范；本页只保留结构示例|
+|第三方倾斜模块|[机制/条件](module-conditions-tilt.md#第三方倾斜模块)、[API/加载](api-module-tilt.md)；安装证据查installation|[案例改写与使用示例](module-practices-tilt.md#第三方倾斜模块)，不自动收录旧洗板参数|
+|第三方正压模块|[机制/条件](module-conditions-positive-pressure.md#第三方正压模块)、[API/创建](api-module-positive-pressure.md)；安装证据查installation|[案例改写与使用示例](module-practices-positive-pressure.md#第三方正压模块)，不自动收录DDM实验参数|
+|Flex协议等待|接口与分析期文案限制见[流程API](api-flow.md)|[长孵育分段提示](operation-incubation.md#长孵育分段提示)为默认规范；本页只保留结构示例|
 
 ## 长孵育分段提示
 
-来源：用户2026-10-28确认采用的默认方式，非官方要求，尚未实机验证。适用范围与选择顺序唯一见[操作规则](operations.md)“长孵育分段提示”；这里只展示先选择实际总时长、再分段的结构，不设实验时长或试运行缩短值。
+来源：用户2026-10-28确认采用的默认方式，非官方要求，尚未实机验证。适用范围与选择顺序唯一见[长孵育分段提示](operation-incubation.md#长孵育分段提示)；这里只展示先选择实际总时长、再分段的结构，不设实验时长或试运行缩短值。
 
 ```python
 # dry_run已转为bool；两个非负有限秒数由本次实验/试运行方案确定，不照抄未定义变量。
@@ -44,6 +44,6 @@ comment文字在分析期算好，这里表示已执行分段对应的计划等�
 
 先检查已有条目。重复内容补充原条目；与旧结论冲突时核对适用条件和证据，再更新唯一出处。新的设备内容少时直接在本文件新增具体章节并加入索引；内容较多才拆独立参考文件，并同步SKILL.md直接路由，避免多层跳转。
 
-归属边界：API签名/官方限制归API参考，名称归catalog，安装兼容归installation，经验默认和统一约束归operations，流速/等待数值归现有参数表。这里只保存额外的设备机制解释及场景经验，或引用上述唯一出处。若某技巧以后被用户确认为普遍默认，把规范落到对应核心规则，本入口改为引用，不维护两份数值或相互竞争的指令。
+归属边界：API签名/官方限制归API参考，名称归catalog，安装兼容归installation，通用约束归operations，场景策略归对应operation-*页，流速/等待数值归现有参数表。这里只保存额外的设备机制解释及场景经验，或引用上述唯一出处。若某技巧以后被用户确认为普遍默认，把规范落到对应核心规则，本入口改为引用，不维护两份数值或相互竞争的指令。
 
 新增经验不自动修改其他维度或提升为全局约束；只有适用条件满足才采用。待验证推断可用于提出核查方向，不作为定案或脚本硬性依据。

@@ -153,4 +153,3 @@ type: ModuleType
 Get the module's general type identifier.
 
 源码：module_contexts.py L95–L97（固定提交）。
-

@@ -9,10 +9,10 @@
 - dilution_wells按梯度顺序；first_column_wells、target_column_wells为用于批量初始化的全部实际孔，勿只标主孔。stock_source_wells、diluent_source_wells及其labware指向实际源孔/耗材。共享槽声明的是多通道总供液量。
 - first_well_initial_volume（已就位量）、stock_load_volume（未就位加样量）、diluent_volume、transfer_volume、mixed_well_volume、mix_volume、stroke_volume、final_remove_volume分别核算；两种首孔路径应满足实验所需起始量。末孔移除量不超可吸量。
 - 移动速度按各阶段源液/目标接触液分别确定，使用下列分阶段变量；级间类别改变时在对应迭代赋值，不把原液、稀释液与混合液共用一套速度。数值一致时最终脚本可合并变量。
-- 本页为流程骨架：符合operations“分段排空”的dispense在生成时展开为patterns对应两段，涵盖预铺、原液就位和混匀末次；两段分别查速率与连续路径，不照抄未展开命令。
-- 混匀模式按operations的默认及本次明确要求确定，dynamic_mix在本次加液前赋值，用于确定原位加液与随后混匀的路径；F/M仍按本次实际液量及容量核算，不用于模式阈值选择。若用户明确要求不同孔/步骤采用不同模式，按其范围处理，不把局部覆盖沿用到其他孔，不默认要求用户选模式。
+- 本页为流程骨架：符合[分段排空](operation-dispense.md#分段排空)的dispense在生成时展开为patterns对应两段，涵盖预铺、原液就位和混匀末次；两段分别查速率与连续路径，不照抄未展开命令。
+- 混匀模式按[混匀规则](operation-mixing.md)的默认及本次明确要求确定，dynamic_mix在本次加液前赋值，用于确定原位加液与随后混匀的路径；F/M仍按本次实际液量及容量核算，不用于模式阈值选择。若用户明确要求不同孔/步骤采用不同模式，按其范围处理，不把局部覆盖沿用到其他孔，不默认要求用户选模式。
 - 每步实际体积查询对应flow_rate；全部push_out依operations判定。原位立即混匀的addition_push_out应符合不需退出准备的条件；若不符则替换入口，不强套本例。
-- tip位置按阶段分配且不重叠；return_tips不意味着跨浓度随意复用。移液器tip_racks和trash_container已加载。dry_run按rates.md统一切换水相吸排速率，并改变确认过的等待/混匀次数，不自行取消末孔液体去向。所有流速变量按patterns.md及rates完成正常/水相分支取值，覆盖原液、稀释液、级间转移、混匀及末孔移除。
+- tip位置按阶段分配且不重叠；return_tips不意味着跨浓度随意复用。移液器tip_racks和trash_container已加载。dry_run按rates.md统一切换水相吸排速率，并改变确认过的等待/混匀次数，不自行取消末孔液体去向。所有流速变量按[取值示例](patterns-parameters.md#dry_run流速赋值)及rates完成正常/水相分支取值，覆盖原液、稀释液、级间转移、混匀及末孔移除。
 - 本例stock_source为均匀原液，首孔不另加稀释液，首次加样后不额外混匀。小体积定位、容量分批、模式切换或无模型等不满足本例条件时，从原子模板替换相应部分。
 
 ## 完整参考片段

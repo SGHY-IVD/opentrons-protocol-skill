@@ -1,10 +1,10 @@
-# 官方仓库导航与资料更新（特殊排查/维护时读取）
+# 官方仓库导航与资料更新
 
-采用随技能发布的已核对快照，不在下载、安装或每次生成时自动刷新。不把官方仓库设为运行依赖，不引入全量克隆或submodule。常规生成不联网刷新；官方耗材按catalog检索快照并按operations定向获取本次定义。具体异常或维护资料不能解释的特殊行为，可按下节定向查询官方依据；查证不等于升级资料或授权使用未收录接口。
+采用随技能发布的已核对快照，不在下载、安装或每次生成时自动刷新。不把官方仓库设为运行依赖，不引入全量克隆或submodule。常规生成不联网刷新；官方耗材按catalog检索快照并按[耗材几何规则](labware-geometry.md#耗材几何按需查询)定向获取本次定义。具体异常或维护资料不能解释的特殊行为，可按[特殊问题导航](#特殊问题查找导航)定向查询官方依据；查证不等于升级资料或授权使用未收录接口。
 
 ## 来源与责任
 
-官方主仓库：https://github.com/Opentrons/opentrons 。目录提示唯一维护在[operations.md](operations.md)的“官方仓库查找起点”，实际查询核对目标版本下的路径。
+官方主仓库：https://github.com/Opentrons/opentrons 。目录提示唯一维护在下方“官方仓库查找起点”，实际查询核对目标版本下的路径。
 
 |资料|本地权威入口|更新方式|
 |---|---|---|
@@ -12,9 +12,9 @@
 |常用耗材、硬件型号与安装关系|catalog.txt、installation.txt|维护时定向核对公开文档、相关定义及实现；缺失不等于不兼容|
 |官方耗材Flex范围索引|labware-index.json；catalog.txt为查询入口|scripts/labware.py校验完整固定发布目录后按Flex范围提取；只维护时重建，非逐次生成同步|
 |自定义耗材构建/字段查证|custom-labware.md|命中按需分支后定向查官方schema/定义及厂家尺寸，不扩展设备API/安装基线|
-|单次任务所需孔几何|operations.md“耗材几何按需查询”|优先实际定义；缺失时按现有例外获取官方JSON，不自动写回技能|
+|单次任务所需孔几何|[耗材几何按需查询](labware-geometry.md#耗材几何按需查询)|优先实际定义；缺失时按现有例外获取官方JSON，不自动写回技能|
 |官方流速、等待、硬件参数|相关JSON的sources/commit/blob_sha等现有字段及配套说明|保留原始来源与项目覆盖的区别；只更新受影响条目|
-|经验默认、模板与审查|operations.md、patterns/mixing-examples等、protocol-review.md|项目维护；不随官方刷新被覆盖，官方新限制冲突时报告并修正组合|
+|经验默认、模板与审查|operations.md、operation-scenarios.md、patterns/mixing-examples等、protocol-review.md|项目维护；不随官方刷新被覆盖，官方新限制冲突时报告并修正组合|
 
 ## 官方耗材索引维护
 
@@ -30,11 +30,30 @@ build拒绝截断/删项/散列不符的Git树、缺文件、blob不符及路径
 
 实际运行工具验收 `python -m unittest discover -s assets/review-regression -p test_labware.py`；核心路由变化另按项目维护规则执行协议回归。API及硬件名单在明确维护任务中同步并核对兼容范围，不由索引重建顺带扩展。
 
+## 官方仓库查找起点
+
+主仓库：https://github.com/Opentrons/opentrons 。以下是2026-10-21核对的目录提示，不是固定接口契约；实际查询先确认当前目录/目标发布tag，路径改变时在官方仓库按load_name、字段名或方法名搜索，不因旧链接失效直接断言数据不存在。
+
+|需要查什么|优先定位的相对目录|
+|---|---|
+|耗材孔尺寸、坐标、容量、体积模型、定义内定位属性|`shared-data/labware/definitions/`；按load_name搜索实际JSON|
+|耗材JSON字段含义与结构|`shared-data/labware/schemas/`；schema版本与耗材定义version不是同一概念|
+|甲板、槽位与夹具定义|`shared-data/deck/definitions/`|
+|模块定义及几何信息|`shared-data/module/definitions/`|
+|移液器参数、喷嘴几何|`shared-data/pipette/definitions/`，再按当前结构查general/geometry等分类|
+|官方液体类配置|`shared-data/liquid-class/definitions/`|
+|Python API公开实现|`api/src/opentrons/protocol_api/`|
+|执行引擎的命令、状态与定位逻辑|`api/src/opentrons/protocol_engine/`|
+
+这些只是导航入口，具体字段/规则可能分布在其他目录；不能凭文件名认定包含完整兼容关系。仅查当前任务所需文件，不遍历整库。分支名（包括edge）、目录层级与版本子目录不写死；实时查找不等于自动采用开发分支最新版，最终数据仍匹配目标定义及运行环境。
+
+本表不扩大联网范围：日常耗材候选/定义身份及所需几何属性按catalog和[耗材几何规则](labware-geometry.md#耗材几何按需查询)定向查证；其他目录供明确维护升级或核对任务定位，不据此自动替换本地API、速率和安装规则。
+
 ## 特殊问题查找导航
 
 触发条件：出现具体报错、实际行为与维护资料不一致，或已有资料无法解释影响当前任务的关键行为。普通生成、单纯未收录某个接口不自动触发全库搜索。先定位现有资料与目标API/机器人软件版本，再按问题只查相关层；已给出的日志、方法名或异常类型优先作为搜索词。
 
-以下路径依据2026-10-21已取得的仓库树（commit `72fd2310e5b8f39e6024f3926c95bfc4468be260`）核对，仅是查找起点，不声明其内容与用户软件版本一致；实际使用时以目标版本目录为准。基础定义目录见operations.md，避免重复维护完整目录树。
+以下路径依据2026-10-21已取得的仓库树（commit `72fd2310e5b8f39e6024f3926c95bfc4468be260`）核对，仅是查找起点，不声明其内容与用户软件版本一致；实际使用时以目标版本目录为准。基础定义目录见本文件“官方仓库查找起点”，避免重复维护完整目录树。
 
 |问题/能力|官方查找起点|查证重点|
 |调用参数、默认行为、版本限制|`api/src/opentrons/protocol_api/`，按方法名定位|公开契约与版本标记；不要把内部方法当协议API|
