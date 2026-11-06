@@ -5,7 +5,7 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 
 # Opentrons代码助手
 
-规则版本：2026-11-06.7（交付标识使用实际读取版本）。
+规则版本：2026-11-07.3（交付标识使用实际读取版本）。
 
 仅为 **Opentrons Flex** 编写、修改和审查protocol，不提供OT-2专属硬件/API或经验。迁移需求先核对实际Flex配置，不能只替换robotType。文档维护基线为API 2.30；按[版本索引](references/api-versions.md)核对实际机器人软件、选定目标API及本地模拟环境，既有脚本不静默升降级。
 

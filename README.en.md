@@ -9,7 +9,12 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This project is primarily a skill package for AI assistants, rather than an official Opentrons project or standalone protocol-generation, device-control, or simulation application. Optional third-party device implementations are documented in the extension reference.
 
 
-## Publication 2026-11-06.7
+## Publication 2026-11-07.3
+
+- [Layout confirmation](skills/write-opentrons/references/protocol-interaction.md) can show an inline SVG deck view with labware, modules, pipettes, and liquid markings when the host supports it. A Markdown table is available as a fallback.
+- Combines 31 deck graphics into one SVG asset and uses .txt extensions for the attribution and license files. The installation ZIP contains 193 files.
+
+### Previous publication 2026-11-06.7
 
 - Organizes [module references](skills/write-opentrons/references/api-modules.md) into hardware and mechanism, common points of confusion, and operating conditions. This covers six official modules and the tilt and positive-pressure extensions.
 - Expands the [Flex Stacker](skills/write-opentrons/references/module-conditions-flex-stacker.md) overview with the hopper, shuttle, and bidirectional storage operations. Distinguishes the shuttle home position in column 4, the ordinary work position in column 3 of the same row, and hopper inventory.

@@ -1,0 +1,266 @@
+{
+  "viewBox": [
+    -166,
+    -82,
+    825,
+    630
+  ],
+  "flipY": 428.56,
+  "slots": {
+    "A1": [
+      0,
+      321
+    ],
+    "A2": [
+      164,
+      321
+    ],
+    "A3": [
+      328,
+      321
+    ],
+    "A4": [
+      492,
+      321
+    ],
+    "B1": [
+      0,
+      214
+    ],
+    "B2": [
+      164,
+      214
+    ],
+    "B3": [
+      328,
+      214
+    ],
+    "B4": [
+      492,
+      214
+    ],
+    "C1": [
+      0,
+      107
+    ],
+    "C2": [
+      164,
+      107
+    ],
+    "C3": [
+      328,
+      107
+    ],
+    "C4": [
+      492,
+      107
+    ],
+    "D1": [
+      0,
+      0
+    ],
+    "D2": [
+      164,
+      0
+    ],
+    "D3": [
+      328,
+      0
+    ],
+    "D4": [
+      492,
+      0
+    ]
+  },
+  "canvas": "fixtures/canvas.svg",
+  "fixtures": {
+    "singleLeftSlot": {
+      "file": "fixtures/left.svg"
+    },
+    "singleCenterSlot": {
+      "file": "fixtures/center.svg"
+    },
+    "singleRightSlot": {
+      "file": "fixtures/right.svg"
+    },
+    "stagingAreaRightSlot": {
+      "file": "fixtures/staging.svg",
+      "expands": true
+    },
+    "thermocyclerModuleV2Front": {
+      "file": "fixtures/left.svg"
+    },
+    "thermocyclerModuleV2Rear": {
+      "file": "fixtures/left.svg"
+    },
+    "stagingAreaSlotWithMagneticBlockV1": {
+      "file": "fixtures/staging.svg",
+      "expands": true
+    },
+    "flexStackerModuleV1": {
+      "file": "fixtures/staging.svg",
+      "expands": true
+    },
+    "flexStackerModuleV1WithMagneticBlockV1": {
+      "file": "fixtures/staging.svg",
+      "expands": true
+    },
+    "heaterShakerModuleV1": {
+      "file": "fixtures/right.svg"
+    },
+    "temperatureModuleV2": {
+      "file": "fixtures/right.svg"
+    },
+    "magneticBlockV1": {
+      "file": "fixtures/right.svg"
+    },
+    "heaterShakerModuleV1:left": {
+      "file": "fixtures/left.svg"
+    },
+    "temperatureModuleV2:left": {
+      "file": "fixtures/left.svg"
+    },
+    "magneticBlockV1:left": {
+      "file": "fixtures/left.svg"
+    },
+    "magneticBlockV1:center": {
+      "file": "fixtures/center.svg"
+    },
+    "absorbanceReaderV1": {
+      "file": "fixtures/right.svg",
+      "expands": true
+    },
+    "trashBinAdapter:left": {
+      "file": "fixtures/trash-left.svg"
+    },
+    "trashBinAdapter": {
+      "file": "fixtures/trash-right.svg"
+    },
+    "wasteChuteRightAdapterNoCover": {
+      "file": "fixtures/waste-chute.svg"
+    },
+    "stagingAreaSlotWithWasteChuteRightAdapterNoCover": {
+      "file": "fixtures/waste-chute-staging.svg",
+      "expands": true
+    },
+    "wasteChuteRightAdapterCovered": {
+      "file": "fixtures/waste-chute.svg"
+    },
+    "stagingAreaSlotWithWasteChuteRightAdapterCovered": {
+      "file": "fixtures/waste-chute-staging.svg",
+      "expands": true
+    },
+    "flexStackerModuleV1WithWasteChuteRightAdapterCovered": {
+      "file": "fixtures/waste-chute-staging.svg",
+      "expands": true
+    },
+    "flexStackerModuleV1WithWasteChuteRightAdapterNoCover": {
+      "file": "fixtures/waste-chute-staging.svg",
+      "expands": true
+    }
+  },
+  "modules": {
+    "thermocyclerModuleV2": {
+      "file": "modules/thermocycler-closed.svg",
+      "childOffset": [
+        -20.005,
+        67.96
+      ]
+    },
+    "thermocyclerModuleV2:open": {
+      "file": "modules/thermocycler-open.svg",
+      "childOffset": [
+        -20.005,
+        67.96
+      ]
+    },
+    "magneticBlockV1": {
+      "file": "modules/magnetic-block.svg",
+      "childOffset": [
+        0,
+        0
+      ]
+    },
+    "magneticBlockV1:right": {
+      "file": "modules/magnetic-block-right.svg",
+      "childOffset": [
+        0,
+        0
+      ]
+    },
+    "heaterShakerModuleV1": {
+      "file": "modules/heater-shaker.svg",
+      "childOffset": [
+        0,
+        0
+      ]
+    },
+    "heaterShakerModuleV1:right": {
+      "file": "modules/heater-shaker-right.svg",
+      "childOffset": [
+        0,
+        0
+      ]
+    },
+    "temperatureModuleV2": {
+      "file": "modules/temperature.svg",
+      "childOffset": [
+        0,
+        0
+      ]
+    },
+    "temperatureModuleV2:right": {
+      "file": "modules/temperature-right.svg",
+      "childOffset": [
+        0,
+        0
+      ]
+    },
+    "absorbanceReaderV1": {
+      "file": "modules/absorbance-reader.svg",
+      "childOffset": [
+        2,
+        0
+      ]
+    },
+    "flexStackerModuleV1": {
+      "file": "modules/stacker.svg",
+      "childOffset": [
+        178.5,
+        0
+      ]
+    }
+  },
+  "adapters": {
+    "opentrons_96_deep_well_adapter": {
+      "file": "adapters/opentrons_96_deep_well_adapter.svg"
+    },
+    "opentrons_96_flat_bottom_adapter": {
+      "file": "adapters/opentrons_96_flat_bottom_adapter.svg"
+    },
+    "opentrons_aluminum_flat_bottom_plate": {
+      "file": "adapters/opentrons_aluminum_flat_bottom_plate.svg"
+    },
+    "opentrons_flex_96_tiprack_adapter": {
+      "file": "adapters/opentrons_flex_96_tiprack_adapter.svg"
+    },
+    "opentrons_universal_flat_adapter": {
+      "file": "adapters/opentrons_universal_flat_adapter.svg"
+    },
+    "opentrons_universal_flat_adapter_type_b": {
+      "file": "adapters/opentrons_universal_flat_adapter_type_b.svg"
+    },
+    "opentrons_tough_pcr_auto_sealing_lid": {
+      "file": "adapters/opentrons_tough_pcr_auto_sealing_lid.svg"
+    },
+    "opentrons_flex_deck_riser": {
+      "file": "adapters/opentrons_flex_deck_riser.svg"
+    }
+  },
+  "instruments": {
+    "pipette-1ch": "instruments/flex-pipette-1ch.svg",
+    "pipette-8ch": "instruments/flex-pipette-8ch.svg",
+    "pipette-96ch": "instruments/flex-pipette-96ch.svg",
+    "gripper": "instruments/flex-gripper.svg"
+  }
+}

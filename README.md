@@ -9,7 +9,12 @@
 本项目主要是供AI助手读取的技能包，不是 Opentrons 官方项目或独立运行的协议生成、设备控制及模拟应用；按需取用的第三方设备实现见扩展入口。
 
 
-## 本次发布 2026-11-06.7
+## 本次发布 2026-11-07.3
+
+- [布局回显](skills/write-opentrons/references/protocol-interaction.md)支持按宿主能力内嵌 SVG 甲板图，可展示耗材、模块、移液器和液体标记。无法内嵌时使用 Markdown 表格。
+- 将 31 个甲板图形合并为一个 SVG 素材文件，来源声明和许可文件使用 .txt 扩展名。安装 ZIP 共 193 个文件。
+
+### 此前发布 2026-11-06.7
 
 - [模块资料](skills/write-opentrons/references/api-modules.md)统一采用「硬件与机制」「易混淆点」「条件约束」。覆盖 6 个官方模块及倾斜、正压两个扩展模块。
 - [Flex Stacker](skills/write-opentrons/references/module-conditions-flex-stacker.md)补充仓体、托盘及双向存取的说明，区分托盘在第 4 列的归位位置、同排第 3 列的普通工作位和仓内库存。

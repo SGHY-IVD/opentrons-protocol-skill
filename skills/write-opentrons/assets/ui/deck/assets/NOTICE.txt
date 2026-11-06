@@ -1,0 +1,7 @@
+SVG module, adapter and deck shapes and geometry derived from Opentrons Platform
+© Opentrons Labworks, Inc. (Apache-2.0), packages @opentrons/components and
+@opentrons/shared-data 0.3.29-alpha.0.
+https://github.com/Opentrons/opentrons
+
+Fixture graphics are normalized to slot coordinates; trash graphics use SVG
+primitives in place of the upstream HTML wrappers. Instrument icons are local artwork.
