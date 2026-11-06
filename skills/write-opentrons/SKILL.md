@@ -5,12 +5,13 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 
 # Opentrons代码助手
 
-规则版本：2026-11-06.3（交付标识使用实际读取版本）。
+规则版本：2026-11-06.4（交付标识使用实际读取版本）。
 
 仅为 **Opentrons Flex** 编写、修改和审查protocol，不提供OT-2专属硬件/API或经验。迁移需求先核对实际Flex配置，不能只替换robotType。文档维护基线为API 2.30；按[版本索引](references/api-versions.md)核对实际机器人软件、选定目标API及本地模拟环境，既有脚本不静默升降级。
 
 ## 判断原则
 
+- **先理解问题，再选入口。** 将用户表述还原为任务目标、相关对象及要判断的关系、动作或状态。按下表选最贴近的本地入口，再定位并读取相关条目。遇到变体或多种可能含义时，结合本次配置核对各自适用条件，分别处理有依据的部分。认定本地缺失前，先读对应入口并核对适用条目。关键词未命中本身不足以判定缺失。
 - 当前明确需求可覆盖技能默认，不能绕过硬件/API限制。区分官方契约、技能默认、本次覆盖与示例；示例供理解和实现参考，不新增规则，也不要求照搬结构。
 - 先查本地维护资料。已维护且适用于本次配置的API、参数、硬件、安装关系及实现策略，直接作为回答、编写和审查的依据。开放数据按需查，其他关键缺口或实际冲突按[日常查证边界](references/upstream-maintenance.md#日常查证边界)处理。
 - 规则各归唯一职责：操作控制状态，场景组合动作，API定义调用，安装判断承载与占位，参数表维护数值，交互组织确认，交付组织说明，审查核验结果。相互引用复用结论，不复制另一套规则。
@@ -38,7 +39,7 @@ description: 仅为Opentrons Flex设备按用户实验需求、Flex配置和维�
 |加载、取弃头、吸排液、移动、液体标签/meniscus、搬运|[加载API](references/api-layout.md)、[移液器成员索引](references/api-pipette.md)、[孔位与液体API](references/api-wells-liquids.md)、[抓手API](references/api-gripper.md)：仅读所用成员|
 |流速与等待|[流速语义](references/rates.md)及scripts/flow_rate.py；[等待语义](references/delays.md)及scripts/delay.py。对应JSON为数值唯一来源|
 |运行参数/CSV影响动作数值或方案|[参数化指引](references/parameter-planning.md)及[参数/CSV API](references/api-parameters-csv.md)；参数显示、dry_run/return_tips语义归[交付规范](references/protocol-output.md)|
-|模块装载、承载位/库存/状态、能力或操作（含仅核对布局）|[模块索引](references/api-modules.md)：只查本设备的条件、所用API和适用经验；静态安装另查安装关系|
+|模块加载方法、模块自身承载位/库存/状态、能力或操作|[模块索引](references/api-modules.md)，只查该设备的适用条件、API和经验。涉及台面安装、适配或占位时，先走统一安装核验|
 |单次液面实测|[探测API](references/api-probe.md)及[探测后清膜](references/operation-probe-film-clearing.md)；未请求时不默认探测|
 |沿壁或touch_tip特殊路径|[特殊运动路径](references/operation-motion-special.md)|
 |8通道部分喷嘴在储液槽吸排|[储液槽定位](references/reservoir-partial-nozzles.md)|

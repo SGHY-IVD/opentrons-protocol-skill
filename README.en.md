@@ -9,7 +9,14 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This project is primarily a skill package for AI assistants, rather than an official Opentrons project or standalone protocol-generation, device-control, or simulation application. Optional third-party device implementations are documented in the extension reference.
 
 
-## Publication 2026-11-06.3
+## Publication 2026-11-06.4
+
+The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version. The maintained Python protocol API baseline is 2.30.
+
+- Identify the user's goal, the objects involved, and the relationship or action to assess before choosing the closest local reference. Check applicability against the actual configuration when wording is ambiguous or the setup is a variant. Check the relevant local reference before treating a keyword miss as a gap.
+- Route deck installation, adapter compatibility, and slot occupancy to the installation check first. Consult module references for device-specific state, capabilities, and operations.
+
+### Capabilities already published in 2026-11-06.3
 
 The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version. The maintained Python protocol API baseline remains 2.30.
 
