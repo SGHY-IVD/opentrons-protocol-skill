@@ -9,7 +9,13 @@ A community-maintained AI Agent Skill developed through iterative protocol-writi
 This project is primarily a skill package for AI assistants, rather than an official Opentrons project or standalone protocol-generation, device-control, or simulation application. Optional third-party device implementations are documented in the extension reference.
 
 
-## Publication 2026-11-06.4
+## Publication 2026-11-06.7
+
+- Organizes [module references](skills/write-opentrons/references/api-modules.md) into hardware and mechanism, common points of confusion, and operating conditions. This covers six official modules and the tilt and positive-pressure extensions.
+- Expands the [Flex Stacker](skills/write-opentrons/references/module-conditions-flex-stacker.md) overview with the hopper, shuttle, and bidirectional storage operations. Distinguishes the shuttle home position in column 4, the ordinary work position in column 3 of the same row, and hopper inventory.
+- Streamlines the [initial hardware description example](skills/write-opentrons/references/protocol-interaction.md) by removing the routine reminder about external PCR instruments.
+
+### Capabilities already published in 2026-11-06.4
 
 The [skill entry point](skills/write-opentrons/SKILL.md) defines the current rule version. The maintained Python protocol API baseline is 2.30.
 

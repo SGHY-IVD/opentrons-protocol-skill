@@ -4,9 +4,14 @@
 
 ### 硬件与机制
 
-- 分别记录仓内（hopper）的同质库存与shuttle穿梭托盘上的当前耗材；声明仓内类型不等于托盘上已经有该耗材，托盘占用也不自动计入仓内库存。用户说“A4装Stacker，A4放枪头盒”时，按该模块托盘承载枪头盒理解并核对，而非两个独立台面对象争位；明确说“仓内”时按库存理解。此语义属于模块，台面安装仍查installation。
-- 仓内一次配置一种主耗材及相应盖/适配器组合。shuttle可临时承载与仓内不同类型的适用labware；“同质库存”限制不能直接套到临时承载，但这不表示任意尺寸、定义或抓手组合均兼容，也不表示它可存入当前仓内。使用模块对象表达其承载位置，不新建一个普通A4槽位或虚构shuttle加载API。
-- 装料门允许人工直接预装仓内耗材。set_stored_labware/set_stored_labware_items声明初始库存；这些调用不等于抓手已逐件搬入或设备已识别实物。retrieve把仓内最底层一件移到托盘；store把托盘上的匹配组合存到仓内底部。库存列表首项为下一次取出对象。
+Flex Stacker由仓体（hopper）和穿梭托盘（shuttle）组成。仓体装在Flex机身右侧外部，耗材在仓内垂直堆叠。穿梭托盘负责在仓体与抓手之间交接，归位时对齐模块在第4列的加载位置（A4、B4、C4或D4）。retrieve()把仓内最底层一件送到托盘，store()把托盘上的匹配耗材送入仓内底部。
+
+操作员可经装料门预装耗材。set_stored_labware()和set_stored_labware_items()登记初始库存，实物装载由操作员确认。库存列表首项为下一次取出对象。
+
+### 易混淆点
+
+- **托盘与同排工作位。** 托盘是第4列的模块承载位，通过模块对象表达托盘上耗材的加载与搬运位置。用户说“A4装Stacker，A4放枪头盒”时，按枪头盒放在该模块托盘上核对。标准Stacker夹具保留同排第3列的独立普通工作位，两处分别记录占用，具体台面配置按安装关系核对。
+- **托盘临时承载与仓内库存。** 暂不执行仓内存取时，可在托盘上单独放一件兼容耗材，类型可与仓内不同。仓内每次配置一种主耗材及相应盖/适配器组合。托盘可承载的耗材能否存入仓内，按当前仓内组合核对。用户明确说“仓内”时按库存核对，仓内库存和托盘当前耗材分别记录。
 
 ### 条件约束
 
@@ -25,3 +30,5 @@ Stacker增补来源（2026-10-29核对；API范围≤2.30）：官方v10.0.0，c
 - api/src/opentrons/protocol_engine/commands/load_labware.py（c580faffadc5e6adafe6bf92401c9e9eb7905d7c）、move_labware.py（cbbe632ccca1e6ef7eff6f4a7bb586d4ac8af27d）、state/geometry.py（68357e61b45daf79d956d0c13f41ea7bea0584bc）：模块承载与占用校验不等同于仓内存入校验；异类临时承载仍查实际定义及动作条件。
 - api/src/opentrons/protocol_engine/state/labware.py（dedeee6786ddde009280527ccdc6c969bf633d16）raise_if_stacker_labware_pool_is_not_valid与commands/flex_stacker/common.py（c2cdd567e5445cc002ac225f9bfa35698fb0304b）：未发现无盖一律报错校验，不据此取消官方带盖装仓要求。
 - 官方装载说明 https://docs.opentrons.com/stacker/loading-labware/ （在线核对，未固定内容版本）：装料门人工装入、堆叠与人工取出；不固定门的方向。不将源码阅读当SDK模拟或实机验证。
+
+仓体安装与托盘归位于2026-11-06核对。依据[官方安装前说明](https://docs.opentrons.com/stacker/pre-installation/)和[官方安装后说明](https://docs.opentrons.com/stacker/post-installation/#attaching-the-shuttle)。
